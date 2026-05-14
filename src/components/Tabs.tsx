@@ -1,0 +1,66 @@
+import type { ReactNode } from 'react'
+import type { TabId } from '../App'
+
+interface Props {
+  activeTab: TabId
+  onTabChange: (tab: TabId) => void
+}
+
+const tabs: { id: TabId; label: string; icon: ReactNode }[] = [
+  {
+    id: 'aufgaben',
+    label: 'Aufgaben',
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
+      </svg>
+    ),
+  },
+  {
+    id: 'cheat',
+    label: 'Cheatsheet',
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+      </svg>
+    ),
+  },
+  {
+    id: 'schema',
+    label: 'Schema',
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+      </svg>
+    ),
+  },
+  {
+    id: 'quiz',
+    label: 'Quiz',
+    icon: (
+      <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+        <circle cx="12" cy="12" r="10" />
+        <path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01" />
+      </svg>
+    ),
+  },
+]
+
+export default function Tabs({ activeTab, onTabChange }: Props) {
+  return (
+    <div className="tabs">
+      {tabs.map(tab => (
+        <button
+          key={tab.id}
+          className={`tab${activeTab === tab.id ? ' active' : ''}`}
+          onClick={() => onTabChange(tab.id)}
+        >
+          {tab.icon}
+          {tab.label}
+        </button>
+      ))}
+    </div>
+  )
+}
