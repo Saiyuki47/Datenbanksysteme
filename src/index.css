@@ -338,6 +338,55 @@ header {
 .schema-col-table { width: 160px; }
 .schema-col-center { text-align: center; }
 
+/* SCHEMA DATA BROWSER */
+.schema-data-card { padding: 12px 16px !important; }
+.schema-data-toggle {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+}
+.schema-data-arrow { font-size: 11px; color: var(--text3); min-width: 12px; }
+.schema-data-name {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text);
+}
+.schema-db-badge {
+  font-size: 10px;
+  font-weight: 700;
+  font-family: var(--font-mono);
+  padding: 2px 6px;
+  border-radius: 4px;
+  letter-spacing: 0.04em;
+}
+.schema-db-badge--pv { background: var(--green-dim); color: var(--green); border: 1px solid rgba(80,200,120,0.25); }
+.schema-db-badge--nw { background: var(--blue-dim); color: var(--blue); border: 1px solid rgba(77,159,255,0.25); }
+.schema-db-badge--uni { background: var(--amber-dim); color: var(--amber); border: 1px solid rgba(245,166,35,0.25); }
+.schema-data-meta { font-size: 12px; color: var(--text3); font-family: var(--font-mono); margin-left: auto; }
+.schema-data-table-wrap { margin-top: 12px; }
+.schema-no-data {
+  margin-top: 10px;
+  padding: 10px 12px;
+  background: var(--bg2);
+  border-radius: 6px;
+  border: 1px solid var(--border);
+}
+.schema-no-data-cols {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text2);
+  line-height: 1.7;
+  margin-bottom: 4px;
+}
+.schema-no-data-hint { font-size: 11px; color: var(--text3); }
+
 /* RESPONSIVE */
 @media (max-width: 600px) {
   header { padding: 1rem; }
@@ -479,5 +528,53 @@ header {
   font-family: var(--font-mono);
   color: var(--text3);
   margin-top: 6px;
+}
+
+/* SQL TIPS */
+.ub-tips-section {
+  margin: 10px 0;
+}
+.toggle-btn--tips {
+  border-color: var(--amber);
+  color: var(--amber);
+}
+.toggle-btn--tips:hover {
+  background: var(--amber-dim);
+  color: var(--amber);
+}
+.ub-tips-list {
+  margin-top: 8px;
+}
+.ub-tip-card {
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: 6px;
+  padding: 10px 14px;
+  margin-bottom: 8px;
+}
+.ub-tip-keyword {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--amber);
+  margin-bottom: 4px;
+}
+.ub-tip-desc {
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.6;
+  margin-bottom: 8px;
+}
+.ub-tip-example {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text3);
+  background: var(--bg3);
+  border-radius: 5px;
+  padding: 8px 10px;
+  margin: 0;
+  white-space: pre-wrap;
+  line-height: 1.6;
 }
 

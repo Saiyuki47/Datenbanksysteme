@@ -5,6 +5,7 @@ import { highlightSQL } from '../utils/sqlHighlight'
 import { pvTables } from '../data/pvTables'
 import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
+import { detectTips } from '../data/sqlTips'
 import type { TableData } from '../data/pvTables'
 import type { DbType } from '../types'
 
@@ -18,6 +19,7 @@ export default function Uebungsblaetter() {
   const [selectedId, setSelectedId] = useState(uebungsblaetter[0]?.id ?? '')
   const [openIds, setOpenIds] = useState<Set<string>>(new Set())
   const [openTables, setOpenTables] = useState<Set<string>>(new Set())
+  const [openTips, setOpenTips] = useState<Set<string>>(new Set())
 
   const blatt = uebungsblaetter.find(b => b.id === selectedId)
 
@@ -32,6 +34,15 @@ export default function Uebungsblaetter() {
 
   const toggleTable = (key: string) => {
     setOpenTables(prev => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
+  }
+
+  const toggleTips = (key: string) => {
+    setOpenTips(prev => {
       const next = new Set(prev)
       if (next.has(key)) next.delete(key)
       else next.add(key)
@@ -132,12 +143,32 @@ export default function Uebungsblaetter() {
                 )}
 
                 {/* Solution */}
-                {aufgabe && (
-                  <>
-                    <button className="toggle-btn" onClick={() => toggleSolution(key)}>
-                      {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
-                    </button>
-                    {isOpen && (
+                {aufgabe && (() => {
+                  const tips = detectTips(aufgabe.sql)
+                  return (
+                    <>
+                      {tips.length > 0 && (
+                        <div className="ub-tips-section">
+                          <button className="toggle-btn toggle-btn--tips" onClick={() => toggleTips(key)}>
+                            {openTips.has(key) ? '▼ Tipps verbergen' : '▶ Tipps anzeigen'}
+                          </button>
+                          {openTips.has(key) && (
+                            <div className="ub-tips-list">
+                              {tips.map(tip => (
+                                <div key={tip.keyword} className="ub-tip-card">
+                                  <p className="ub-tip-keyword">{tip.keyword}</p>
+                                  <p className="ub-tip-desc">{tip.description}</p>
+                                  <pre className="ub-tip-example">{tip.example}</pre>
+                                </div>
+                              ))}
+                            </div>
+                          )}
+                        </div>
+                      )}
+                      <button className="toggle-btn" onClick={() => toggleSolution(key)}>
+                        {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
+                      </button>
+                      {isOpen && (
                       <>
                         <div
                           className="sql-block visible"
@@ -171,8 +202,9 @@ export default function Uebungsblaetter() {
                         )}
                       </>
                     )}
-                  </>
-                )}
+                    </>
+                  )
+                })()}
               </div>
             )
           })}
