@@ -29,3 +29,25 @@ export interface CheatCard {
   title: string
   code: string
 }
+
+export interface QueryResult {
+  columns: string[]
+  rows: (string | number | null)[][]
+}
+
+export interface UebungsblattTask {
+  nr: number
+  text: string
+  aufgabeId: string
+  relevantTables: string[]
+  queryResult?: QueryResult
+}
+
+export interface Uebungsblatt {
+  id: string
+  nr: string
+  typ: 'Hausaufgabe' | 'Präsenzaufgabe'
+  beschreibung?: string
+  db?: DbType
+  tasks: UebungsblattTask[]
+}
