@@ -62,7 +62,7 @@ export default function Quiz() {
           <div className="result-box">
             <div className="result-score">{score}/{quizData.length}</div>
             <p className="result-label">{pct}% richtig &mdash; {msg}</p>
-            <button className="nav-btn" onClick={handleReset}>↺ Nochmal starten</button>
+            <button type="button" className="nav-btn" onClick={handleReset}>↺ Nochmal starten</button>
           </div>
         </div>
       </div>
@@ -87,7 +87,8 @@ export default function Quiz() {
             }
             return (
               <button
-                key={i}
+                type="button"
+                key={`${qi}-${opt}`}
                 className={cls}
                 disabled={isAnswered}
                 onClick={() => handleAnswer(i)}
@@ -106,7 +107,7 @@ export default function Quiz() {
         </p>
         <div className="quiz-nav">
           <span className="score-pill">{score} / {qi} richtig</span>
-          <button className="nav-btn" disabled={!isAnswered} onClick={handleNext}>
+          <button type="button" className="nav-btn" disabled={!isAnswered} onClick={handleNext}>
             Weiter →
           </button>
         </div>

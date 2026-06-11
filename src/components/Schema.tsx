@@ -85,6 +85,7 @@ export default function Schema() {
       <div className="filter-row">
         {(['pv', 'nw', 'uni', 'all'] as Filter[]).map(f => (
           <button
+            type="button"
             key={f}
             className={`filter-btn${filter === f ? ' on' : ''}`}
             onClick={() => { setFilter(f); setOpenTables(new Set()) }}
@@ -93,8 +94,8 @@ export default function Schema() {
           </button>
         ))}
         <div style={{ marginLeft: 'auto', display: 'flex', gap: '6px' }}>
-          <button className="filter-btn" onClick={expandAll}>Alle aufklappen</button>
-          <button className="filter-btn" onClick={collapseAll}>Alle zuklappen</button>
+          <button type="button" className="filter-btn" onClick={expandAll}>Alle aufklappen</button>
+          <button type="button" className="filter-btn" onClick={collapseAll}>Alle zuklappen</button>
         </div>
       </div>
 
@@ -103,7 +104,7 @@ export default function Schema() {
         const hasData = data.rows.length > 0
         return (
           <div key={`${db}-${name}`} className="card schema-data-card">
-            <button className="schema-data-toggle" onClick={() => toggle(name)}>
+            <button type="button" className="schema-data-toggle" onClick={() => toggle(name)}>
               <span className="schema-data-arrow">{isOpen ? '▼' : '▶'}</span>
               <span className="schema-data-name">{name}</span>
               <span className={`schema-db-badge schema-db-badge--${db}`}>{db.toUpperCase()}</span>
@@ -119,13 +120,16 @@ export default function Schema() {
                       <tr>{data.columns.map(col => <th key={col}>{col}</th>)}</tr>
                     </thead>
                     <tbody>
-                      {data.rows.map((row, i) => (
-                        <tr key={i}>
-                          {row.map((cell, j) => (
-                            <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
-                          ))}
-                        </tr>
-                      ))}
+                      {data.rows.map((row, i) => {
+                        const rowKey = row.map(cell => String(cell)).join('|') || `row-${i}`
+                        return (
+                          <tr key={rowKey}>
+                            {row.map((cell, j) => (
+                              <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
+                            ))}
+                          </tr>
+                        )
+                      })}
                     </tbody>
                   </table>
                 </div>

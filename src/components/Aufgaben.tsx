@@ -41,14 +41,13 @@ export default function Aufgaben() {
             </div>
             <p className="q-title">{a.title}</p>
             <p className="q-text">{a.text}</p>
-            <button className="toggle-btn" onClick={() => toggle(a.id)}>
+            <button type="button" className="toggle-btn" onClick={() => toggle(a.id)}>
               {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
             </button>
             {isOpen && (
-              <div
-                className="sql-block visible"
-                dangerouslySetInnerHTML={{ __html: highlightSQL(a.sql) }}
-              />
+              <div className="sql-block visible">
+                {highlightSQL(a.sql)}
+              </div>
             )}
           </div>
         )

@@ -12,10 +12,9 @@ export default function Cheatsheet() {
         {cheatCards.map(card => (
           <div key={card.title} className="cheat-card">
             <h3>{card.title}</h3>
-            <div
-              className="cheat-code"
-              dangerouslySetInnerHTML={{ __html: highlightSQL(card.code) }}
-            />
+            <pre className="cheat-code sql-block">
+              {highlightSQL(card.code)}
+            </pre>
           </div>
         ))}
       </div>

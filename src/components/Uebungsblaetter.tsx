@@ -62,6 +62,7 @@ export default function Uebungsblaetter() {
         <div className="filter-row">
           {uebungsblaetter.map(b => (
             <button
+              type="button"
               key={b.id}
               className={`filter-btn${selectedId === b.id ? ' on' : ''}`}
               onClick={() => setSelectedId(b.id)}
@@ -108,6 +109,7 @@ export default function Uebungsblaetter() {
                       return (
                         <div key={tableName} className="ub-table-wrap">
                           <button
+                            type="button"
                             className="ub-table-toggle"
                             onClick={() => toggleTable(tKey)}
                           >
@@ -125,13 +127,16 @@ export default function Uebungsblaetter() {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {tableData.rows.map((row, i) => (
-                                    <tr key={i}>
-                                      {row.map((cell, j) => (
-                                        <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
-                                      ))}
-                                    </tr>
-                                  ))}
+                                  {tableData.rows.map((row, i) => {
+                                    const rowKey = row.map(cell => String(cell)).join('|') || `row-${i}`
+                                    return (
+                                      <tr key={rowKey}>
+                                        {row.map((cell, j) => (
+                                          <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
+                                        ))}
+                                      </tr>
+                                    )
+                                  })}
                                 </tbody>
                               </table>
                             </div>
@@ -149,7 +154,7 @@ export default function Uebungsblaetter() {
                     <>
                       {tips.length > 0 && (
                         <div className="ub-tips-section">
-                          <button className="toggle-btn toggle-btn--tips" onClick={() => toggleTips(key)}>
+                          <button type="button" className="toggle-btn toggle-btn--tips" onClick={() => toggleTips(key)}>
                             {openTips.has(key) ? '▼ Tipps verbergen' : '▶ Tipps anzeigen'}
                           </button>
                           {openTips.has(key) && (
@@ -165,15 +170,14 @@ export default function Uebungsblaetter() {
                           )}
                         </div>
                       )}
-                      <button className="toggle-btn" onClick={() => toggleSolution(key)}>
+                      <button type="button" className="toggle-btn" onClick={() => toggleSolution(key)}>
                         {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
                       </button>
                       {isOpen && (
                       <>
-                        <div
-                          className="sql-block visible"
-                          dangerouslySetInnerHTML={{ __html: highlightSQL(aufgabe.sql) }}
-                        />
+                        <div className="sql-block visible">
+                          {highlightSQL(aufgabe.sql)}
+                        </div>
                         {task.queryResult && (
                           <div className="ub-result-section">
                             <p className="ub-result-label">Ergebnis:</p>
@@ -187,13 +191,16 @@ export default function Uebungsblaetter() {
                                   </tr>
                                 </thead>
                                 <tbody>
-                                  {task.queryResult.rows.map((row, i) => (
-                                    <tr key={i}>
-                                      {row.map((cell, j) => (
-                                        <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
-                                      ))}
-                                    </tr>
-                                  ))}
+                                  {task.queryResult.rows.map((row, i) => {
+                                    const rowKey = row.map(cell => String(cell)).join('|') || `result-row-${i}`
+                                    return (
+                                      <tr key={rowKey}>
+                                        {row.map((cell, j) => (
+                                          <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
+                                        ))}
+                                      </tr>
+                                    )
+                                  })}
                                 </tbody>
                               </table>
                             </div>
