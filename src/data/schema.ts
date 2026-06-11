@@ -83,7 +83,7 @@ export const schemaData: SchemaRow[] = [
   { t: 'TERRITORIES', c: 'REGIONID', ty: 'NUMBER', nn: true, db: 'nw' },
 ]
 
-export const PK_COLS = new Set([
+const PK_COLS = new Set([
   'CUSTOMERID', 'ORDERID', 'PRODUCTID', 'EMPLOYEEID', 'SUPPLIERID',
   'CATEGORYID', 'SHIPPERID', 'REGIONID', 'TERRITORYID', 'SALESPERSONID',
   'VENDORID', 'WORKCENTERID', 'MATERIALID', 'SKILLID', 'PRODUCTLINEID',

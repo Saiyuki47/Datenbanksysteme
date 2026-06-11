@@ -4,7 +4,7 @@ export interface TableData {
   rows: (string | number | null)[][]
 }
 
-export const CUSTOMER_T: TableData = {
+const CUSTOMER_T: TableData = {
   name: 'CUSTOMER_T',
   columns: ['CUSTOMERID', 'CUSTOMERNAME', 'CUSTOMERADDRESS', 'CUSTOMERCITY', 'CUSTOMERSTATE', 'CUSTOMERPOSTALCODE'],
   rows: [
@@ -26,7 +26,7 @@ export const CUSTOMER_T: TableData = {
   ],
 }
 
-export const ORDER_T: TableData = {
+const ORDER_T: TableData = {
   name: 'ORDER_T',
   columns: ['ORDERID', 'CUSTOMERID', 'ORDERDATE'],
   rows: [
@@ -43,7 +43,7 @@ export const ORDER_T: TableData = {
   ],
 }
 
-export const ORDERLINE_T: TableData = {
+const ORDERLINE_T: TableData = {
   name: 'ORDERLINE_T',
   columns: ['ORDERID', 'PRODUCTID', 'ORDEREDQUANTITY'],
   rows: [
@@ -68,7 +68,7 @@ export const ORDERLINE_T: TableData = {
   ],
 }
 
-export const PRODUCT_T: TableData = {
+const PRODUCT_T: TableData = {
   name: 'PRODUCT_T',
   columns: ['PRODUCTID', 'PRODUCTLINEID', 'PRODUCTDESCRIPTION', 'PRODUCTFINISH', 'PRODUCTSTANDARDPRICE'],
   rows: [
@@ -83,7 +83,7 @@ export const PRODUCT_T: TableData = {
   ],
 }
 
-export const PRODUCTLINE_T: TableData = {
+const PRODUCTLINE_T: TableData = {
   name: 'PRODUCTLINE_T',
   columns: ['PRODUCTLINEID', 'PRODUCTLINENAME'],
   rows: [
@@ -93,7 +93,7 @@ export const PRODUCTLINE_T: TableData = {
   ],
 }
 
-export const EMPLOYEE_T: TableData = {
+const EMPLOYEE_T: TableData = {
   name: 'EMPLOYEE_T',
   columns: ['EMPLOYEEID', 'EMPLOYEENAME', 'EMPLOYEECITY', 'EMPLOYEESTATE'],
   rows: [
@@ -102,7 +102,7 @@ export const EMPLOYEE_T: TableData = {
   ],
 }
 
-export const SALESPERSON_T: TableData = {
+const SALESPERSON_T: TableData = {
   name: 'SALESPERSON_T',
   columns: ['SALESPERSONID', 'SALESPERSONNAME', 'SALESPERSONPHONE', 'TERRITORYID'],
   rows: [
@@ -114,7 +114,7 @@ export const SALESPERSON_T: TableData = {
   ],
 }
 
-export const TERRITORY_T: TableData = {
+const TERRITORY_T: TableData = {
   name: 'TERRITORY_T',
   columns: ['TERRITORYID', 'TERRITORYNAME'],
   rows: [

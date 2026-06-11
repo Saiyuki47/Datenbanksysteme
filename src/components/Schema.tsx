@@ -12,7 +12,10 @@ interface TableEntry { db: DbTag; name: string; data: TableData }
 
 // Build stub TableData for tables in schemaData without real data
 function stubFromSchema(tableName: string): TableData {
-  const cols = schemaData.filter(r => r.t === tableName).map(r => r.c)
+  const cols: string[] = []
+  for (const r of schemaData) {
+    if (r.t === tableName) cols.push(r.c)
+  }
   return { name: tableName, columns: cols, rows: [] }
 }
 
@@ -25,8 +28,13 @@ function buildEntries(): TableEntry[] {
   for (const [name, data] of Object.entries(pvTables)) {
     entries.push({ db: 'pv', name, data })
   }
-  // Pine Valley tables in schema but without data
-  const pvSchemaNames = [...new Set(schemaData.filter(r => r.db === 'pv').map(r => r.t))]
+  // Pine Valley tables in schema but without data (single-pass collect)
+  const pvSchemaNames = new Set<string>()
+  const nwSchemaNames = new Set<string>()
+  for (const r of schemaData) {
+    if (r.db === 'pv') pvSchemaNames.add(r.t)
+    else if (r.db === 'nw') nwSchemaNames.add(r.t)
+  }
   for (const name of pvSchemaNames) {
     if (!coveredPV.has(name)) entries.push({ db: 'pv', name, data: stubFromSchema(name) })
   }
@@ -35,8 +43,6 @@ function buildEntries(): TableEntry[] {
   for (const [name, data] of Object.entries(nwTables)) {
     entries.push({ db: 'nw', name, data })
   }
-  // Northwind tables in schema but without data
-  const nwSchemaNames = [...new Set(schemaData.filter(r => r.db === 'nw').map(r => r.t))]
   for (const name of nwSchemaNames) {
     if (!coveredNW.has(name)) entries.push({ db: 'nw', name, data: stubFromSchema(name) })
   }

@@ -1,6 +1,6 @@
 import type { TableData } from './pvTables'
 
-export const VORLESUNGEN: TableData = {
+const VORLESUNGEN: TableData = {
   name: 'VORLESUNGEN',
   columns: ['VORLNR', 'TITEL', 'SWS', 'GELESENVON'],
   rows: [
@@ -16,7 +16,7 @@ export const VORLESUNGEN: TableData = {
   ],
 }
 
-export const PROFESSOREN: TableData = {
+const PROFESSOREN: TableData = {
   name: 'PROFESSOREN',
   columns: ['PERSNR', 'NAME', 'RANG', 'RAUM'],
   rows: [
@@ -31,7 +31,7 @@ export const PROFESSOREN: TableData = {
   ],
 }
 
-export const STUDENTEN: TableData = {
+const STUDENTEN: TableData = {
   name: 'STUDENTEN',
   columns: ['MATRNR', 'NAME', 'SEMESTER'],
   rows: [
@@ -46,7 +46,7 @@ export const STUDENTEN: TableData = {
   ],
 }
 
-export const HOEREN: TableData = {
+const HOEREN: TableData = {
   name: 'HOEREN',
   columns: ['MATRNR', 'VORLNR'],
   rows: [
@@ -64,7 +64,7 @@ export const HOEREN: TableData = {
   ],
 }
 
-export const VORAUSSETZEN: TableData = {
+const VORAUSSETZEN: TableData = {
   name: 'VORAUSSETZEN',
   columns: ['VORGAENGER', 'NACHFOLGER'],
   rows: [

@@ -188,8 +188,12 @@ const tipMap = new Map(SQL_TIPS.map(t => [t.keyword, t]))
 export function detectTips(sql: string): SqlTip[] {
   // Remove single-line comments before matching
   const cleaned = sql.replace(/--[^\n]*/g, '')
-  return DETECTION_RULES
-    .filter(rule => rule.pattern.test(cleaned))
-    .map(rule => tipMap.get(rule.keyword))
-    .filter((t): t is SqlTip => t !== undefined)
+  const out: SqlTip[] = []
+  for (const rule of DETECTION_RULES) {
+    if (rule.pattern.test(cleaned)) {
+      const tip = tipMap.get(rule.keyword)
+      if (tip) out.push(tip)
+    }
+  }
+  return out
 }

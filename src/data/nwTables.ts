@@ -1,6 +1,6 @@
 import type { TableData } from './pvTables'
 
-export const NW_CATEGORIES: TableData = {
+const NW_CATEGORIES: TableData = {
   name: 'CATEGORIES',
   columns: ['CATEGORYID', 'CATEGORYNAME', 'DESCRIPTION', 'PICTURE'],
   rows: [
@@ -15,7 +15,7 @@ export const NW_CATEGORIES: TableData = {
   ],
 }
 
-export const NW_CUSTOMERS: TableData = {
+const NW_CUSTOMERS: TableData = {
   name: 'CUSTOMERS',
   columns: ['CUSTOMERID', 'COMPANYNAME', 'CONTACTNAME', 'CONTACTTITLE', 'ADDRESS', 'CITY', 'REGION', 'POSTALCODE', 'COUNTRY', 'PHONE', 'FAX'],
   rows: [
@@ -113,7 +113,7 @@ export const NW_CUSTOMERS: TableData = {
   ],
 }
 
-export const NW_PRODUCTS: TableData = {
+const NW_PRODUCTS: TableData = {
   name: 'PRODUCTS',
   columns: ['PRODUCTID', 'PRODUCTNAME', 'SUPPLIERID', 'CATEGORYID', 'QUANTITYPERUNIT', 'UNITPRICE', 'UNITSINSTOCK', 'UNITSONORDER', 'REORDERLEVEL', 'DISCONTINUED'],
   rows: [
@@ -197,7 +197,7 @@ export const NW_PRODUCTS: TableData = {
   ],
 }
 
-export const NW_TERRITORIES: TableData = {
+const NW_TERRITORIES: TableData = {
   name: 'TERRITORIES',
   columns: ['TERRITORYID', 'TERRITORYDESCRIPTION', 'REGIONID'],
   rows: [
@@ -257,7 +257,7 @@ export const NW_TERRITORIES: TableData = {
   ],
 }
 
-export const NW_REGIONS: TableData = {
+const NW_REGIONS: TableData = {
   name: 'REGIONS',
   columns: ['REGIONID', 'REGIONDESCRIPTION'],
   rows: [
@@ -268,7 +268,7 @@ export const NW_REGIONS: TableData = {
   ],
 }
 
-export const NW_SHIPPERS: TableData = {
+const NW_SHIPPERS: TableData = {
   name: 'SHIPPERS',
   columns: ['SHIPPERID', 'COMPANYNAME', 'PHONE'],
   rows: [
@@ -278,7 +278,7 @@ export const NW_SHIPPERS: TableData = {
   ],
 }
 
-export const NW_SUPPLIERS: TableData = {
+const NW_SUPPLIERS: TableData = {
   name: 'SUPPLIERS',
   columns: ['SUPPLIERID', 'COMPANYNAME', 'CONTACTNAME', 'CONTACTTITLE', 'ADDRESS', 'CITY', 'REGION', 'POSTALCODE', 'COUNTRY'],
   rows: [
@@ -314,7 +314,7 @@ export const NW_SUPPLIERS: TableData = {
   ],
 }
 
-export const NW_EMPLOYEES: TableData = {
+const NW_EMPLOYEES: TableData = {
   name: 'EMPLOYEES',
   columns: ['EMPLOYEEID', 'LASTNAME', 'FIRSTNAME', 'TITLE', 'CITY', 'REGION', 'COUNTRY', 'HIREDATE', 'REPORTSTO'],
   rows: [
