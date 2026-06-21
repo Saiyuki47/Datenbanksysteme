@@ -22,6 +22,11 @@ const outFile = join(projectRoot, 'src', 'data', 'dateien.ts')
 // Northwind INSERT script) are opened from /public instead of bloating the bundle.
 const INLINE_TEXT_LIMIT = 60_000
 
+// GitHub rejects files > 100 MB and GitHub Pages can't serve them, so leave any
+// such file out of the manifest entirely (it is .gitignored too). The course
+// provides an external streaming link for these instead.
+const MAX_DEPLOY_BYTES = 100 * 1024 * 1024
+
 const TEXT_EXT = new Set(['.txt', '.sql'])
 const IMAGE_EXT = new Set(['.jpg', '.jpeg', '.png', '.gif', '.webp', '.svg', '.bmp'])
 const VIDEO_EXT = new Set(['.mp4', '.m4v', '.webm', '.mov', '.ogg'])
@@ -110,8 +115,15 @@ function buildFolder(absPath, isRoot) {
   for (const e of entries) {
     if (e.name.startsWith('.')) continue
     const child = join(absPath, e.name)
-    if (e.isDirectory()) folders.push(buildFolder(child, false))
-    else if (e.isFile()) files.push(buildFile(child))
+    if (e.isDirectory()) {
+      folders.push(buildFolder(child, false))
+    } else if (e.isFile()) {
+      if (statSync(child).size > MAX_DEPLOY_BYTES) {
+        console.log(`generate-dateien: skipping (> 100 MB) ${relative(publicRoot, child)}`)
+        continue
+      }
+      files.push(buildFile(child))
+    }
   }
 
   if (isRoot) {
