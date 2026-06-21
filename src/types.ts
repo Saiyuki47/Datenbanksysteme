@@ -35,18 +35,27 @@ export interface QueryResult {
   rows: (string | number | null)[][]
 }
 
+// Blocks for text-based (theory) solutions, rendered in order.
+export type LoesungBlock =
+  | { art: 'text'; text: string }
+  | { art: 'liste'; punkte: string[] }
+  | { art: 'unterpunkt'; label: string; text: string; punkte?: string[] }
+  | { art: 'tabelle'; titel?: string; columns: string[]; rows: (string | null)[][] }
+
 export interface UebungsblattTask {
   nr: number
+  titel?: string
   text: string
-  aufgabeId: string
-  relevantTables: string[]
+  aufgabeId?: string
+  relevantTables?: string[]
   queryResult?: QueryResult
+  loesung?: LoesungBlock[]
 }
 
 export interface Uebungsblatt {
   id: string
   nr: string
-  typ: 'Hausaufgabe' | 'Präsenzaufgabe'
+  typ: string
   beschreibung?: string
   db?: DbType
   tasks: UebungsblattTask[]

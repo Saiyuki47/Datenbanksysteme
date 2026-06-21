@@ -906,3 +906,48 @@ header > :first-child { flex: 1; }
   font-family: var(--font-mono);
   margin: 10px 0 3px;
 }
+
+/* ---- Übungsblätter: multi-line questions + text-based (theory) solutions ---- */
+.ub-question { white-space: pre-line; }
+
+.ub-loesung {
+  margin-top: 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--green);
+  border-radius: var(--radius);
+  padding: 1rem 1.25rem;
+}
+.ub-loesung-text {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.ub-loesung-up { display: flex; flex-direction: column; gap: 6px; }
+.ub-loesung-up-head {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+}
+.ub-loesung-label { font-weight: 600; color: var(--green); }
+.ub-loesung-liste {
+  margin: 2px 0 0;
+  padding-left: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ub-loesung-liste li {
+  font-size: 13.5px;
+  color: var(--text2);
+  line-height: 1.6;
+}
+.ub-loesung-tab-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text2);
+  margin-bottom: 6px;
+}

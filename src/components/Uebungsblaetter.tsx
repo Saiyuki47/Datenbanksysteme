@@ -7,7 +7,62 @@ import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
 import { detectTips } from '../data/sqlTips'
 import type { TableData } from '../data/pvTables'
-import type { DbType } from '../types'
+import type { DbType, LoesungBlock } from '../types'
+
+// Renders a text-based (theory) solution: paragraphs, bullet lists, labelled
+// sub-points and the occasional table (e.g. the Lost-Update schedule).
+function LoesungView({ blocks }: { blocks: LoesungBlock[] }) {
+  return (
+    <div className="ub-loesung">
+      {blocks.map((block, i) => {
+        if (block.art === 'text') {
+          return <p key={i} className="ub-loesung-text">{block.text}</p>
+        }
+        if (block.art === 'liste') {
+          return (
+            <ul key={i} className="ub-loesung-liste">
+              {block.punkte.map((p, j) => <li key={j}>{p}</li>)}
+            </ul>
+          )
+        }
+        if (block.art === 'unterpunkt') {
+          return (
+            <div key={i} className="ub-loesung-up">
+              <p className="ub-loesung-up-head">
+                <span className="ub-loesung-label">{block.label}</span> {block.text}
+              </p>
+              {block.punkte && block.punkte.length > 0 && (
+                <ul className="ub-loesung-liste">
+                  {block.punkte.map((p, j) => <li key={j}>{p}</li>)}
+                </ul>
+              )}
+            </div>
+          )
+        }
+        // tabelle
+        return (
+          <div key={i} className="ub-loesung-tabelle">
+            {block.titel && <p className="ub-loesung-tab-title">{block.titel}</p>}
+            <div className="ub-table-scroll">
+              <table className="ub-table">
+                <thead>
+                  <tr>{block.columns.map(col => <th key={col}>{col}</th>)}</tr>
+                </thead>
+                <tbody>
+                  {block.rows.map((row, r) => (
+                    <tr key={r}>
+                      {row.map((cell, c) => <td key={c}>{cell || ''}</td>)}
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+          </div>
+        )
+      })}
+    </div>
+  )
+}
 
 function getTable(db: DbType | undefined, name: string): TableData | undefined {
   if (!db) return undefined
@@ -94,8 +149,8 @@ export default function Uebungsblaetter() {
 
             return (
               <div key={key} className="card">
-                <p className="ub-task-nr">Aufgabe {task.nr}</p>
-                <p className="q-title">{task.text}</p>
+                <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
+                <p className="q-title ub-question">{task.text}</p>
 
                 {/* Relevant tables */}
                 {task.relevantTables && task.relevantTables.length > 0 && (
@@ -212,6 +267,16 @@ export default function Uebungsblaetter() {
                     </>
                   )
                 })()}
+
+                {/* Text-based (theory) solution */}
+                {task.loesung && task.loesung.length > 0 && (
+                  <>
+                    <button type="button" className="toggle-btn" onClick={() => toggleSolution(key)}>
+                      {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
+                    </button>
+                    {isOpen && <LoesungView blocks={task.loesung} />}
+                  </>
+                )}
               </div>
             )
           })}
