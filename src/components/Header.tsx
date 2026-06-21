@@ -8,7 +8,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
     <header>
       <div>
         <div className="logo">
-          SQL<span>.</span>Übung
+          Datenbanksysteme
         </div>
         <div className="subtitle">Pine Valley &amp; Northwind Datenbank</div>
       </div>
