@@ -470,14 +470,6 @@ export const dateienTree: DateiFolder = {
       "folders": [],
       "files": [
         {
-          "name": "Original-Video (Link).txt",
-          "path": "dateien_aus_moodle/übung 0/Original-Video (Link).txt",
-          "typ": "link",
-          "ext": "txt",
-          "sizeLabel": "488 B",
-          "url": "https://pine-proxy-prd.pearson.com/PRS/CustomFormat3/8d/d3/c7/c9/37/v1_PS1/PS15FN0.mp4?Expires=1782151992&Signature=oPztEwIOzQWxin1ag-KuKdtH9imlez~2GQez8ICbFhvEK5YzAwh28POaveCof5Y0flZ5GpQ1wXaMyhXaMfAvKwirJg-U-pk~dKbXQluDfUKX7bDGc2jOKWYui-7NfIwkZJTU6wtaLYeWH6s2D74p~967YlvteTzxGmZWWKcur91pGX67VnhfAaM8M61ZGHDndTikxNFmSes5bNZ7wvoHaHS8jQJ4JW14pCZF88Lnf9s0MMqGdL2ecKCL3ufBsKrXgmEbYXibqQqC~Sv66Oc4YguIpH7rcXPMRuwUsOk~qmpVOn3H9ua1pEmnYvPL6Xdw~9emlCYPs8lSz4dmGh3ndw__&Key-Pair-Id=K1SRIGFJPD149K"
-        },
-        {
           "name": "PS15FN0_komprimiert.mp4",
           "path": "dateien_aus_moodle/übung 0/PS15FN0_komprimiert.mp4",
           "typ": "video",
