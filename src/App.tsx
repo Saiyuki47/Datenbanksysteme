@@ -5,9 +5,10 @@ import Cheatsheet from './components/Cheatsheet'
 import Schema from './components/Schema'
 import Quiz from './components/Quiz'
 import Uebungsblaetter from './components/Uebungsblaetter'
+import Dateien from './components/Dateien'
 import { useTheme } from './hooks/useTheme'
 
-export type TabId = 'cheat' | 'schema' | 'quiz' | 'uebung'
+export type TabId = 'cheat' | 'schema' | 'quiz' | 'uebung' | 'dateien'
 
 function App() {
   const [activeTab, setActiveTab] = useState<TabId>('uebung')
@@ -22,6 +23,7 @@ function App() {
         {activeTab === 'schema' && <Schema />}
         {activeTab === 'quiz' && <Quiz />}
         {activeTab === 'uebung' && <Uebungsblaetter />}
+        {activeTab === 'dateien' && <Dateien />}
       </div>
     </>
   )
