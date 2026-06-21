@@ -1,0 +1,47 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww24560\viewh17900\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 drop table TT2;\
+drop table TT1;\
+\
+CREATE TABLE TT1 (A INT, B INT, C INT,\
+CONSTRAINT TT1_PS PRIMARY KEY (A,B), \
+CONSTRAINT TT1_SK UNIQUE (C));\
+\
+CREATE TABLE TT2 (A INT, B INT, C INT, D INT, E INT,\
+CONSTRAINT TT2_PS PRIMARY KEY (A),\
+CONSTRAINT TT2_FS1 FOREIGN KEY (B,C) REFERENCES TT1(A,B), \
+CONSTRAINT  TT2_FS2 FOREIGN KEY (D) REFERENCES TT1(C), \
+CONSTRAINT TT2_E_NN CHECK (E IS NOT NULL),\
+CONSTRAINT TT2_E_13 CHECK (E BETWEEN 1 AND 3));\
+\
+insert into TT1 values (1, 1, 5);\
+insert into TT1 values (2, 2, 10);\
+insert into TT1 values (3, 3, 15);\
+insert into TT1 values (4, 4, 20);\
+insert into TT1 values (5, 5, 25);\
+\
+select * from TT1;\
+\
+insert into TT2 values (100, null, null, 15, 1);\
+insert into TT2 values (101, 2, 2, 25, 2);\
+insert into TT2 values (102, 2, 2, null, 3);\
+insert into TT2 values (103, 3, 3, 10, 3);\
+insert into TT2 values (104, 3, 3, 10, 3);\
+\
+select * from TT2;\
+\
+INSERT INTO TT1 VALUES (1, 2, 5);\
+INSERT INTO TT1 VALUES (1, 2, 30);\
+delete from TT1 where C=30;\
+INSERT INTO TT1 VALUES (1, 1, 50);\
+INSERT INTO TT1 VALUES (1, NULL, NULL);\
+INSERT INTO TT2 VALUES (117, 2, 2, 5, 5);\
+INSERT INTO TT2 VALUES (109, 3, 1, 10, 3);\
+INSERT INTO TT2 VALUES (103, 1, 1, 20, 2);\
+INSERT INTO TT2 VALUES (110, 4, 4, 35, 1);\
+}

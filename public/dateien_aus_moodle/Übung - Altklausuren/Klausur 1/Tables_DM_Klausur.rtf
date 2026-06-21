@@ -1,0 +1,81 @@
+{\rtf1\ansi\ansicpg1252\cocoartf2513
+\cocoatextscaling0\cocoaplatform0{\fonttbl\f0\fswiss\fcharset0 Helvetica;}
+{\colortbl;\red255\green255\blue255;}
+{\*\expandedcolortbl;;}
+\paperw11900\paperh16840\margl1440\margr1440\vieww10800\viewh8400\viewkind0
+\pard\tx720\tx1440\tx2160\tx2880\tx3600\tx4320\tx5040\tx5760\tx6480\tx7200\tx7920\tx8640\pardirnatural\partightenfactor0
+
+\f0\fs24 \cf0 drop table X2;\
+drop table X1;\
+\
+\pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
+\cf0 CREATE TABLE X1 (\
+A INT,\
+B VARCHAR(64),\
+C INT,\
+D INT,\
+CONSTRAINT X1_CO_1 PRIMARY KEY (A, C),\
+CONSTRAINT X1_CO_2 CHECK (LENGTH(B) IN (3,4,6,7)), \
+CONSTRAINT X1_CO_3 CHECK (D IN (1,2,4,8,16,32,64,128,256)), \
+CONSTRAINT X1_CO_4 UNIQUE (D)\
+);\
+\
+CREATE TABLE X2 (\
+A INT,\
+B INT,\
+C INT,\
+D INT,\
+E INT,\
+CONSTRAINT X2_CO_1 PRIMARY KEY (A,E),\
+CONSTRAINT X2_CO_2 FOREIGN KEY (A,B) REFERENCES X1(A,C), \
+CONSTRAINT X2_CO_3 FOREIGN KEY (E) REFERENCES X1(D), \
+CONSTRAINT X2_CO_4 CHECK (D BETWEEN 12 AND 16)\
+);\
+\
+--------------------------------------------------------------\
+\
+delete from x1;\
+\
+insert into x1 values ( 1,   'blau',  2,  16);\
+insert into x1 values ( 3,    'rot',  4,  32);\
+insert into x1 values ( 5,   'gelb',  8,  64);\
+insert into x1 values ( 9, 'orange', 12, 256);\
+insert into x1 values (12,   'gelb', 16, 128);\
+\
+select * from x1;\
+\
+delete from x2;\
+\
+insert into x2 values ( 3,  4,    1, 13, 128);\
+insert into x2 values ( 3,  4,    3, 15,  64);\
+insert into x2 values ( 9, 12,    2, 14,  32);\
+insert into x2 values (12, 16, null, 14,  16);\
+insert into x2 values ( 9, 12,    5, 14,  16);\
+\
+select * from x2;\
+\
+--------------------------------------------------------------\
+\
+a.)\
+INSERT INTO X1 VALUES (1, 'magenta', 45, 128); \
+b.)\
+INSERT INTO X1 VALUES (4, 'orange', 32, 512);\
+c.)\
+INSERT INTO X1 VALUES (11, 'orange', 14, 8);\
+OK\
+d.)\
+INSERT INTO X1 VALUES (10, \'92gruen\'92, 15, 4)\
+e.)\
+INSERT INTO X2 VALUES (1, 2, 3, 12, 256);\
+OK\
+f.)\
+INSERT INTO X2 VALUES (2, 9, NULL, 16, 128);\
+g.)\
+INSERT INTO X2 VALUES (3, 4, 3, 1, 256); \
+h.)\
+INSERT INTO X2 VALUES (9, 12, 3, 14, 32);\
+i.)\
+INSERT INTO X2 VALUES (5, 8, 3, 13, 256);\
+OK\
+j.)\
+INSERT INTO X2 VALUES (5, 8, NULL, 12, 512);}

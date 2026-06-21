@@ -1,0 +1,1 @@
+ACHTEN Sie darauf, dass wir eine Oracle Datenbank haben und folgen Sie den diesbezüglichen Beschreibungen. Sie können die orangen Boxen einfach markieren und löschen.
