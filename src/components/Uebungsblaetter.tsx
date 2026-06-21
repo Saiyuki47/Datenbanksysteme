@@ -152,6 +152,34 @@ export default function Uebungsblaetter() {
                 <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
                 <p className="q-title ub-question">{task.text}</p>
 
+                {/* Anwendungsfall tables shown directly with the task */}
+                {task.tabellen && task.tabellen.length > 0 && (
+                  <div className="ub-tables-section">
+                    {task.tabellen.map(t => (
+                      <div key={t.titel} className="ub-anw-table">
+                        <p className="ub-tables-label">{t.titel}</p>
+                        <div className="ub-table-scroll">
+                          <table className="ub-table">
+                            <thead>
+                              <tr>{t.columns.map(col => <th key={col}>{col}</th>)}</tr>
+                            </thead>
+                            <tbody>
+                              {t.rows.map((row, r) => {
+                                const rowKey = row.map(cell => String(cell)).join('|') || `row-${r}`
+                                return (
+                                  <tr key={rowKey}>
+                                    {row.map((cell, c) => <td key={c}>{cell}</td>)}
+                                  </tr>
+                                )
+                              })}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+
                 {/* Relevant tables */}
                 {task.relevantTables && task.relevantTables.length > 0 && (
                   <div className="ub-tables-section">

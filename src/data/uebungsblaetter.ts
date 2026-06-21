@@ -82,10 +82,43 @@ export const uebungsblaetter: Uebungsblatt[] = [
         nr: 1,
         titel: 'Gruppenaufgabe 1',
         text:
-          'Wenn zur Verwaltung von Daten lediglich auf Dateisysteme zurückgegriffen würde, ergäben sich diverse Nachteile. ' +
-          'Nennen und erläutern Sie diese Nachteile kurz und geben Sie für jeden Nachteil ein Beispiel anhand des Anwendungsfalls.\n\n' +
-          'Anwendungsfall: Eine kleine Bibliothek speichert Daten über ihre Bücher, ihre Leser und den Status ausgeliehener Bücher ' +
-          'in drei Tabellen (Buch, Leser, Ausleihe) einer Tabellenverarbeitungssoftware.',
+          'Wenn zur Verwaltung von Daten lediglich auf Dateisysteme zurückgegriffen würde, würden sich diverse Nachteile ergeben. ' +
+          'Nennen und erläutern Sie diese Nachteile kurz und geben Sie für jeden Nachteil ein Beispiel anhand des nachfolgenden Anwendungsfalls.\n\n' +
+          'Anwendungsfall: Eine kleine Bibliothek speichert Daten über ihre Bücher, ihre Leser und den Status ausgeliehener Bücher. ' +
+          'Für die Datenverwaltung wird dabei eine Tabellenverarbeitungssoftware genutzt. Die drei untenstehenden Tabellen zeigen einen ' +
+          'beispielhaften Auszug aus den Tabellen, den Sie für einige der Beispiele heranziehen können. Denken Sie auch darüber hinaus: ' +
+          'Wie werden die Daten gesichert? Wer hat Zugriff auf die Daten? etc.',
+        tabellen: [
+          {
+            titel: 'Buch',
+            columns: ['Buchtitel', 'Kopien', 'Leihfrist', 'Format', 'Einkaufspreis'],
+            rows: [
+              ['Grundlagen der Wirtschaftsinformatik', '9', '5', 'Paperback', '20,00'],
+              ['Datenbanksysteme', '6', '2', 'Paperback', '44,00'],
+              ['Datenbanksysteme', '2', '5', 'Gebunden', '60,00'],
+              ['XML Ge-Packt', '3', '2', 'Taschenbuch', '10,50'],
+            ],
+          },
+          {
+            titel: 'Leser',
+            columns: ['Name', 'Vorname', 'Adresse', 'Geburtsdatum', 'Anmerkung'],
+            rows: [
+              ['Meier', 'Petra', 'Schneiderstr. 2, 36039 Fulda', '10.02.1962', 'OK'],
+              ['Müller', 'Georg', 'Schnittstr. 1, 36037 Fulda', '15.06.1968', 'OK'],
+              ['Müller', 'Karla', 'Teststr. 3, 36043 Fulda', '25.09.1999', 'Gesperrt'],
+              ['Mustermann', 'Max', 'Musterstr. 10, 36037 Fulda', '18.12.1990', 'OK'],
+            ],
+          },
+          {
+            titel: 'Ausleihe',
+            columns: ['Titel', 'Leihfrist', 'Ausleihe', 'Rückgabe', 'Name'],
+            rows: [
+              ['Grundlagen der Wirtschaftsinformatik', '5', '01.04.2021', '', 'Müller'],
+              ['Datenbanksysteme', '2', '29.03.2021', '17.04.2021', 'Meier'],
+              ['Einführung in XML', '5', '28.03.2021', '17.04.2021', 'Mustermann'],
+            ],
+          },
+        ],
         loesung: [
           {
             art: 'text',

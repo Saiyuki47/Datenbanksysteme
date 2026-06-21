@@ -951,3 +951,7 @@ header > :first-child { flex: 1; }
   color: var(--text2);
   margin-bottom: 6px;
 }
+
+/* Anwendungsfall tables shown inline with a task */
+.ub-anw-table { margin-bottom: 14px; }
+.ub-anw-table:last-child { margin-bottom: 0; }

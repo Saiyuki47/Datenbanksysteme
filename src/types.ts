@@ -42,12 +42,20 @@ export type LoesungBlock =
   | { art: 'unterpunkt'; label: string; text: string; punkte?: string[] }
   | { art: 'tabelle'; titel?: string; columns: string[]; rows: (string | null)[][] }
 
+// A named table shown inline with the task (e.g. the Anwendungsfall tables on the sheet).
+export interface NamedTable {
+  titel: string
+  columns: string[]
+  rows: (string | null)[][]
+}
+
 export interface UebungsblattTask {
   nr: number
   titel?: string
   text: string
   aufgabeId?: string
   relevantTables?: string[]
+  tabellen?: NamedTable[]
   queryResult?: QueryResult
   loesung?: LoesungBlock[]
 }
