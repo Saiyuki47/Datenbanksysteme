@@ -472,6 +472,57 @@ header > :first-child { flex: 1; }
   margin-bottom: 6px;
 }
 
+/* Lecturer note / remarks box */
+.ub-anmerkung {
+  margin: 0 0 1rem;
+  padding: 0.9rem 1.1rem;
+  background: var(--red-dim);
+  border: 1px solid rgba(241,96,99,0.25);
+  border-left: 3px solid var(--red);
+  border-radius: var(--radius);
+}
+.ub-anmerkung-title {
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--red);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+.ub-anmerkung-liste {
+  margin: 0;
+  padding-left: 1.1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.ub-anmerkung-liste li {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text2);
+}
+
+/* Task head row: title + optional red marker */
+.ub-task-head {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ub-task-head .ub-task-nr { margin-bottom: 0; }
+.ub-task-hinweis {
+  font-size: 11px;
+  font-weight: 600;
+  font-family: var(--font-mono);
+  padding: 2px 8px;
+  border-radius: 5px;
+  background: var(--red-dim);
+  color: var(--red);
+  border: 1px solid rgba(241,96,99,0.3);
+  letter-spacing: 0.03em;
+}
+
 /* RELEVANT TABLES */
 .ub-tables-section {
   margin: 14px 0 10px;
@@ -950,6 +1001,20 @@ header > :first-child { flex: 1; }
   font-weight: 600;
   color: var(--text2);
   margin-bottom: 6px;
+}
+.ub-loesung-code-wrap { margin: 4px 0; }
+.ub-loesung-code {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--text);
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 12px 14px;
+  margin: 0;
+  white-space: pre;
+  overflow-x: auto;
 }
 
 /* Anwendungsfall tables shown inline with a task */

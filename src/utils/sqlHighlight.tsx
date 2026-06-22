@@ -4,23 +4,20 @@ import type { ReactNode } from 'react'
 const KEYWORDS = [
   'FETCH FIRST', 'ROWS ONLY',
   'IS NOT NULL', 'IS NULL',
+  'PRIMARY KEY', 'FOREIGN KEY',
   'FULL OUTER JOIN', 'INNER JOIN', 'LEFT JOIN', 'RIGHT JOIN',
   'GROUP BY', 'ORDER BY',
+  'CREATE', 'TABLE', 'INSERT', 'INTO', 'VALUES',
+  'CONSTRAINT', 'REFERENCES', 'CHECK', 'UNIQUE', 'DEFAULT',
   'SELECT', 'DISTINCT', 'FROM', 'WHERE', 'AND', 'OR', 'NOT',
   'JOIN', 'ON', 'HAVING', 'ASC', 'DESC', 'AS', 'IN', 'IS',
-  'BETWEEN', 'LIKE', 'COUNT', 'SUM', 'AVG', 'MIN', 'MAX',
+  'BETWEEN', 'LIKE', 'COUNT', 'SUM', 'AVG', 'MIN', 'MAX', 'LENGTH',
   'ROUND', 'NVL', 'UPPER', 'LOWER', 'TRIM', 'SUBSTR', 'TO_DATE',
+  'INT', 'VARCHAR', 'NULL',
 ]
 
 const KW_PATTERN = KEYWORDS.map(k => k.replace(/\s+/g, '\\s+')).join('|')
 const KW_REGEX = new RegExp(`\\b(${KW_PATTERN})\\b`, 'gi')
-
-function escapeHtml(text: string): string {
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-}
 
 function tokenizeSql(text: string, lineIndex: number): ReactNode[] {
   const nodes: ReactNode[] = []
@@ -55,12 +52,12 @@ export function highlightSQL(sql: string): ReactNode[] {
     const nodes: ReactNode[] = []
 
     if (commentIndex === -1) {
-      nodes.push(...tokenizeSql(escapeHtml(line), lineIndex))
+      nodes.push(...tokenizeSql(line, lineIndex))
     } else {
-      nodes.push(...tokenizeSql(escapeHtml(line.slice(0, commentIndex)), lineIndex))
+      nodes.push(...tokenizeSql(line.slice(0, commentIndex), lineIndex))
       nodes.push(
         <span key={`cm-${lineIndex}`} className="cm">
-          {escapeHtml(line.slice(commentIndex))}
+          {line.slice(commentIndex)}
         </span>,
       )
     }

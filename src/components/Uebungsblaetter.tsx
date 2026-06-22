@@ -39,6 +39,14 @@ function LoesungView({ blocks }: { blocks: LoesungBlock[] }) {
             </div>
           )
         }
+        if (block.art === 'code') {
+          return (
+            <div key={i} className="ub-loesung-code-wrap">
+              {block.titel && <p className="ub-loesung-tab-title">{block.titel}</p>}
+              <pre className="ub-loesung-code">{block.text}</pre>
+            </div>
+          )
+        }
         // tabelle
         return (
           <div key={i} className="ub-loesung-tabelle">
@@ -122,7 +130,7 @@ export default function Uebungsblaetter() {
               className={`filter-btn${selectedId === b.id ? ' on' : ''}`}
               onClick={() => setSelectedId(b.id)}
             >
-              Blatt {b.nr}
+              {b.titel ?? `Blatt ${b.nr}`}
             </button>
           ))}
         </div>
@@ -135,11 +143,23 @@ export default function Uebungsblaetter() {
             <div className="ub-meta-row">
               <span className="ub-badge">{blatt.typ}</span>
             </div>
-            <h3 className="ub-title">Übungsblatt {blatt.nr}</h3>
+            <h3 className="ub-title">{blatt.titel ?? `Übungsblatt ${blatt.nr}`}</h3>
             {blatt.beschreibung && (
               <p className="ub-desc">{blatt.beschreibung}</p>
             )}
           </div>
+
+          {/* Lecturer note / remarks box */}
+          {blatt.anmerkung && (
+            <div className="ub-anmerkung">
+              <p className="ub-anmerkung-title">
+                {blatt.anmerkung.titel ?? 'Anmerkung'}
+              </p>
+              <ul className="ub-anmerkung-liste">
+                {blatt.anmerkung.punkte.map((p, i) => <li key={i}>{p}</li>)}
+              </ul>
+            </div>
+          )}
 
           {/* Tasks */}
           {blatt.tasks.map(task => {
@@ -149,8 +169,18 @@ export default function Uebungsblaetter() {
 
             return (
               <div key={key} className="card">
-                <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
+                <div className="ub-task-head">
+                  <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
+                  {task.hinweis && <span className="ub-task-hinweis">{task.hinweis}</span>}
+                </div>
                 <p className="q-title ub-question">{task.text}</p>
+
+                {/* Given SQL query (the exam question), always visible */}
+                {task.sqlQuery && (
+                  <div className="sql-block visible">
+                    {highlightSQL(task.sqlQuery)}
+                  </div>
+                )}
 
                 {/* Anwendungsfall tables shown directly with the task */}
                 {task.tabellen && task.tabellen.length > 0 && (

@@ -41,6 +41,8 @@ export type LoesungBlock =
   | { art: 'liste'; punkte: string[] }
   | { art: 'unterpunkt'; label: string; text: string; punkte?: string[] }
   | { art: 'tabelle'; titel?: string; columns: string[]; rows: (string | null)[][] }
+  // Preformatted, monospaced block (e.g. relational-algebra expressions, operator trees).
+  | { art: 'code'; titel?: string; text: string }
 
 // A named table shown inline with the task (e.g. the Anwendungsfall tables on the sheet).
 export interface NamedTable {
@@ -53,9 +55,12 @@ export interface UebungsblattTask {
   nr: number
   titel?: string
   text: string
+  // Short red marker shown next to the title (e.g. "nicht relevant").
+  hinweis?: string
   aufgabeId?: string
   relevantTables?: string[]
   tabellen?: NamedTable[]
+  sqlQuery?: string
   queryResult?: QueryResult
   loesung?: LoesungBlock[]
 }
@@ -64,7 +69,12 @@ export interface Uebungsblatt {
   id: string
   nr: string
   typ: string
+  // Optional override for the heading/selector label (e.g. "Probeklausur 1"
+  // instead of the default "Übungsblatt {nr}" / "Blatt {nr}").
+  titel?: string
   beschreibung?: string
+  // Highlighted note box shown above the first task (e.g. lecturer remarks).
+  anmerkung?: { titel?: string; punkte: string[] }
   db?: DbType
   tasks: UebungsblattTask[]
 }

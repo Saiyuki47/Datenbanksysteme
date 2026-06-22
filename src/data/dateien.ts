@@ -1003,6 +1003,125 @@ export const dateienTree: DateiFolder = {
           "url": "https://mystery.knightlab.com/"
         }
       ]
+    },
+    {
+      "name": "Altklausuren_Datenbanksysteme_share",
+      "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share",
+      "folders": [
+        {
+          "name": "Altklausuren_Datenbanksysteme_share",
+          "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share",
+          "folders": [],
+          "files": [
+            {
+              "name": "datenbanken_ss19_aufgabenblatt.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/datenbanken_ss19_aufgabenblatt.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "3.9 MB"
+            },
+            {
+              "name": "datenbanken_ws1819_aufgabenblatt.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/datenbanken_ws1819_aufgabenblatt.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "2.8 MB"
+            },
+            {
+              "name": "DBS_verschiedeneAltklausuren.zip",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/DBS_verschiedeneAltklausuren.zip",
+              "typ": "archive",
+              "ext": "zip",
+              "sizeLabel": "11.0 MB"
+            },
+            {
+              "name": "Klausur Aufgabenblätter Datenbanksysteme 1 BSc SS08.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur Aufgabenblätter Datenbanksysteme 1 BSc SS08.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "98 KB"
+            },
+            {
+              "name": "Klausur Aufgabenblätter Datenbanksysteme 1 BSc SS09.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur Aufgabenblätter Datenbanksysteme 1 BSc SS09.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "88 KB"
+            },
+            {
+              "name": "Klausur Aufgabenblätter Datenbanksysteme 1 BSc WS08.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur Aufgabenblätter Datenbanksysteme 1 BSc WS08.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "79 KB"
+            },
+            {
+              "name": "Klausur_A WS18_Aufgabenblatt.docx",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_A WS18_Aufgabenblatt.docx",
+              "typ": "office",
+              "ext": "docx",
+              "sizeLabel": "3.3 MB"
+            },
+            {
+              "name": "Klausur_B WS18_Loesungsblatt_AUSGEFUELLT.docx",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_B WS18_Loesungsblatt_AUSGEFUELLT.docx",
+              "typ": "office",
+              "ext": "docx",
+              "sizeLabel": "649 KB"
+            },
+            {
+              "name": "Klausur_C WS18_Musterloesung.docx",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_C WS18_Musterloesung.docx",
+              "typ": "office",
+              "ext": "docx",
+              "sizeLabel": "2.7 MB"
+            },
+            {
+              "name": "Klausur_Datenbanksysteme_WS2021.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_Datenbanksysteme_WS2021.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "497 KB"
+            },
+            {
+              "name": "Klausur_Losungsblatter_Datenbanksysteme_1_Bsc_SS08.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_Losungsblatter_Datenbanksysteme_1_Bsc_SS08.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "55 KB"
+            },
+            {
+              "name": "Klausur_Losungsblatter_Datenbanksysteme_1_BSc_SS09.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_Losungsblatter_Datenbanksysteme_1_BSc_SS09.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "122 KB"
+            },
+            {
+              "name": "Klausur_Losungsblatter_Datenbanksysteme_1_BSc_WS08.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Klausur_Losungsblatter_Datenbanksysteme_1_BSc_WS08.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "106 KB"
+            },
+            {
+              "name": "klausur-ws0708-convertedword.docx",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/klausur-ws0708-convertedword.docx",
+              "typ": "office",
+              "ext": "docx",
+              "sizeLabel": "209 KB"
+            },
+            {
+              "name": "Nachklausur_Datenbanken_WS2021.pdf",
+              "path": "dateien_aus_moodle/Altklausuren_Datenbanksysteme_share/Altklausuren_Datenbanksysteme_share/Nachklausur_Datenbanken_WS2021.pdf",
+              "typ": "pdf",
+              "ext": "pdf",
+              "sizeLabel": "387 KB"
+            }
+          ]
+        }
+      ],
+      "files": []
     }
   ],
   "files": [
