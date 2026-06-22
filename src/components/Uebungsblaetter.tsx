@@ -6,6 +6,7 @@ import { pvTables } from '../data/pvTables'
 import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
 import { detectTips } from '../data/sqlTips'
+import { aufgabeTipps } from '../data/aufgabeTipps'
 import type { TableData } from '../data/pvTables'
 import type { DbType, LoesungBlock } from '../types'
 
@@ -83,6 +84,7 @@ export default function Uebungsblaetter() {
   const [openIds, setOpenIds] = useState<Set<string>>(new Set())
   const [openTables, setOpenTables] = useState<Set<string>>(new Set())
   const [openTips, setOpenTips] = useState<Set<string>>(new Set())
+  const [openHints, setOpenHints] = useState<Set<string>>(new Set())
 
   const blatt = uebungsblaetter.find(b => b.id === selectedId)
 
@@ -106,6 +108,15 @@ export default function Uebungsblaetter() {
 
   const toggleTips = (key: string) => {
     setOpenTips(prev => {
+      const next = new Set(prev)
+      if (next.has(key)) next.delete(key)
+      else next.add(key)
+      return next
+    })
+  }
+
+  const toggleHint = (key: string) => {
+    setOpenHints(prev => {
       const next = new Set(prev)
       if (next.has(key)) next.delete(key)
       else next.add(key)
@@ -257,6 +268,28 @@ export default function Uebungsblaetter() {
                         </div>
                       )
                     })}
+                  </div>
+                )}
+
+                {/* Structured hint accordion (4 categories) */}
+                {aufgabeTipps[key] && aufgabeTipps[key].length > 0 && (
+                  <div className="ub-hints-section">
+                    <button type="button" className="toggle-btn toggle-btn--hints" onClick={() => toggleHint(key)}>
+                      {openHints.has(key) ? '▼ Hinweise verbergen' : '▶ Hinweise anzeigen'}
+                    </button>
+                    {openHints.has(key) && (
+                      <div className="tipp-accordion">
+                        {aufgabeTipps[key].map((hint, i) => (
+                          <details key={i} className="tipp-section">
+                            <summary className="tipp-section-summary">
+                              <span className="tipp-section-icon">{hint.icon}</span>
+                              {hint.titel}
+                            </summary>
+                            <div className="tipp-section-body">{hint.inhalt}</div>
+                          </details>
+                        ))}
+                      </div>
+                    )}
                   </div>
                 )}
 

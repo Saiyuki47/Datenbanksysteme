@@ -1,4 +1,10 @@
 export type DbType = 'pv' | 'nw'
+
+export interface TippSection {
+  icon: string
+  titel: string
+  inhalt: string
+}
 export type Difficulty = 'easy' | 'med' | 'hard'
 
 export interface SchemaRow {

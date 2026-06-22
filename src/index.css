@@ -1020,3 +1020,55 @@ header > :first-child { flex: 1; }
 /* Anwendungsfall tables shown inline with a task */
 .ub-anw-table { margin-bottom: 14px; }
 .ub-anw-table:last-child { margin-bottom: 0; }
+
+/* TIPP-ACCORDION (4-Kategorien-Hinweissektion auf Aufgabenkarten) */
+.ub-hints-section { margin: 10px 0; }
+.toggle-btn--hints {
+  border-color: var(--green);
+  color: var(--green);
+}
+.toggle-btn--hints:hover {
+  background: var(--green-dim);
+  color: var(--green);
+}
+.tipp-accordion {
+  margin-top: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.tipp-section {
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow: hidden;
+  background: var(--bg);
+}
+.tipp-section[open] { border-color: var(--border2); }
+.tipp-section-summary {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 12px;
+  cursor: pointer;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text2);
+  list-style: none;
+  user-select: none;
+  transition: background 0.15s, color 0.15s;
+}
+.tipp-section-summary::-webkit-details-marker { display: none; }
+.tipp-section[open] > .tipp-section-summary {
+  color: var(--text);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.tipp-section-summary:hover { background: var(--bg3); color: var(--text); }
+.tipp-section-icon { font-size: 15px; flex-shrink: 0; }
+.tipp-section-body {
+  padding: 10px 14px;
+  font-size: 13px;
+  color: var(--text2);
+  line-height: 1.75;
+  white-space: pre-line;
+}
