@@ -1003,6 +1003,24 @@ header > :first-child { flex: 1; }
   margin-bottom: 6px;
 }
 .ub-loesung-code-wrap { margin: 4px 0; }
+
+/* Drawn diagrams (ER diagrams, operator / decomposition trees) */
+.ub-diagram {
+  margin: 14px 0;
+  padding: 14px;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  overflow-x: auto;
+}
+.ub-diagram svg { display: block; margin: 0 auto; max-width: 100%; height: auto; }
+.dgm-shape { fill: var(--bg); stroke: var(--text2); stroke-width: 1.5; }
+.dgm-line { stroke: var(--text2); stroke-width: 1.5; fill: none; }
+.dgm-text { fill: var(--text); font-family: var(--font-sans, system-ui, sans-serif); font-size: 14px; }
+.dgm-text--sm { font-size: 12px; }
+.dgm-key { fill: var(--text); font-family: var(--font-sans, system-ui, sans-serif); font-size: 14px; text-decoration: underline; }
+.dgm-lbl { fill: var(--blue); font-family: var(--font-mono, monospace); font-size: 13px; font-weight: 700; }
+.dgm-card { fill: var(--green); font-family: var(--font-mono, monospace); font-size: 12px; font-weight: 600; }
 .ub-loesung-code {
   font-family: var(--font-mono);
   font-size: 13px;

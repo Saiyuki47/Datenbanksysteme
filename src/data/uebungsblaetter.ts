@@ -1255,8 +1255,8 @@ CREATE TABLE X2 (
       '20. Februar 2019). Umgesetzt sind die Aufgaben 1–6: ER-Modell (Aufgabe 1 – Begriffe, ' +
       'Aufgabe 2 – Überführung ins relationale Schema und Verfeinerung, Aufgabe 3 – (min,max)-Notation), ' +
       'SQL-Anfragen (Aufgabe 4), Integritätsbedingungen (Aufgabe 5), relationale Algebra (Aufgabe 6) und ' +
-      'Normalisierung/BCNF (Aufgabe 7). Die ER-Diagramme sind in Textform beschrieben; die Lösungen lassen ' +
-      'sich pro Teilaufgabe einblenden.',
+      'Normalisierung/BCNF (Aufgabe 7). Die ER-Diagramme und Operatorbäume sind als gezeichnete Diagramme ' +
+      'dargestellt; die Lösungen lassen sich pro Teilaufgabe einblenden.',
     anmerkung: {
       titel: 'Rahmen der Klausur',
       punkte: [
@@ -1275,21 +1275,46 @@ CREATE TABLE X2 (
         titel: 'Aufgabe 1 (Begriffe des ER-Modells – Teil 1) (5 Punkte)',
         text:
           'Das folgende ER-Diagramm stellt einen kleinen Ausschnitt der aus der Vorlesung bekannten ' +
-          'Universitätsdatenbank dar. Benennen Sie die einzelnen Elemente gemäß den Fragen.\n\n' +
-          'Diagramm (in Textform):\n' +
-          '• Entitätstyp „Student" (Kasten) mit den Attributen MatrNr, Name, Geburtstag (Ovale). ' +
-          'MatrNr ist unterstrichen.\n' +
-          '• Entitätstyp „Vorlesung" (Kasten) mit den Attributen Nr, Titel, Credits.\n' +
-          '• Dazwischen die Beziehung „besucht" (Raute), über je eine Kante mit Student und mit Vorlesung verbunden.\n\n' +
-          'Beschriftung der Elemente:\n' +
-          '• A = der Kasten „Student"\n' +
-          '• B = die Raute „besucht"\n' +
-          '• C = das (unterstrichene) Attribut „MatrNr"\n' +
-          '• D = das Attribut „Name"\n' +
-          '• E = die Kante zwischen Student und „besucht"\n' +
-          '• F = die Kante zwischen „besucht" und Vorlesung\n\n' +
+          'Universitätsdatenbank dar (die Elemente sind mit A–F beschriftet). Benennen Sie die einzelnen ' +
+          'Elemente gemäß den Fragen.\n\n' +
           'Hintergrund: Ein Student kann mehrere Vorlesungen besuchen, und eine Vorlesung kann von ' +
           'mehreren Studenten besucht werden. (Je 1 Punkt)',
+        svg: `<svg viewBox="0 0 720 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm: Student besucht Vorlesung (n:m)">
+  <line class="dgm-line" x1="95" y1="66" x2="178" y2="145"/>
+  <line class="dgm-line" x1="200" y1="66" x2="200" y2="145"/>
+  <line class="dgm-line" x1="312" y1="66" x2="232" y2="145"/>
+  <line class="dgm-line" x1="430" y1="66" x2="492" y2="145"/>
+  <line class="dgm-line" x1="535" y1="66" x2="530" y2="145"/>
+  <line class="dgm-line" x1="645" y1="66" x2="568" y2="145"/>
+  <line class="dgm-line" x1="260" y1="171" x2="305" y2="171"/>
+  <line class="dgm-line" x1="415" y1="171" x2="470" y2="171"/>
+  <ellipse class="dgm-shape" cx="95" cy="48" rx="50" ry="20"/>
+  <text class="dgm-key" x="95" y="53" text-anchor="middle">MatrNr</text>
+  <ellipse class="dgm-shape" cx="200" cy="48" rx="42" ry="20"/>
+  <text class="dgm-text" x="200" y="53" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="312" cy="48" rx="56" ry="20"/>
+  <text class="dgm-text" x="312" y="53" text-anchor="middle">Geburtstag</text>
+  <ellipse class="dgm-shape" cx="430" cy="48" rx="40" ry="20"/>
+  <text class="dgm-text" x="430" y="53" text-anchor="middle">Nr</text>
+  <ellipse class="dgm-shape" cx="535" cy="48" rx="42" ry="20"/>
+  <text class="dgm-text" x="535" y="53" text-anchor="middle">Titel</text>
+  <ellipse class="dgm-shape" cx="645" cy="48" rx="48" ry="20"/>
+  <text class="dgm-text" x="645" y="53" text-anchor="middle">Credits</text>
+  <rect class="dgm-shape" x="140" y="145" width="120" height="52" rx="3"/>
+  <text class="dgm-text" x="200" y="177" text-anchor="middle">Student</text>
+  <rect class="dgm-shape" x="470" y="145" width="120" height="52" rx="3"/>
+  <text class="dgm-text" x="530" y="177" text-anchor="middle">Vorlesung</text>
+  <polygon class="dgm-shape" points="305,171 360,141 415,171 360,201"/>
+  <text class="dgm-text dgm-text--sm" x="360" y="175" text-anchor="middle">besucht</text>
+  <text class="dgm-card" x="282" y="162" text-anchor="middle">N</text>
+  <text class="dgm-card" x="440" y="162" text-anchor="middle">M</text>
+  <text class="dgm-lbl" x="282" y="191" text-anchor="middle">E</text>
+  <text class="dgm-lbl" x="440" y="191" text-anchor="middle">F</text>
+  <text class="dgm-lbl" x="200" y="229" text-anchor="middle">A</text>
+  <text class="dgm-lbl" x="360" y="229" text-anchor="middle">B</text>
+  <text class="dgm-lbl" x="95" y="16" text-anchor="middle">C</text>
+  <text class="dgm-lbl" x="200" y="16" text-anchor="middle">D</text>
+</svg>`,
       },
       {
         nr: 1,
@@ -1396,14 +1421,31 @@ CREATE TABLE X2 (
         nr: 10,
         titel: 'Aufgabe 2 (Begriffe des ER-Modells – Teil 2) (5 Punkte)',
         text:
-          'Überführen Sie das Diagramm zuerst in ein relationales Schema und verfeinern Sie dieses anschließend.\n\n' +
-          'Diagramm (in Textform):\n' +
-          '• Entitätstyp A (Kasten) mit Schlüsselattribut a (unterstrichen).\n' +
-          '• Entitätstyp B (Kasten) mit Schlüsselattribut b (unterstrichen).\n' +
-          '• Beziehung R (Raute) zwischen A und B mit dem Beziehungsattribut r.\n' +
-          '• Funktionalität 1 : N – an der Kante zu A steht eine „1", an der Kante zu B ein „N".\n\n' +
+          'Überführen Sie das unten dargestellte Diagramm zuerst in ein relationales Schema und verfeinern Sie ' +
+          'dieses anschließend.\n\n' +
           'Schreibweise: „A: {[a]}" steht für die Relation A mit dem Attribut a; unterstrichene Attribute ' +
           'bilden den Primärschlüssel.',
+        svg: `<svg viewBox="0 0 560 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm: A 1:N R B">
+  <line class="dgm-line" x1="180" y1="95" x2="228" y2="95"/>
+  <line class="dgm-line" x1="332" y1="95" x2="380" y2="95"/>
+  <line class="dgm-line" x1="125" y1="165" x2="125" y2="120"/>
+  <line class="dgm-line" x1="280" y1="165" x2="280" y2="122"/>
+  <line class="dgm-line" x1="435" y1="165" x2="435" y2="120"/>
+  <rect class="dgm-shape" x="70" y="70" width="110" height="50" rx="3"/>
+  <text class="dgm-text" x="125" y="100" text-anchor="middle">A</text>
+  <rect class="dgm-shape" x="380" y="70" width="110" height="50" rx="3"/>
+  <text class="dgm-text" x="435" y="100" text-anchor="middle">B</text>
+  <polygon class="dgm-shape" points="228,95 280,68 332,95 280,122"/>
+  <text class="dgm-text" x="280" y="100" text-anchor="middle">R</text>
+  <ellipse class="dgm-shape" cx="125" cy="185" rx="40" ry="20"/>
+  <text class="dgm-key" x="125" y="190" text-anchor="middle">a</text>
+  <ellipse class="dgm-shape" cx="280" cy="185" rx="40" ry="20"/>
+  <text class="dgm-text" x="280" y="190" text-anchor="middle">r</text>
+  <ellipse class="dgm-shape" cx="435" cy="185" rx="40" ry="20"/>
+  <text class="dgm-key" x="435" y="190" text-anchor="middle">b</text>
+  <text class="dgm-card" x="204" y="86" text-anchor="middle">1</text>
+  <text class="dgm-card" x="356" y="86" text-anchor="middle">N</text>
+</svg>`,
       },
       {
         nr: 11,
@@ -1477,19 +1519,56 @@ CREATE TABLE X2 (
           'Fehler gemacht, vor allem in der (min,max)-Notation. Die in den Relationen gespeicherten Werte sind ' +
           'ein korrektes Abbild der Miniwelt; beantworten Sie die Fragen auf Basis dieser gespeicherten Werte. ' +
           '(Je 1 Punkt)\n\n' +
-          'Diagramm (in Textform):\n' +
-          '• Entitätstyp KNEIPE – Attribute ORT, NAME (NAME ist Schlüssel)\n' +
-          '• Entitätstyp BIER – Attribute ALKOHOL, SORTE (SORTE ist Schlüssel)\n' +
-          '• Entitätstyp BRAUEREI – Attribute NAME, HRG (HRG ist Schlüssel)\n' +
-          '• Beziehung VERKAUFT zwischen KNEIPE und BIER – Angabe an der KNEIPE-Seite [0,2], an der BIER-Seite [1,n]\n' +
-          '• Beziehung BESTSELLER zwischen KNEIPE und BIER – Angabe an der KNEIPE-Seite [1,1], an der BIER-Seite [0,n]\n' +
-          '• Beziehung BRAUT zwischen BRAUEREI und BIER – Angabe an der BRAUEREI-Seite [2,4], an der BIER-Seite [1,2]\n\n' +
           'So liest man (min,max): Die Angabe [min,max] an der Seite eines Entitätstyps bedeutet, dass jede ' +
           'einzelne Entität dieses Typs an mindestens min und höchstens max Beziehungen teilnimmt. Beispiel: ' +
           'VERKAUFT [0,2] an der KNEIPE-Seite heißt „jede Kneipe verkauft zwischen 0 und 2 Biere".\n\n' +
           'Hinweis: Die vollständigen Tabellen VERKAUFT und BRAUT standen auf den Aufgabenblättern. Die für die ' +
           'Lösung entscheidenden Fakten sind jeweils in der Erklärung genannt; siehe auch die „Anmerkungen zur ' +
           'Lösung" am Ende dieser Aufgabe.',
+        svg: `<svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm: Kneipe, Bier, Brauerei mit Beziehungen Verkauft, Bestseller, Braut">
+  <line class="dgm-line" x1="78" y1="68" x2="112" y2="120"/>
+  <line class="dgm-line" x1="186" y1="68" x2="158" y2="120"/>
+  <line class="dgm-line" x1="566" y1="68" x2="592" y2="120"/>
+  <line class="dgm-line" x1="678" y1="68" x2="650" y2="120"/>
+  <line class="dgm-line" x1="300" y1="382" x2="340" y2="352"/>
+  <line class="dgm-line" x1="420" y1="382" x2="380" y2="352"/>
+  <line class="dgm-line" x1="192" y1="146" x2="305" y2="146"/>
+  <line class="dgm-line" x1="360" y1="176" x2="360" y2="300"/>
+  <line class="dgm-line" x1="132" y1="172" x2="132" y2="296"/>
+  <line class="dgm-line" x1="192" y1="326" x2="300" y2="326"/>
+  <line class="dgm-line" x1="621" y1="172" x2="621" y2="296"/>
+  <line class="dgm-line" x1="566" y1="326" x2="420" y2="326"/>
+  <ellipse class="dgm-shape" cx="78" cy="50" rx="38" ry="20"/>
+  <text class="dgm-text dgm-text--sm" x="78" y="55" text-anchor="middle">ORT</text>
+  <ellipse class="dgm-shape" cx="186" cy="50" rx="44" ry="20"/>
+  <text class="dgm-key" x="186" y="55" text-anchor="middle">NAME</text>
+  <ellipse class="dgm-shape" cx="566" cy="50" rx="44" ry="20"/>
+  <text class="dgm-text dgm-text--sm" x="566" y="55" text-anchor="middle">NAME</text>
+  <ellipse class="dgm-shape" cx="678" cy="50" rx="38" ry="20"/>
+  <text class="dgm-key" x="678" y="55" text-anchor="middle">HRG</text>
+  <ellipse class="dgm-shape" cx="300" cy="400" rx="50" ry="20"/>
+  <text class="dgm-text dgm-text--sm" x="300" y="405" text-anchor="middle">ALKOHOL</text>
+  <ellipse class="dgm-shape" cx="420" cy="400" rx="44" ry="20"/>
+  <text class="dgm-key" x="420" y="405" text-anchor="middle">SORTE</text>
+  <rect class="dgm-shape" x="72" y="120" width="120" height="52" rx="3"/>
+  <text class="dgm-text" x="132" y="151" text-anchor="middle">KNEIPE</text>
+  <rect class="dgm-shape" x="556" y="120" width="130" height="52" rx="3"/>
+  <text class="dgm-text" x="621" y="151" text-anchor="middle">BRAUEREI</text>
+  <rect class="dgm-shape" x="300" y="300" width="120" height="52" rx="3"/>
+  <text class="dgm-text" x="360" y="331" text-anchor="middle">BIER</text>
+  <polygon class="dgm-shape" points="305,146 360,116 415,146 360,176"/>
+  <text class="dgm-text dgm-text--sm" x="360" y="150" text-anchor="middle">VERKAUFT</text>
+  <polygon class="dgm-shape" points="68,326 132,294 196,326 132,358"/>
+  <text class="dgm-text dgm-text--sm" x="132" y="330" text-anchor="middle">BESTSELLER</text>
+  <polygon class="dgm-shape" points="566,326 621,296 676,326 621,356"/>
+  <text class="dgm-text dgm-text--sm" x="621" y="330" text-anchor="middle">BRAUT</text>
+  <text class="dgm-card" x="248" y="138" text-anchor="middle">[0,2]</text>
+  <text class="dgm-card" x="384" y="240" text-anchor="middle">[1,n]</text>
+  <text class="dgm-card" x="106" y="238" text-anchor="middle">[1,1]</text>
+  <text class="dgm-card" x="246" y="318" text-anchor="middle">[0,n]</text>
+  <text class="dgm-card" x="647" y="238" text-anchor="middle">[2,4]</text>
+  <text class="dgm-card" x="493" y="318" text-anchor="middle">[1,2]</text>
+</svg>`,
         tabellen: [
           {
             titel: 'Ausprägungen KNEIPE (Schlüssel NAME)',
@@ -1727,11 +1806,8 @@ CREATE TABLE X2 (
         nr: 30,
         titel: 'Aufgabe 4 (SQL-Select-Anweisung) (22 Punkte)',
         text:
-          'Tragen Sie die Ergebnisse von 11 SQL-Anfragen (4a–4k) auf den unten stehenden Tabellen T1 und T2 ein.\n\n' +
-          'Die Quelltabellen (aus dem Aufgabenblatt-Skript) sind hier abgedruckt. Hinweis: Die genauen Texte ' +
-          'der 11 SELECT-Anfragen 4a–4k waren auf dem Lösungsblatt nicht abgedruckt (das Skript enthält nur die ' +
-          'Tabellen-Definitionen und „SELECT * FROM …"). Unten stehen daher die offiziellen Ergebnisse 4a–4k ' +
-          'originalgetreu; mit den Anfragetexten ergänze ich die Schritt-für-Schritt-Herleitung je Teilaufgabe.',
+          'Tragen Sie die Ergebnisse der folgenden SQL-Anfragen (4a–4k) auf den unten stehenden Tabellen T1 und T2 ein. ' +
+          'Klappen Sie zu jeder Teilaufgabe die Lösung mit der ausführlichen Herleitung auf.',
         tabellen: [
           {
             titel: 'T1 (A int, B varchar(7), C int, D varchar(3))',
@@ -2191,19 +2267,39 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
               'die Blätter werden zuerst ausgewertet.',
           },
           {
-            art: 'code',
+            art: 'svg',
             titel: 'Operatorbaum (Wurzel oben, Auswertung von unten nach oben)',
-            text:
-              'σ[Semester ≥ 12]\n' +
-              '└─ ⋈                                (über MatrNr)\n' +
-              '   ├─ Studenten\n' +
-              '   └─ ⋈                             (über VorlNr)\n' +
-              '      ├─ hören\n' +
-              '      └─ π[VorlNr]\n' +
-              '         └─ ⋈[gelesenVon = PersNr]\n' +
-              '            ├─ Vorlesungen\n' +
-              '            └─ σ[Name = ’Sokrates’]\n' +
-              '               └─ Professoren',
+            svg: `<svg viewBox="0 0 720 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Operatorbaum der Anfrage">
+  <line class="dgm-line" x1="330" y1="44" x2="330" y2="72"/>
+  <line class="dgm-line" x1="330" y1="104" x2="170" y2="134"/>
+  <line class="dgm-line" x1="330" y1="104" x2="430" y2="134"/>
+  <line class="dgm-line" x1="430" y1="166" x2="330" y2="198"/>
+  <line class="dgm-line" x1="430" y1="166" x2="520" y2="198"/>
+  <line class="dgm-line" x1="520" y1="230" x2="520" y2="272"/>
+  <line class="dgm-line" x1="520" y1="304" x2="430" y2="346"/>
+  <line class="dgm-line" x1="520" y1="304" x2="620" y2="346"/>
+  <line class="dgm-line" x1="620" y1="378" x2="620" y2="408"/>
+  <rect class="dgm-shape" x="252" y="12" width="156" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="330" y="33" text-anchor="middle">σ[Semester ≥ 12]</text>
+  <rect class="dgm-shape" x="310" y="72" width="40" height="32" rx="5"/>
+  <text class="dgm-text" x="330" y="93" text-anchor="middle">⋈</text>
+  <rect class="dgm-shape" x="122" y="134" width="96" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="170" y="155" text-anchor="middle">Studenten</text>
+  <rect class="dgm-shape" x="410" y="134" width="40" height="32" rx="5"/>
+  <text class="dgm-text" x="430" y="155" text-anchor="middle">⋈</text>
+  <rect class="dgm-shape" x="294" y="198" width="72" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="330" y="219" text-anchor="middle">hören</text>
+  <rect class="dgm-shape" x="472" y="198" width="96" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="520" y="219" text-anchor="middle">π[VorlNr]</text>
+  <rect class="dgm-shape" x="420" y="272" width="200" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="520" y="293" text-anchor="middle">⋈[gelesenVon = PersNr]</text>
+  <rect class="dgm-shape" x="374" y="346" width="112" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="430" y="367" text-anchor="middle">Vorlesungen</text>
+  <rect class="dgm-shape" x="532" y="346" width="176" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="620" y="367" text-anchor="middle">σ[Name = ’Sokrates’]</text>
+  <rect class="dgm-shape" x="564" y="408" width="112" height="32" rx="5"/>
+  <text class="dgm-text dgm-text--sm" x="620" y="429" text-anchor="middle">Professoren</text>
+</svg>`,
           },
           {
             art: 'liste',
@@ -2397,12 +2493,21 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
               'Attribute (alles außer dem „abgespaltenen" B), also {A, C, D}.',
           },
           {
-            art: 'code',
+            art: 'svg',
             titel: 'Zerlegung entlang D → B',
-            text:
-              'R(A, B, C, D)        {D}⁺ = {B, D} ≠ {A, B, C, D}\n' +
-              '   ├─ R1(B, D)       enthält {D}⁺ = {B, D}\n' +
-              '   └─ R2(A, C, D)    enthält {A}⁺ = {A, C, D}',
+            svg: `<svg viewBox="0 0 540 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BCNF-Zerlegung von R in R1 und R2">
+  <line class="dgm-line" x1="270" y1="58" x2="140" y2="122"/>
+  <line class="dgm-line" x1="270" y1="58" x2="400" y2="122"/>
+  <rect class="dgm-shape" x="195" y="22" width="150" height="36" rx="5"/>
+  <text class="dgm-text" x="270" y="45" text-anchor="middle">R(A, B, C, D)</text>
+  <rect class="dgm-shape" x="80" y="122" width="120" height="36" rx="5"/>
+  <text class="dgm-text" x="140" y="145" text-anchor="middle">R1(B, D)</text>
+  <rect class="dgm-shape" x="330" y="122" width="140" height="36" rx="5"/>
+  <text class="dgm-text" x="400" y="145" text-anchor="middle">R2(A, C, D)</text>
+  <text class="dgm-text dgm-text--sm" x="140" y="184" text-anchor="middle">{D}⁺ = {B, D}</text>
+  <text class="dgm-text dgm-text--sm" x="400" y="184" text-anchor="middle">{A}⁺ = {A, C, D}</text>
+  <text class="dgm-card" x="270" y="212" text-anchor="middle">zerlegt entlang D → B (D ist kein Superschlüssel)</text>
+</svg>`,
           },
           {
             art: 'unterpunkt',

@@ -41,8 +41,10 @@ export type LoesungBlock =
   | { art: 'liste'; punkte: string[] }
   | { art: 'unterpunkt'; label: string; text: string; punkte?: string[] }
   | { art: 'tabelle'; titel?: string; columns: string[]; rows: (string | null)[][] }
-  // Preformatted, monospaced block (e.g. relational-algebra expressions, operator trees).
+  // Preformatted, monospaced block (e.g. relational-algebra expressions).
   | { art: 'code'; titel?: string; text: string }
+  // Inline SVG diagram (e.g. operator tree, decomposition tree).
+  | { art: 'svg'; titel?: string; svg: string }
 
 // A named table shown inline with the task (e.g. the Anwendungsfall tables on the sheet).
 export interface NamedTable {
@@ -57,6 +59,8 @@ export interface UebungsblattTask {
   text: string
   // Short red marker shown next to the title (e.g. "nicht relevant").
   hinweis?: string
+  // Inline SVG diagram shown with the question (e.g. an ER diagram).
+  svg?: string
   aufgabeId?: string
   relevantTables?: string[]
   tabellen?: NamedTable[]

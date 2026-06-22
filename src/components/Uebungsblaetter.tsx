@@ -47,6 +47,14 @@ function LoesungView({ blocks }: { blocks: LoesungBlock[] }) {
             </div>
           )
         }
+        if (block.art === 'svg') {
+          return (
+            <div key={i} className="ub-loesung-code-wrap">
+              {block.titel && <p className="ub-loesung-tab-title">{block.titel}</p>}
+              <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: block.svg }} />
+            </div>
+          )
+        }
         // tabelle
         return (
           <div key={i} className="ub-loesung-tabelle">
@@ -174,6 +182,11 @@ export default function Uebungsblaetter() {
                   {task.hinweis && <span className="ub-task-hinweis">{task.hinweis}</span>}
                 </div>
                 <p className="q-title ub-question">{task.text}</p>
+
+                {/* ER / structural diagram shown with the question */}
+                {task.svg && (
+                  <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: task.svg }} />
+                )}
 
                 {/* Given SQL query (the exam question), always visible */}
                 {task.sqlQuery && (
