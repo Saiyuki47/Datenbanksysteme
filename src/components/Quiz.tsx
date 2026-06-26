@@ -39,7 +39,7 @@ export default function Quiz() {
 
   const header = (
     <div className="section-header">
-      <h2>Quiz-Modus</h2>
+      <h2>Quiz</h2>
       <p>Teste dein SQL-Wissen mit {quizData.length} Fragen.</p>
     </div>
   )
@@ -47,11 +47,11 @@ export default function Quiz() {
   if (quizState === 'finished') {
     const pct = Math.round((score / quizData.length) * 100)
     const msg =
-      score >= 7
+      score >= Math.ceil(quizData.length * 0.8)
         ? 'Ausgezeichnet! Du beherrschst SQL sehr gut.'
-        : score >= 5
+        : score >= Math.ceil(quizData.length * 0.5)
         ? 'Gut! Noch ein bisschen Übung.'
-        : 'Schau nochmal ins Cheatsheet und die Aufgaben!'
+        : 'Schau nochmal in die Themen und die Aufgaben!'
     return (
       <div>
         {header}
