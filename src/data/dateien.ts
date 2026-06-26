@@ -247,7 +247,7 @@ export const dateienTree: DateiFolder = {
           "path": "dateien_aus_moodle/vorlesung 7/readme.txt",
           "typ": "text",
           "ext": "txt",
-          "sizeLabel": "528 B",
+          "sizeLabel": "536 B",
           "isReadme": true,
           "text": "Lesen Sie / arbeiten Sie durch die Seiten 114 - 125 des Kemper Buches (Auflage 10).\n\nAngabe in Kapiteln: vom Anfang des Kapitels 4 (Relationale Anfragesprachen) bis einschließlich Abschnitt 4.9 (Geschachtelte Anfragen).\n\nArbeiten Sie das Zeile für Zeile durch. Dies ist eine etwas kurze Darstellung, wir werden aber in den Übungen jede Menge Beispiele durcharbeiten und die Datenbank auch selber aufbauen.\n\nDie SQL-Abfragen können Sie auch dann selber hier ausführen / ausprobieren: \n\nhttp://www.hyper-db.com/interface.html",
           "url": "http://www.hyper-db.com/interface.html"
@@ -299,7 +299,7 @@ export const dateienTree: DateiFolder = {
           "path": "dateien_aus_moodle/vorlesung 8 und 9/readme_zu_PVFC_Video.txt",
           "typ": "text",
           "ext": "txt",
-          "sizeLabel": "214 B",
+          "sizeLabel": "216 B",
           "isReadme": true,
           "text": "Schauen Sie sich auch dieses Video an. Es benutzt die Daten, die wir am Anfang des Kurses kennengelernt haben. Es ist eine gute Einführung 'wie man am besten' SQL versteht und anwendet. Sehr gut fuer die Praxis."
         },
@@ -308,7 +308,7 @@ export const dateienTree: DateiFolder = {
           "path": "dateien_aus_moodle/vorlesung 8 und 9/readme.txt",
           "typ": "text",
           "ext": "txt",
-          "sizeLabel": "827 B",
+          "sizeLabel": "845 B",
           "isReadme": true,
           "text": "Arbeiten Sie die folgenden Abschnitte im Kemper durch. Seitenzahlen sind wie immer bzgl. der 10ten Auflage. Ich gebe daher wieder die Kapitel / Abschnittsnummern und Beschreibungen an.\n\nS. 125 - 126 4.10 Modularisierung von SQL-Anfragen\n\nS. 126 - 127 4.11 Mengen-Operatoren\n\n(NICHT S. 127 - 129 4.12 Quantifizierte Anfrage in SQL)\n\nS. 129 -  130 4.13 Nullwerte\n\nS. 130 - 131 4.14 Spezielle Sprachkonstrukte\n\nS. 131 - 132 4.15 Joins in SQL-92\n\n(NICHT S. 132 - 137 Rekursiv)\n\nDie 2 Abschnitte die mit 'NICHT' gekennzeichnet sind, sind kein Prüfungsstoff. Sie koennen sich diese aber natuerlich gerne anschauen.\n\nArbeiten mit der Praesentation: am Anfang finden Sie nochmals die Seiten von der letzten Vorlesung. Wiederholen Sie diese nochmals, bevor Sie mit dem Rest der Vorlesung weitermachen. Es kommt nur sehr auf Details an."
         }
@@ -430,7 +430,7 @@ export const dateienTree: DateiFolder = {
           "path": "dateien_aus_moodle/Vorlesung 10/readme_zum_Kemper_Ordner.txt",
           "typ": "text",
           "ext": "txt",
-          "sizeLabel": "770 B",
+          "sizeLabel": "792 B",
           "isReadme": true,
           "text": "Arbeiten Sie im Lehrbuch von Kemper (10. Auflage) das Kapitel 5 durch (kurzes Kapitel). Es handelt sich im einzelnen um die Abschnitte\n\n- 5. Datenintegrität und temporale Daten (Seite 163 - 4)\n\n- 5.1 Referentielle Integritet (Seite 164)\n\n- 5.2 Gewaehrleistung referentieller Integrität (eher optional, Seite 165)\n\n- 5.3 Referentielle Integritet in SQL (Seite 165 - 6)\n\n- 5.4 Ueberpruefung statischer Integritaetsbedingungen (Seite 166 - 168)\n\n- 5.5 Das Universitätsschema mit Integritätsbedingungen (Seite 168 - 170)\n\n- 5.6 Komplexere Integritaetsbedingungen (Seite 170 - 171)\n\n- 5.7 Trigger (Seite 171 - 173)\n\n- 5.8 Temporale Daten (Seite 173)\n\n- 5.8.1 System-versionierte Relationen  (Seite 173 - 174)\n\n- 5.8.2 Temporale Daten nach Anwendungszeit (Seite 174 - 175)"
         }
@@ -481,7 +481,7 @@ export const dateienTree: DateiFolder = {
           "path": "dateien_aus_moodle/übung 0/readme_zum_Video.txt",
           "typ": "text",
           "ext": "txt",
-          "sizeLabel": "537 B",
+          "sizeLabel": "541 B",
           "isReadme": true,
           "text": "Link zum VideoLink/URL\nSchauen Sie sich das Video zu Kapitel 1 sorgfältig an. Formulieren Sie danach die SQL-Statements, die die vier Fragen auf der letzten Seite (siehe auch Übungsblatt 0) beantworten können und laden Sie diese unter folgendem Punkt hier in Moodle hoch. Geben Sie die Antworten nur als Text an.\n\nHinweis: Sobald Sie sich mit der DBMS Datenbank verbunden haben (siehe PDF \"Zugriff auf Datenbank\") können Sie Ihre formulierten SQL-Statements an der Datenbank der 'Pine Valley Furniture Company' aus dem Video testen."
         },
@@ -682,7 +682,7 @@ export const dateienTree: DateiFolder = {
               "path": "dateien_aus_moodle/übung 8/Northwind Datenbank - SQL Dateien-20260621/Oracle_Northwind_DropTables.sql",
               "typ": "text",
               "ext": "sql",
-              "sizeLabel": "319 B",
+              "sizeLabel": "332 B",
               "text": "DROP TABLE OrderDetails;\nDROP TABLE Orders;\nDROP TABLE CustomerCustomerDemo;\nDROP TABLE CustomerDemographics;\nDROP TABLE EmployeeTerritories;\nDROP TABLE Employees;\nDROP TABLE Customers;\nDROP TABLE Shippers;\nDROP TABLE Products;\nDROP TABLE Suppliers; \nDROP TABLE Categories; \nDROP TABLE Territories; \nDROP TABLE Region;"
             }
           ]

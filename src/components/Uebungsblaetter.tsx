@@ -5,30 +5,37 @@ import { highlightSQL } from '../utils/sqlHighlight'
 import { pvTables } from '../data/pvTables'
 import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
-import { detectTips } from '../data/sqlTips'
 import { aufgabeTipps } from '../data/aufgabeTipps'
 import type { TableData } from '../data/pvTables'
-import type { DbType, LoesungBlock } from '../types'
+import type { DbType, LoesungBlock, UebungsblattTask } from '../types'
+
+// Stable, content-derived key for a solution block. The blocks array is static
+// (built once per task, never reordered or filtered), but we still key by content
+// instead of the array index so identity stays correct no matter what.
+function blockKey(block: LoesungBlock): string {
+  return JSON.stringify(block)
+}
 
 // Renders a text-based (theory) solution: paragraphs, bullet lists, labelled
 // sub-points and the occasional table (e.g. the Lost-Update schedule).
 function LoesungView({ blocks }: { blocks: LoesungBlock[] }) {
   return (
     <div className="ub-loesung">
-      {blocks.map((block, i) => {
+      {blocks.map(block => {
+        const k = blockKey(block)
         if (block.art === 'text') {
-          return <p key={i} className="ub-loesung-text">{block.text}</p>
+          return <p key={k} className="ub-loesung-text">{block.text}</p>
         }
         if (block.art === 'liste') {
           return (
-            <ul key={i} className="ub-loesung-liste">
+            <ul key={k} className="ub-loesung-liste">
               {block.punkte.map((p, j) => <li key={j}>{p}</li>)}
             </ul>
           )
         }
         if (block.art === 'unterpunkt') {
           return (
-            <div key={i} className="ub-loesung-up">
+            <div key={k} className="ub-loesung-up">
               <p className="ub-loesung-up-head">
                 <span className="ub-loesung-label">{block.label}</span> {block.text}
               </p>
@@ -42,7 +49,7 @@ function LoesungView({ blocks }: { blocks: LoesungBlock[] }) {
         }
         if (block.art === 'code') {
           return (
-            <div key={i} className="ub-loesung-code-wrap">
+            <div key={k} className="ub-loesung-code-wrap">
               {block.titel && <p className="ub-loesung-tab-title">{block.titel}</p>}
               <pre className="ub-loesung-code">{block.text}</pre>
             </div>
@@ -50,15 +57,16 @@ function LoesungView({ blocks }: { blocks: LoesungBlock[] }) {
         }
         if (block.art === 'svg') {
           return (
-            <div key={i} className="ub-loesung-code-wrap">
+            <div key={k} className="ub-loesung-code-wrap">
               {block.titel && <p className="ub-loesung-tab-title">{block.titel}</p>}
+              {/* eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (block.svg), kein User-Input */}
               <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: block.svg }} />
             </div>
           )
         }
         // tabelle
         return (
-          <div key={i} className="ub-loesung-tabelle">
+          <div key={k} className="ub-loesung-tabelle">
             {block.titel && <p className="ub-loesung-tab-title">{block.titel}</p>}
             <div className="ub-table-scroll">
               <table className="ub-table">
@@ -87,11 +95,54 @@ function getTable(db: DbType | undefined, name: string): TableData | undefined {
   return map[name]
 }
 
+// For a task that shows a given SQL query, find the result table whose values the
+// student is meant to work out: either an explicit queryResult or the final
+// "Ergebnis…" table inside the (text) solution. Returns just the shape we need to
+// render a blank copy of it with the question.
+function getResultTable(task: UebungsblattTask): { columns: string[]; rowCount: number } | undefined {
+  if (task.queryResult) {
+    return { columns: task.queryResult.columns, rowCount: task.queryResult.rows.length }
+  }
+  if (task.loesung) {
+    // Take the LAST "Ergebnis" table – tasks may have intermediate tables first.
+    for (let i = task.loesung.length - 1; i >= 0; i--) {
+      const b = task.loesung[i]
+      if (b.art === 'tabelle' && b.titel?.startsWith('Ergebnis')) {
+        return { columns: b.columns, rowCount: b.rows.length }
+      }
+    }
+  }
+  return undefined
+}
+
+// Blank version of a query's result table, shown with the question so the student
+// can fill it in. Same columns and number of rows as the solution, but no values.
+function EmptyResultTable({ columns, rowCount }: { columns: string[]; rowCount: number }) {
+  return (
+    <div className="ub-result-section">
+      <p className="ub-result-label">Ergebnis (zum Ausfüllen):</p>
+      <div className="ub-table-scroll">
+        <table className="ub-table ub-result-table ub-result-empty">
+          <thead>
+            <tr>{columns.map(col => <th key={col}>{col}</th>)}</tr>
+          </thead>
+          <tbody>
+            {Array.from({ length: rowCount }, (_, r) => (
+              <tr key={r}>
+                {columns.map((_, c) => <td key={c}>{' '}</td>)}
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  )
+}
+
 export default function Uebungsblaetter() {
   const [selectedId, setSelectedId] = useState(uebungsblaetter[0]?.id ?? '')
   const [openIds, setOpenIds] = useState<Set<string>>(new Set())
   const [openTables, setOpenTables] = useState<Set<string>>(new Set())
-  const [openTips, setOpenTips] = useState<Set<string>>(new Set())
   const [openHints, setOpenHints] = useState<Set<string>>(new Set())
 
   const blatt = uebungsblaetter.find(b => b.id === selectedId)
@@ -107,15 +158,6 @@ export default function Uebungsblaetter() {
 
   const toggleTable = (key: string) => {
     setOpenTables(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
-    })
-  }
-
-  const toggleTips = (key: string) => {
-    setOpenTips(prev => {
       const next = new Set(prev)
       if (next.has(key)) next.delete(key)
       else next.add(key)
@@ -175,7 +217,7 @@ export default function Uebungsblaetter() {
                 {blatt.anmerkung.titel ?? 'Anmerkung'}
               </p>
               <ul className="ub-anmerkung-liste">
-                {blatt.anmerkung.punkte.map((p, i) => <li key={i}>{p}</li>)}
+                {blatt.anmerkung.punkte.map(p => <li key={p}>{p}</li>)}
               </ul>
             </div>
           )}
@@ -185,6 +227,9 @@ export default function Uebungsblaetter() {
             const aufgabe = aufgaben.find(a => a.id === task.aufgabeId)
             const key = `${blatt.id}-${task.nr}`
             const isOpen = openIds.has(key)
+            // Blank result table shown with the question (only for query tasks
+            // whose answer is a result table the student should fill in).
+            const resultTable = task.sqlQuery ? getResultTable(task) : undefined
 
             return (
               <div key={key} className="card">
@@ -196,6 +241,7 @@ export default function Uebungsblaetter() {
 
                 {/* ER / structural diagram shown with the question */}
                 {task.svg && (
+                  // eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (task.svg), kein User-Input
                   <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: task.svg }} />
                 )}
 
@@ -204,6 +250,11 @@ export default function Uebungsblaetter() {
                   <div className="sql-block visible">
                     {highlightSQL(task.sqlQuery)}
                   </div>
+                )}
+
+                {/* Blank result table to fill in (shown with the question) */}
+                {resultTable && (
+                  <EmptyResultTable columns={resultTable.columns} rowCount={resultTable.rowCount} />
                 )}
 
                 {/* Anwendungsfall tables shown directly with the task */}
@@ -288,12 +339,12 @@ export default function Uebungsblaetter() {
                 {aufgabeTipps[key] && aufgabeTipps[key].length > 0 && (
                   <div className="ub-hints-section">
                     <button type="button" className="toggle-btn toggle-btn--hints" onClick={() => toggleHint(key)}>
-                      {openHints.has(key) ? '▼ Hinweise verbergen' : '▶ Hinweise anzeigen'}
+                      {openHints.has(key) ? '▼ Tipp verbergen' : '▶ Tipp anzeigen'}
                     </button>
                     {openHints.has(key) && (
                       <div className="tipp-accordion">
-                        {aufgabeTipps[key].map((hint, i) => (
-                          <details key={i} className="tipp-section">
+                        {aufgabeTipps[key].map(hint => (
+                          <details key={hint.titel} className="tipp-section">
                             <summary className="tipp-section-summary">
                               <span className="tipp-section-icon">{hint.icon}</span>
                               {hint.titel}
@@ -306,33 +357,13 @@ export default function Uebungsblaetter() {
                   </div>
                 )}
 
-                {/* Solution */}
-                {aufgabe && (() => {
-                  const tips = detectTips(aufgabe.sql)
-                  return (
-                    <>
-                      {tips.length > 0 && (
-                        <div className="ub-tips-section">
-                          <button type="button" className="toggle-btn toggle-btn--tips" onClick={() => toggleTips(key)}>
-                            {openTips.has(key) ? '▼ Tipps verbergen' : '▶ Tipps anzeigen'}
-                          </button>
-                          {openTips.has(key) && (
-                            <div className="ub-tips-list">
-                              {tips.map(tip => (
-                                <div key={tip.keyword} className="ub-tip-card">
-                                  <p className="ub-tip-keyword">{tip.keyword}</p>
-                                  <p className="ub-tip-desc">{tip.description}</p>
-                                  <pre className="ub-tip-example">{tip.example}</pre>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      )}
-                      <button type="button" className="toggle-btn" onClick={() => toggleSolution(key)}>
-                        {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
-                      </button>
-                      {isOpen && (
+                {/* Solution (linked aufgabe with SQL + result) */}
+                {aufgabe && (
+                  <>
+                    <button type="button" className="toggle-btn" onClick={() => toggleSolution(key)}>
+                      {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
+                    </button>
+                    {isOpen && (
                       <>
                         <div className="sql-block visible">
                           {highlightSQL(aufgabe.sql)}
@@ -368,9 +399,8 @@ export default function Uebungsblaetter() {
                         )}
                       </>
                     )}
-                    </>
-                  )
-                })()}
+                  </>
+                )}
 
                 {/* Text-based (theory) solution */}
                 {task.loesung && task.loesung.length > 0 && (

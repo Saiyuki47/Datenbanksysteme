@@ -19,26 +19,29 @@ const KEYWORDS = [
 const KW_PATTERN = KEYWORDS.map(k => k.replace(/\s+/g, '\\s+')).join('|')
 const KW_REGEX = new RegExp(`\\b(${KW_PATTERN})\\b`, 'gi')
 
-function tokenizeSql(text: string, lineIndex: number): ReactNode[] {
+// `baseOffset` is the absolute character position of `text` within the whole SQL
+// string. Each token is keyed by its absolute offset, which uniquely and stably
+// identifies it across renders (the SQL text is static and never reorders).
+function tokenizeSql(text: string, baseOffset: number): ReactNode[] {
   const nodes: ReactNode[] = []
-  let lastIndex = 0
+  let lastEnd = 0
 
   text.replace(KW_REGEX, (match, ...args) => {
-    const index = args[args.length - 2] as number
-    if (index > lastIndex) {
-      nodes.push(text.slice(lastIndex, index))
+    const matchStart = args[args.length - 2] as number
+    if (matchStart > lastEnd) {
+      nodes.push(text.slice(lastEnd, matchStart))
     }
     nodes.push(
-      <span key={`kw-${lineIndex}-${index}`} className="kw">
+      <span key={`kw-${baseOffset + matchStart}`} className="kw">
         {match.toUpperCase()}
       </span>,
     )
-    lastIndex = index + match.length
+    lastEnd = matchStart + match.length
     return match
   })
 
-  if (lastIndex < text.length) {
-    nodes.push(text.slice(lastIndex))
+  if (lastEnd < text.length) {
+    nodes.push(text.slice(lastEnd))
   }
 
   return nodes
@@ -46,26 +49,28 @@ function tokenizeSql(text: string, lineIndex: number): ReactNode[] {
 
 export function highlightSQL(sql: string): ReactNode[] {
   const lines = sql.split('\n')
+  const nodes: ReactNode[] = []
+  let base = 0 // absolute offset of the current line within `sql`
 
-  return lines.flatMap((line, lineIndex) => {
-    const commentIndex = line.indexOf('--')
-    const nodes: ReactNode[] = []
+  lines.forEach((line, lineNo) => {
+    const commentStart = line.indexOf('--')
 
-    if (commentIndex === -1) {
-      nodes.push(...tokenizeSql(line, lineIndex))
+    if (commentStart === -1) {
+      nodes.push(...tokenizeSql(line, base))
     } else {
-      nodes.push(...tokenizeSql(line.slice(0, commentIndex), lineIndex))
+      nodes.push(...tokenizeSql(line.slice(0, commentStart), base))
       nodes.push(
-        <span key={`cm-${lineIndex}`} className="cm">
-          {line.slice(commentIndex)}
+        <span key={`cm-${base + commentStart}`} className="cm">
+          {line.slice(commentStart)}
         </span>,
       )
     }
 
-    if (lineIndex < lines.length - 1) {
+    if (lineNo < lines.length - 1) {
       nodes.push('\n')
     }
-
-    return nodes
+    base += line.length + 1 // +1 for the '\n' removed by split
   })
+
+  return nodes
 }

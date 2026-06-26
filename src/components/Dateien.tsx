@@ -46,17 +46,22 @@ const TYPE_LABEL: Record<DateiFile['typ'], string> = {
 }
 
 // Turn raw text into React nodes, making any http(s) URLs clickable.
+// Each part is keyed by its character offset in the source text – a stable,
+// unique identifier (parts never overlap), not the array index.
 function linkify(text: string) {
   const parts = text.split(/(https?:\/\/[^\s)]+)/g)
-  return parts.map((part, i) =>
-    /^https?:\/\//.test(part) ? (
-      <a key={i} href={part} target="_blank" rel="noopener noreferrer" className="dz-inline-link">
+  let offset = 0
+  return parts.map(part => {
+    const key = `${offset}:${part}`
+    offset += part.length
+    return /^https?:\/\//.test(part) ? (
+      <a key={key} href={part} target="_blank" rel="noopener noreferrer" className="dz-inline-link">
         {part}
       </a>
     ) : (
-      <Fragment key={i}>{part}</Fragment>
-    ),
-  )
+      <Fragment key={key}>{part}</Fragment>
+    )
+  })
 }
 
 function countFiles(folder: DateiFolder): number {
@@ -79,7 +84,17 @@ function FilePreview({ file }: { file: DateiFile }) {
   const url = fileUrl(file.path)
 
   if (file.typ === 'pdf') {
-    return <iframe className="dz-pdf" src={url} title={file.name} />
+    // Our own, same-origin PDF. Locked down: no scripts, so the embedded document
+    // cannot run code; allow-same-origin lets the browser PDF viewer load the file,
+    // allow-popups/-downloads keep links and the download button working.
+    return (
+      <iframe
+        className="dz-pdf"
+        src={url}
+        title={file.name}
+        sandbox="allow-same-origin allow-popups allow-downloads"
+      />
+    )
   }
   if (file.typ === 'image') {
     return (
@@ -89,7 +104,8 @@ function FilePreview({ file }: { file: DateiFile }) {
     )
   }
   if (file.typ === 'video') {
-    return <video className="dz-video" src={url} controls preload="metadata" />
+    // eslint-disable-next-line react-doctor/media-has-caption -- hochgeladene Vorlesungsvideos ohne verfügbare Untertiteldatei
+    return <video className="dz-video" src={url} controls preload="metadata" aria-label={file.name} />
   }
   if (file.typ === 'text' && file.text != null) {
     const isSql = file.ext === 'sql'
@@ -109,7 +125,21 @@ function FilePreview({ file }: { file: DateiFile }) {
         </div>
       )
     }
-    return <iframe className="dz-office" src={officeViewerSrc(file.path)} title={file.name} allowFullScreen />
+    // Microsoft's official Office Online viewer (trusted, cross-origin). It is a
+    // full web app, so it needs allow-scripts; and because it is cross-origin it
+    // needs allow-same-origin to use its OWN officeapps.live.com origin (cookies /
+    // session) – it can never reach our origin. We grant only the minimal extra
+    // tokens (popups/forms) the viewer uses.
+    return (
+      <iframe
+        className="dz-office"
+        src={officeViewerSrc(file.path)}
+        title={file.name}
+        // eslint-disable-next-line react-doctor/iframe-missing-sandbox -- MS Office Online Viewer: braucht allow-scripts + allow-same-origin für seine EIGENE Origin (officeapps.live.com), erreicht unsere Origin nie
+        sandbox="allow-scripts allow-same-origin allow-popups allow-forms"
+        allowFullScreen
+      />
+    )
   }
   return null
 }
@@ -213,7 +243,7 @@ function groupIntoWeeks(folders: DateiFolder[]): { weeks: Week[]; leftovers: Dat
     byWeek.set(num, week)
   }
 
-  const weeks = [...byWeek.values()].sort((a, b) => a.num - b.num)
+  const weeks = Array.from(byWeek.values()).sort((a, b) => a.num - b.num)
   return { weeks, leftovers }
 }
 
@@ -267,7 +297,7 @@ export default function Dateien() {
   return (
     <div>
       <div className="section-header">
-        <h2>Dateien</h2>
+        <h2>Moodle</h2>
         <p>Alle Moodle-Materialien nach Wochen. Wähle oben eine Woche – darunter siehst du direkt die Vorlesung und die Übung.</p>
       </div>
 
@@ -281,6 +311,7 @@ export default function Dateien() {
       <input
         type="search"
         className="dz-search"
+        aria-label="Alle Dateien durchsuchen"
         placeholder="Alle Dateien durchsuchen…"
         value={query}
         onChange={e => setQuery(e.target.value)}

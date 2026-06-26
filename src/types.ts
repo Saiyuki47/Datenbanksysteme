@@ -31,11 +31,6 @@ export interface AufgabeItem {
   sql: string
 }
 
-export interface CheatCard {
-  title: string
-  code: string
-}
-
 export interface QueryResult {
   columns: string[]
   rows: (string | number | null)[][]
