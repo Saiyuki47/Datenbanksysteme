@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, type CSSProperties } from 'react'
+import { useDoneTracker } from 'lernseiten-ui'
 import { uebungsblaetter } from '../data/uebungsblaetter'
 import { aufgaben } from '../data/aufgaben'
 import { highlightSQL } from '../utils/sqlHighlight'
@@ -14,6 +15,16 @@ import type { DbType, LoesungBlock, UebungsblattTask } from '../types'
 // instead of the array index so identity stays correct no matter what.
 function blockKey(block: LoesungBlock): string {
   return JSON.stringify(block)
+}
+
+// Immutable toggle of a key inside a Set-state (open/closed accordions).
+function toggleInSet(setter: (fn: (prev: Set<string>) => Set<string>) => void, key: string) {
+  setter(prev => {
+    const next = new Set(prev)
+    if (next.has(key)) next.delete(key)
+    else next.add(key)
+    return next
+  })
 }
 
 // Renders a text-based (theory) solution: paragraphs, bullet lists, labelled
@@ -144,35 +155,18 @@ export default function Uebungsblaetter() {
   const [openIds, setOpenIds] = useState<Set<string>>(new Set())
   const [openTables, setOpenTables] = useState<Set<string>>(new Set())
   const [openHints, setOpenHints] = useState<Set<string>>(new Set())
+  const { done, toggle: toggleDone, ratio } = useDoneTracker()
 
   const blatt = uebungsblaetter.find(b => b.id === selectedId)
 
-  const toggleSolution = (key: string) => {
-    setOpenIds(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
-    })
-  }
+  // Fortschritt pro Blatt: gleicher Schlüssel wie bei Lösung/Tipps (`${blatt.id}-${task.nr}`).
+  const taskKeys = blatt ? blatt.tasks.map(t => `${blatt.id}-${t.nr}`) : []
+  const verstanden = taskKeys.filter(k => done.has(k)).length
+  const pct = Math.round(ratio(taskKeys) * 100)
 
-  const toggleTable = (key: string) => {
-    setOpenTables(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
-    })
-  }
-
-  const toggleHint = (key: string) => {
-    setOpenHints(prev => {
-      const next = new Set(prev)
-      if (next.has(key)) next.delete(key)
-      else next.add(key)
-      return next
-    })
-  }
+  const toggleSolution = (key: string) => toggleInSet(setOpenIds, key)
+  const toggleTable = (key: string) => toggleInSet(setOpenTables, key)
+  const toggleHint = (key: string) => toggleInSet(setOpenHints, key)
 
   return (
     <div>
@@ -207,6 +201,16 @@ export default function Uebungsblaetter() {
             <h3 className="ub-title">{blatt.titel ?? `Übungsblatt ${blatt.nr}`}</h3>
             {blatt.beschreibung && (
               <p className="ub-desc">{blatt.beschreibung}</p>
+            )}
+            {taskKeys.length > 0 && (
+              <>
+                <div className="progress-wrap" style={{ marginTop: '0.75rem' }}>
+                  <div className="progress-bar" style={{ '--bar-w': `${pct}%` } as CSSProperties} />
+                </div>
+                <p className="ub-desc" style={{ marginTop: '0.4rem' }}>
+                  {verstanden} / {taskKeys.length} Aufgaben verstanden ({pct}%)
+                </p>
+              </>
             )}
           </div>
 
@@ -411,6 +415,16 @@ export default function Uebungsblaetter() {
                     {isOpen && <LoesungView blocks={task.loesung} />}
                   </>
                 )}
+
+                {/* Fortschritt: Aufgabe als verstanden markieren */}
+                <button
+                  type="button"
+                  className="toggle-btn"
+                  onClick={() => toggleDone(key)}
+                  style={done.has(key) ? { color: 'var(--green, #2ea043)', borderColor: 'var(--green, #2ea043)' } : undefined}
+                >
+                  {done.has(key) ? '✓ Verstanden' : '○ Als verstanden markieren'}
+                </button>
               </div>
             )
           })}
