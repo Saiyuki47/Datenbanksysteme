@@ -1,3 +1,5 @@
+import { SiteNav } from 'lernseiten-ui'
+
 interface Props {
   theme: 'dark' | 'light'
   onToggleTheme: () => void
@@ -11,6 +13,7 @@ export default function Header({ theme, onToggleTheme }: Props) {
           Datenbanksysteme
         </div>
         <div className="subtitle">Pine Valley &amp; Northwind Datenbank</div>
+        <SiteNav current="datenbanken" />
       </div>
       <button
         type="button"

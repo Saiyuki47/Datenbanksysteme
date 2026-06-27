@@ -23,20 +23,6 @@ export const quizFragen: QuizFrage[] = [
     erklaerung: 'SELECT DISTINCT CUSTOMERCITY FROM CUSTOMER_T ORDER BY CUSTOMERCITY gibt jede Stadt genau einmal aus.',
     quelle: 'Blatt 0, Aufgabe 1',
   },
-  {
-    art: 'single',
-    frage:
-      'Pine Valley: In welcher Tabelle stehen die Bestellpositionen (verbindet Bestellungen und Produkte, z. B. für „Produkte auf Bestellung 1008")?',
-    optionen: [
-      { text: 'ORDERLINE_T' },
-      { text: 'ORDERS_T', warumFalsch: 'Im Pine-Valley-Schema heißt die Bestelltabelle ORDER_T und enthält keine einzelnen Positionen mit PRODUCTID.' },
-      { text: 'ORDERDETAILS', warumFalsch: 'ORDERDETAILS gehört zum Northwind-Schema, nicht zu Pine Valley.' },
-      { text: 'PRODUCT_T', warumFalsch: 'PRODUCT_T enthält die Produktstammdaten, nicht die Bestellpositionen.' },
-    ],
-    richtige: 0,
-    erklaerung: 'ORDERLINE_T verbindet ORDER_T und PRODUCT_T über ORDERID und PRODUCTID; ein Join darüber liefert die Produktbeschreibungen einer Bestellung.',
-    quelle: 'Blatt 0, Aufgabe 4',
-  },
 
   // ─────────────────────────────────────────────────────────────────────────
   // Blatt 1 – Grundlagen: Nachteile Dateiverwaltung, Datenmodelle, paralleler Zugriff
