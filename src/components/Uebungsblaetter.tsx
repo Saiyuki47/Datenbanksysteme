@@ -1,5 +1,5 @@
 import { useState, type CSSProperties } from 'react'
-import { useDoneTracker } from 'lernseiten-ui'
+import { useDoneTracker, useTaskDeepLink, getHashDetail } from 'lernseiten-ui'
 import { uebungsblaetter } from '../data/uebungsblaetter'
 import { aufgaben } from '../data/aufgaben'
 import { highlightSQL } from '../utils/sqlHighlight'
@@ -151,11 +151,15 @@ function EmptyResultTable({ columns, rowCount }: { columns: string[]; rowCount: 
 }
 
 export default function Uebungsblaetter() {
-  const [selectedId, setSelectedId] = useState(uebungsblaetter[0]?.id ?? '')
+  const [selectedId, setSelectedId] = useState(() => {
+    const b = getHashDetail().blatt
+    return b && uebungsblaetter.some(x => x.id === b) ? b : (uebungsblaetter[0]?.id ?? '')
+  })
   const [openIds, setOpenIds] = useState<Set<string>>(new Set())
   const [openTables, setOpenTables] = useState<Set<string>>(new Set())
   const [openHints, setOpenHints] = useState<Set<string>>(new Set())
   const { done, toggle: toggleDone, ratio } = useDoneTracker()
+  const listRef = useTaskDeepLink<HTMLDivElement>(selectedId)
 
   const blatt = uebungsblaetter.find(b => b.id === selectedId)
 
@@ -227,6 +231,7 @@ export default function Uebungsblaetter() {
           )}
 
           {/* Tasks */}
+          <div ref={listRef}>
           {blatt.tasks.map(task => {
             const aufgabe = aufgaben.find(a => a.id === task.aufgabeId)
             const key = `${blatt.id}-${task.nr}`
@@ -236,7 +241,7 @@ export default function Uebungsblaetter() {
             const resultTable = task.sqlQuery ? getResultTable(task) : undefined
 
             return (
-              <div key={key} className="card">
+              <div key={key} className="card" data-aufgabe={String(task.nr)}>
                 <div className="ub-task-head">
                   <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
                   {task.hinweis && <span className="ub-task-hinweis">{task.hinweis}</span>}
@@ -428,6 +433,7 @@ export default function Uebungsblaetter() {
               </div>
             )
           })}
+          </div>
         </>
       )}
     </div>
