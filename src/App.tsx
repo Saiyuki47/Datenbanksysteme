@@ -3,10 +3,10 @@ import Header from './components/Header'
 import Tabs from './components/Tabs'
 import Themen from './components/Themen'
 import Schema from './components/Schema'
-import Quiz from './components/Quiz'
 import Uebungsblaetter from './components/Uebungsblaetter'
 import Dateien from './components/Dateien'
-import { useTheme } from './hooks/useTheme'
+import { Quiz, useTheme } from 'lernseiten-ui'
+import { quizFragen } from './data/quiz'
 
 export type TabId = 'uebung' | 'themen' | 'schema' | 'moodle' | 'quiz'
 
@@ -21,7 +21,7 @@ function App() {
         <Tabs activeTab={activeTab} onTabChange={setActiveTab} />
         {activeTab === 'themen' && <Themen />}
         {activeTab === 'schema' && <Schema />}
-        {activeTab === 'quiz' && <Quiz />}
+        {activeTab === 'quiz' && <Quiz fragen={quizFragen} />}
         {activeTab === 'uebung' && <Uebungsblaetter />}
         {activeTab === 'moodle' && <Dateien />}
       </div>

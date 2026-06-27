@@ -1,4 +1,4 @@
-import type { QuizFrage } from '../types'
+import type { QuizFrage } from 'lernseiten-ui'
 
 // Quizfragen zu den Übungsblättern 0–11 der Lehrveranstaltung Datenbanksysteme.
 // Alle Inhalte sind aus den Lösungen der Übungsblätter abgeleitet (Probeklausuren
