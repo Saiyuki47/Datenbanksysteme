@@ -15,23 +15,6 @@
 .kw { color: var(--blue); font-weight: 500; }
 
 /* THEMEN */
-.themen-card { padding: 1.5rem 1.75rem; }
-.themen-card-nr {
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  color: var(--blue);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 6px;
-}
-.themen-card-title {
-  font-size: 19px;
-  font-weight: 600;
-  color: var(--text);
-  line-height: 1.3;
-  margin-bottom: 6px;
-}
 .themen-card-subtitle {
   font-size: 14px;
   color: var(--text2);
@@ -170,49 +153,8 @@
   margin-bottom: 6px;
 }
 
-/* Table of contents */
-.themen-toc { padding: 1rem 1.25rem 1.1rem; }
-.themen-toc-title {
-  font-size: 11px;
-  font-weight: 600;
-  font-family: var(--font-mono);
-  color: var(--text3);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  margin-bottom: 0.6rem;
-}
-.themen-toc-list {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-  gap: 2px 1.25rem;
-}
-.themen-toc-link {
-  display: flex;
-  align-items: baseline;
-  gap: 0.6rem;
-  padding: 0.3rem 0;
-  font-size: 13.5px;
-  color: var(--text2);
-  text-decoration: none;
-  border-radius: var(--radius);
-  transition: color 0.15s;
-}
-.themen-toc-link:hover { color: var(--blue); }
-.themen-toc-nr {
-  flex-shrink: 0;
-  width: 1.4rem;
-  font-family: var(--font-mono);
-  font-size: 12px;
-  color: var(--text3);
-  text-align: right;
-}
-.themen-toc-link:hover .themen-toc-nr { color: var(--blue); }
-
 /* Anchor jumps must clear the sticky header */
-#top, .themen-card { scroll-margin-top: 90px; }
+#top { scroll-margin-top: 90px; }
 
 .themen-back-top {
   display: inline-block;
