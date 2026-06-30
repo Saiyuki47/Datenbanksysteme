@@ -1,5 +1,7 @@
-import { useState, type CSSProperties } from 'react'
-import { useDoneTracker, useTaskDeepLink, getHashDetail } from 'lernseiten-ui'
+import { useState, useMemo, type CSSProperties } from 'react'
+// eslint-disable-next-line react-doctor/no-flush-sync -- offizielles React-Muster: flushSync + scrollIntoView, um nach dem Ansichtswechsel sofort zur Ziel-Aufgabe zu scrollen
+import { flushSync } from 'react-dom'
+import { useDoneTracker, useTaskDeepLink, getHashDetail, setHashDetail, OffeneAufgaben, type OffenItem } from 'lernseiten-ui'
 import { uebungsblaetter } from '../data/uebungsblaetter'
 import { aufgaben } from '../data/aufgaben'
 import { highlightSQL } from '../utils/sqlHighlight'
@@ -8,7 +10,7 @@ import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
 import { aufgabeTipps } from '../data/aufgabeTipps'
 import type { TableData } from '../data/pvTables'
-import type { DbType, LoesungBlock, UebungsblattTask } from '../types'
+import type { DbType, LoesungBlock, Uebungsblatt, UebungsblattTask } from '../types'
 
 // Stable, content-derived key for a solution block. The blocks array is static
 // (built once per task, never reordered or filtered), but we still key by content
@@ -150,27 +152,265 @@ function EmptyResultTable({ columns, rowCount }: { columns: string[]; rowCount: 
   )
 }
 
+// One exercise card: the question, any tables/diagrams, the hint accordion and the
+// (collapsible) solution. Each card owns its own open/closed accordion state, so the
+// parent list component stays small and a card re-render does not touch its siblings.
+function TaskCard({
+  task,
+  blatt,
+  done,
+  toggleDone,
+}: {
+  task: UebungsblattTask
+  blatt: Uebungsblatt
+  done: Set<string>
+  toggleDone: (key: string) => void
+}) {
+  const [open, setOpen] = useState<Set<string>>(new Set())
+  const toggle = (key: string) => toggleInSet(setOpen, key)
+
+  const aufgabe = aufgaben.find(a => a.id === task.aufgabeId)
+  const key = `${blatt.id}-${task.nr}`
+  const solKey = `${key}-sol`
+  const hintKey = `${key}-hint`
+  const isOpen = open.has(solKey)
+  // Blank result table shown with the question (only for query tasks whose answer is
+  // a result table the student should fill in).
+  const resultTable = task.sqlQuery ? getResultTable(task) : undefined
+
+  return (
+    <div className="card" data-aufgabe={String(task.nr)}>
+      <div className="ub-task-head">
+        <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
+        {task.hinweis && <span className="ub-task-hinweis">{task.hinweis}</span>}
+      </div>
+      <p className="q-title ub-question">{task.text}</p>
+
+      {/* ER / structural diagram shown with the question */}
+      {task.svg && (
+        // eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (task.svg), kein User-Input
+        <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: task.svg }} />
+      )}
+
+      {/* Given SQL query (the exam question), always visible */}
+      {task.sqlQuery && (
+        <div className="sql-block visible">
+          {highlightSQL(task.sqlQuery)}
+        </div>
+      )}
+
+      {/* Blank result table to fill in (shown with the question) */}
+      {resultTable && (
+        <EmptyResultTable columns={resultTable.columns} rowCount={resultTable.rowCount} />
+      )}
+
+      {/* Anwendungsfall tables shown directly with the task */}
+      {task.tabellen && task.tabellen.length > 0 && (
+        <div className="ub-tables-section">
+          {task.tabellen.map(t => (
+            <div key={t.titel} className="ub-anw-table">
+              <p className="ub-tables-label">{t.titel}</p>
+              <div className="ub-table-scroll">
+                <table className="ub-table">
+                  <thead>
+                    <tr>{t.columns.map(col => <th key={col}>{col}</th>)}</tr>
+                  </thead>
+                  <tbody>
+                    {t.rows.map((row, r) => {
+                      const rowKey = row.map(cell => String(cell)).join('|') || `row-${r}`
+                      return (
+                        <tr key={rowKey}>
+                          {row.map((cell, c) => <td key={c}>{cell}</td>)}
+                        </tr>
+                      )
+                    })}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          ))}
+        </div>
+      )}
+
+      {/* Relevant tables */}
+      {task.relevantTables && task.relevantTables.length > 0 && (
+        <div className="ub-tables-section">
+          <p className="ub-tables-label">Relevante Tabellen:</p>
+          {task.relevantTables.map(tableName => {
+            const tableData = getTable(blatt.db, tableName)
+            if (!tableData) return null
+            const tKey = `${key}-${tableName}`
+            const isTableOpen = open.has(tKey)
+            return (
+              <div key={tableName} className="ub-table-wrap">
+                <button
+                  type="button"
+                  className="ub-table-toggle"
+                  onClick={() => toggle(tKey)}
+                >
+                  {isTableOpen ? '▼' : '▶'} {tableName}
+                  <span className="ub-table-rowcount">({tableData.rows.length} Zeilen)</span>
+                </button>
+                {isTableOpen && (
+                  <div className="ub-table-scroll">
+                    <table className="ub-table">
+                      <thead>
+                        <tr>
+                          {tableData.columns.map(col => (
+                            <th key={col}>{col}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {tableData.rows.map((row, i) => {
+                          const rowKey = row.map(cell => String(cell)).join('|') || `row-${i}`
+                          return (
+                            <tr key={rowKey}>
+                              {row.map((cell, j) => (
+                                <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
+                              ))}
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                )}
+              </div>
+            )
+          })}
+        </div>
+      )}
+
+      {/* Structured hint accordion (4 categories) */}
+      {aufgabeTipps[key] && aufgabeTipps[key].length > 0 && (
+        <div className="ub-hints-section">
+          <button type="button" className="toggle-btn toggle-btn--hints" onClick={() => toggle(hintKey)}>
+            {open.has(hintKey) ? '▼ Tipp verbergen' : '▶ Tipp anzeigen'}
+          </button>
+          {open.has(hintKey) && (
+            <div className="tipp-accordion">
+              {aufgabeTipps[key].map(hint => (
+                <details key={hint.titel} className="tipp-section">
+                  <summary className="tipp-section-summary">
+                    <span className="tipp-section-icon">{hint.icon}</span>
+                    {hint.titel}
+                  </summary>
+                  <div className="tipp-section-body">{hint.inhalt}</div>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      {/* Solution (linked aufgabe with SQL + result) */}
+      {aufgabe && (
+        <>
+          <button type="button" className="toggle-btn" onClick={() => toggle(solKey)}>
+            {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
+          </button>
+          {isOpen && (
+            <>
+              <div className="sql-block visible">
+                {highlightSQL(aufgabe.sql)}
+              </div>
+              {task.queryResult && (
+                <div className="ub-result-section">
+                  <p className="ub-result-label">Ergebnis:</p>
+                  <div className="ub-table-scroll">
+                    <table className="ub-table ub-result-table">
+                      <thead>
+                        <tr>
+                          {task.queryResult.columns.map(col => (
+                            <th key={col}>{col}</th>
+                          ))}
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {task.queryResult.rows.map((row, i) => {
+                          const rowKey = row.map(cell => String(cell)).join('|') || `result-row-${i}`
+                          return (
+                            <tr key={rowKey}>
+                              {row.map((cell, j) => (
+                                <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
+                              ))}
+                            </tr>
+                          )
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                  <p className="ub-result-count">{task.queryResult.rows.length} Zeile(n) gefunden</p>
+                </div>
+              )}
+            </>
+          )}
+        </>
+      )}
+
+      {/* Text-based (theory) solution */}
+      {task.loesung && task.loesung.length > 0 && (
+        <>
+          <button type="button" className="toggle-btn" onClick={() => toggle(solKey)}>
+            {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
+          </button>
+          {isOpen && <LoesungView blocks={task.loesung} />}
+        </>
+      )}
+
+      {/* Fortschritt: Aufgabe als verstanden markieren */}
+      <button
+        type="button"
+        className="toggle-btn"
+        onClick={() => toggleDone(key)}
+        style={done.has(key) ? { color: 'var(--green, #2ea043)', borderColor: 'var(--green, #2ea043)' } : undefined}
+      >
+        {done.has(key) ? '✓ Verstanden' : '○ Als verstanden markieren'}
+      </button>
+    </div>
+  )
+}
+
 export default function Uebungsblaetter() {
   const [selectedId, setSelectedId] = useState(() => {
     const b = getHashDetail().blatt
     return b && uebungsblaetter.some(x => x.id === b) ? b : (uebungsblaetter[0]?.id ?? '')
   })
-  const [openIds, setOpenIds] = useState<Set<string>>(new Set())
-  const [openTables, setOpenTables] = useState<Set<string>>(new Set())
-  const [openHints, setOpenHints] = useState<Set<string>>(new Set())
+  const [view, setView] = useState<'blatt' | 'offen'>('blatt')
   const { done, toggle: toggleDone, ratio } = useDoneTracker()
   const listRef = useTaskDeepLink<HTMLDivElement>(selectedId)
 
   const blatt = uebungsblaetter.find(b => b.id === selectedId)
 
+  // Alle noch nicht als „verstanden" markierten Aufgaben (über alle Blätter).
+  const offen = useMemo<OffenItem[]>(() => {
+    const out: OffenItem[] = []
+    for (const b of uebungsblaetter)
+      for (const t of b.tasks) {
+        const key = `${b.id}-${t.nr}`
+        if (!done.has(key)) {
+          out.push({ key, blattId: b.id, blattLabel: b.titel ?? `Blatt ${b.nr}`, aufgabeNr: String(t.nr), label: t.titel ?? `Aufgabe ${t.nr}` })
+        }
+      }
+    return out
+  }, [done])
+
+  // Aus der „Noch offen"-Liste zur Aufgabe zurückspringen: Blatt wählen + Ansicht
+  // synchron umschalten (flushSync), dann steht die Karte im DOM → direkt scrollen.
+  const goToTask = (blattId: string, aufgabeNr: string) => {
+    flushSync(() => {
+      setSelectedId(blattId)
+      setView('blatt')
+    })
+    setHashDetail(blattId, aufgabeNr, 'uebung')
+    listRef.current?.querySelector(`[data-aufgabe="${aufgabeNr}"]`)?.scrollIntoView({ block: 'start' })
+  }
+
   // Fortschritt pro Blatt: gleicher Schlüssel wie bei Lösung/Tipps (`${blatt.id}-${task.nr}`).
   const taskKeys = blatt ? blatt.tasks.map(t => `${blatt.id}-${t.nr}`) : []
   const verstanden = taskKeys.filter(k => done.has(k)).length
   const pct = Math.round(ratio(taskKeys) * 100)
-
-  const toggleSolution = (key: string) => toggleInSet(setOpenIds, key)
-  const toggleTable = (key: string) => toggleInSet(setOpenTables, key)
-  const toggleHint = (key: string) => toggleInSet(setOpenHints, key)
 
   return (
     <div>
@@ -179,6 +419,27 @@ export default function Uebungsblaetter() {
         <p>Aufgaben und Musterlösungen nach Übungsblatt geordnet.</p>
       </div>
 
+      <div className="filter-row" style={{ marginBottom: '0.6rem' }}>
+        <button
+          type="button"
+          className={`filter-btn${view === 'blatt' ? ' on' : ''}`}
+          onClick={() => setView('blatt')}
+        >
+          📚 Nach Blatt
+        </button>
+        <button
+          type="button"
+          className={`filter-btn${view === 'offen' ? ' on' : ''}`}
+          onClick={() => setView('offen')}
+        >
+          📌 Noch offen{offen.length ? ` (${offen.length})` : ''}
+        </button>
+      </div>
+
+      {view === 'offen' ? (
+        <OffeneAufgaben items={offen} onGo={goToTask} />
+      ) : (
+        <>
       {/* Sheet selector */}
       {uebungsblaetter.length > 1 && (
         <div className="filter-row">
@@ -232,208 +493,18 @@ export default function Uebungsblaetter() {
 
           {/* Tasks */}
           <div ref={listRef}>
-          {blatt.tasks.map(task => {
-            const aufgabe = aufgaben.find(a => a.id === task.aufgabeId)
-            const key = `${blatt.id}-${task.nr}`
-            const isOpen = openIds.has(key)
-            // Blank result table shown with the question (only for query tasks
-            // whose answer is a result table the student should fill in).
-            const resultTable = task.sqlQuery ? getResultTable(task) : undefined
-
-            return (
-              <div key={key} className="card" data-aufgabe={String(task.nr)}>
-                <div className="ub-task-head">
-                  <p className="ub-task-nr">{task.titel ?? `Aufgabe ${task.nr}`}</p>
-                  {task.hinweis && <span className="ub-task-hinweis">{task.hinweis}</span>}
-                </div>
-                <p className="q-title ub-question">{task.text}</p>
-
-                {/* ER / structural diagram shown with the question */}
-                {task.svg && (
-                  // eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (task.svg), kein User-Input
-                  <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: task.svg }} />
-                )}
-
-                {/* Given SQL query (the exam question), always visible */}
-                {task.sqlQuery && (
-                  <div className="sql-block visible">
-                    {highlightSQL(task.sqlQuery)}
-                  </div>
-                )}
-
-                {/* Blank result table to fill in (shown with the question) */}
-                {resultTable && (
-                  <EmptyResultTable columns={resultTable.columns} rowCount={resultTable.rowCount} />
-                )}
-
-                {/* Anwendungsfall tables shown directly with the task */}
-                {task.tabellen && task.tabellen.length > 0 && (
-                  <div className="ub-tables-section">
-                    {task.tabellen.map(t => (
-                      <div key={t.titel} className="ub-anw-table">
-                        <p className="ub-tables-label">{t.titel}</p>
-                        <div className="ub-table-scroll">
-                          <table className="ub-table">
-                            <thead>
-                              <tr>{t.columns.map(col => <th key={col}>{col}</th>)}</tr>
-                            </thead>
-                            <tbody>
-                              {t.rows.map((row, r) => {
-                                const rowKey = row.map(cell => String(cell)).join('|') || `row-${r}`
-                                return (
-                                  <tr key={rowKey}>
-                                    {row.map((cell, c) => <td key={c}>{cell}</td>)}
-                                  </tr>
-                                )
-                              })}
-                            </tbody>
-                          </table>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-
-                {/* Relevant tables */}
-                {task.relevantTables && task.relevantTables.length > 0 && (
-                  <div className="ub-tables-section">
-                    <p className="ub-tables-label">Relevante Tabellen:</p>
-                    {task.relevantTables.map(tableName => {
-                      const tableData = getTable(blatt.db, tableName)
-                      if (!tableData) return null
-                      const tKey = `${key}-${tableName}`
-                      const isTableOpen = openTables.has(tKey)
-                      return (
-                        <div key={tableName} className="ub-table-wrap">
-                          <button
-                            type="button"
-                            className="ub-table-toggle"
-                            onClick={() => toggleTable(tKey)}
-                          >
-                            {isTableOpen ? '▼' : '▶'} {tableName}
-                            <span className="ub-table-rowcount">({tableData.rows.length} Zeilen)</span>
-                          </button>
-                          {isTableOpen && (
-                            <div className="ub-table-scroll">
-                              <table className="ub-table">
-                                <thead>
-                                  <tr>
-                                    {tableData.columns.map(col => (
-                                      <th key={col}>{col}</th>
-                                    ))}
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {tableData.rows.map((row, i) => {
-                                    const rowKey = row.map(cell => String(cell)).join('|') || `row-${i}`
-                                    return (
-                                      <tr key={rowKey}>
-                                        {row.map((cell, j) => (
-                                          <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
-                                        ))}
-                                      </tr>
-                                    )
-                                  })}
-                                </tbody>
-                              </table>
-                            </div>
-                          )}
-                        </div>
-                      )
-                    })}
-                  </div>
-                )}
-
-                {/* Structured hint accordion (4 categories) */}
-                {aufgabeTipps[key] && aufgabeTipps[key].length > 0 && (
-                  <div className="ub-hints-section">
-                    <button type="button" className="toggle-btn toggle-btn--hints" onClick={() => toggleHint(key)}>
-                      {openHints.has(key) ? '▼ Tipp verbergen' : '▶ Tipp anzeigen'}
-                    </button>
-                    {openHints.has(key) && (
-                      <div className="tipp-accordion">
-                        {aufgabeTipps[key].map(hint => (
-                          <details key={hint.titel} className="tipp-section">
-                            <summary className="tipp-section-summary">
-                              <span className="tipp-section-icon">{hint.icon}</span>
-                              {hint.titel}
-                            </summary>
-                            <div className="tipp-section-body">{hint.inhalt}</div>
-                          </details>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {/* Solution (linked aufgabe with SQL + result) */}
-                {aufgabe && (
-                  <>
-                    <button type="button" className="toggle-btn" onClick={() => toggleSolution(key)}>
-                      {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
-                    </button>
-                    {isOpen && (
-                      <>
-                        <div className="sql-block visible">
-                          {highlightSQL(aufgabe.sql)}
-                        </div>
-                        {task.queryResult && (
-                          <div className="ub-result-section">
-                            <p className="ub-result-label">Ergebnis:</p>
-                            <div className="ub-table-scroll">
-                              <table className="ub-table ub-result-table">
-                                <thead>
-                                  <tr>
-                                    {task.queryResult.columns.map(col => (
-                                      <th key={col}>{col}</th>
-                                    ))}
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                  {task.queryResult.rows.map((row, i) => {
-                                    const rowKey = row.map(cell => String(cell)).join('|') || `result-row-${i}`
-                                    return (
-                                      <tr key={rowKey}>
-                                        {row.map((cell, j) => (
-                                          <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
-                                        ))}
-                                      </tr>
-                                    )
-                                  })}
-                                </tbody>
-                              </table>
-                            </div>
-                            <p className="ub-result-count">{task.queryResult.rows.length} Zeile(n) gefunden</p>
-                          </div>
-                        )}
-                      </>
-                    )}
-                  </>
-                )}
-
-                {/* Text-based (theory) solution */}
-                {task.loesung && task.loesung.length > 0 && (
-                  <>
-                    <button type="button" className="toggle-btn" onClick={() => toggleSolution(key)}>
-                      {isOpen ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
-                    </button>
-                    {isOpen && <LoesungView blocks={task.loesung} />}
-                  </>
-                )}
-
-                {/* Fortschritt: Aufgabe als verstanden markieren */}
-                <button
-                  type="button"
-                  className="toggle-btn"
-                  onClick={() => toggleDone(key)}
-                  style={done.has(key) ? { color: 'var(--green, #2ea043)', borderColor: 'var(--green, #2ea043)' } : undefined}
-                >
-                  {done.has(key) ? '✓ Verstanden' : '○ Als verstanden markieren'}
-                </button>
-              </div>
-            )
-          })}
+          {blatt.tasks.map(task => (
+            <TaskCard
+              key={`${blatt.id}-${task.nr}`}
+              task={task}
+              blatt={blatt}
+              done={done}
+              toggleDone={toggleDone}
+            />
+          ))}
           </div>
+        </>
+      )}
         </>
       )}
     </div>
