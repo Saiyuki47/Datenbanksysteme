@@ -3,6 +3,17 @@
 // examples (with optional result table), relational-algebra snippets,
 // SQL↔algebra pairs and small reference tables.
 
+import { thema as relationaleAlgebra } from './themen/relationale-algebra'
+import { thema as referentielleIntegritaet } from './themen/referentielle-integritaet'
+import { thema as integritaetsbedingungen } from './themen/integritaetsbedingungen'
+import { thema as trigger } from './themen/trigger'
+import { thema as temporaleDaten } from './themen/temporale-daten'
+import { thema as funktionaleAbhaengigkeiten } from './themen/funktionale-abhaengigkeiten'
+import { thema as attributhuelleSchluessel } from './themen/attributhuelle-schluessel'
+import { thema as normalformen } from './themen/normalformen'
+import { thema as bcnfZerlegung } from './themen/bcnf-zerlegung'
+import { thema as verlustlosigkeitAbhaengigkeit } from './themen/verlustlosigkeit-abhaengigkeit'
+
 export interface ErgebnisTabelle {
   columns: string[]
   rows: string[][]
@@ -58,7 +69,7 @@ const T_TABELLE: ThemaBlock = {
   ],
 }
 
-export const themen: Thema[] = [
+const bestehende: Thema[] = [
   // ---------------------------------------------------------------------------
   {
     id: 'grundabfrage',
@@ -1408,3 +1419,21 @@ export const themen: Thema[] = [
     ],
   },
 ]
+
+// Neue Themen (je eine Datei in ./themen/) in Stoff-Reihenfolge einsortiert;
+// die bestehenden 16 Karten bleiben unverändert. nr wird aus der Position vergeben.
+export const themen: Thema[] = [
+  ...bestehende.slice(0, 11),          // SQL-Grundlagen (grundabfrage … insert)
+  relationaleAlgebra,                  // relationale Algebra: Operatoren
+  ...bestehende.slice(11, 15),         // sql-zu-algebra, er-modell, min-max, er-zu-schema
+  referentielleIntegritaet,            // — Kapitel 5: Datenintegrität —
+  integritaetsbedingungen,
+  trigger,
+  temporaleDaten,
+  funktionaleAbhaengigkeiten,          // — Kapitel 6: Entwurfstheorie —
+  attributhuelleSchluessel,
+  normalformen,
+  bcnfZerlegung,
+  verlustlosigkeitAbhaengigkeit,
+  ...bestehende.slice(15),             // normalisierung-bcnf (bestehende Zusammenfassung/Capstone)
+].map((t, i) => ({ ...t, nr: i + 1 }))
