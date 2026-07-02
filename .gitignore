@@ -3,6 +3,9 @@ dist
 .env
 *.local
 
+# Auto-generiert aus den public-Moodle-Ordnern (scripts/generate-dateien.mjs)
+src/data/dateien.ts
+
 # Original lecture video exceeds GitHub's 100 MB file limit – kept locally only.
 # A 39 MB compressed copy and an external streaming link are shipped instead.
 public/dateien_aus_moodle/übung 0/PS15FN0.mp4
