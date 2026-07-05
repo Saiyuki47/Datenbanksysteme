@@ -13,10 +13,12 @@ const Quiz = lazy(() => import('lernseiten-ui').then(m => ({ default: m.Quiz }))
 const Flashcards = lazy(() => import('lernseiten-ui').then(m => ({ default: m.Flashcards })))
 
 // Tab-IDs sind über alle Lernseiten vereinheitlicht (uebung/referenz/
-// hilfsmittel/moodle/quiz/karten); 'schema' ist der DB-Sonderfall.
-export type TabId = 'uebung' | 'referenz' | 'hilfsmittel' | 'schema' | 'moodle' | 'quiz' | 'karten'
+// hilfsmittel/moodle/quiz/karten); 'schema' ist der DB-Sonderfall und steht
+// als letzter Tab (Karteikarten dafür an vierter Stelle – bewusste Abweichung
+// von der sonstigen „Karteikarten zuletzt"-Reihenfolge).
+export type TabId = 'uebung' | 'referenz' | 'hilfsmittel' | 'karten' | 'moodle' | 'quiz' | 'schema'
 
-const TABS: readonly TabId[] = ['uebung', 'referenz', 'hilfsmittel', 'schema', 'moodle', 'quiz', 'karten']
+const TABS: readonly TabId[] = ['uebung', 'referenz', 'hilfsmittel', 'karten', 'moodle', 'quiz', 'schema']
 
 // Alten Tab-Hash auf die vereinheitlichte ID umleiten (Lesezeichen/Deep-Links).
 if (typeof window !== 'undefined') {

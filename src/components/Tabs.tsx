@@ -41,13 +41,12 @@ const tabs: TabDef<TabId>[] = [
     ),
   },
   {
-    id: 'schema',
-    label: 'Schema',
+    id: 'karten',
+    label: 'Karteikarten',
     icon: (
       <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <ellipse cx="12" cy="5" rx="9" ry="3" />
-        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
-        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
+        <rect x="3" y="7" width="13" height="13" rx="2" />
+        <path d="M8 7V5a2 2 0 012-2h9a2 2 0 012 2v9a2 2 0 01-2 2h-2" />
       </svg>
     ),
   },
@@ -71,12 +70,13 @@ const tabs: TabDef<TabId>[] = [
     ),
   },
   {
-    id: 'karten',
-    label: 'Karteikarten',
+    id: 'schema',
+    label: 'Schema',
     icon: (
       <svg width="14" height="14" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
-        <rect x="3" y="7" width="13" height="13" rx="2" />
-        <path d="M8 7V5a2 2 0 012-2h9a2 2 0 012 2v9a2 2 0 01-2 2h-2" />
+        <ellipse cx="12" cy="5" rx="9" ry="3" />
+        <path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3" />
+        <path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5" />
       </svg>
     ),
   },
