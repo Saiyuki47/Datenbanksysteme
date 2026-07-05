@@ -1,6 +1,5 @@
 import { lazy, Suspense } from 'react'
-import Tabs from './components/Tabs'
-import { Header, GlobalSearch, useTheme, useHashTab } from 'lernseiten-ui'
+import { Header, GlobalSearch, Tabs, tabDefs, STANDARD_TAB_REIHENFOLGE, useTheme, useHashTab } from 'lernseiten-ui'
 import { quizFragen } from './data/quiz'
 import { karteikarten } from './data/karteikarten'
 
@@ -12,13 +11,12 @@ const Dateien = lazy(() => import('./components/Dateien'))
 const Quiz = lazy(() => import('lernseiten-ui').then(m => ({ default: m.Quiz })))
 const Flashcards = lazy(() => import('lernseiten-ui').then(m => ({ default: m.Flashcards })))
 
-// Tab-IDs sind über alle Lernseiten vereinheitlicht (uebung/referenz/
-// hilfsmittel/moodle/quiz/karten); 'schema' ist der DB-Sonderfall und steht
-// als letzter Tab (Karteikarten dafür an vierter Stelle – bewusste Abweichung
-// von der sonstigen „Karteikarten zuletzt"-Reihenfolge).
-export type TabId = 'uebung' | 'referenz' | 'hilfsmittel' | 'karten' | 'moodle' | 'quiz' | 'schema'
-
-const TABS: readonly TabId[] = ['uebung', 'referenz', 'hilfsmittel', 'karten', 'moodle', 'quiz', 'schema']
+// Tab-IDs, -Reihenfolge und -Icons sind über alle Lernseiten vereinheitlicht;
+// die Tab-Leiste kommt zentral aus lernseiten-ui (tabDefs). 'schema' ist der
+// DB-Sonderfall und hängt als letzter Tab hinten an.
+const TABS = [...STANDARD_TAB_REIHENFOLGE, 'schema'] as const
+export type TabId = (typeof TABS)[number]
+const tabs = tabDefs(TABS)
 
 // Alten Tab-Hash auf die vereinheitlichte ID umleiten (Lesezeichen/Deep-Links).
 if (typeof window !== 'undefined') {
@@ -37,7 +35,7 @@ function App() {
     <>
       <Header logo={<>Datenbanksysteme</>} subtitle="Pine Valley & Northwind Datenbank" current="datenbanken" theme={theme} onToggleTheme={toggle} />
       <div className="container">
-        <Tabs activeTab={activeTab} onTabChange={setActiveTab} />
+        <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
         <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.75rem' }}>
           <GlobalSearch loadIndex={() => import('./data/searchIndex').then(m => m.searchIndex)} onNavigate={t => setActiveTab(t as TabId)} />
         </div>
