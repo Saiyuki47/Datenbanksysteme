@@ -143,7 +143,7 @@ export default function Themen() {
   return (
     <Referenz
       karten={karten}
-      tab="themen"
+      tab="referenz"
       intro="Alle SQL-Befehle aus den Übungsblättern, von Grund auf erklärt – ein Thema pro Karte."
     />
   )

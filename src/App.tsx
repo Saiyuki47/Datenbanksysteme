@@ -5,15 +5,27 @@ import { quizFragen } from './data/quiz'
 import { karteikarten } from './data/karteikarten'
 
 const Themen = lazy(() => import('./components/Themen'))
+const Hilfsmittel = lazy(() => import('./components/Hilfsmittel'))
 const Schema = lazy(() => import('./components/Schema'))
 const Uebungsblaetter = lazy(() => import('./components/Uebungsblaetter'))
 const Dateien = lazy(() => import('./components/Dateien'))
 const Quiz = lazy(() => import('lernseiten-ui').then(m => ({ default: m.Quiz })))
 const Flashcards = lazy(() => import('lernseiten-ui').then(m => ({ default: m.Flashcards })))
 
-export type TabId = 'uebung' | 'themen' | 'schema' | 'moodle' | 'quiz' | 'karten'
+// Tab-IDs sind über alle Lernseiten vereinheitlicht (uebung/referenz/
+// hilfsmittel/moodle/quiz/karten); 'schema' ist der DB-Sonderfall.
+export type TabId = 'uebung' | 'referenz' | 'hilfsmittel' | 'schema' | 'moodle' | 'quiz' | 'karten'
 
-const TABS: readonly TabId[] = ['uebung', 'themen', 'schema', 'moodle', 'quiz', 'karten']
+const TABS: readonly TabId[] = ['uebung', 'referenz', 'hilfsmittel', 'schema', 'moodle', 'quiz', 'karten']
+
+// Alten Tab-Hash auf die vereinheitlichte ID umleiten (Lesezeichen/Deep-Links).
+if (typeof window !== 'undefined') {
+  const teile = window.location.hash.replace(/^#/, '').split('/')
+  if (teile[0] === 'themen') {
+    teile[0] = 'referenz'
+    history.replaceState(null, '', '#' + teile.join('/'))
+  }
+}
 
 function App() {
   const [activeTab, setActiveTab] = useHashTab(TABS, 'uebung')
@@ -28,7 +40,8 @@ function App() {
           <GlobalSearch loadIndex={() => import('./data/searchIndex').then(m => m.searchIndex)} onNavigate={t => setActiveTab(t as TabId)} />
         </div>
         <Suspense fallback={<div className="card"><p className="quiz-hint">Lädt …</p></div>}>
-          {activeTab === 'themen' && <Themen />}
+          {activeTab === 'referenz' && <Themen />}
+          {activeTab === 'hilfsmittel' && <Hilfsmittel />}
           {activeTab === 'schema' && <Schema />}
           {activeTab === 'quiz' && <Quiz fragen={quizFragen} />}
           {activeTab === 'uebung' && <Uebungsblaetter />}

@@ -6,7 +6,7 @@ import { schemaData } from './schema'
 
 // Such-Index aus den Inhalten der Seite. Jeder Treffer kennt seinen Ziel-Tab,
 // damit die globale Suche direkt dorthin springen kann. Die Tab-Werte müssen
-// gültige TabId-Werte sein ('uebung' | 'themen' | 'schema' | 'moodle' | 'quiz').
+// gültige TabId-Werte sein ('uebung' | 'referenz' | 'hilfsmittel' | 'schema' | 'moodle' | 'quiz').
 export const searchIndex: SearchItem[] = [
   ...uebungsblaetter.flatMap(b =>
     b.tasks.map(t => ({
@@ -25,9 +25,16 @@ export const searchIndex: SearchItem[] = [
   ...themen.map(t => ({
     label: t.title,
     snippet: t.subtitle,
-    tab: 'themen',
+    tab: 'referenz',
     keywords: `Thema ${t.nr}`,
   })),
+  // Hilfsmittel: der druckbare DB-Spickzettel.
+  {
+    label: 'DB-Spickzettel (druckbar, 2 Seiten)',
+    snippet: 'Entwurfstheorie-Rezepte + SQL-/Algebra-Kurzreferenz',
+    tab: 'hilfsmittel',
+    keywords: 'Hilfsmittel Spickzettel Attributhülle Schlüssel Normalformen BCNF SQL Algebra Trigger drucken',
+  },
   // Schema: ein Eintrag pro Tabelle (Spalten als Stichwörter).
   ...Array.from(new Set(schemaData.map(r => r.t))).map(table => {
     const cols = schemaData.filter(r => r.t === table)
