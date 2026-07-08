@@ -229,43 +229,32 @@ export const blatt10: Uebungsblatt = {
         { titel: 'R', columns: ['A', 'B', 'C', 'D'], rows: [['1', 'blau', '2', '16'], ['3', 'rot', '4', '32'], ['5', 'gelb', '8', '64'], ['9', 'orange', '12', '256'], ['12', 'gelb', '16', '128']] },
         { titel: 'S', columns: ['A', 'B', 'C', 'D', 'E'], rows: [['3', '4', '1', '13', '128'], ['3', '4', '3', '15', '64'], ['9', '12', '2', '14', '32'], ['12', '16', null, '14', '16'], ['9', '12', '5', '14', '16']] },
       ],
-      loesung: [
-        {
-          art: 'code',
-          titel: 'Tabellendefinitionen',
-          text:
-            'CREATE TABLE R (A INT, B VARCHAR(64), C INT, D INT,\n' +
-            '  CONSTRAINT CR1 PRIMARY KEY (A, C),\n' +
-            '  CONSTRAINT CR2 CHECK (LENGTH(B) IN (3,4,6,7)),\n' +
-            '  CONSTRAINT CR3 CHECK (D IN (1,2,4,8,16,32,64,128,256)),\n' +
-            '  CONSTRAINT CR4 UNIQUE (D));\n\n' +
-            'CREATE TABLE S (A INT, B INT, C INT, D INT, E INT,\n' +
-            '  CONSTRAINT CS1 PRIMARY KEY (A, E),\n' +
-            '  CONSTRAINT CS2 FOREIGN KEY (E) REFERENCES R(D),\n' +
-            '  CONSTRAINT CS3 CHECK (D BETWEEN 12 AND 16));',
-        },
-        {
-          art: 'tabelle',
-          titel: 'Ergebnis je INSERT',
-          columns: ['INSERT-Anweisung', 'Ergebnis'],
-          rows: [
-            ["a) R VALUES (1, 'magenta', 45, 512)", 'Verstoß CR3 (D = 512 nicht in der erlaubten Werteliste)'],
-            ["b) R VALUES (4, 'orange', 32, 256)", 'Verstoß CR4 (D = 256 existiert bereits – UNIQUE)'],
-            ["c) R VALUES (11, 'magenta', 14, 8)", 'OK'],
-            ["d) R VALUES (10, 'gruen', 15, 4)", "Verstoß CR2 (LENGTH('gruen') = 5 ∉ {3,4,6,7})"],
-            ['e) S VALUES (1, 2, 3, 12, 256)', 'OK (E = 256 existiert als D in R, D = 12 ∈ [12,16])'],
-            ['f) S VALUES (3, 4, 3, 1, 256)', 'Verstoß CS3 (D = 1 nicht zwischen 12 und 16)'],
-            ['g) S VALUES (9, 12, 3, 14, 32)', 'Verstoß CS1 (PK (A,E) = (9,32) existiert bereits)'],
-          ],
-        },
-        {
-          art: 'text',
-          text:
-            'Vorgehen je INSERT: alle Constraints prüfen – Primärschlüssel (eindeutig?), CHECK (Wert im erlaubten Bereich/' +
-            'Länge?), UNIQUE (Wert schon da?), Fremdschlüssel (Zielwert existiert?). Schon ein verletzter Constraint ' +
-            'verhindert das Einfügen.',
-        },
-      ],
+      sqlQuery: `-- Tabellendefinitionen
+CREATE TABLE R (A INT, B VARCHAR(64), C INT, D INT,
+  CONSTRAINT CR1 PRIMARY KEY (A, C),
+  CONSTRAINT CR2 CHECK (LENGTH(B) IN (3,4,6,7)),
+  CONSTRAINT CR3 CHECK (D IN (1,2,4,8,16,32,64,128,256)),
+  CONSTRAINT CR4 UNIQUE (D));
+
+CREATE TABLE S (A INT, B INT, C INT, D INT, E INT,
+  CONSTRAINT CS1 PRIMARY KEY (A, E),
+  CONSTRAINT CS2 FOREIGN KEY (E) REFERENCES R(D),
+  CONSTRAINT CS3 CHECK (D BETWEEN 12 AND 16));
+
+-- a)
+INSERT INTO R VALUES (1, 'magenta', 45, 512);
+-- b)
+INSERT INTO R VALUES (4, 'orange', 32, 256);
+-- c)
+INSERT INTO R VALUES (11, 'magenta', 14, 8);
+-- d)
+INSERT INTO R VALUES (10, 'gruen', 15, 4);
+-- e)
+INSERT INTO S VALUES (1, 2, 3, 12, 256);
+-- f)
+INSERT INTO S VALUES (3, 4, 3, 1, 256);
+-- g)
+INSERT INTO S VALUES (9, 12, 3, 14, 32);`,
     },
   ],
 }

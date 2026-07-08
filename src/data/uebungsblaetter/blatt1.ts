@@ -105,28 +105,6 @@ export const blatt1: Uebungsblatt = {
         'Fallstudie – Pine Valley Furniture Company (PVFC).\n\n' +
         'a) Betrachten Sie Figure 1-2 (PVFC Fallstudie Teil 1): das alte File Processing System. Was sieht auf den ersten Blick problematisch aus?\n\n' +
         'b) Lesen Sie die Fallstudie (Teil 2) zur Entwicklung einer Datenbankanwendung und fassen Sie Ihren zugeteilten Abschnitt auf dem Etherpad zusammen.',
-      loesung: [
-        {
-          art: 'unterpunkt',
-          label: 'a) Probleme des alten Systems',
-          text: 'Das File Processing System nutzt für jede Anwendung (z. B. Auftragsbearbeitung, Rechnungsstellung, Lohnbuchhaltung) eigene, getrennte Dateien:',
-          punkte: [
-            'Redundanz: dieselben Daten (z. B. Kunden- und Produktdaten) werden in mehreren Dateien doppelt gehalten.',
-            'Inkonsistenz: Änderungen in einer Datei werden in den anderen nicht nachgezogen → widersprüchliche Daten.',
-            'Keine Integration / Datenisolation: jede Anwendung „kennt" nur ihre eigenen Dateien; bereichsübergreifende Auswertungen sind schwer.',
-            'Hoher Pflegeaufwand und Abhängigkeit von einzelnen Programmen (jede Datei hat ihr eigenes Format/Programm).',
-          ],
-        },
-        {
-          art: 'text',
-          text: 'Kurz: Es sind genau die Nachteile aus Gruppenaufgabe 1 – allen voran Redundanz und die daraus folgende Inkonsistenz.',
-        },
-        {
-          art: 'unterpunkt',
-          label: 'b) Lese-/Zusammenfassungsaufgabe',
-          text: 'Dies ist eine kollaborative Aufgabe: Teil 2 der Fallstudie beschreibt, wie PVFC von der reinen Dateiverwaltung auf einen Datenbankansatz umgestellt wird (Anforderungen, Datenmodell/ER-Modell, Tabellen). Jede Gruppe fasst ihren zugeteilten Abschnitt in wenigen Stichpunkten auf dem Etherpad zusammen – der konkrete Inhalt hängt vom zugeteilten Abschnitt ab.',
-        },
-      ],
     },
     {
       nr: 3,

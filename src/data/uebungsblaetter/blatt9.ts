@@ -26,31 +26,12 @@ export const blatt9: Uebungsblatt = {
         { titel: 'Professoren', columns: ['PersNr', 'Name', 'Rang', 'Raum'], rows: [['2125', 'Sokrates', 'C4', '226'], ['2126', 'Russel', 'C4', '232'], ['2127', 'Kopernikus', 'C3', '310'], ['2133', 'Popper', 'C3', '52'], ['2134', 'Augustinus', 'C3', '309'], ['2136', 'Curie', 'C4', '36'], ['2137', 'Kant', 'C4', '7']] },
         { titel: 'prüfen', columns: ['MatrNr', 'VorlNr', 'PersNr', 'Note'], rows: [['28106', '5001', '2126', '1'], ['25403', '5041', '2125', '2'], ['27550', '4630', '2137', '2']] },
       ],
-      loesung: [
-        { art: 'code', titel: 'a)', text: 'SELECT Name\nFROM Studenten\nWHERE Semester > 10;' },
-        { art: 'tabelle', titel: 'Ergebnis a) – nur Semester ECHT größer 10 (Fichte = 10 fällt raus!)', columns: ['Name'], rows: [['Xenokrates'], ['Jonas']] },
-        { art: 'code', titel: 'b)', text: 'SELECT count(*)\nFROM Vorlesungen\nWHERE SWS = 3;' },
-        { art: 'tabelle', titel: 'Ergebnis b) – SWS=3: Erkenntnistheorie, Wissenschaftstheorie', columns: ['count(*)'], rows: [['2']] },
-        { art: 'code', titel: 'c)', text: 'SELECT count(*)\nFROM Professoren, Vorlesungen;' },
-        { art: 'tabelle', titel: 'Ergebnis c) – Kreuzprodukt: 7 × 10', columns: ['count(*)'], rows: [['70']] },
-        { art: 'code', titel: 'd)', text: 'SELECT SWS, count(*)\nFROM Vorlesungen\nGROUP BY SWS\nHAVING count(*) > 2;' },
-        { art: 'tabelle', titel: 'Ergebnis d) – Gruppen mit mehr als 2 Vorlesungen', columns: ['SWS', 'count(*)'], rows: [['4', '4'], ['2', '4']] },
-        {
-          art: 'text',
-          text: 'Zu d): SWS=4 (Grundzüge, Ethik, Logik, Die 3 Kritiken) = 4; SWS=2 (Mäeutik, Bioethik, Der Wiener Kreis, Glaube und Wissen) = 4; SWS=3 hat nur 2 → fällt durch HAVING count(*) > 2 raus.',
-        },
-        {
-          art: 'code',
-          titel: 'e)',
-          text: 'SELECT Name, Titel\nFROM Professoren prof, Vorlesungen v, pruefen p\nWHERE prof.PersNr = p.PersNr AND p.VorlNr = v.VorlNr AND SWS = 4\nORDER BY Name;',
-        },
-        {
-          art: 'tabelle',
-          titel: 'Ergebnis e) – geprüfte 4-SWS-Vorlesungen, nach Name sortiert',
-          columns: ['Name', 'Titel'],
-          rows: [['Kant', 'Die 3 Kritiken'], ['Russel', 'Grundzüge'], ['Sokrates', 'Ethik']],
-        },
-      ],
+      sqlQuery:
+        '-- a)\nSELECT Name\nFROM Studenten\nWHERE Semester > 10;\n\n' +
+        '-- b)\nSELECT count(*)\nFROM Vorlesungen\nWHERE SWS = 3;\n\n' +
+        '-- c)\nSELECT count(*)\nFROM Professoren, Vorlesungen;\n\n' +
+        '-- d)\nSELECT SWS, count(*)\nFROM Vorlesungen\nGROUP BY SWS\nHAVING count(*) > 2;\n\n' +
+        '-- e)\nSELECT Name, Titel\nFROM Professoren prof, Vorlesungen v, pruefen p\nWHERE prof.PersNr = p.PersNr AND p.VorlNr = v.VorlNr AND SWS = 4\nORDER BY Name;',
     },
     {
       nr: 2,
@@ -109,33 +90,10 @@ export const blatt9: Uebungsblatt = {
         { titel: 'T1', columns: ['A', 'B', 'C', 'D'], rows: [['1', 'blau', '10', 'X'], ['2', 'blau', '40', 'X'], ['3', 'rosa', '30', 'S'], ['4', 'orange', '10', 'M'], ['5', 'orange', '20', 'M'], ['6', 'orange', '50', 'X'], ['7', 'orange', '50', 'X'], ['8', 'magenta', '50', 'S'], ['9', 'magenta', '40', 'S'], ['10', 'violett', '10', 'XXL'], ['11', 'violett', '20', 'XXL'], ['12', 'violett', '10', 'M']] },
         { titel: 'T2', columns: ['E', 'B', 'C'], rows: [['2', 'blau', '20'], ['4', 'blau', '40'], ['4', 'blau', '50'], ['6', 'orange', '20'], ['6', 'orange', '50'], ['8', 'orange', '50']] },
       ],
-      loesung: [
-        { art: 'code', titel: 'a)', text: "SELECT A FROM T1\nWHERE A >= 9 AND D = 'S' OR C = 20" },
-        {
-          art: 'tabelle',
-          titel: 'Ergebnis a) – Klammerung: (A>=9 AND D=\'S\') OR C=20',
-          columns: ['A'],
-          rows: [['5'], ['9'], ['11']],
-        },
-        {
-          art: 'text',
-          text: 'Zu a): AND bindet stärker als OR → (A≥9 ∧ D=\'S\') = {9}, dazu C=20 = {5, 11}. Vereinigt: 5, 9, 11.',
-        },
-        { art: 'code', titel: 'b)', text: 'SELECT A, E FROM T1, T2\nWHERE A = 3*E' },
-        {
-          art: 'tabelle',
-          titel: 'Ergebnis b) – A = 3·E (E=4 kommt in T2 zweimal vor)',
-          columns: ['A', 'E'],
-          rows: [['6', '2'], ['12', '4'], ['12', '4']],
-        },
-        { art: 'code', titel: 'c)', text: 'SELECT B, COUNT(*) FROM T1\nWHERE C > 30\nGROUP BY B' },
-        {
-          art: 'tabelle',
-          titel: 'Ergebnis c) – nur Zeilen mit C > 30, je Farbe gezählt',
-          columns: ['B', 'COUNT(*)'],
-          rows: [['blau', '1'], ['orange', '2'], ['magenta', '2']],
-        },
-      ],
+      sqlQuery:
+        "-- a)\nSELECT A FROM T1\nWHERE A >= 9 AND D = 'S' OR C = 20\n\n" +
+        '-- b)\nSELECT A, E FROM T1, T2\nWHERE A = 3*E\n\n' +
+        '-- c)\nSELECT B, COUNT(*) FROM T1\nWHERE C > 30\nGROUP BY B',
     },
     {
       nr: 4,
@@ -181,28 +139,14 @@ export const blatt9: Uebungsblatt = {
       nr: 5,
       titel: 'Hausaufgabe 2 – Ergebnisse auf T1/T2 bestimmen',
       text: 'Bestimmen Sie die Ergebnisse der Anfragen a)–g) auf den Tabellen T1 und T2 (siehe Gruppenaufgabe 3).',
-      loesung: [
-        { art: 'code', titel: 'a)', text: "SELECT B FROM T1\nWHERE A > 7 AND (D = 'm' OR D = 'XXL')" },
-        { art: 'tabelle', titel: "Ergebnis a) – Achtung: 'm' ≠ 'M' (case-sensitiv) → nur XXL", columns: ['B'], rows: [['violett'], ['violett']] },
-        { art: 'code', titel: 'b)', text: 'SELECT COUNT(*) FROM T2, T2' },
-        { art: 'tabelle', titel: 'Ergebnis b) – Kreuzprodukt 6 × 6', columns: ['COUNT(*)'], rows: [['36']] },
-        { art: 'code', titel: 'c)', text: 'SELECT D, COUNT(D) AS ANZAHL FROM T1\nWHERE A > 6\nGROUP BY D' },
-        { art: 'tabelle', titel: 'Ergebnis c) – Zeilen mit A > 6, je D gezählt', columns: ['D', 'ANZAHL'], rows: [['X', '1'], ['S', '2'], ['XXL', '2'], ['M', '1']] },
-        { art: 'code', titel: 'd)', text: 'SELECT COUNT(*) FROM T1 JOIN T2 ON T1.A = T2.E' },
-        { art: 'tabelle', titel: 'Ergebnis d) – Inner Join (A=2:1, A=4:2, A=6:2, A=8:1)', columns: ['COUNT(*)'], rows: [['6']] },
-        { art: 'code', titel: 'e)', text: "SELECT B, COUNT(*), MIN(C) FROM T1\nWHERE D IN ('X','XXL')\nGROUP BY B HAVING COUNT(*) >= 2" },
-        { art: 'tabelle', titel: 'Ergebnis e)', columns: ['B', 'COUNT(*)', 'MIN(C)'], rows: [['blau', '2', '10'], ['orange', '2', '50'], ['violett', '2', '10']] },
-        { art: 'code', titel: 'f)', text: 'SELECT DISTINCT B FROM T1\nWHERE C IN (SELECT C FROM T2 WHERE E > 4)' },
-        { art: 'tabelle', titel: 'Ergebnis f) – Subquery liefert C ∈ {20, 50}', columns: ['B'], rows: [['orange'], ['magenta'], ['violett']] },
-        { art: 'code', titel: 'g)', text: 'SELECT COUNT(*) FROM T1 LEFT OUTER JOIN T2 ON T1.A = T2.E;' },
-        { art: 'tabelle', titel: 'Ergebnis g) – 6 Treffer + 8 partnerlose T1-Zeilen', columns: ['COUNT(*)'], rows: [['14']] },
-        {
-          art: 'text',
-          text:
-            'Zu g): Der Left Outer Join behält alle 12 T1-Zeilen. Gematchte: A=2 (1), A=4 (2), A=6 (2), A=8 (1) = 6. Die ' +
-            'übrigen 8 T1-Zeilen ohne Partner liefern je 1 Zeile (mit NULLs) → 6 + 8 = 14.',
-        },
-      ],
+      sqlQuery:
+        "-- a)\nSELECT B FROM T1\nWHERE A > 7 AND (D = 'm' OR D = 'XXL')\n\n" +
+        '-- b)\nSELECT COUNT(*) FROM T2, T2\n\n' +
+        '-- c)\nSELECT D, COUNT(D) AS ANZAHL FROM T1\nWHERE A > 6\nGROUP BY D\n\n' +
+        '-- d)\nSELECT COUNT(*) FROM T1 JOIN T2 ON T1.A = T2.E\n\n' +
+        "-- e)\nSELECT B, COUNT(*), MIN(C) FROM T1\nWHERE D IN ('X','XXL')\nGROUP BY B HAVING COUNT(*) >= 2\n\n" +
+        '-- f)\nSELECT DISTINCT B FROM T1\nWHERE C IN (SELECT C FROM T2 WHERE E > 4)\n\n' +
+        '-- g)\nSELECT COUNT(*) FROM T1 LEFT OUTER JOIN T2 ON T1.A = T2.E;',
     },
   ],
 }

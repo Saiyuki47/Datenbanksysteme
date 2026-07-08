@@ -23,28 +23,6 @@ export const blatt8: Uebungsblatt = {
       text:
         'a) Um was für eine Datenbank handelt es sich bei Northwind? b) Wofür stehen die Symbole an den Spalten und die ' +
         'Beziehungsnotation im Diagramm? c) Bauen Sie die Northwind-Datenbank in Ihrer Verbindung auf.',
-      loesung: [
-        {
-          art: 'unterpunkt',
-          label: 'a) Was ist Northwind?',
-          text: 'Northwind ist eine bekannte Beispieldatenbank von Microsoft (für SQL Server / Access). Sie enthält die Verkaufsdaten von „Northwind Traders", einem fiktiven Im-/Export-Unternehmen für Spezialitäten-Lebensmittel – also eine klassische Handels-/Vertriebsdatenbank (Kunden, Bestellungen, Produkte, Lieferanten, Mitarbeiter, Versand).',
-        },
-        {
-          art: 'unterpunkt',
-          label: 'b) Notation im Diagramm',
-          text: 'Die Symbole codieren Schlüssel und Beziehungen:',
-          punkte: [
-            'Ein Schlüssel-Symbol bzw. fett/unterstrichene Spalte = Primärschlüssel der Tabelle (z. B. CustomerID, OrderID).',
-            'Eine Linie zwischen zwei Tabellen = Fremdschlüssel-Beziehung; sie verbindet das FK-Attribut mit dem PK der anderen Tabelle.',
-            'Die „1" an einem Linienende und das „∞" (Unendlich-Zeichen) am anderen Ende geben die Funktionalität an: 1 : ∞ = 1:N (z. B. ein Kunde hat viele Bestellungen).',
-          ],
-        },
-        {
-          art: 'unterpunkt',
-          label: 'c) Verbindung zur Northwind-DB',
-          text: 'Mit der bereitgestellten Datenbankverbindung „DBNORTHWIND" verbinden (Benutzername und Passwort sind ebenfalls DBNORTHWIND). Die Northwind-Tabellen sind dort bereits aufgesetzt; man kann sie sofort abfragen. (Praktische Einrichtung.)',
-        },
-      ],
     },
     {
       nr: 2,

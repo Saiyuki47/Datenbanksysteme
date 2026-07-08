@@ -195,11 +195,7 @@ export const blatt4: Uebungsblatt = {
         'Überführen Sie das ER-Modell in ein relationales Schema und verfeinern Sie es. mieten ist eine ternäre Beziehung ' +
         '(Vermieter 1, Wohnung N, Mieter 1); Wohnung ist eine schwache Entität, die über die identifizierende Beziehung ' +
         'liegt_in zum Haus gehört (Nummer ist nur innerhalb eines Hauses eindeutig).',
-      loesung: [
-        {
-          art: 'svg',
-          titel: 'ER-Modell',
-          svg: `<svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vermieter Wohnung Haus">
+      svg: `<svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vermieter Wohnung Haus">
   <line class="dgm-line" x1="150" y1="93" x2="216" y2="93"/>
   <line class="dgm-line" x1="324" y1="93" x2="410" y2="93"/>
   <line class="dgm-line" x1="270" y1="127" x2="270" y2="230"/>
@@ -246,37 +242,6 @@ export const blatt4: Uebungsblatt = {
   <text class="dgm-card" x="548" y="85">N</text>
   <text class="dgm-card" x="700" y="85">1</text>
 </svg>`,
-        },
-        {
-          art: 'unterpunkt',
-          label: 'a) Relationales Schema (initial)',
-          text: 'Je Entitytyp eine Relation; Wohnung ist schwach (Schlüssel = Haus-Adresse + Nummer). mieten ist ternär – sein Schlüssel umfasst zwei Entitäten (z. B. Wohnung + Mieter), da (Wohnung, Mieter) den Vermieter bestimmt.',
-        },
-        {
-          art: 'code',
-          text:
-            'Vermieter: {[ «Name», Adresse ]}\n' +
-            'Mieter:    {[ «Name», Geburtsjahr ]}\n' +
-            'Haus:      {[ «Adresse» ]}\n' +
-            'Wohnung:   {[ «HausAdresse», «Nummer», Größe ]}\n' +
-            'liegt_in:  {[ «HausAdresse», «Nummer» ]}\n' +
-            'mieten:    {[ «HausAdresse», «Nummer», «MieterName», VermieterName ]}',
-        },
-        {
-          art: 'unterpunkt',
-          label: 'b) Verfeinerung',
-          text: 'liegt_in hat denselben Schlüssel wie Wohnung → zusammenfassen. mieten bleibt eigenständig (Schlüssel über zwei Entitäten, nicht in eine Entity-Relation einrechenbar).',
-        },
-        {
-          art: 'code',
-          text:
-            'Vermieter: {[ «Name», Adresse ]}\n' +
-            'Mieter:    {[ «Name», Geburtsjahr ]}\n' +
-            'Haus:      {[ «Adresse» ]}\n' +
-            'Wohnung:   {[ «HausAdresse», «Nummer», Größe ]}\n' +
-            'mieten:    {[ «HausAdresse», «Nummer», «MieterName», VermieterName ]}',
-        },
-      ],
     },
     {
       nr: 3,

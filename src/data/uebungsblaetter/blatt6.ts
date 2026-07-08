@@ -419,34 +419,6 @@ export const blatt6: Uebungsblatt = {
         'a) Installieren Sie einen SQL-Client (SQL Developer, DBeaver oder DataGrip). ' +
         'b) Legen Sie eine individuelle Datenbankverbindung an und setzen Sie mit schema_rn.sql und daten.sql das ' +
         'Universitätsschema auf. c) Abgabe: Screenshots des erfolgreichen Verbindungsaufbaus und der aufgesetzten DB.',
-      loesung: [
-        {
-          art: 'liste',
-          punkte: [
-            'Verbindungs-/Benutzername/Kennwort: individuelle Kennung (z. B. DBAIA01)',
-            'Hostname: zeus.informatik.hs-fulda.de',
-            'Port: 1521',
-            'SID: zeuspdb1',
-          ],
-        },
-        {
-          art: 'text',
-          text:
-            'schema_rn.sql legt die Tabellen des Universitätsschemas an, daten.sql füllt sie mit den Beispieldaten – beide ' +
-            'nacheinander ausführen (jederzeit wiederholbar, um den Ursprungszustand herzustellen).',
-        },
-        {
-          art: 'liste',
-          punkte: [
-            'Abgabe 1: Screenshot des erfolgreichen Verbindungsaufbaus (Status „Erfolgreich" über den Test-Button).',
-            'Abgabe 2: Screenshot mit allen Tabellen der Verbindung und Beispieldaten, z. B. SELECT * FROM pruefen;',
-          ],
-        },
-        {
-          art: 'text',
-          text: '(Reine Einrichtungsaufgabe – keine inhaltlich „lösbare" Aufgabe; entscheidend sind die korrekten Verbindungsdaten und die Reihenfolge schema_rn.sql → daten.sql.)',
-        },
-      ],
     },
   ],
 }
