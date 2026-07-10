@@ -1,0 +1,183 @@
+Korrekturen der Hausaufgaben
+
+Zu Aufgabenblatt 2
+
+-1 Buchtitel ----N---- <vormerken> ----M--- Ausleiher
+
+2. -7 Textform
+
+Es können maximal 3 partielle Funktionen auftreten:
+1. Übungsleiter x Übungsgruppe --> Student
+Textform: Ein Übungsleiter pro Übungsgruppe nur einen Studenten haben.
+
+2. Übungsleiter x Student --> Übungsgruppe
+Textform: Ein Student darf ei einem Übungsleiter nur eine Übungsgruppe besuchen
+
+3. Übungsgruppe x Student --> Übungsleiter
+Textform: Ein Student kann eine Übungsgruppe nur bei einem Übungsleiter haben.
+
+
+Aufgabenblatt 3
+
+HA2.
+
+(-1) Schwache Objekte wie Beziehungen oder Entitäten werden durch eine doppelte Linie und die entsprechende Geometrie dargestellt.
+schwache Entitäten: Flug 
+schwache Beziehung: anbieten
+
+Beziehungen "Start" und "Ziel" sollten nicht miteinander kombiniert werden,
+
+vollständige Beziehungen: (-16)
+
+Flug --(1,1)--<Start> --(1,*)--- Flughafen
+Flug --(1,1)--<Ziel> ----(1,*)--- Flughafen
+Fluglinie ----(0,*)---<anbieten>----(1,1)--- Flug
+Fluglinie ----(0,*)---<Lieblingsgesellschaft>----(1,1)--- Kunde
+
+
+Übungsblatt 5
+
+
+2a. -5
+
+TITEL
+
+Maria Stuart
+
+Wallenstein
+
+Tell
+
+2b. -5
+
+PNR
+
+1
+
+2
+
+2c.-5 
+
+PNR
+
+1
+
+2
+
+4
+
+5
+
+2d. -17
+
+π PNR(σ FIGUR = ‚Faust‘ ∨ FIGUR = ‚Wallenstein‘ (DARSTELLER)) –
+
+π PNR(σ FIGUR ≠ ‚Faust‘ ∧ FIGUR ≠ ‚Wallenstein‘ (DARSTELLER))
+
+eine Alternative:
+
+π PNR(DARSTELLER) – π PNR(σ FIGUR ≠ ‚Faust‘  ∧ FIGUR ≠ ‚Wallenstein‘ (DARSTELLER))
+
+PNR
+
+1
+
+
+
+2e. -5
+
+π PNR(σ FIGUR = ‚Faust‘ ∨ FIGUR = ‚Wallenstein‘ (DARSTELLER)) –
+
+π PNR(σ FIGUR ≠ ‚Faust‘ ∧ FIGUR ≠ ‚Wallenstein‘ (DARSTELLER))
+
+eine Alternative:
+
+π PNR(DARSTELLER) – π PNR(σ FIGUR ≠ ‚Faust‘  ∧ FIGUR ≠ ‚Wallenstein‘ (DARSTELLER))
+
+PNR
+
+1
+
+
+
+Übungsblatt 7
+
+2b.
+
+SELECT DISTINCT s.Name, s.MatrNr
+
+FROM Studenten s
+
+JOIN HOEREN h ON h.MatrNr = s.MatrNr
+
+WHERE h.VorlNr IN (
+
+    SELECT h2.VorlNr
+
+    FROM HOEREN h2
+
+    JOIN Studenten s2 ON s2.MatrNr = h2.MatrNr
+
+    WHERE s2.Name = 'Fichte'
+
+)
+
+AND s.Name <> 'Fichte';
+
+2a.
+
+a)        CREATE TABLE Abschlussarbeiten (
+      ArbeitNr integer PRIMARY KEY,
+      Titel varchar (50) NOT NULL,
+       Abgabedatum date);
+
+ 2c.
+
+a)        INSERT INTO Studenten (MatrNr, Name, Semester)
+    VALUES (1234, 'Platon', 1);
+
+
+
+Übungsblatt 9
+
+	
+1abc:
+
+LEFT JOIN
+
+Bildschirmfoto%202026-01-12%20um%201.40.47%E2%80%AFAM.png
+
+RIGHT JOINBildschirmfoto%202026-01-12%20um%201.41.16%E2%80%AFAM.png
+
+FULL JOIN
+Bildschirmfoto%202026-01-12%20um%201.41.28%E2%80%AFAM.png
+
+
+Aufgabe 2a sind 2 mal violett und 2e violett blau orange
+
+
+
+Übungsblatt 10
+
+2.
+a. CR3
+
+1.
+
+Löschen der Vorlesung „Ethik“ (VorlNr 5041):
+Es gibt Referenzen in hören, voraussetzen und prüfen.
+In hören und voraussetzen sind die Fremdschlüssel mit ON DELETE CASCADE definiert, daher werden die zugehörigen Tupel beim Löschen der Vorlesung automatisch mitgelöscht.
+In prüfen ist VorlNr ein Fremdschlüssel auf Vorlesungen ohne spezielles Löschverhalten, d. h. Default ist RESTRICT/NO ACTION: Das DBMS verhindert „dangling references“ und blockiert das Löschen der Vorlesung (entspricht explizit ON DELETE NO ACTION).
+
+Erstes Einfügen eines prüfen-Tupels:
+Das INSERT scheitert, weil es keinen Professor mit PersNr 2138 gibt. Der Fremdschlüssel (REFERENCES Professoren …) erzwingt bei INSERT die Existenz des referenzierten Tupels.
+
+Zweites Einfügen eines prüfen-Tupels:
+prüfen hat den Primärschlüssel (MatrNr, VorlNr). Da (28106, 5001) bereits existiert, scheitert das INSERT wegen PK-Verletzung (Duplikat).
+
+DROP TABLE Studenten:
+DROP TABLE scheitert, weil prüfen und hören Fremdschlüssel-Constraints auf Studenten besitzen. Solange diese Constraints existieren, kann die Tabelle nicht gedroppt werden, selbst wenn Studenten leer ist und selbst bei ON DELETE CASCADE oder ON DELETE SET NULL. Man kann die Datensätze löschen, aber nicht die Tabelle ohne vorheriges Entfernen/Ändern der Constraints.
+
+
+
+

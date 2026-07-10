@@ -147,6 +147,19 @@ export const blatt9: Uebungsblatt = {
         "-- e)\nSELECT B, COUNT(*), MIN(C) FROM T1\nWHERE D IN ('X','XXL')\nGROUP BY B HAVING COUNT(*) >= 2\n\n" +
         '-- f)\nSELECT DISTINCT B FROM T1\nWHERE C IN (SELECT C FROM T2 WHERE E > 4)\n\n' +
         '-- g)\nSELECT COUNT(*) FROM T1 LEFT OUTER JOIN T2 ON T1.A = T2.E;',
+      loesung: [
+        {
+          art: 'text',
+          text: 'Hinweis: Stringvergleiche sind case-sensitiv – in a) ist \'m\' ≠ \'M\', daher zählt Zeile A = 12 (D = \'M\') nicht mit.',
+        },
+        { art: 'tabelle', titel: 'a) SELECT B … WHERE A > 7 AND (D = \'m\' OR D = \'XXL\')', columns: ['B'], rows: [['violett'], ['violett']] },
+        { art: 'tabelle', titel: 'b) SELECT COUNT(*) FROM T2, T2', columns: ['COUNT(*)'], rows: [['36']] },
+        { art: 'tabelle', titel: 'c) SELECT D, COUNT(D) AS ANZAHL … WHERE A > 6 GROUP BY D', columns: ['D', 'ANZAHL'], rows: [['X', '1'], ['S', '2'], ['M', '1'], ['XXL', '2']] },
+        { art: 'tabelle', titel: 'd) SELECT COUNT(*) FROM T1 JOIN T2 ON T1.A = T2.E', columns: ['COUNT(*)'], rows: [['6']] },
+        { art: 'tabelle', titel: 'e) SELECT B, COUNT(*), MIN(C) … WHERE D IN (\'X\',\'XXL\') GROUP BY B HAVING COUNT(*) >= 2', columns: ['B', 'COUNT(*)', 'MIN(C)'], rows: [['blau', '2', '10'], ['orange', '2', '50'], ['violett', '2', '10']] },
+        { art: 'tabelle', titel: 'f) SELECT DISTINCT B … WHERE C IN (SELECT C FROM T2 WHERE E > 4)', columns: ['B'], rows: [['orange'], ['magenta'], ['violett']] },
+        { art: 'tabelle', titel: 'g) SELECT COUNT(*) FROM T1 LEFT OUTER JOIN T2 ON T1.A = T2.E', columns: ['COUNT(*)'], rows: [['14']] },
+      ],
     },
   ],
 }
