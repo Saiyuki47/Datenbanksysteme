@@ -49,20 +49,24 @@ export const blatt3: Uebungsblatt = {
       referenz: ['er-modell', 'min-max'],
       titel: 'Gruppenaufgabe 2 – Übungssystem',
       text:
-        'Die ternäre Beziehung „betreuen" verbindet Übungsleiter, Übungsgruppe und Student.\n\n' +
-        'a) Bestimmen Sie die (min,max)-Angaben so, dass gilt: Ein Übungsleiter betreut mindestens einmal; ' +
-        'eine Übungsgruppe wird mindestens einmal und höchstens 25-mal betreut; ein Student wird höchstens einmal betreut.\n\n' +
-        'b) Welchen Zusammenhang gibt es zwischen der (min,max)-Notation und der konkreten Ausprägung der Beziehung?',
+        'Angenommen, das hier modellierte Übungssystem (ternäre Beziehung „teilnehmen" zwischen Übungsleiter, ' +
+        'Übungsgruppe und Student) entspricht dem Übungssystem des Moduls Datenbanken.\n\n' +
+        'a) Bestimmen Sie die (min,max)-Beziehungen so, dass folgende Einschränkungen modelliert werden:\n' +
+        '• Ein Übungsleiter hält mindestens eine Übungsgruppe.\n' +
+        '• Eine Übungsgruppe wird von mindestens einem Studenten besucht.\n' +
+        '• Ein Student kann höchstens eine Übungsgruppe besuchen.\n\n' +
+        'b) Betrachten Sie eine Ausprägung, die die Beziehung modelliert. Welchen Zusammenhang gibt es zwischen ' +
+        'der (min,max)-Notation und einer solchen Ausprägung?',
       loesung: [
         {
           art: 'unterpunkt',
           label: 'a) (min,max)-Angaben',
-          text: 'Übungsleiter: (1,*), Übungsgruppe: (1,25), Student: (0,1). min = 1 bei Übungsleiter/Übungsgruppe erzwingt „mindestens einmal"; max = 25 bei Übungsgruppe begrenzt die Gruppe auf höchstens 25 Betreuungen (Studierende); max = 1 bei Student erzwingt „höchstens einmal je Student".',
+          text: 'Übungsleiter: (1,*), Übungsgruppe: (1,*), Student: (0,1). min = 1 bei Übungsleiter und Übungsgruppe erzwingt „mindestens einmal"; max = 1 bei Student erzwingt, dass ein Student höchstens eine Übungsgruppe besuchen kann.',
         },
         {
           art: 'svg',
-          titel: 'a) betreuen mit (min,max)-Angaben',
-          svg: `<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ternäre Beziehung betreuen">
+          titel: 'a) teilnehmen mit (min,max)-Angaben',
+          svg: `<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ternäre Beziehung teilnehmen">
   <line class="dgm-line" x1="240" y1="103" x2="305" y2="103"/>
   <line class="dgm-line" x1="415" y1="103" x2="520" y2="103"/>
   <line class="dgm-line" x1="360" y1="141" x2="360" y2="230"/>
@@ -72,7 +76,7 @@ export const blatt3: Uebungsblatt = {
   <rect class="dgm-shape" x="80" y="80" width="160" height="46" rx="4"/>
   <text class="dgm-text dgm-text--sm" x="160" y="107" text-anchor="middle">Übungsleiter</text>
   <polygon class="dgm-shape" points="305,103 360,65 415,103 360,141"/>
-  <text class="dgm-text dgm-text--sm" x="360" y="107" text-anchor="middle">betreuen</text>
+  <text class="dgm-text dgm-text--sm" x="360" y="107" text-anchor="middle">teilnehmen</text>
   <rect class="dgm-shape" x="520" y="80" width="160" height="46" rx="4"/>
   <text class="dgm-text dgm-text--sm" x="600" y="107" text-anchor="middle">Übungsgruppe</text>
   <rect class="dgm-shape" x="280" y="230" width="160" height="46" rx="4"/>
@@ -84,14 +88,14 @@ export const blatt3: Uebungsblatt = {
   <ellipse class="dgm-shape" cx="415" cy="310" rx="36" ry="16"/>
   <text class="dgm-key" x="415" y="315" text-anchor="middle">MatrNr</text>
   <text class="dgm-card" x="252" y="95">(1,*)</text>
-  <text class="dgm-card" x="450" y="95">(1,25)</text>
+  <text class="dgm-card" x="450" y="95">(1,*)</text>
   <text class="dgm-card" x="372" y="185">(0,1)</text>
 </svg>`,
         },
         {
           art: 'unterpunkt',
           label: 'b) Zusammenhang mit der Ausprägung',
-          text: 'Die (min,max)-Angaben sagen, wie oft ein konkreter Wert in der Beziehungstabelle minimal und maximal vorkommen darf. In der Ausprägung kommt jede MatrNr genau einmal vor → Student max = 1 (höchstens einmal betreut). Eine GruppenNr (z. B. Gruppe 2 mit den MatrNr 23, 24, 25) erscheint mehrfach, aber höchstens 25-mal → Übungsgruppe (1,25). Der Name einer Übungsleiterin (z. B. „Barckmann") darf beliebig oft erscheinen → (1,*). Man liest die (min,max)-Werte also direkt aus der erlaubten Wiederholbarkeit der Werte in der Tabelle ab.',
+          text: 'In Bezug auf die tabellarische Repräsentation der Beziehung sagen die (min,max)-Angaben gerade aus, wie oft ein konkreter Wert, etwa der Name der Übungsleiterin Barckmann, minimal und maximal vorkommen darf. Die (min,max)-Angaben lassen sich also leicht herleiten, indem man sich die tabellarische Repräsentation einer Beziehung vorstellt und überlegt, welche Einschränkungen für die Wiederholung eines konkreten Werts in dieser Repräsentation gelten sollen. Dadurch, dass im Beispiel keine Matrikelnummer mehrfach vorkommt, wird etwa die Einschränkung modelliert, dass ein Student nicht mehrere Übungen besuchen darf.',
         },
       ],
     },

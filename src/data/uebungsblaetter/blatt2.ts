@@ -206,39 +206,39 @@ export const blatt2: Uebungsblatt = {
         {
           art: 'svg',
           titel: 'a) ER-Diagramm Bibliothek',
-          svg: `<svg viewBox="0 0 640 470" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm Bibliothek">
-  <line class="dgm-line" x1="100" y1="84" x2="100" y2="166"/>
-  <line class="dgm-line" x1="100" y1="234" x2="100" y2="320"/>
-  <line class="dgm-line" x1="525" y1="84" x2="525" y2="166"/>
-  <line class="dgm-line" x1="525" y1="234" x2="525" y2="320"/>
-  <line class="dgm-line" x1="160" y1="342" x2="255" y2="342"/>
-  <line class="dgm-line" x1="365" y1="342" x2="455" y2="342"/>
-  <line class="dgm-line" x1="460" y1="84" x2="350" y2="150"/>
-  <line class="dgm-line" x1="120" y1="320" x2="272" y2="172"/>
-  <rect class="dgm-shape" x="40" y="40" width="120" height="44" rx="4"/>
-  <text class="dgm-text dgm-text--sm" x="100" y="67" text-anchor="middle">Autor</text>
-  <polygon class="dgm-shape" points="56,200 100,168 144,200 100,232"/>
-  <text class="dgm-text dgm-text--sm" x="100" y="204" text-anchor="middle">schreiben</text>
-  <rect class="dgm-shape" x="40" y="320" width="120" height="44" rx="4"/>
-  <text class="dgm-text dgm-text--sm" x="100" y="347" text-anchor="middle">Buchtitel</text>
-  <rect class="dgm-shape" x="460" y="40" width="130" height="44" rx="4"/>
-  <text class="dgm-text dgm-text--sm" x="525" y="67" text-anchor="middle">Ausleiher</text>
-  <polygon class="dgm-shape" points="481,200 525,168 569,200 525,232"/>
-  <text class="dgm-text dgm-text--sm" x="525" y="204" text-anchor="middle">ausleihen</text>
-  <rect class="dgm-shape" x="455" y="320" width="140" height="44" rx="4"/>
-  <text class="dgm-text dgm-text--sm" x="525" y="347" text-anchor="middle">Buchexemplar</text>
-  <polygon class="dgm-shape" points="255,342 310,310 365,342 310,374"/>
-  <text class="dgm-text dgm-text--sm" x="310" y="346" text-anchor="middle">zugeordnet</text>
-  <polygon class="dgm-shape" points="256,150 310,118 364,150 310,182"/>
-  <text class="dgm-text dgm-text--sm" x="310" y="154" text-anchor="middle">vormerken</text>
-  <text class="dgm-card" x="108" y="120">N</text>
-  <text class="dgm-card" x="108" y="280">M</text>
-  <text class="dgm-card" x="533" y="120">1</text>
-  <text class="dgm-card" x="533" y="280">N</text>
-  <text class="dgm-card" x="180" y="334">1</text>
-  <text class="dgm-card" x="435" y="334">N</text>
-  <text class="dgm-card" x="420" y="100">M</text>
-  <text class="dgm-card" x="185" y="250">N</text>
+          svg: `<svg viewBox="0 0 700 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm Bibliothek">
+  <line class="dgm-line" x1="150" y1="90" x2="150" y2="158"/>
+  <line class="dgm-line" x1="150" y1="222" x2="150" y2="310"/>
+  <line class="dgm-line" x1="550" y1="90" x2="550" y2="158"/>
+  <line class="dgm-line" x1="550" y1="222" x2="550" y2="310"/>
+  <line class="dgm-line" x1="240" y1="335" x2="290" y2="335"/>
+  <line class="dgm-line" x1="410" y1="335" x2="460" y2="335"/>
+  <line class="dgm-line" x1="485" y1="90" x2="388" y2="176"/>
+  <line class="dgm-line" x1="312" y1="205" x2="222" y2="310"/>
+  <rect class="dgm-shape" x="60" y="40" width="180" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="150" y="70" text-anchor="middle">Autor</text>
+  <rect class="dgm-shape" x="460" y="40" width="180" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="550" y="70" text-anchor="middle">Ausleiher</text>
+  <polygon class="dgm-shape" points="90,190 150,158 210,190 150,222"/>
+  <text class="dgm-text dgm-text--sm" x="150" y="194" text-anchor="middle">schreiben</text>
+  <polygon class="dgm-shape" points="290,190 350,158 410,190 350,222"/>
+  <text class="dgm-text dgm-text--sm" x="350" y="194" text-anchor="middle">vormerken</text>
+  <polygon class="dgm-shape" points="490,190 550,158 610,190 550,222"/>
+  <text class="dgm-text dgm-text--sm" x="550" y="194" text-anchor="middle">ausleihen</text>
+  <rect class="dgm-shape" x="60" y="310" width="180" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="150" y="340" text-anchor="middle">Buchtitel</text>
+  <rect class="dgm-shape" x="460" y="310" width="180" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="550" y="340" text-anchor="middle">Buchexemplar</text>
+  <polygon class="dgm-shape" points="290,335 350,303 410,335 350,367"/>
+  <text class="dgm-text dgm-text--sm" x="350" y="339" text-anchor="middle">zugeordnet</text>
+  <text class="dgm-card" x="130" y="128">N</text>
+  <text class="dgm-card" x="130" y="284">M</text>
+  <text class="dgm-card" x="562" y="128">1</text>
+  <text class="dgm-card" x="562" y="284">N</text>
+  <text class="dgm-card" x="258" y="325">1</text>
+  <text class="dgm-card" x="428" y="325">N</text>
+  <text class="dgm-card" x="452" y="112">M</text>
+  <text class="dgm-card" x="232" y="298">N</text>
 </svg>`,
         },
         {
