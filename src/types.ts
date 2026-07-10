@@ -61,6 +61,8 @@ export interface UebungsblattTask {
   sqlQuery?: string
   queryResult?: QueryResult
   loesung?: LoesungBlock[]
+  // IDs der passenden Referenz-Themen → Deep-Link-Buttons „📘 Thema" (#referenz/<id>).
+  referenz?: string[]
 }
 
 export interface Uebungsblatt {

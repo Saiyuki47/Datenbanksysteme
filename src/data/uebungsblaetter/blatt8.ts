@@ -19,6 +19,7 @@ export const blatt8: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['grundabfrage'],
       titel: 'Gruppenaufgabe 1 – Northwind-Datenbank & Notation',
       text:
         'a) Um was für eine Datenbank handelt es sich bei Northwind? b) Wofür stehen die Symbole an den Spalten und die ' +
@@ -26,6 +27,7 @@ export const blatt8: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['grundabfrage', 'sortieren'],
       titel: 'Gruppenaufgabe 2 – Tutorial Teil 1: Simple SELECTs',
       text:
         'Erarbeiten Sie die in den orangefarbenen Boxen verdeckten SQL-Statements von Teil 1 (Simple SELECTs). ' +
@@ -95,6 +97,7 @@ export const blatt8: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['aggregate', 'gruppieren'],
       titel: 'Hausaufgabe 1 – Tutorial Teil 2: Advanced SELECTs',
       text:
         'Erarbeiten Sie die abzugebenden SQL-Statements aus Teil 2 (Advanced SELECTs): berechnete Felder, ' +

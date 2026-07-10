@@ -18,6 +18,7 @@ export const blatt6: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['relationale-algebra', 'er-zu-schema'],
       titel: 'Gruppenaufgabe 1 – ER-Rekonstruktion & Anfragen',
       text:
         'Gegeben das verfeinerte Schema: Mitarbeiter(MitarbeiterID, …, AbtNr), Abteilung(AbtNr, …), Server(ServerID, …, AbtNr), ' +
@@ -232,6 +233,7 @@ export const blatt6: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['relationale-algebra'],
       titel: 'Hausaufgabe 1 – weitere Anfragen (gleiches Schema)',
       text:
         'Formulieren Sie für das Schema aus Gruppenaufgabe 1 in relationaler Algebra (mit Operatorbaum):\n\n' +
@@ -342,6 +344,7 @@ export const blatt6: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['relationale-algebra'],
       titel: 'Hausaufgabe 2 – Anfragen auf der Universitätsdatenbank',
       text:
         '(1) Geben Sie alle Vorlesungen (VorlNr, Titel) an, die der Student „Theophrastos" gehört hat.\n' +
@@ -413,6 +416,7 @@ export const blatt6: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['grundabfrage'],
       titel: 'Hausaufgabe 3 – SQL-Client & Datenbankverbindung',
       hinweis: 'praktische Einrichtung',
       text:

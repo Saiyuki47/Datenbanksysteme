@@ -9,8 +9,24 @@ import { pvTables } from '../data/pvTables'
 import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
 import { aufgabeTipps } from '../data/aufgabeTipps'
+import { themaTitelById } from '../data/themen'
 import type { TableData } from '../data/pvTables'
 import type { DbType, LoesungBlock, Uebungsblatt, UebungsblattTask } from '../types'
+
+// „📘 Thema"-Deep-Links unter der Frage: führen zum passenden Referenz-Thema
+// (#referenz/<id>) – wie bei Mathe/BWL.
+const refLinksRow: CSSProperties = { display: 'flex', flexWrap: 'wrap', gap: '0.4rem', margin: '0.1rem 0 0.6rem' }
+const refLinkStyle: CSSProperties = {
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '0.3rem',
+  fontSize: '0.8rem',
+  padding: '0.2rem 0.6rem',
+  border: '1px solid var(--blue, #2563eb)',
+  borderRadius: '999px',
+  color: 'var(--blue, #2563eb)',
+  textDecoration: 'none',
+}
 
 // Stable, content-derived key for a solution block. The blocks array is static
 // (built once per task, never reordered or filtered), but we still key by content
@@ -185,6 +201,17 @@ function TaskCard({
         {task.hinweis && <span className="ub-task-hinweis">{task.hinweis}</span>}
       </div>
       <p className="q-title ub-question">{task.text}</p>
+
+      {/* Deep-Links zu den passenden Referenz-Themen */}
+      {task.referenz && task.referenz.length > 0 && (
+        <div style={refLinksRow}>
+          {task.referenz.map(rid => (
+            <a key={rid} href={`#referenz/${rid}`} style={refLinkStyle}>
+              📘 {themaTitelById[rid] ?? rid}
+            </a>
+          ))}
+        </div>
+      )}
 
       {/* ER / structural diagram shown with the question */}
       {task.svg && (

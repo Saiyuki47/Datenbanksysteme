@@ -19,6 +19,7 @@ export const blatt4: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['er-zu-schema'],
       titel: 'Gruppenaufgabe 1 – ER → Schema + Verfeinerung',
       text:
         'Überführen Sie die ER-Diagramme a)–d) jeweils in ein Relationenschema und verfeinern Sie es. Geben Sie ' +
@@ -190,6 +191,7 @@ export const blatt4: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['er-zu-schema'],
       titel: 'Gruppenaufgabe 2 – Vermieter / Wohnung / Haus',
       text:
         'Überführen Sie das ER-Modell in ein relationales Schema und verfeinern Sie es. mieten ist eine ternäre Beziehung ' +
@@ -245,6 +247,7 @@ export const blatt4: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['er-zu-schema'],
       titel: 'Hausaufgabe 1 – abstrakte 1:N-Beziehung (Altklausur)',
       text:
         'Überführen Sie das abstrakte Diagramm A —1— R —N— B (mit Attributen a, b, r) in ein Schema und verfeinern Sie es.',
@@ -301,6 +304,7 @@ export const blatt4: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['er-zu-schema'],
       titel: 'Hausaufgabe 2 – Zugverbindungen',
       text:
         'Gegeben das ER-Modell mit Bahnhöfe, Städte, Züge und den Beziehungen liegt_in, Start, Ziel und der ternären ' +

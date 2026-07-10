@@ -13,6 +13,7 @@ export const blatt0: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['grundabfrage'],
       text: 'From which cities do Pine Valley\'s customers come?',
       aufgabeId: 'a1',
       relevantTables: ['CUSTOMER_T'],
@@ -39,6 +40,7 @@ export const blatt0: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['grundabfrage', 'logik'],
       text: 'What are the names of customers who are in Clearwater Florida?',
       aufgabeId: 'a2',
       relevantTables: ['CUSTOMER_T'],
@@ -49,6 +51,7 @@ export const blatt0: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['joins'],
       text: 'What is the postal code of the customer who placed order 1008?',
       aufgabeId: 'a3',
       relevantTables: ['CUSTOMER_T', 'ORDER_T'],
@@ -59,6 +62,7 @@ export const blatt0: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['joins'],
       text: 'What are the descriptions of products on order 1008?',
       aufgabeId: 'a4',
       relevantTables: ['ORDERLINE_T', 'PRODUCT_T'],

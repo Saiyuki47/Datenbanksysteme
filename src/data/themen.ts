@@ -3,6 +3,7 @@
 // examples (with optional result table), relational-algebra snippets,
 // SQL↔algebra pairs and small reference tables.
 
+import { thema as dbGrundlagen } from './themen/db-grundlagen'
 import { thema as relationaleAlgebra } from './themen/relationale-algebra'
 import { thema as referentielleIntegritaet } from './themen/referentielle-integritaet'
 import { thema as integritaetsbedingungen } from './themen/integritaetsbedingungen'
@@ -513,7 +514,7 @@ const bestehende: Thema[] = [
   {
     id: 'joins',
     nr: 7,
-    title: 'Tabellen verbinden: Joins, Kreuzprodukt & Self-Join',
+    title: 'Tabellen verbinden: Joins, Outer Joins, Kreuzprodukt & Self-Join',
     subtitle: 'Wie man Daten aus mehreren Tabellen zusammenführt – und warum man dabei eine Bedingung braucht.',
     sections: [
       {
@@ -584,6 +585,39 @@ const bestehende: Thema[] = [
             text:
               'Ein Join ist immer „Kreuzprodukt + Bedingung". Fehlt die Verbindungsbedingung, bekommt man aus Versehen ' +
               'das volle Kreuzprodukt.',
+          },
+        ],
+      },
+      {
+        heading: 'Äußere Joins – LEFT, RIGHT & FULL OUTER JOIN',
+        blocks: [
+          {
+            art: 'text',
+            text:
+              'Ein (innerer) Join liefert nur Zeilen mit Treffern in BEIDEN Tabellen. Ein äußerer Join behält ' +
+              'zusätzlich die treffer­losen Zeilen einer oder beider Tabellen und füllt die fehlende Seite mit NULL:',
+          },
+          {
+            art: 'liste',
+            punkte: [
+              'LEFT (OUTER) JOIN: alle Zeilen der LINKEN Tabelle, rechts ggf. NULL.',
+              'RIGHT (OUTER) JOIN: alle Zeilen der RECHTEN Tabelle, links ggf. NULL.',
+              'FULL (OUTER) JOIN: alle Zeilen BEIDER Tabellen, jeweils die andere Seite ggf. NULL.',
+            ],
+          },
+          {
+            art: 'beispiel',
+            titel: 'Beispiel – LEFT OUTER JOIN zählen (aus Blatt 9)',
+            sql: 'SELECT COUNT(*)\nFROM T1 LEFT OUTER JOIN T2 ON T1.A = T2.E',
+            erklaerung:
+              'Alle 12 Zeilen von T1 bleiben erhalten. Passende T2-Zeilen vervielfachen die Treffer (A = 4 und A = 6 passen je zweimal), Zeilen ohne Partner erscheinen einmal mit NULL auf der T2-Seite. Zusammen 14 Zeilen – ein innerer Join hätte nur die 6 Treffer geliefert.',
+            ergebnis: { columns: ['COUNT(*)'], rows: [['14']] },
+          },
+          {
+            art: 'merksatz',
+            text:
+              'Merkhilfe: „Welche Tabelle soll VOLLSTÄNDIG bleiben?" LEFT = die linke, RIGHT = die rechte, FULL = beide. ' +
+              'Die fehlenden Werte der Gegenseite werden zu NULL.',
           },
         ],
       },
@@ -759,11 +793,11 @@ const bestehende: Thema[] = [
   {
     id: 'insert',
     nr: 11,
-    title: 'Daten einfügen: INSERT INTO … VALUES',
-    subtitle: 'Wie neue Zeilen in eine Tabelle geschrieben werden – und worauf die Constraints dabei achten.',
+    title: 'Daten ändern: INSERT, UPDATE & DELETE',
+    subtitle: 'Zeilen einfügen (INSERT), bestehende Werte ändern (UPDATE) und Zeilen löschen (DELETE) – und worauf die Constraints dabei achten.',
     sections: [
       {
-        heading: 'Die Grundform',
+        heading: 'INSERT – neue Zeilen einfügen',
         blocks: [
           {
             art: 'text',
@@ -791,6 +825,52 @@ const bestehende: Thema[] = [
             text:
               'Tipp: Sicherer als die reine VALUES-Form ist die Variante mit Spaltenliste, z. B. ' +
               'INSERT INTO X1 (A, C) VALUES (1, 45) – dann ist die Zuordnung eindeutig und reihenfolgeunabhängig.',
+          },
+        ],
+      },
+      {
+        heading: 'UPDATE – bestehende Werte ändern',
+        blocks: [
+          {
+            art: 'text',
+            text:
+              'UPDATE ändert Werte in schon vorhandenen Zeilen. SET nennt Spalte = neuer Wert, WHERE bestimmt, ' +
+              'WELCHE Zeilen geändert werden. Ohne WHERE werden ALLE Zeilen der Tabelle geändert – ein häufiger Fehler.',
+          },
+          {
+            art: 'sql',
+            titel: 'Grundform',
+            code: 'UPDATE tabelle\nSET spalte = wert\nWHERE bedingung',
+          },
+          {
+            art: 'beispiel',
+            titel: 'Beispiel – Besoldung anheben (aus Blatt 7)',
+            sql: "UPDATE Professoren\nSET Rang = 'C4'\nWHERE Rang = 'C3'",
+            erklaerung:
+              'Alle Professoren mit Rang C3 werden auf C4 gesetzt. WHERE grenzt die Änderung auf genau diese Zeilen ein; alle anderen bleiben unverändert.',
+          },
+        ],
+      },
+      {
+        heading: 'DELETE – Zeilen löschen',
+        blocks: [
+          {
+            art: 'text',
+            text:
+              'DELETE FROM entfernt ganze Zeilen. WHERE bestimmt, welche – ohne WHERE wird die Tabelle GELEERT ' +
+              '(alle Zeilen, aber die Tabelle selbst bleibt bestehen; das Löschen der Tabelle wäre DROP TABLE).',
+          },
+          {
+            art: 'sql',
+            titel: 'Grundform',
+            code: 'DELETE FROM tabelle\nWHERE bedingung',
+          },
+          {
+            art: 'beispiel',
+            titel: 'Beispiel – einen Studenten löschen (aus Blatt 7)',
+            sql: "DELETE FROM Studenten\nWHERE MatrNr = 1234 AND Name = 'Platon'",
+            erklaerung:
+              'Löscht genau die Zeile(n), auf die beide Bedingungen zutreffen. Achtung: Referenzieren andere Tabellen diese Zeile per Fremdschlüssel, kann das Löschen scheitern oder (bei ON DELETE CASCADE) die abhängigen Zeilen mitlöschen – siehe „Referentielle Integrität".',
           },
         ],
       },
@@ -1423,6 +1503,7 @@ const bestehende: Thema[] = [
 // Neue Themen (je eine Datei in ./themen/) in Stoff-Reihenfolge einsortiert;
 // die bestehenden 16 Karten bleiben unverändert. nr wird aus der Position vergeben.
 export const themen: Thema[] = [
+  dbGrundlagen,                        // Kapitel 1: Grundlagen (DBMS, Datenmodelle, Transaktionen)
   ...bestehende.slice(0, 11),          // SQL-Grundlagen (grundabfrage … insert)
   relationaleAlgebra,                  // relationale Algebra: Operatoren
   ...bestehende.slice(11, 15),         // sql-zu-algebra, er-modell, min-max, er-zu-schema
@@ -1437,3 +1518,8 @@ export const themen: Thema[] = [
   verlustlosigkeitAbhaengigkeit,
   ...bestehende.slice(15),             // normalisierung-bcnf (bestehende Zusammenfassung/Capstone)
 ].map((t, i) => ({ ...t, nr: i + 1 }))
+
+// id → Titel (ohne Nummer) für die Deep-Link-Buttons in den Übungsaufgaben.
+export const themaTitelById: Record<string, string> = Object.fromEntries(
+  themen.map(t => [t.id, t.title]),
+)

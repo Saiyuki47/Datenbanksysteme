@@ -11,6 +11,7 @@ export const blatt2: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['er-modell', 'min-max'],
       titel: 'Gruppenaufgabe 1',
       text:
         'Welche binären Beziehungstypen werden hinsichtlich ihrer Funktionalität in einem ER-Diagramm unterschieden?\n' +
@@ -20,6 +21,7 @@ export const blatt2: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['er-modell'],
       titel: 'Gruppenaufgabe 2 – Apothekenkette „Prescriptions-4-U"',
       text:
         'Entwerfen Sie für die Apothekenkette eine Datenbank.\n\n' +
@@ -188,6 +190,7 @@ export const blatt2: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['er-modell'],
       titel: 'Hausaufgabe 1 – ER-Diagramme zu drei Sachverhalten',
       text:
         'Erstellen Sie für jeden Sachverhalt ein ER-Diagramm (Entitäten, Beziehungen mit Funktionalitäten 1:1/1:N/N:1/N:M, ggf. Attribute).\n\n' +
@@ -325,6 +328,7 @@ export const blatt2: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 2 – partielle Funktionen einer ternären Beziehung',
       text:
         'Gegeben die ternäre Beziehung teilnehmen(Übungsleiter, Übungsgruppe, Student) mit Funktionalitäten 1:1:N.\n\n' +
@@ -362,6 +366,7 @@ export const blatt2: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 3 – Funktionalitäten aus partieller Funktion',
       text:
         'Ternäre Beziehung R(A, B, C). Es gelte nur die partielle Funktion A × C → B. Beschriften Sie das Diagramm mit ' +
@@ -402,6 +407,7 @@ export const blatt2: Uebungsblatt = {
     },
     {
       nr: 6,
+      referenz: ['er-modell'],
       titel: 'Zusatzaufgabe zum Knobeln',
       hinweis: 'kein Pflichtteil',
       text:

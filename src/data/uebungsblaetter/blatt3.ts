@@ -11,6 +11,7 @@ export const blatt3: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['min-max', 'er-modell'],
       titel: 'Gruppenaufgabe 1 – Funktionalität ↔ (min,max)',
       text:
         'Die Beziehungstypen 1:1, 1:N, N:1 und N:M lassen sich bei binären Beziehungen auch in (min,max)-Notation ausdrücken. ' +
@@ -45,6 +46,7 @@ export const blatt3: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['er-modell', 'min-max'],
       titel: 'Gruppenaufgabe 2 – Übungssystem',
       text:
         'Die ternäre Beziehung „betreuen" verbindet Übungsleiter, Übungsgruppe und Student.\n\n' +
@@ -95,6 +97,7 @@ export const blatt3: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['min-max'],
       titel: 'Gruppenaufgabe 3 – Funktionalität vs. (min,max) bei n > 2',
       text:
         'Zeigen Sie, dass die Ausdruckskraft von Funktionalitätsangaben (1:1, 1:N, …) und (min,max)-Angaben bei n-stelligen ' +
@@ -221,6 +224,7 @@ export const blatt3: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 1 – Fahrzeugverwaltung',
       text:
         'Gegeben das ER-Modell mit Fahrer — hat_Fahrerlaubnis — Fahrzeug — gehört — Abteilung sowie Fahrzeug — steht_in — Einzelgarage. Bedingungen:\n' +
@@ -319,6 +323,7 @@ export const blatt3: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 2 – Vielfliegerprogramm (Altklausur)',
       text:
         'Das ER-Diagramm modelliert Vielfliegerprogramme mehrerer Fluglinien. Bei der Umsetzung des Textes wurden im ' +

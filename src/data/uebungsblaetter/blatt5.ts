@@ -11,6 +11,7 @@ export const blatt5: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['relationale-algebra'],
       titel: 'Gruppenaufgabe 1 – Ausdrücke auswerten',
       text:
         'Gegeben die Relationen u, v und z. Geben Sie die Ergebnisrelationen der Ausdrücke a)–i) in Tabellenform an:\n\n' +
@@ -101,6 +102,7 @@ export const blatt5: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['relationale-algebra'],
       titel: 'Gruppenaufgabe 2 – Anfragen in relationaler Algebra (Uni-Schema)',
       text:
         'Formulieren Sie die folgenden Anfragen in relationaler Algebra (Schema: Studenten, Vorlesungen[gelesenVon], ' +
@@ -122,6 +124,7 @@ export const blatt5: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['relationale-algebra'],
       titel: 'Hausaufgabe 1 – „Welche Vorlesungen wurden geprüft?" (drei Join-Varianten)',
       text:
         'Formulieren Sie „Welche Vorlesungen (Titel) wurden bereits geprüft?" auf dem Uni-Schema mit a) einem natürlichen ' +
@@ -159,6 +162,7 @@ export const blatt5: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['relationale-algebra'],
       titel: 'Hausaufgabe 2 – Dichter-Datenbank',
       text:
         'Formulieren Sie in relationaler Algebra und geben Sie die Ergebnisrelation an.\n\n' +

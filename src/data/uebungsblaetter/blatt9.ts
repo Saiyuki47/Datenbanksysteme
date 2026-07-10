@@ -17,6 +17,7 @@ export const blatt9: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['grundabfrage', 'gruppieren', 'joins'],
       titel: 'Gruppenaufgabe 1 – SQL-Anfragen auswerten (Uni-Schema)',
       text:
         'Bestimmen Sie die Ergebnisse der folgenden Anfragen „von Hand" und prüfen Sie sie im SQL Developer.',
@@ -35,6 +36,7 @@ export const blatt9: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['subqueries', 'joins'],
       titel: 'Gruppenaufgabe 2 – Tutorial Teil 3: Subqueries & Joins',
       text:
         'Bestimmen Sie die verdeckten SQL-Statements aus Teil 3 (bis Seite 13): Subqueries und (Inner) Joins. ' +
@@ -84,6 +86,7 @@ export const blatt9: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['grundabfrage', 'gruppieren'],
       titel: 'Gruppenaufgabe 3 – Ergebnisse auf T1/T2 bestimmen',
       text: 'Bestimmen Sie die Ergebnisse der Anfragen a)–c) auf den Tabellen T1 und T2.',
       tabellen: [
@@ -97,6 +100,7 @@ export const blatt9: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['joins', 'mengen'],
       titel: 'Hausaufgabe 1 – Tutorial Teil 3: Outer Joins & Unions',
       text:
         'Bestimmen Sie die letzten vier verdeckten Statements ab Seite 14 (Outer Joins): Left Join, Right Join, Full Outer ' +
@@ -137,6 +141,7 @@ export const blatt9: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['gruppieren', 'joins', 'subqueries'],
       titel: 'Hausaufgabe 2 – Ergebnisse auf T1/T2 bestimmen',
       text: 'Bestimmen Sie die Ergebnisse der Anfragen a)–g) auf den Tabellen T1 und T2 (siehe Gruppenaufgabe 3).',
       sqlQuery:

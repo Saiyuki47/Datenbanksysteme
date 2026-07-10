@@ -73,6 +73,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 1,
+      referenz: ['er-modell'],
       titel: '1a) Das Objekt A beschreibt …',
       text: 'Wie heißt das Element A (der Kasten „Student")?',
       loesung: [
@@ -94,6 +95,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['er-modell'],
       titel: '1b) Das Objekt B beschreibt …',
       text: 'Wie heißt das Element B (die Raute „besucht")?',
       loesung: [
@@ -108,6 +110,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['er-modell'],
       titel: '1c) Das Objekt C bezeichnet man als …',
       text: 'Wie nennt man das Element C (das unterstrichene Attribut „MatrNr")?',
       loesung: [
@@ -128,6 +131,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['er-modell'],
       titel: '1d) Das Objekt D bezeichnet man als …',
       text: 'Wie nennt man das Element D (das Attribut „Name")?',
       loesung: [
@@ -143,6 +147,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['min-max', 'er-modell'],
       titel: '1e) E und F beschreiben eine Funktionalität. Es handelt sich um …',
       text:
         'Welche Funktionalität (Kardinalität) beschreiben die Kanten E (Student–besucht) und ' +
@@ -204,6 +209,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 11,
+      referenz: ['er-zu-schema'],
       titel: '2a) Relationales Schema (3 Punkte)',
       text: 'Geben Sie das relationale Schema (Standardüberführung, noch ohne Verfeinerung) an.',
       loesung: [
@@ -234,6 +240,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 12,
+      referenz: ['er-zu-schema'],
       titel: '2b) Verfeinertes relationales Schema (2 Punkte)',
       text: 'Verfeinern Sie das Schema, indem Sie die 1 : N-Beziehung geeignet einbetten.',
       loesung: [
@@ -351,6 +358,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 21,
+      referenz: ['min-max'],
       titel: '3a) Ist der Beziehungstyp [0,n] korrekt?',
       text: 'Beziehung BESTSELLER, BIER-Seite: [0,n].',
       loesung: [
@@ -370,6 +378,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 22,
+      referenz: ['min-max'],
       titel: '3b) Ist der Beziehungstyp [1,1] korrekt?',
       text: 'Beziehung BESTSELLER, KNEIPE-Seite: [1,1].',
       loesung: [
@@ -400,6 +409,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 23,
+      referenz: ['min-max'],
       titel: '3c) Ist der Beziehungstyp [0,2] korrekt?',
       text: 'Beziehung VERKAUFT, KNEIPE-Seite: [0,2].',
       loesung: [
@@ -426,6 +436,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 24,
+      referenz: ['min-max'],
       titel: '3d) Ist der Beziehungstyp [1,n] korrekt?',
       text: 'Beziehung VERKAUFT, BIER-Seite: [1,n].',
       loesung: [
@@ -453,6 +464,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 25,
+      referenz: ['min-max'],
       titel: '3e) Ist der Beziehungstyp [1,2] korrekt?',
       text: 'Beziehung BRAUT, BIER-Seite: [1,2].',
       loesung: [
@@ -479,6 +491,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 26,
+      referenz: ['min-max'],
       titel: '3f) Ist der Beziehungstyp [2,4] korrekt?',
       text: 'Beziehung BRAUT, BRAUEREI-Seite: [2,4].',
       loesung: [
@@ -598,6 +611,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 31,
+      referenz: ['logik', 'grundabfrage'],
       titel: '4a) WHERE mit AND/OR (Vorrang!) (2 Punkte)',
       text: 'Gib A aller Zeilen aus.',
       sqlQuery: "SELECT A\nFROM T1\nWHERE A > 6 AND D = 'S' OR C = 30",
@@ -620,6 +634,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 32,
+      referenz: ['sortieren'],
       titel: '4b) DISTINCT mit Klammerung (2 Punkte)',
       text: 'Gib die verschiedenen B-Werte aus.',
       sqlQuery: "SELECT DISTINCT B\nFROM T1\nWHERE A > 3 AND (D = 'M' OR D = 'S')",
@@ -642,6 +657,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 33,
+      referenz: ['joins'],
       titel: '4c) Kreuzprodukt mit Join-Bedingung (2 Punkte)',
       text: 'Gib alle Paare (A, E) aus.',
       sqlQuery: 'SELECT A, E\nFROM T1, T2\nWHERE 2 * A = E',
@@ -671,6 +687,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 34,
+      referenz: ['joins'],
       titel: '4d) Kreuzprodukt zählen (1 Punkt)',
       text: 'Wie viele Zeilen liefert das Kreuzprodukt?',
       sqlQuery: 'SELECT COUNT(*)\nFROM T1, T2',
@@ -686,6 +703,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 35,
+      referenz: ['gruppieren', 'aggregate'],
       titel: '4e) GROUP BY mit COUNT(*) (1 Punkt)',
       text: 'Zähle die Zeilen je Farbe B.',
       sqlQuery: 'SELECT B, COUNT(*)\nFROM T1\nGROUP BY B',
@@ -714,6 +732,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 36,
+      referenz: ['gruppieren'],
       titel: '4f) WHERE vor GROUP BY (3 Punkte)',
       text: 'Zähle je D-Wert nur die Zeilen mit C > 30.',
       sqlQuery: 'SELECT D, COUNT(*)\nFROM T1\nWHERE C > 30\nGROUP BY D',
@@ -740,6 +759,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 37,
+      referenz: ['gruppieren', 'aggregate'],
       titel: '4g) WHERE, GROUP BY, HAVING, MAX (3 Punkte)',
       text: 'Gib je B den größten C-Wert aus – nur für Zeilen mit D ∈ {S, M} und nur Gruppen mit ≥ 2 Zeilen.',
       sqlQuery: "SELECT B, MAX(C)\nFROM T1\nWHERE D IN ('S', 'M')\nGROUP BY B\nHAVING COUNT(*) >= 2",
@@ -767,6 +787,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 38,
+      referenz: ['joins'],
       titel: '4h) Self-Join über zwei Tabellen zählen (2 Punkte)',
       text: 'Zähle die Paare mit T1.A = T2.E.',
       sqlQuery: 'SELECT COUNT(*)\nFROM T1, T2\nWHERE T1.A = T2.E',
@@ -792,6 +813,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 39,
+      referenz: ['joins'],
       titel: '4i) Join über zwei Bedingungen (3 Punkte)',
       text: 'Gib A und T1.B für alle Paare mit T1.B = T2.B UND T1.A = T2.E aus.',
       sqlQuery: 'SELECT A, T1.B\nFROM T1, T2\nWHERE T1.B = T2.B AND T1.A = T2.E',
@@ -823,6 +845,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 310,
+      referenz: ['subqueries'],
       titel: '4j) Unterabfrage mit IN (2 Punkte)',
       text: 'Gib die verschiedenen B-Werte aus, deren C in der Unterabfrage vorkommt.',
       sqlQuery: 'SELECT DISTINCT B\nFROM T1\nWHERE C IN (\n  SELECT C FROM T2 WHERE E > 4\n)',
@@ -840,6 +863,7 @@ export const probeklausur2: Uebungsblatt = {
     },
     {
       nr: 311,
+      referenz: ['null'],
       titel: '4k) Die NULL-Falle: <> NULL (1 Punkt)',
       text: 'Zähle die Zeilen mit B <> NULL.',
       sqlQuery: 'SELECT COUNT(*)\nFROM T1\nWHERE B <> NULL',
@@ -956,6 +980,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 42,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5a) INSERT INTO S VALUES (5, 4, 4)',
       text: 'A = 5, D = 4, E = 4. Verstoß?',
       sqlQuery: 'INSERT INTO S VALUES (5, 4, 4)',
@@ -974,6 +999,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 43,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5b) INSERT INTO S VALUES (7, NULL, 5)',
       text: 'A = 7, D = NULL, E = 5. Verstoß?',
       sqlQuery: 'INSERT INTO S VALUES (7, NULL, 5)',
@@ -992,6 +1018,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 44,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5c) INSERT INTO S VALUES (5, 2, NULL)',
       text: 'A = 5, D = 2, E = NULL. Verstoß?',
       sqlQuery: 'INSERT INTO S VALUES (5, 2, NULL)',
@@ -1011,6 +1038,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 45,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5d) INSERT INTO S VALUES (NULL, 2, 2)',
       text: 'A = NULL, D = 2, E = 2. Verstoß?',
       sqlQuery: 'INSERT INTO S VALUES (NULL, 2, 2)',
@@ -1024,6 +1052,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 46,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5e) INSERT INTO S VALUES (12, 3, 2)',
       text: 'A = 12, D = 3, E = 2. Verstoß?',
       sqlQuery: 'INSERT INTO S VALUES (12, 3, 2)',
@@ -1043,6 +1072,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 47,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5f) INSERT INTO S VALUES (7, 6, 7)',
       text: 'A = 7, D = 6, E = 7. Verstoß?',
       sqlQuery: 'INSERT INTO S VALUES (7, 6, 7)',
@@ -1070,6 +1100,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 48,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5g) INSERT INTO R VALUES (3, 8, 1, 3, 12)',
       text: 'A = 3, B = 8, C = 1, F = 3, G = 12. Verstoß?',
       sqlQuery: 'INSERT INTO R VALUES (3, 8, 1, 3, 12)',
@@ -1090,6 +1121,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 49,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5h) INSERT INTO R VALUES (2, 4, 2, 2, NULL)',
       text: 'A = 2, B = 4, C = 2, F = 2, G = NULL. Verstoß?',
       sqlQuery: 'INSERT INTO R VALUES (2, 4, 2, 2, NULL)',
@@ -1109,6 +1141,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 50,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5i) INSERT INTO R VALUES (3, 9, 1, 3, 4)',
       text: 'A = 3, B = 9, C = 1, F = 3, G = 4. Verstoß?',
       sqlQuery: 'INSERT INTO R VALUES (3, 9, 1, 3, 4)',
@@ -1129,6 +1162,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 51,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5j) INSERT INTO R VALUES (NULL, NULL, 3, 4, 9)',
       text: 'A = NULL, B = NULL, C = 3, F = 4, G = 9. Verstoß?',
       sqlQuery: 'INSERT INTO R VALUES (NULL, NULL, 3, 4, 9)',
@@ -1142,6 +1176,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 52,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5k) INSERT INTO R VALUES (7, 2, 3, 8, 9)',
       text: 'A = 7, B = 2, C = 3, F = 8, G = 9. Verstoß?',
       sqlQuery: 'INSERT INTO R VALUES (7, 2, 3, 8, 9)',
@@ -1161,6 +1196,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 53,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '5l) INSERT INTO R VALUES (4, 5, 2, 1, 7)',
       text: 'A = 4, B = 5, C = 2, F = 1, G = 7. Verstoß?',
       sqlQuery: 'INSERT INTO R VALUES (4, 5, 2, 1, 7)',
@@ -1194,6 +1230,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 61,
+      referenz: ['relationale-algebra'],
       titel: '6.1) In relationaler Algebra (3 Punkte)',
       text: 'Geben Sie die Anfrage als Folge von Operationen der Relationenalgebra an.',
       loesung: [
@@ -1241,6 +1278,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 62,
+      referenz: ['relationale-algebra', 'sql-zu-algebra'],
       titel: '6.2) Als Operatorbaum (4 Punkte)',
       text: 'Zeichnen Sie den zugehörigen Operatorbaum.',
       loesung: [
@@ -1318,6 +1356,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 71,
+      referenz: ['attributhuelle-schluessel', 'funktionale-abhaengigkeiten'],
       titel: '7a) Kanonische Überdeckung (3 Punkte)',
       text: 'Bestimmen Sie die kanonische Überdeckung – zuerst Linksreduktion, dann Rechtsreduktion.',
       loesung: [
@@ -1387,6 +1426,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 72,
+      referenz: ['attributhuelle-schluessel'],
       titel: '7b) Hüllen von A und B (2 Punkte)',
       text: 'Berechnen Sie die Attributhüllen {A}⁺ und {B}⁺.',
       loesung: [
@@ -1414,6 +1454,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 73,
+      referenz: ['attributhuelle-schluessel'],
       titel: '7c) Kandidatenschlüssel (2 Punkte)',
       text: 'Bestimmen Sie alle Kandidatenschlüssel der Relation R(A, B, C, D).',
       loesung: [
@@ -1451,6 +1492,7 @@ CREATE TABLE R ( A INT, B INT, C INT, F INT, G INT,
     },
     {
       nr: 74,
+      referenz: ['bcnf-zerlegung', 'normalformen'],
       titel: '7d) Zerlegung gemäß Boyce-Codd (BCNF) (3 Punkte + 1 Bonus)',
       text:
         'Führen Sie eine Zerlegung gemäß Boyce-Codd durch (auch wenn sie nicht abhängigkeitserhaltend ist). ' +

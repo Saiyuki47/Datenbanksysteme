@@ -20,6 +20,7 @@ export const blatt11: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['funktionale-abhaengigkeiten'],
       titel: 'Gruppenaufgabe 1 – Funktionale Abhängigkeiten prüfen',
       text:
         'Erläutern Sie den Begriff der funktionalen Abhängigkeit und prüfen Sie für die gegebene Relation r(A,B,C,D), ' +
@@ -61,6 +62,7 @@ export const blatt11: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['attributhuelle-schluessel'],
       titel: 'Gruppenaufgabe 2 – Hülle, Schlüssel & kanonische Überdeckung',
       text: 'R = {A,B,C,D} mit A→BC, B→C, AB→D. Berechnen Sie A⁺, alle Kandidatenschlüssel und die kanonische Überdeckung.',
       loesung: [
@@ -96,6 +98,7 @@ export const blatt11: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['attributhuelle-schluessel', 'funktionale-abhaengigkeiten'],
       titel: 'Gruppenaufgabe 3 – Ist die kanonische Überdeckung eindeutig?',
       text: 'Ist die kanonische Überdeckung Fc einer FD-Menge F eindeutig? Begründen Sie.',
       loesung: [
@@ -118,6 +121,7 @@ export const blatt11: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['attributhuelle-schluessel', 'normalformen'],
       titel: 'Hausaufgabe 1 – Hülle, Schlüssel, Fc & 3NF-Synthese',
       text:
         'R = {A,B,C,D,E,F} mit A→BC, C→DA, E→ABC, F→CD, CD→BEF. Berechnen Sie A⁺, alle Kandidatenschlüssel, die ' +
@@ -164,6 +168,7 @@ export const blatt11: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['normalformen', 'attributhuelle-schluessel'],
       titel: 'Hausaufgabe 2 – Synthese: AssisBossDiplomanden → 3NF',
       text:
         'Schema {PersNr, Name, Fachgebiet, BossPersNr, BossName, MatrNr, SName, Semester, SWohnOrt} mit:\n' +

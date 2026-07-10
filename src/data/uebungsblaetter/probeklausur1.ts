@@ -51,6 +51,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 1,
+      referenz: ['gruppieren', 'aggregate'],
       titel: '1a) GROUP BY mit COUNT(*) (2 Punkte)',
       text: 'Zähle die Zeilen je Farbe C.',
       sqlQuery: 'SELECT C, COUNT(*)\nFROM T\nGROUP BY C',
@@ -89,6 +90,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['gruppieren', 'aggregate'],
       titel: '1b) GROUP BY mit HAVING auf Summen (2 Punkte)',
       text: 'Gib je Farbe SUM(B) und SUM(D) aus, aber nur dort, wo SUM(B) = SUM(D) + 30 gilt.',
       sqlQuery: 'SELECT C, SUM(B), SUM(D)\nFROM T\nGROUP BY C\nHAVING SUM(B) = SUM(D) + 30',
@@ -126,6 +128,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['gruppieren', 'grundabfrage'],
       titel: '1c) WHERE vor GROUP BY, dann HAVING (2 Punkte)',
       text: 'Zähle je Farbe nur die Zeilen mit D > 30 und behalte nur Gruppen mit mindestens 2 solcher Zeilen.',
       sqlQuery: 'SELECT C, COUNT(*)\nFROM T\nWHERE D > 30\nGROUP BY C\nHAVING COUNT(*) >= 2',
@@ -166,6 +169,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['joins'],
       titel: '1d) Self-Join / Kartesisches Produkt (2 Punkte)',
       text: 'Zähle alle Paare (T1, T2), bei denen der B-Wert der einen Zeile gleich dem D-Wert der anderen Zeile ist.',
       sqlQuery: 'SELECT COUNT(*)\nFROM T T1, T T2\nWHERE T1.B = T2.D',
@@ -208,6 +212,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['gruppieren'],
       titel: '1e) GROUP BY auf einer Funktion (2 Punkte)',
       text: 'Gruppiere nach der Länge des Farbnamens LENGTH(C) und zähle die Zeilen je Länge.',
       sqlQuery: 'SELECT LENGTH(C), COUNT(*)\nFROM T\nGROUP BY LENGTH(C)',
@@ -248,6 +253,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 6,
+      referenz: ['subqueries'],
       titel: '1f) Unterabfrage mit IN (2 Punkte)',
       text: 'Gib A, B, D aller Zeilen aus, deren B-Wert in der Ergebnismenge der Unterabfrage (SELECT B FROM T WHERE 2*A > D) vorkommt.',
       sqlQuery: 'SELECT A, B, D\nFROM T\nWHERE B IN (\n  SELECT B FROM T WHERE 2*A > D\n)',
@@ -328,6 +334,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 21,
+      referenz: ['sql-zu-algebra'],
       titel: '2a) SQL → Relationenalgebra (3 Punkte)',
       text: 'Formulieren Sie den folgenden SQL-Ausdruck als Folge von Operationen der Relationenalgebra.',
       sqlQuery: 'SELECT *\nFROM V, W\nWHERE V.B = W.B AND V.A < 4',
@@ -354,6 +361,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 22,
+      referenz: ['sql-zu-algebra'],
       titel: '2b) SQL → Relationenalgebra (3 Punkte)',
       text: 'Formulieren Sie den folgenden SQL-Ausdruck als Folge von Operationen der Relationenalgebra.',
       sqlQuery: '(SELECT B FROM V)\nUNION\n(SELECT B FROM W)',
@@ -375,6 +383,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 23,
+      referenz: ['sql-zu-algebra', 'relationale-algebra'],
       titel: '2c) SELECT B FROM V  vs.  π[B](V) (3 Punkte)',
       text:
         'Liefert die SQL-Anfrage SELECT B FROM V die gleichen Ergebnisse wie die Abfrage π[B](V) der ' +
@@ -429,6 +438,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 31,
+      referenz: ['grundabfrage'],
       titel: '3a) Rechnung in der WHERE-Klausel (2 Punkte)',
       text: 'Gib A aller Zeilen aus, für die (B·20) > (D/2) gilt.',
       sqlQuery: 'SELECT A\nFROM V\nWHERE (B*20) > (D/2)',
@@ -462,6 +472,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 32,
+      referenz: ['logik'],
       titel: '3b) OR-Verknüpfung (2 Punkte)',
       text: 'Gib A aller Zeilen aus, für die B = C ODER C > 90 gilt.',
       sqlQuery: 'SELECT A\nFROM V\nWHERE B = C OR C > 90',
@@ -488,6 +499,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 33,
+      referenz: ['null'],
       titel: '3c) IS NULL vs. = NULL (2 Punkte)',
       text: 'Gib A aller Zeilen aus, für die D IS NULL ODER B = NULL gilt.',
       sqlQuery: 'SELECT A\nFROM V\nWHERE D IS NULL OR B = NULL',
@@ -514,6 +526,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 34,
+      referenz: ['mengen', 'subqueries'],
       titel: '3d) UNION zweier Unterabfragen (2 Punkte)',
       text: 'Vereinige die beiden Spalten unter dem gemeinsamen Namen X und sortiere aufsteigend.',
       sqlQuery:
@@ -559,6 +572,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 35,
+      referenz: ['joins'],
       titel: '3e) Self-Join (2 Punkte)',
       text: 'Bilde alle Paare (V1, V2) mit V1.B ≥ V2.A UND V1.C = V2.D und gib V1.A und V2.A aus.',
       sqlQuery: 'SELECT V1.A, V2.A\nFROM V V1, V V2\nWHERE V1.B >= V2.A AND V1.C = V2.D',
@@ -593,6 +607,7 @@ export const probeklausur1: Uebungsblatt = {
     },
     {
       nr: 36,
+      referenz: ['joins', 'sortieren'],
       titel: '3f) Outer Join (+), berechnete Spalte, ORDER BY (8 Punkte)',
       hinweis: 'nicht relevant',
       text:
@@ -698,6 +713,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 41,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4a) INSERT in X1',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: "INSERT INTO X1 VALUES (1, 'magenta', 45, 128)",
@@ -716,6 +732,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 42,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4b) INSERT in X1',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: "INSERT INTO X1 VALUES (4, 'orange', 32, 512)",
@@ -734,6 +751,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 43,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4c) INSERT in X1',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: "INSERT INTO X1 VALUES (11, 'orange', 14, 8)",
@@ -753,6 +771,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 44,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4d) INSERT in X1',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: "INSERT INTO X1 VALUES (10, 'gruen', 15, 4)",
@@ -770,6 +789,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 45,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4e) INSERT in X2',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: 'INSERT INTO X2 VALUES (1, 2, 3, 12, 256)',
@@ -789,6 +809,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 46,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4f) INSERT in X2',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: 'INSERT INTO X2 VALUES (2, 9, NULL, 16, 128)',
@@ -808,6 +829,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 47,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4g) INSERT in X2',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: 'INSERT INTO X2 VALUES (3, 4, 3, 1, 256)',
@@ -826,6 +848,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 48,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4h) INSERT in X2',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: 'INSERT INTO X2 VALUES (9, 12, 3, 14, 32)',
@@ -844,6 +867,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 49,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4i) INSERT in X2',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: 'INSERT INTO X2 VALUES (5, 8, 3, 13, 256)',
@@ -863,6 +887,7 @@ CREATE TABLE X2 (
     },
     {
       nr: 50,
+      referenz: ['insert', 'integritaetsbedingungen'],
       titel: '4j) INSERT in X2',
       text: 'Verletzt diese Anweisung eine Bedingung?',
       sqlQuery: 'INSERT INTO X2 VALUES (5, 8, NULL, 12, 512)',

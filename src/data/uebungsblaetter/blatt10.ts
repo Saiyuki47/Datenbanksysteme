@@ -11,6 +11,7 @@ export const blatt10: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['integritaetsbedingungen', 'referentielle-integritaet'],
       titel: 'Gruppenaufgabe 1 – Constraints von Professoren & Assistenten',
       text:
         'a) Benennen und erläutern Sie die Integritätsbedingungen der Tabellen Professoren und Assistenten. ' +
@@ -80,6 +81,7 @@ export const blatt10: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['integritaetsbedingungen', 'er-zu-schema'],
       titel: 'Gruppenaufgabe 2 – ER-Modell vs. Schema',
       text:
         'Welche Integritätsbedingungen sind bereits durch die ER-Modellierung festgelegt und welche entstehen erst im ' +
@@ -119,6 +121,7 @@ export const blatt10: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['create-table', 'referentielle-integritaet'],
       titel: 'Gruppenaufgabe 3 – DDL-Operationen auf der Uni-DB',
       text:
         'Führen Sie die Anweisungen auf der Universitätsdatenbank (Schema aus Übung 7, schema_rn.sql – NICHT das Schema ' +
@@ -187,6 +190,7 @@ export const blatt10: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['referentielle-integritaet', 'integritaetsbedingungen'],
       titel: 'Hausaufgabe 1 – Operationen: erlaubt oder nicht?',
       text:
         'Beurteilen Sie für das Schema aus Gruppenaufgabe 1 und die Beispieldaten, ob die Operationen ausgeführt werden ' +
@@ -220,6 +224,7 @@ export const blatt10: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['integritaetsbedingungen', 'insert'],
       titel: 'Hausaufgabe 2 – Constraint-Verstöße bei INSERTs (Tabellen R & S)',
       text:
         'Gegeben die Tabellen R und S mit ihren Constraints (siehe unten) und der aktuellen Ausprägung. Geben Sie für jede ' +

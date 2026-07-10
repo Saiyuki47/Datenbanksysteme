@@ -10,6 +10,7 @@ export const blatt1: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['db-grundlagen'],
       titel: 'Gruppenaufgabe 1',
       text:
         'Wenn zur Verwaltung von Daten lediglich auf Dateisysteme zurückgegriffen würde, würden sich diverse Nachteile ergeben. ' +
@@ -100,6 +101,7 @@ export const blatt1: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['db-grundlagen'],
       titel: 'Gruppenaufgabe 2',
       text:
         'Fallstudie – Pine Valley Furniture Company (PVFC).\n\n' +
@@ -108,6 +110,7 @@ export const blatt1: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['db-grundlagen'],
       titel: 'Hausaufgabe 1',
       text:
         'Grundlage für die Strukturierung der Daten ist das Datenbankmodell.\n\n' +
@@ -151,6 +154,7 @@ export const blatt1: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['db-grundlagen'],
       titel: 'Hausaufgabe 2',
       text:
         'Bei unkontrolliertem parallelem Zugriff können Probleme auftreten (Beispiel: zwei Kunden A und B bestellen gleichzeitig dasselbe Produkt). ' +

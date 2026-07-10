@@ -11,6 +11,7 @@ export const blatt7: Uebungsblatt = {
   tasks: [
     {
       nr: 1,
+      referenz: ['grundabfrage', 'gruppieren'],
       titel: 'Gruppenaufgabe 1 – Reihenfolge der SELECT-Klauseln',
       text:
         'In welcher Reihenfolge stehen die Klauseln SELECT, FROM, WHERE, GROUP BY, HAVING und ORDER BY in einem ' +
@@ -40,6 +41,7 @@ export const blatt7: Uebungsblatt = {
     },
     {
       nr: 2,
+      referenz: ['sql-zu-algebra'],
       titel: 'Gruppenaufgabe 2 – Algebra-Anfragen als SQL',
       text:
         'Formulieren Sie die Algebra-Anfragen aus Blatt 5 nun als SQL und beschreiben Sie den Zusammenhang zwischen ' +
@@ -65,6 +67,7 @@ export const blatt7: Uebungsblatt = {
     },
     {
       nr: 3,
+      referenz: ['relationale-algebra'],
       titel: 'Gruppenaufgabe 3 – Operatorbaum optimieren + SQL',
       text:
         'Der Ausdruck π[Name] σ[VorlNr=Nachfolger] ( σ[SWS=2] (Professoren ⋈[PersNr=gelesenVon] Vorlesungen) × voraussetzen ) ' +
@@ -73,6 +76,7 @@ export const blatt7: Uebungsblatt = {
     },
     {
       nr: 4,
+      referenz: ['joins'],
       titel: 'Hausaufgabe 1 – Mehrtabellen-Joins in SQL',
       text:
         'Formulieren Sie auf dem Universitätsschema in SQL:\n' +
@@ -117,6 +121,7 @@ export const blatt7: Uebungsblatt = {
     },
     {
       nr: 5,
+      referenz: ['create-table', 'insert'],
       titel: 'Hausaufgabe 2 – DDL & DML',
       text:
         'Formulieren Sie für das Universitätsschema:\n' +
