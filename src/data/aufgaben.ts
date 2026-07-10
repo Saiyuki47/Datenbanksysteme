@@ -9,7 +9,7 @@ export const aufgaben: AufgabeItem[] = [
     text: 'Gib alle eindeutigen Städte aus, in denen Pine Valley-Kunden registriert sind. Sortiere alphabetisch.',
     sql: `SELECT DISTINCT CUSTOMERCITY
 FROM CUSTOMER_T
-ORDER BY CUSTOMERCITY;`,
+ORDER BY 1`,
   },
   {
     id: 'a2',
@@ -20,7 +20,7 @@ ORDER BY CUSTOMERCITY;`,
     sql: `SELECT CUSTOMERNAME
 FROM CUSTOMER_T
 WHERE CUSTOMERCITY = 'Clearwater'
-  AND CUSTOMERSTATE = 'FL';`,
+  AND CUSTOMERSTATE = 'FL'`,
   },
   {
     id: 'a3',
@@ -28,10 +28,10 @@ WHERE CUSTOMERCITY = 'Clearwater'
     difficulty: 'med',
     title: '3. Was ist die Postleitzahl des Kunden von Bestellung 1008?',
     text: 'Verknüpfe ORDER_T mit CUSTOMER_T über die gemeinsame CUSTOMERID.',
-    sql: `SELECT C.CUSTOMERPOSTALCODE
-FROM CUSTOMER_T C
-  JOIN ORDER_T O ON C.CUSTOMERID = O.CUSTOMERID
-WHERE O.ORDERID = 1008;`,
+    sql: `SELECT CUSTOMERPOSTALCODE
+FROM ORDER_T, CUSTOMER_T
+WHERE ORDERID = 1008
+  AND ORDER_T.CUSTOMERID = CUSTOMER_T.CUSTOMERID`,
   },
   {
     id: 'a4',
@@ -39,10 +39,10 @@ WHERE O.ORDERID = 1008;`,
     difficulty: 'med',
     title: '4. Welche Produktbeschreibungen stehen auf Bestellung 1008?',
     text: 'Verknüpfe ORDERLINE_T mit PRODUCT_T über die PRODUCTID.',
-    sql: `SELECT P.PRODUCTDESCRIPTION
-FROM PRODUCT_T P
-  JOIN ORDERLINE_T OL ON P.PRODUCTID = OL.PRODUCTID
-WHERE OL.ORDERID = 1008;`,
+    sql: `SELECT DISTINCT PRODUCTDESCRIPTION
+FROM ORDERLINE_T, PRODUCT_T
+WHERE ORDERLINE_T.PRODUCTID = PRODUCT_T.PRODUCTID
+  AND ORDERID = 1008`,
   },
   {
     id: 'a5',

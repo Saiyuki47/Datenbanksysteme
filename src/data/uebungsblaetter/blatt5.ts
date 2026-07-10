@@ -14,9 +14,8 @@ export const blatt5: Uebungsblatt = {
       referenz: ['relationale-algebra'],
       titel: 'Gruppenaufgabe 1 – Ausdrücke auswerten',
       text:
-        'Gegeben die Relationen u, v und z. Geben Sie die Ergebnisrelationen der Ausdrücke a)–i) in Tabellenform an:\n\n' +
-        'a) σ[A=a](u)  b) π[A,B](v)  c) u ∪ v  d) u ∩ v  e) u − v  f) u × z  ' +
-        'g) u ⋈[u.B=v.B] v  h) u ⋈ v  i) ρ[RelationZ](z) bzw. ρ[SpalteE←E](z)',
+        'Gegeben die Relationen u, v und z. Geben Sie die Ergebnisrelationen der Ausdrücke a)–e) in Tabellenform an:\n\n' +
+        'a) σ[A=a](u)  b) π[A,B](v)  c) u ∪ v  d) u × z  e) u ⋈[u.B=z.G] z',
       tabellen: [
         { titel: 'Relation u', columns: ['A', 'B', 'C'], rows: [['a', '2', 'a'], ['b', '3', 'b'], ['c', '1', 'c'], ['a', '2', 'd']] },
         { titel: 'Relation v', columns: ['A', 'B', 'C'], rows: [['a', '2', 'a'], ['a', '1', 'c'], ['b', '3', 'b']] },
@@ -25,37 +24,25 @@ export const blatt5: Uebungsblatt = {
       loesung: [
         {
           art: 'tabelle',
-          titel: 'a) σ[A=a](u) – Selektion: Zeilen mit A = a',
+          titel: 'a) σ[A=a](u) – Selektion (unär): Auswahl von Zeilen auf Basis einer Bedingung',
           columns: ['A', 'B', 'C'],
           rows: [['a', '2', 'a'], ['a', '2', 'd']],
         },
         {
           art: 'tabelle',
-          titel: 'b) π[A,B](v) – Projektion auf A, B (Duplikate entfallen)',
+          titel: 'b) π[A,B](v) – Projektion (unär): Auswahl von Spalten',
           columns: ['A', 'B'],
           rows: [['a', '2'], ['a', '1'], ['b', '3']],
         },
         {
           art: 'tabelle',
-          titel: 'c) u ∪ v – Vereinigung (Duplikate nur einmal)',
+          titel: 'c) u ∪ v – Vereinigung (binär): Vereinigung von zwei Ergebnisrelationen',
           columns: ['A', 'B', 'C'],
           rows: [['a', '2', 'a'], ['b', '3', 'b'], ['c', '1', 'c'], ['a', '2', 'd'], ['a', '1', 'c']],
         },
         {
           art: 'tabelle',
-          titel: 'd) u ∩ v – Schnitt (Tupel in BEIDEN)',
-          columns: ['A', 'B', 'C'],
-          rows: [['a', '2', 'a'], ['b', '3', 'b']],
-        },
-        {
-          art: 'tabelle',
-          titel: 'e) u − v – Differenz (in u, nicht in v)',
-          columns: ['A', 'B', 'C'],
-          rows: [['c', '1', 'c'], ['a', '2', 'd']],
-        },
-        {
-          art: 'tabelle',
-          titel: 'f) u × z – Kreuzprodukt (4 × 2 = 8)',
+          titel: 'd) u × z – Kreuzprodukt (binär): Kombination aller möglichen Paare von Tupeln zweier Relationen',
           columns: ['A', 'B', 'C', 'E', 'F', 'G'],
           rows: [
             ['a', '2', 'a', '5', 'q', '4'],
@@ -70,33 +57,12 @@ export const blatt5: Uebungsblatt = {
         },
         {
           art: 'tabelle',
-          titel: 'g) u ⋈[u.B=v.B] v – Theta-Join (gleiche Spaltennamen → mit u./v. unterschieden)',
-          columns: ['u.A', 'u.B', 'u.C', 'v.A', 'v.B', 'v.C'],
+          titel: 'e) u ⋈[u.B=z.G] z – allgemeiner Join (Theta-Verbund, binär): Kombination aus Kreuzprodukt und Selektion, Verbund mit Verbundbedingung',
+          columns: ['A', 'B', 'C', 'E', 'F', 'G'],
           rows: [
-            ['a', '2', 'a', 'a', '2', 'a'],
-            ['b', '3', 'b', 'b', '3', 'b'],
-            ['c', '1', 'c', 'a', '1', 'c'],
-            ['a', '2', 'd', 'a', '2', 'a'],
+            ['a', '2', 'a', '7', 'p', '2'],
+            ['a', '2', 'd', '7', 'p', '2'],
           ],
-        },
-        {
-          art: 'tabelle',
-          titel: 'h) u ⋈ v – natürlicher Join über alle gemeinsamen Spalten (A,B,C) = Tupel in beiden',
-          columns: ['A', 'B', 'C'],
-          rows: [['a', '2', 'a'], ['b', '3', 'b']],
-        },
-        {
-          art: 'tabelle',
-          titel: 'i) ρ[RelationZ](z) und ρ[SpalteE←E](z) – Umbenennung (nur Namen, keine Werte)',
-          columns: ['SpalteE', 'F', 'G'],
-          rows: [['5', 'q', '4'], ['7', 'p', '2']],
-        },
-        {
-          art: 'text',
-          text:
-            'Hinweis: Beim natürlichen Join (h) wird über ALLE gleichnamigen Spalten verbunden – da u und v dasselbe Schema ' +
-            '(A,B,C) haben, entspricht das Ergebnis genau dem Schnitt (d). ρ benennt nur Relation bzw. Spalte um, die Werte ' +
-            'bleiben gleich.',
         },
       ],
     },
@@ -106,20 +72,18 @@ export const blatt5: Uebungsblatt = {
       titel: 'Gruppenaufgabe 2 – Anfragen in relationaler Algebra (Uni-Schema)',
       text:
         'Formulieren Sie die folgenden Anfragen in relationaler Algebra (Schema: Studenten, Vorlesungen[gelesenVon], ' +
-        'Professoren, Assistenten[Boss], prüfen):\n\n' +
+        'Professoren, Assistenten[Boss]):\n\n' +
         'a) Namen der Studierenden  b) Vorlesungen mit 4 SWS  c) AssistentInnen der Fachgebiete „Ideenlehre"/„Sprachtheorie"  ' +
-        'd) Namen unter Studierenden oder ProfessorInnen  e) Studierende mit Note 2 in einer Prüfung  ' +
-        'f) Vorlesung (Titel) + lesende ProfessorIn (Name)  g) Vorlesungen von Augustinus  ' +
-        'h) AssistentInnen, deren Chef eine 4-SWS-Vorlesung hält.',
+        'd) Namen unter Studierenden oder ProfessorInnen  e) Vorlesung (Titel) + lesende ProfessorIn (Name)  ' +
+        'f) Vorlesungen von Augustinus  g) AssistentInnen, deren Chef eine 4-SWS-Vorlesung hält.',
       loesung: [
         { art: 'code', titel: 'a) Namen aller Studierenden', text: 'π[Name] ( Studenten )' },
         { art: 'code', titel: 'b) Vorlesungen mit 4 SWS', text: "σ[SWS = 4] ( Vorlesungen )" },
         { art: 'code', titel: 'c) AssistentInnen zweier Fachgebiete', text: "π[Name] ( σ[Fachgebiet='Ideenlehre' ∨ Fachgebiet='Sprachtheorie'] ( Assistenten ) )" },
         { art: 'code', titel: 'd) Namen unter Studierenden oder ProfessorInnen', text: 'π[Name] ( Studenten )  ∪  π[Name] ( Professoren )' },
-        { art: 'code', titel: 'e) Studierende mit Note 2', text: 'π[Name] ( Studenten ⋈ σ[Note = 2] ( prüfen ) )' },
-        { art: 'code', titel: 'f) Vorlesung + lesende ProfessorIn', text: 'π[Titel, Name] ( Vorlesungen ⋈[gelesenVon = PersNr] Professoren )' },
-        { art: 'code', titel: 'g) Vorlesungen von Augustinus', text: "π[Titel] ( Vorlesungen ⋈[gelesenVon = PersNr] σ[Name='Augustinus'] (Professoren) )" },
-        { art: 'code', titel: 'h) AssistentInnen mit 4-SWS-Chef', text: "π[Name] ( σ[SWS = 4] (Vorlesungen) ⋈[gelesenVon = Boss] Assistenten )" },
+        { art: 'code', titel: 'e) Vorlesung + lesende ProfessorIn', text: 'π[Titel, Name] ( Vorlesungen ⋈[gelesenVon = PersNr] Professoren )' },
+        { art: 'code', titel: 'f) Vorlesungen von Augustinus', text: "π[Titel] ( Vorlesungen ⋈[gelesenVon = PersNr] σ[Name='Augustinus'] (Professoren) )" },
+        { art: 'code', titel: 'g) AssistentInnen mit 4-SWS-Chef', text: "π[Name] ( σ[SWS = 4] (Vorlesungen) ⋈[gelesenVon = Boss] Assistenten )" },
       ],
     },
     {
