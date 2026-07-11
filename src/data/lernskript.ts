@@ -47,6 +47,19 @@ export const lernskript: SkriptKapitel[] = [
             a: 'Redundanz & Inkonsistenz, beschränkte Zugriffsmöglichkeiten, Datenisolation, Integritätsprobleme, Atomaritäts-/Sicherungsprobleme, Probleme im Mehrbenutzerbetrieb und Sicherheitsprobleme. Ein DBMS trennt Daten von den Anwendungen und löst genau diese Punkte zentral.',
           },
           {
+            art: 'liste',
+            titel: 'Die Nachteile im Einzelnen – jeweils mit Beispiel',
+            punkte: [
+              'Redundanz & Inkonsistenz: Dieselben Daten liegen mehrfach in verschiedenen Dateien; wird nur eine Kopie geändert, widersprechen sich die anderen. Beispiel: Die Kundenadresse steht in der Rechnungs- und in der Versanddatei – nach einem Umzug wird nur eine geändert, und es existieren zwei verschiedene Adressen.',
+              'Beschränkte Zugriffsmöglichkeiten: Für jede neue Auswertung muss erst ein Programm geschrieben werden, spontane Abfragen sind nicht möglich. Beispiel: „Welche Kunden aus Berlin haben über 1000 € Umsatz?" lässt sich nicht eben abfragen, solange kein passendes Programm dafür existiert.',
+              'Datenisolation: Die Daten liegen verstreut in vielen Dateien mit unterschiedlichen Formaten, sodass zusammengehörige Daten schwer zu kombinieren sind. Beispiel: Kunden als CSV, Bestellungen als XML, Lagerbestand als Textdatei – jedes Programm muss alle Formate selbst kennen und zusammenführen.',
+              'Integritätsprobleme: Konsistenzregeln stecken verstreut im Anwendungscode und müssen in jedes Programm neu eingebaut werden. Beispiel: Die Regel „Kontostand ≥ 0" muss jedes kontoändernde Programm selbst prüfen – vergisst es eines, wird die Regel verletzt.',
+              'Atomaritäts- & Sicherungsprobleme: Stürzt das System mitten in einer Operation ab, bleibt ein halbfertiger Zustand ohne automatische Wiederherstellung. Beispiel: Bei einer Überweisung wird bei A abgebucht, dann stürzt das System vor der Gutschrift bei B ab – das Geld ist weg statt „alles oder nichts".',
+              'Probleme im Mehrbenutzerbetrieb: Greifen mehrere gleichzeitig zu, überschreiben sie sich gegenseitig (Lost Update). Beispiel: Zwei Verkäufer buchen gleichzeitig vom Bestand 10; beide lesen zuerst 10, einer zieht 2 ab, einer 5 – statt 3 steht am Ende 8 oder 5.',
+              'Sicherheitsprobleme: Ohne feinkörnige Rechtevergabe kann jeder, der Zugriff auf die Datei hat, alles sehen und ändern. Beispiel: Ein Praktikant, der nur Bestellungen erfassen soll, kann auch die komplette Gehaltsdatei öffnen, weil es nur „Dateizugriff ja/nein" gibt.',
+            ],
+          },
+          {
             art: 'def',
             begriff: 'DBMS / Datenbanksystem',
             text: 'Ein Datenbankmanagementsystem (DBMS) ist die Software, die einen gemeinsamen, konsistenten Datenbestand für mehrere Anwendungen/Nutzer verwaltet. Datenbanksystem (DBS) = DBMS + Datenbank.',
