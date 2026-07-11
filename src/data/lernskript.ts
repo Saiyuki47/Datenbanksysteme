@@ -1,7 +1,7 @@
 // Kompaktes Lern-Skript für die gesamte Datenbanksysteme-Vorlesung – im Stil
 // eines durchgehenden Lernzettels (Frage→Antwort, Definitionen, Merksätze,
 // Tabellen, kurze Code-/Algebra-Beispiele), kapitelweise nach der Vorlesung
-// (Kapitel 1–6 + Anhang „Wichtiges zum Merken"). Inhalt aus den
+// (Kapitel 1–7). Die klausurrelevanten Fallstricke stehen im Tab „Klausur-Fallen". Inhalt aus den
 // Vorlesungsfolien, Übungsblättern und den Referenz-Themen kondensiert.
 
 export type SkriptBlock =
@@ -673,56 +673,6 @@ export const lernskript: SkriptKapitel[] = [
             art: 'def',
             begriff: 'Verlustlosigkeit / Abhängigkeitserhaltung',
             text: 'Verlustlos: der natürliche Join der Teilrelationen ergibt genau die Ausgangsrelation (keine „Phantom-Tupel"). Abhängigkeitserhaltend: alle FDs lassen sich auf den Teilrelationen prüfen, ohne sie erst zu verbinden.',
-          },
-        ],
-      },
-    ],
-  },
-  // ===========================================================================
-  {
-    id: 'merken',
-    nr: '★',
-    titel: 'Wichtiges zum Merken',
-    abschnitte: [
-      {
-        titel: 'Kompakt-Spickzettel',
-        blocks: [
-          {
-            art: 'liste',
-            titel: 'SQL',
-            punkte: [
-              'Klauselreihenfolge: SELECT – FROM – WHERE – GROUP BY – HAVING – ORDER BY.',
-              'WHERE filtert Zeilen (vor Gruppierung), HAVING filtert Gruppen (nach Aggregaten).',
-              'NULL: immer IS (NOT) NULL, nie = NULL. AND bindet stärker als OR.',
-              'Kreuzprodukt = Join ohne Bedingung. LEFT/RIGHT/FULL JOIN füllen mit NULL.',
-            ],
-          },
-          {
-            art: 'liste',
-            titel: 'ER & Schema',
-            punkte: [
-              'Funktionalität ↔ (min,max) „über Kreuz" (siehe Tabelle in Kap. 2).',
-              'ER→Schema: Entitytyp = Relation; Beziehung = Relation aus den Schlüsseln.',
-              'Verfeinern nur bei GLEICHEM Schlüssel; N:M behält eigene Relation.',
-            ],
-          },
-          {
-            art: 'liste',
-            titel: 'Normalisierung',
-            punkte: [
-              'Attributhülle A⁺: FDs anwenden, bis stabil. Superschlüssel ⇔ A⁺ = alle Attribute.',
-              'Kanonische Überdeckung: Links- → Rechtsreduktion → leere Seiten streichen → zusammenfassen.',
-              'BCNF: jede nicht-triviale FD hat einen Superschlüssel links; verlustlos, aber ggf. nicht abhängigkeitserhaltend.',
-              '3NF-Synthese: verlustlos UND abhängigkeitserhaltend.',
-            ],
-          },
-          {
-            art: 'liste',
-            titel: 'Integrität',
-            punkte: [
-              'ON DELETE: NO ACTION (blockt) · CASCADE (löscht mit) · SET NULL (setzt NULL).',
-              'DROP TABLE scheitert, solange ein Fremdschlüssel die Tabelle referenziert.',
-            ],
           },
         ],
       },
