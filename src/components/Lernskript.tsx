@@ -62,6 +62,14 @@ function Block({ block }: { block: SkriptBlock }) {
           <pre className="themen-algebra">{block.text}</pre>
         </div>
       )
+    case 'svg':
+      return (
+        <div className="themen-code-wrap">
+          {block.titel && <p className="themen-code-label">{block.titel}</p>}
+          {/* eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (block.svg), kein User-Input */}
+          <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: block.svg }} />
+        </div>
+      )
     case 'tabelle':
       return (
         <div className="themen-tabelle">

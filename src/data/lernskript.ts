@@ -16,6 +16,8 @@ export type SkriptBlock =
   | { art: 'tabelle'; titel?: string; columns: string[]; rows: string[][] }
   // Monospace-Block (SQL, relationale Algebra, Schema).
   | { art: 'code'; titel?: string; text: string }
+  // Inline-SVG-Diagramm (z. B. Beispiel-ER-Diagramm); nutzt die dgm-*-Styles.
+  | { art: 'svg'; titel?: string; svg: string }
 
 export interface SkriptAbschnitt {
   titel: string
@@ -110,9 +112,59 @@ export const lernskript: SkriptKapitel[] = [
             ],
           },
           {
+            art: 'svg',
+            titel: 'Beispiel: Professoren –(1)– liest –(N)– Vorlesungen (Schlüsselattribute unterstrichen)',
+            svg: `<svg viewBox="0 0 720 230" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel-ER-Diagramm: Professoren liest Vorlesungen">
+  <line class="dgm-line" x1="128" y1="64" x2="150" y2="120"/>
+  <line class="dgm-line" x1="205" y1="64" x2="182" y2="120"/>
+  <line class="dgm-line" x1="533" y1="64" x2="552" y2="120"/>
+  <line class="dgm-line" x1="622" y1="64" x2="600" y2="120"/>
+  <line class="dgm-line" x1="230" y1="145" x2="295" y2="145"/>
+  <line class="dgm-line" x1="425" y1="145" x2="490" y2="145"/>
+  <rect class="dgm-shape" x="80" y="120" width="150" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="155" y="149" text-anchor="middle">Professoren</text>
+  <rect class="dgm-shape" x="490" y="120" width="170" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="575" y="149" text-anchor="middle">Vorlesungen</text>
+  <polygon class="dgm-shape" points="295,145 360,107 425,145 360,183"/>
+  <text class="dgm-text dgm-text--sm" x="360" y="149" text-anchor="middle">liest</text>
+  <ellipse class="dgm-shape" cx="110" cy="47" rx="42" ry="17"/>
+  <text class="dgm-key" x="110" y="52" text-anchor="middle">PersNr</text>
+  <ellipse class="dgm-shape" cx="212" cy="47" rx="38" ry="17"/>
+  <text class="dgm-text dgm-text--sm" x="212" y="52" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="518" cy="47" rx="42" ry="17"/>
+  <text class="dgm-key" x="518" y="52" text-anchor="middle">VorlNr</text>
+  <ellipse class="dgm-shape" cx="628" cy="47" rx="38" ry="17"/>
+  <text class="dgm-text dgm-text--sm" x="628" y="52" text-anchor="middle">Titel</text>
+  <text class="dgm-card" x="256" y="136">1</text>
+  <text class="dgm-card" x="452" y="136">N</text>
+</svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Rechteck = Entitytyp, Ellipse = Attribut (Schlüssel unterstrichen), Raute = Beziehungstyp; die 1 und das N geben die Funktionalität an (ein Professor liest mehrere Vorlesungen, jede Vorlesung wird von genau einem Professor gelesen).',
+          },
+          {
             art: 'frage',
             q: 'Was ist eine IS-A-Beziehung (Generalisierung)?',
             a: 'Ein Obertyp wird in Untertypen spezialisiert (z. B. Kunde → Person / Firma). Die Untertypen erben die Attribute des Obertyps.',
+          },
+          {
+            art: 'svg',
+            titel: 'Beispiel IS-A: Kunde wird in Person und Firma spezialisiert (beide erben KDNR/Name)',
+            svg: `<svg viewBox="0 0 460 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="IS-A: Kunde spezialisiert in Person und Firma">
+  <line class="dgm-line" x1="230" y1="69" x2="230" y2="100"/>
+  <line class="dgm-line" x1="214" y1="138" x2="150" y2="185"/>
+  <line class="dgm-line" x1="246" y1="138" x2="310" y2="185"/>
+  <rect class="dgm-shape" x="160" y="25" width="140" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="230" y="51" text-anchor="middle">Kunde</text>
+  <polygon class="dgm-shape" points="200,120 214,100 246,100 260,120 246,140 214,140"/>
+  <text class="dgm-text dgm-text--sm" x="230" y="124" text-anchor="middle">IS-A</text>
+  <polygon class="dgm-shape" points="224,101 236,101 230,93"/>
+  <rect class="dgm-shape" x="70" y="185" width="130" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="135" y="211" text-anchor="middle">Person</text>
+  <rect class="dgm-shape" x="260" y="185" width="130" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="325" y="211" text-anchor="middle">Firma</text>
+</svg>`,
           },
         ],
       },
@@ -143,6 +195,23 @@ export const lernskript: SkriptKapitel[] = [
             art: 'frage',
             q: 'Bei n-stelligen Beziehungen (n > 2): Funktionalität vs. (min,max)?',
             a: 'Beide Notationen sind unvergleichbar. Funktionalitäten drücken partielle Funktionen über PAARE von Entitäten aus (z. B. Prof × Student → Thema), (min,max) beschränkt das Vorkommen EINZELNER Entitäten. Manche Bedingungen sind nur mit der einen, andere nur mit der anderen Notation ausdrückbar.',
+          },
+          {
+            art: 'svg',
+            titel: 'Ternäre Beziehung: „betreuen" verbindet drei Entitytypen',
+            svg: `<svg viewBox="0 0 600 250" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ternäre Beziehung betreuen zwischen Studenten, Professoren und Seminarthemen">
+  <line class="dgm-line" x1="170" y1="97" x2="238" y2="97"/>
+  <line class="dgm-line" x1="362" y1="97" x2="430" y2="97"/>
+  <line class="dgm-line" x1="300" y1="134" x2="300" y2="185"/>
+  <rect class="dgm-shape" x="30" y="75" width="140" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="100" y="101" text-anchor="middle">Studenten</text>
+  <rect class="dgm-shape" x="430" y="75" width="140" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="500" y="101" text-anchor="middle">Professoren</text>
+  <rect class="dgm-shape" x="210" y="185" width="180" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="300" y="211" text-anchor="middle">Seminarthemen</text>
+  <polygon class="dgm-shape" points="238,97 300,60 362,97 300,134"/>
+  <text class="dgm-text dgm-text--sm" x="300" y="101" text-anchor="middle">betreuen</text>
+</svg>`,
           },
         ],
       },
@@ -186,6 +255,22 @@ export const lernskript: SkriptKapitel[] = [
             text: 'Verfeinern: Relationen mit GLEICHEM Schlüssel darf man zusammenfassen – aber nur diese! Binäre 1:N/N:1/1:1-Beziehungsrelationen werden mit der passenden Entity-Relation verschmolzen; N:M-Beziehungen behalten immer eine eigene Relation.',
           },
           {
+            art: 'svg',
+            titel: 'ER-Diagramm zum Beispiel (wird unten in Relationen überführt)',
+            svg: `<svg viewBox="0 0 560 120" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER: Auto N herstellen 1 Hersteller">
+  <line class="dgm-line" x1="150" y1="57" x2="218" y2="57"/>
+  <line class="dgm-line" x1="342" y1="57" x2="410" y2="57"/>
+  <rect class="dgm-shape" x="30" y="35" width="120" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="90" y="61" text-anchor="middle">Auto</text>
+  <rect class="dgm-shape" x="410" y="35" width="120" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="470" y="61" text-anchor="middle">Hersteller</text>
+  <polygon class="dgm-shape" points="218,57 280,22 342,57 280,92"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="61" text-anchor="middle">herstellen</text>
+  <text class="dgm-card" x="168" y="47">N</text>
+  <text class="dgm-card" x="366" y="47">1</text>
+</svg>`,
+          },
+          {
             art: 'code',
             titel: 'Beispiel: Auto —N— herstellen —1— Hersteller',
             text: 'Initial:  Auto{[FGNr]}, Hersteller{[Name]}, herstellen{[FGNr, Name]}\nVerfeinert:  Auto{[FGNr, Name]}  (Auto + herstellen), Hersteller{[Name]}',
@@ -227,6 +312,26 @@ export const lernskript: SkriptKapitel[] = [
             art: 'code',
             titel: 'Beispiel',
             text: 'π[Titel] ( Vorlesungen ⋈[gelesenVon = PersNr] σ[Name=\'Augustinus\'] (Professoren) )\n→ Titel aller Vorlesungen, die Augustinus hält.',
+          },
+          {
+            art: 'svg',
+            titel: 'Derselbe Ausdruck als Operatorbaum (Blätter = Relationen, von unten nach oben auswerten)',
+            svg: `<svg viewBox="0 0 560 305" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Operatorbaum zum Algebra-Beispiel">
+  <line class="dgm-line" x1="270" y1="49" x2="270" y2="90"/>
+  <line class="dgm-line" x1="240" y1="124" x2="140" y2="185"/>
+  <line class="dgm-line" x1="300" y1="124" x2="410" y2="185"/>
+  <line class="dgm-line" x1="420" y1="219" x2="420" y2="255"/>
+  <rect class="dgm-shape" x="220" y="15" width="100" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="270" y="37" text-anchor="middle">π[Titel]</text>
+  <rect class="dgm-shape" x="165" y="90" width="210" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="270" y="112" text-anchor="middle">⋈[gelesenVon = PersNr]</text>
+  <rect class="dgm-shape" x="60" y="185" width="130" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="125" y="207" text-anchor="middle">Vorlesungen</text>
+  <rect class="dgm-shape" x="330" y="185" width="180" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="420" y="207" text-anchor="middle">σ[Name = 'Augustinus']</text>
+  <rect class="dgm-shape" x="355" y="255" width="130" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="420" y="277" text-anchor="middle">Professoren</text>
+</svg>`,
           },
         ],
       },
@@ -323,6 +428,30 @@ export const lernskript: SkriptKapitel[] = [
               'FULL (OUTER) JOIN: alle Zeilen beider Tabellen.',
               'Self-Join: eine Tabelle mit sich selbst (zwei Aliase), um Zeilen zu vergleichen.',
             ],
+          },
+          {
+            art: 'svg',
+            titel: 'Join-Arten: gefärbt = welche Zeilen im Ergebnis bleiben (links R, rechts S)',
+            svg: `<svg viewBox="0 0 640 165" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Join-Arten als Venn-Diagramme: INNER, LEFT, RIGHT, FULL">
+  <defs><clipPath id="jvLens"><circle cx="107" cy="62" r="34"/></clipPath></defs>
+  <circle cx="67" cy="62" r="34" style="fill:var(--blue);fill-opacity:.32" clip-path="url(#jvLens)"/>
+  <circle cx="67" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <circle cx="107" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <text class="dgm-text dgm-text--sm" x="87" y="150" text-anchor="middle">INNER JOIN</text>
+  <circle cx="225" cy="62" r="34" style="fill:var(--blue);fill-opacity:.32"/>
+  <circle cx="225" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <circle cx="265" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <text class="dgm-text dgm-text--sm" x="245" y="150" text-anchor="middle">LEFT JOIN</text>
+  <circle cx="423" cy="62" r="34" style="fill:var(--blue);fill-opacity:.32"/>
+  <circle cx="383" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <circle cx="423" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <text class="dgm-text dgm-text--sm" x="403" y="150" text-anchor="middle">RIGHT JOIN</text>
+  <circle cx="541" cy="62" r="34" style="fill:var(--blue);fill-opacity:.32"/>
+  <circle cx="581" cy="62" r="34" style="fill:var(--blue);fill-opacity:.32"/>
+  <circle cx="541" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <circle cx="581" cy="62" r="34" style="fill:none;stroke:var(--text);stroke-width:1.4"/>
+  <text class="dgm-text dgm-text--sm" x="561" y="150" text-anchor="middle">FULL JOIN</text>
+</svg>`,
           },
         ],
       },
@@ -512,6 +641,22 @@ export const lernskript: SkriptKapitel[] = [
               'Wiederhole, bis alle Teilrelationen in BCNF sind.',
               'BCNF ist immer verlustlos, aber NICHT immer abhängigkeitserhaltend.',
             ],
+          },
+          {
+            art: 'svg',
+            titel: 'Zerlegungsbaum: R an der schlechten FD B → C aufteilen (R1 = B⁺, R2 = B ∪ Rest)',
+            svg: `<svg viewBox="0 0 480 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="BCNF-Zerlegungsbaum von R(A,B,C,D) an der FD B nach C">
+  <line class="dgm-line" x1="205" y1="58" x2="140" y2="138"/>
+  <line class="dgm-line" x1="275" y1="58" x2="350" y2="138"/>
+  <rect class="dgm-shape" x="165" y="22" width="150" height="36" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="240" y="44" text-anchor="middle">R(A, B, C, D)</text>
+  <rect class="dgm-shape" x="70" y="138" width="120" height="36" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="130" y="160" text-anchor="middle">R1(B, C)</text>
+  <rect class="dgm-shape" x="290" y="138" width="150" height="36" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="365" y="160" text-anchor="middle">R2(A, B, D)</text>
+  <text class="dgm-card" x="118" y="128">= B⁺</text>
+  <text class="dgm-card" x="356" y="128">= B ∪ Rest</text>
+</svg>`,
           },
           {
             art: 'liste',
