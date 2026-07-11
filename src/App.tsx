@@ -3,7 +3,7 @@ import { Header, GlobalSearch, Tabs, tabDefs, STANDARD_TAB_REIHENFOLGE, useTheme
 import { quizFragen } from './data/quiz'
 import { karteikarten } from './data/karteikarten'
 
-const Themen = lazy(() => import('./components/Themen'))
+const Referenz = lazy(() => import('./components/Referenz'))
 const Hilfsmittel = lazy(() => import('./components/Hilfsmittel'))
 const Schema = lazy(() => import('./components/Schema'))
 const Uebungsblaetter = lazy(() => import('./components/Uebungsblaetter'))
@@ -40,7 +40,7 @@ function App() {
           <GlobalSearch loadIndex={() => import('./data/searchIndex').then(m => m.searchIndex)} onNavigate={t => setActiveTab(t as TabId)} />
         </div>
         <Suspense fallback={<div className="card"><p className="quiz-hint">Lädt …</p></div>}>
-          {activeTab === 'referenz' && <Themen />}
+          {activeTab === 'referenz' && <Referenz />}
           {activeTab === 'hilfsmittel' && <Hilfsmittel />}
           {activeTab === 'schema' && <Schema />}
           {activeTab === 'quiz' && <Quiz fragen={quizFragen} />}
