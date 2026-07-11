@@ -238,42 +238,60 @@ const SEITEN: Seite[] = [
   },
 ]
 
-function SpickzettelSeite({ seite, nr }: { seite: Seite; nr: number }) {
+// Alle Themen flach + in Vierer-Blätter aufgeteilt (4 Schneidekarten je A4).
+interface Karte { gruppe: string; box: Box }
+const KARTEN: Karte[] = SEITEN.flatMap(s => s.boxen.map(box => ({ gruppe: s.titel, box })))
+const BLAETTER: (Karte | null)[][] = []
+for (let i = 0; i < KARTEN.length; i += 4) {
+  const vier: (Karte | null)[] = KARTEN.slice(i, i + 4)
+  while (vier.length < 4) vier.push(null) // leere Viertel auffüllen
+  BLAETTER.push(vier)
+}
+
+function BoxInhalt({ box }: { box: Box }) {
   return (
-    <div className="hm-page">
-      <p className="hm-page-head">
-        <span className="hm-page-nr">Seite {nr}</span>
-        <span className="hm-page-titel">{seite.titel}</span>
-      </p>
-      <div className="hm-grid">
-        {seite.boxen.map(box => (
-          <section key={box.t} className="hm-box">
-            <h4>{box.t}</h4>
-            {box.tab && (
-              <table className="hm-tab">
-                <thead>
-                  <tr>{box.tab.head.map(h => <th key={h}>{h}</th>)}</tr>
-                </thead>
-                <tbody>
-                  {box.tab.rows.map(row => (
-                    <tr key={row.join('|')}>{row.map((c, i) => <td key={i}>{c}</td>)}</tr>
-                  ))}
-                </tbody>
-              </table>
-            )}
-            {box.r && (
-              <ul>
-                {box.r.map(zeile => (
-                  <li key={zeile.f}>
-                    {zeile.l && <span className="hm-label">{zeile.l}</span>}
-                    <span className="hm-code">{zeile.f}</span>
-                  </li>
-                ))}
-              </ul>
-            )}
-          </section>
-        ))}
-      </div>
+    <>
+      {box.tab && (
+        <table className="hm-tab">
+          <thead>
+            <tr>{box.tab.head.map(h => <th key={h}>{h}</th>)}</tr>
+          </thead>
+          <tbody>
+            {box.tab.rows.map(row => (
+              <tr key={row.join('|')}>{row.map((c, i) => <td key={i}>{c}</td>)}</tr>
+            ))}
+          </tbody>
+        </table>
+      )}
+      {box.r && (
+        <ul>
+          {box.r.map(zeile => (
+            <li key={zeile.f}>
+              {zeile.l && <span className="hm-label">{zeile.l}</span>}
+              <span className="hm-code">{zeile.f}</span>
+            </li>
+          ))}
+        </ul>
+      )}
+    </>
+  )
+}
+
+// Ein A4-Blatt = 2×2 Schneidekarten.
+function CutSheet({ karten }: { karten: (Karte | null)[] }) {
+  return (
+    <div className="hm-sheet">
+      {karten.map((k, i) => (
+        <div key={k ? k.box.t : `leer-${i}`} className="hm-cut-cell">
+          {k && (
+            <div className="hm-cut-frame">
+              <p className="hm-cut-gruppe">{k.gruppe}</p>
+              <h4 className="hm-cut-titel">{k.box.t}</h4>
+              <BoxInhalt box={k.box} />
+            </div>
+          )}
+        </div>
+      ))}
     </div>
   )
 }
@@ -285,57 +303,55 @@ export default function Hilfsmittel() {
       <div className="section-header no-print">
         <h2>Hilfsmittel</h2>
         <p>
-          Der DB-Spickzettel: das Wichtigste aus dem gesamten Kurs auf drei A4-Seiten – ER-Modell &
-          Schema, Algebra & SQL, Integrität & Entwurfstheorie. Zum Lernen und zum Ausdrucken.
+          DB-Spickzettel als Schneidekarten: das Wichtigste aus dem ganzen Kurs, ein Thema je Viertel.
+          Blatt ausdrucken und an den gestrichelten Linien in vier Karten schneiden.
         </p>
       </div>
-      <div className="filter-row no-print" style={{ marginBottom: '0.9rem' }}>
+      <div className="filter-row no-print" style={{ marginBottom: '0.5rem' }}>
         <button type="button" className="filter-btn" onClick={() => window.print()}>
-          🖨️ Drucken (3 Seiten A4)
+          🖨️ Drucken (4 Karten je A4-Blatt)
         </button>
       </div>
-      {SEITEN.map((seite, i) => (
-        <SpickzettelSeite key={seite.titel} seite={seite} nr={i + 1} />
-      ))}
+      <p className="hm-hint no-print">
+        Im Druckdialog: Ränder „Keine", Skalierung 100 %, „Hintergrundgrafiken" aktivieren.
+      </p>
+      <div className="hm-sheets">
+        {BLAETTER.map((karten, i) => (
+          <CutSheet key={i} karten={karten} />
+        ))}
+      </div>
     </div>
   )
 }
 
-// Theme-fähige Styles + Druck-Regeln.
+// Schneidekarten-Layout: A4-Blatt mit 2×2-Raster, je Viertel eine Karteikarte.
+// Bildschirm = Vorschau (weiße Blätter mit Schatten), Druck = echtes A4 mit
+// gestrichelten Schnittlinien, schwarz auf weiß.
 const HM_CSS = `
-.hm-page{margin:0 0 1.4rem}
-.hm-page-head{display:flex;align-items:center;gap:.6rem;margin:0 0 .6rem;padding-bottom:.35rem;border-bottom:2px solid var(--blue)}
-.hm-page-nr{font-size:.72rem;font-weight:700;letter-spacing:.03em;text-transform:uppercase;background:var(--blue);color:#fff;padding:.12rem .5rem;border-radius:5px}
-.hm-page-titel{font-size:.95rem;font-weight:700;color:var(--text)}
-.hm-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:.7rem;align-items:start}
-.hm-box{border:1px solid var(--border2);border-left:3px solid var(--blue);border-radius:8px;background:var(--bg2);padding:.5rem .7rem;break-inside:avoid}
-.hm-box h4{margin:0 0 .4rem;font-size:.85rem;font-weight:700;color:var(--blue)}
-.hm-box ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:.28rem}
-.hm-box li{font-size:.78rem;line-height:1.45;color:var(--text)}
-.hm-label{display:inline-block;margin-right:.4rem;padding:0 .35rem;border-radius:4px;background:var(--bg3);color:var(--text2);font-size:.72rem;font-weight:600;white-space:nowrap}
-.hm-code{font-family:var(--font-mono,monospace);font-size:.76rem;color:var(--text)}
-.hm-tab{width:100%;border-collapse:collapse;margin:0 0 .4rem;font-size:.75rem}
-.hm-tab th,.hm-tab td{border:1px solid var(--border2);padding:.15rem .4rem;text-align:center;color:var(--text)}
-.hm-tab th{background:var(--bg3);font-weight:700}
+.hm-hint{font-size:.8rem;color:var(--text2);margin:0 0 1rem}
+.hm-sheets{display:flex;flex-direction:column;align-items:center;gap:1.2rem;overflow-x:auto}
+.hm-sheet{width:210mm;height:297mm;flex-shrink:0;background:#fff;color:#000;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+.hm-cut-cell{border:1px dashed #b4b4b4;display:flex;padding:6mm;overflow:hidden}
+.hm-cut-frame{flex:1;border:1.2px solid #555;border-radius:3mm;display:flex;flex-direction:column;padding:6mm;overflow:hidden}
+.hm-cut-gruppe{margin:0 0 1.5mm;font-family:var(--font-mono,monospace);font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:#8a8a8a}
+.hm-cut-titel{margin:0 0 3mm;font-family:var(--font-sans);font-weight:700;font-size:13pt;line-height:1.15;color:#000}
+.hm-cut-frame ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.6mm}
+.hm-cut-frame li{font-size:8.4pt;line-height:1.3;color:#111}
+.hm-label{display:inline-block;margin-right:1.2mm;padding:0 1.2mm;border-radius:2px;background:#ececec;color:#444;font-size:7.4pt;font-weight:700;white-space:nowrap}
+.hm-code{font-family:var(--font-mono,monospace);font-size:8.3pt;color:#111}
+.hm-tab{width:100%;border-collapse:collapse;margin:0 0 2mm;font-size:8pt}
+.hm-tab th,.hm-tab td{border:.75pt solid #999;padding:.4mm 1.5mm;text-align:center;color:#111}
+.hm-tab th{background:#ececec;font-weight:700}
 .hm-tab td{font-family:var(--font-mono,monospace)}
 @media print{
+  @page{size:A4 portrait;margin:0}
   header,.tabs,.no-print,.site-nav{display:none!important}
-  body{background:#fff}
-  .container{max-width:none;padding:0}
-  .hm-page{break-after:page;margin:0}
-  .hm-page:last-child{break-after:auto}
-  .hm-page-head{border-bottom:1.5pt solid #000}
-  .hm-page-nr{background:#000;color:#fff}
-  .hm-page-titel{color:#000}
-  .hm-grid{grid-template-columns:1fr 1fr;gap:8pt}
-  .hm-box{border:.75pt solid #999;border-left:2pt solid #000;background:#fff;padding:4pt 6pt}
-  .hm-box h4{color:#000;font-size:9.5pt;margin-bottom:2pt}
-  .hm-box li{color:#000;font-size:7.8pt;line-height:1.32}
-  .hm-label{background:#eee;color:#333}
-  .hm-code{color:#000}
-  .hm-tab{font-size:7.5pt}
-  .hm-tab th,.hm-tab td{border:.5pt solid #999;color:#000}
-  .hm-tab th{background:#eee}
+  body{background:#fff!important}
+  .container{max-width:none!important;margin:0!important;padding:0!important}
+  .hm-sheets{gap:0!important;overflow:visible!important}
+  .hm-sheet{box-shadow:none!important;page-break-after:always;break-after:page}
+  .hm-sheet:last-child{page-break-after:auto;break-after:auto}
+  .hm-cut-cell{border:1px dashed #bbb}
 }
 `
 
