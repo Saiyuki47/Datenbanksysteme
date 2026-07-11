@@ -285,9 +285,11 @@ function CutSheet({ karten }: { karten: (Karte | null)[] }) {
         <div key={k ? k.box.t : `leer-${i}`} className="hm-cut-cell">
           {k && (
             <div className="hm-cut-frame">
-              <p className="hm-cut-gruppe">{k.gruppe}</p>
-              <h4 className="hm-cut-titel">{k.box.t}</h4>
-              <BoxInhalt box={k.box} />
+              <div className="hm-cut-rot">
+                <p className="hm-cut-gruppe">{k.gruppe}</p>
+                <h4 className="hm-cut-titel">{k.box.t}</h4>
+                <BoxInhalt box={k.box} />
+              </div>
             </div>
           )}
         </div>
@@ -332,15 +334,17 @@ const HM_CSS = `
 .hm-sheets{display:flex;flex-direction:column;align-items:center;gap:1.2rem;overflow-x:auto}
 .hm-sheet{width:210mm;height:297mm;flex-shrink:0;background:#fff;color:#000;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;box-shadow:0 2px 16px rgba(0,0,0,.35)}
 .hm-cut-cell{border:1px dashed #b4b4b4;display:flex;padding:6mm;overflow:hidden}
-.hm-cut-frame{flex:1;border:1.2px solid #555;border-radius:3mm;display:flex;flex-direction:column;padding:6mm;overflow:hidden}
-.hm-cut-gruppe{margin:0 0 1.5mm;font-family:var(--font-mono,monospace);font-size:7pt;letter-spacing:.1em;text-transform:uppercase;color:#8a8a8a}
-.hm-cut-titel{margin:0 0 3mm;font-family:var(--font-sans);font-weight:700;font-size:13pt;line-height:1.15;color:#000}
-.hm-cut-frame ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.6mm}
-.hm-cut-frame li{font-size:8.4pt;line-height:1.3;color:#111}
-.hm-label{display:inline-block;margin-right:1.2mm;padding:0 1.2mm;border-radius:2px;background:#ececec;color:#444;font-size:7.4pt;font-weight:700;white-space:nowrap}
-.hm-code{font-family:var(--font-mono,monospace);font-size:8.3pt;color:#111}
-.hm-tab{width:100%;border-collapse:collapse;margin:0 0 2mm;font-size:8pt}
-.hm-tab th,.hm-tab td{border:.75pt solid #999;padding:.4mm 1.5mm;text-align:center;color:#111}
+.hm-cut-frame{position:relative;flex:1;border:1.2px solid #555;border-radius:3mm;overflow:hidden}
+/* Inhalt um 90° gedreht: Querformat nutzt das Hochformat-Viertel besser aus. */
+.hm-cut-rot{position:absolute;top:50%;left:50%;width:135mm;height:92mm;box-sizing:border-box;transform:translate(-50%,-50%) rotate(-90deg);display:flex;flex-direction:column;justify-content:center;padding:5mm 9mm}
+.hm-cut-gruppe{margin:0 0 2mm;font-family:var(--font-mono,monospace);font-size:8.5pt;letter-spacing:.1em;text-transform:uppercase;color:#8a8a8a}
+.hm-cut-titel{margin:0 0 4mm;font-family:var(--font-sans);font-weight:700;font-size:15pt;line-height:1.15;color:#000}
+.hm-cut-rot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2mm}
+.hm-cut-rot li{font-size:9.5pt;line-height:1.4;color:#111}
+.hm-label{display:inline-block;margin-right:1.5mm;padding:0 1.4mm;border-radius:2px;background:#ececec;color:#444;font-size:8.5pt;font-weight:700;white-space:nowrap}
+.hm-code{font-family:var(--font-mono,monospace);font-size:9.5pt;color:#111}
+.hm-tab{width:100%;border-collapse:collapse;margin:0 0 2mm;font-size:9pt}
+.hm-tab th,.hm-tab td{border:.75pt solid #999;padding:.6mm 2mm;text-align:center;color:#111}
 .hm-tab th{background:#ececec;font-weight:700}
 .hm-tab td{font-family:var(--font-mono,monospace)}
 @media print{
