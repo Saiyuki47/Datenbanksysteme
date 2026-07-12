@@ -1,9 +1,14 @@
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 import { lernskript, type SkriptBlock } from '../data/lernskript'
 
 // Stabiler Schlüssel für einen Block (das Array ist statisch).
 function blockKey(b: SkriptBlock): string {
   return JSON.stringify(b)
+}
+
+// Minimaler Inline-Fettdruck: **Text** → <strong>Text</strong>.
+function renderInline(text: string): ReactNode[] {
+  return text.split(/\*\*(.+?)\*\*/g).map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part))
 }
 
 const kapId = (id: string) => `skript-kap-${id}`
@@ -51,7 +56,7 @@ function Block({ block }: { block: SkriptBlock }) {
         <div>
           {block.titel && <p className="themen-code-label">{block.titel}</p>}
           <ul className="themen-liste">
-            {block.punkte.map(p => <li key={p}>{p}</li>)}
+            {block.punkte.map(p => <li key={p}>{renderInline(p)}</li>)}
           </ul>
         </div>
       )
