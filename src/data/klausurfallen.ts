@@ -129,6 +129,12 @@ export const klausurFallen: FalleGruppe[] = [
         beispiel: 'Raum(GebNr, RaumNr, Fläche)\nPK = (GebNr, RaumNr)   -- zwei Spalten\nGebNr = FK → Gebäude    (RaumNr allein nicht eindeutig)',
         merke: 'Gestrichelte Unterstreichung = partieller Schlüssel, nicht der volle PK. PK der schwachen Entität = FK der starken Entität + partieller Schlüssel.',
       },
+      {
+        titel: 'IS-A: Untertyp bekommt KEINEN neuen Schlüssel',
+        falle: 'Beim Überführen einer Generalisierung erfindet man für den Untertyp keinen eigenen neuen Schlüssel. Der Untertyp übernimmt den Schlüssel des Obertyps – dieser ist im Untertyp zugleich Primärschlüssel UND Fremdschlüssel auf den Obertyp.',
+        beispiel: 'Kunde(KDNR, Name)\nPerson(KDNR, Geburtsdatum)   -- KDNR = PK und FK → Kunde\n(kein eigener PersonNr!)',
+        merke: 'Untertyp erbt den Schlüssel des Obertyps (PK = FK); alle Attribute holt man per Join über diesen Schlüssel.',
+      },
     ],
   },
   // ===========================================================================

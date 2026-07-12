@@ -293,6 +293,46 @@ export const lernskript: SkriptKapitel[] = [
   <text class="dgm-text dgm-text--sm" x="325" y="211" text-anchor="middle">Firma</text>
 </svg>`,
           },
+          {
+            art: 'text',
+            text: 'Relational setzt man die Generalisierung meist so um: Der Obertyp bekommt eine eigene Relation mit den gemeinsamen Attributen (Kunde), und jeder Untertyp bekommt eine eigene Relation mit nur seinen zusätzlichen Attributen (Person, Firma). Als Schlüssel benutzt jeder Untertyp denselben Schlüssel wie der Obertyp: KDNR ist im Untertyp zugleich Primärschlüssel UND Fremdschlüssel auf Kunde. Die vollständigen Daten eines Untertyps – geerbte plus eigene Attribute – bekommt man, indem man Obertyp und Untertyp über KDNR verbindet (Kunde ⋈ Person).',
+          },
+          {
+            art: 'code',
+            titel: 'Relationale Umsetzung – Untertyp erbt den Schlüssel des Obertyps',
+            text: 'Kunde(KDNR, Name)               Obertyp – gemeinsame Attribute\nPerson(KDNR, Geburtsdatum)      KDNR = PK und FK → Kunde\nFirma(KDNR, Rechtsform)         KDNR = PK und FK → Kunde',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Obertyp Kunde – die gemeinsamen Attribute (KDNR, Name) für alle Kunden',
+            columns: ['KDNR', 'Name'],
+            rows: [
+              ['K1', 'Anna Schmidt'],
+              ['K2', 'Weber Bau AG'],
+              ['K3', 'Ben Krause'],
+            ],
+          },
+          {
+            art: 'tabelle',
+            titel: 'Untertyp Person – nur K1 und K3 sind Personen (KDNR verweist zurück auf Kunde)',
+            columns: ['KDNR', 'Geburtsdatum'],
+            rows: [
+              ['K1', '12.05.1990'],
+              ['K3', '03.11.1985'],
+            ],
+          },
+          {
+            art: 'tabelle',
+            titel: 'Untertyp Firma – K2 ist eine Firma (KDNR verweist zurück auf Kunde)',
+            columns: ['KDNR', 'Rechtsform'],
+            rows: [
+              ['K2', 'AG'],
+            ],
+          },
+          {
+            art: 'merk',
+            text: 'Faustregel IS-A: Dieselbe KDNR steht im Obertyp und im Untertyp – der Untertyp erbt den Schlüssel und benutzt ihn zugleich als Fremdschlüssel auf den Obertyp. Jeder Kunde taucht in genau einem Untertyp auf; alle Attribute (geerbt + eigen) holt man per Join über KDNR (z. B. Kunde ⋈ Person ergibt KDNR, Name, Geburtsdatum).',
+          },
         ],
       },
       {
