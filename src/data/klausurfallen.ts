@@ -125,9 +125,9 @@ export const klausurFallen: FalleGruppe[] = [
       },
       {
         titel: 'Schwache Entität braucht den fremden Schlüssel',
-        falle: 'Der Schlüssel einer schwachen Entität ist nur PARTIELL – eindeutig wird sie erst zusammen mit dem Schlüssel der identifizierenden (starken) Entität.',
-        beispiel: 'Raum ist nur mit (GebNr, RaumNr) eindeutig, nicht mit RaumNr allein.',
-        merke: 'Schwache Entität + identifizierende Beziehung = Doppelrahmen/Doppelraute.',
+        falle: 'Der eigene (partielle) Schlüssel einer schwachen Entität – im Diagramm gestrichelt unterstrichen – ist NICHT der ganze Primärschlüssel. Relational übernimmt sie den Schlüssel der starken Entität als Fremdschlüssel; der Primärschlüssel besteht dann aus zwei Spalten: Fremdschlüssel + eigener partieller Schlüssel.',
+        beispiel: 'Raum(GebNr, RaumNr, Fläche)\nPK = (GebNr, RaumNr)   -- zwei Spalten\nGebNr = FK → Gebäude    (RaumNr allein nicht eindeutig)',
+        merke: 'Gestrichelte Unterstreichung = partieller Schlüssel, nicht der volle PK. PK der schwachen Entität = FK der starken Entität + partieller Schlüssel.',
       },
     ],
   },

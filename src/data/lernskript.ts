@@ -244,7 +244,31 @@ export const lernskript: SkriptKapitel[] = [
           },
           {
             art: 'text',
-            text: 'Raum ist eine schwache Entität (Doppelrahmen): RaumNr allein ist nicht eindeutig – „Raum 101" gibt es in fast jedem Gebäude. Erst zusammen mit dem Gebäude über die identifizierende Beziehung liegt_in (Doppelraute) wird ein Raum eindeutig. Deshalb ist RaumNr nur gestrichelt unterstrichen (partieller Schlüssel), und die schwache Seite nimmt immer voll an der Beziehung teil (jeder Raum gehört zu genau einem Gebäude).',
+            text: 'Raum ist eine schwache Entität (Doppelrahmen): RaumNr allein ist nicht eindeutig – „Raum 101" gibt es in fast jedem Gebäude. Erst zusammen mit dem Gebäude über die identifizierende Beziehung liegt_in (Doppelraute) wird ein Raum eindeutig. Die gestrichelte Unterstreichung heißt darum ausdrücklich nicht „das ist schon der Primärschlüssel", sondern nur partieller Schlüssel: RaumNr ist bloß ein Teil davon. Weil außerdem jeder Raum zu genau einem Gebäude gehört, nimmt die schwache Seite immer voll an der Beziehung teil.',
+          },
+          {
+            art: 'text',
+            text: 'Was das für die relationale Umsetzung bedeutet: Die schwache Entität übernimmt den Schlüssel der starken Entität als Fremdschlüssel und setzt ihren Primärschlüssel aus diesem Fremdschlüssel PLUS ihrem eigenen partiellen Schlüssel zusammen. Der Primärschlüssel von Raum besteht also aus zwei Spalten – (GebNr, RaumNr) –, wobei GebNr gleichzeitig Fremdschlüssel auf Gebäude ist. Genau das drückt die gestrichelte Unterstreichung im Diagramm aus.',
+          },
+          {
+            art: 'code',
+            titel: 'Relationale Umsetzung – der Primärschlüssel von Raum ist zusammengesetzt',
+            text: 'Gebäude(GebNr, Name)          PK: GebNr\nRaum(GebNr, RaumNr, Fläche)   PK: (GebNr, RaumNr)  ← zwei Spalten\n                              FK: GebNr → Gebäude(GebNr)',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Beispiel-Daten: RaumNr „101" kommt mehrfach vor – erst (GebNr, RaumNr) zusammen ist eindeutig',
+            columns: ['GebNr', 'RaumNr', 'Fläche'],
+            rows: [
+              ['G1', '101', '24 m²'],
+              ['G1', '102', '30 m²'],
+              ['G2', '101', '18 m²'],
+              ['G2', '205', '40 m²'],
+            ],
+          },
+          {
+            art: 'merk',
+            text: 'Faustregel schwache Entität: Ihr Primärschlüssel ist immer zusammengesetzt = Schlüssel der starken Entität (als Fremdschlüssel übernommen) + eigener partieller Schlüssel. Für Raum also PK = (GebNr, RaumNr) über zwei Spalten – RaumNr allein wäre nicht eindeutig.',
           },
           {
             art: 'frage',
