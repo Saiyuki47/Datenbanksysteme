@@ -212,6 +212,41 @@ export const lernskript: SkriptKapitel[] = [
             text: 'Rechteck = Entitytyp, Ellipse = Attribut (Schlüssel unterstrichen), Raute = Beziehungstyp; die 1 und das N geben die Funktionalität an (ein Professor liest mehrere Vorlesungen, jede Vorlesung wird von genau einem Professor gelesen).',
           },
           {
+            art: 'svg',
+            titel: 'Beispiel schwache Entität: Gebäude –(1)– liegt_in –(N)– Raum (Doppelrahmen = schwach, Doppelraute = identifizierend, RaumNr gestrichelt = partieller Schlüssel)',
+            svg: `<svg viewBox="0 0 720 240" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm mit schwacher Entität: Gebäude liegt_in Raum">
+  <line class="dgm-line" x1="128" y1="67" x2="150" y2="125"/>
+  <line class="dgm-line" x1="205" y1="67" x2="182" y2="125"/>
+  <line class="dgm-line" x1="538" y1="67" x2="556" y2="125"/>
+  <line class="dgm-line" x1="622" y1="67" x2="600" y2="125"/>
+  <line class="dgm-line" x1="230" y1="150" x2="300" y2="150"/>
+  <line class="dgm-line" x1="430" y1="150" x2="490" y2="150"/>
+  <rect class="dgm-shape" x="80" y="125" width="150" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="155" y="154" text-anchor="middle">Gebäude</text>
+  <rect class="dgm-shape" x="490" y="125" width="160" height="50" rx="4"/>
+  <rect class="dgm-shape" x="494" y="129" width="152" height="42" rx="2"/>
+  <text class="dgm-text dgm-text--sm" x="570" y="154" text-anchor="middle">Raum</text>
+  <polygon class="dgm-shape" points="300,150 365,110 430,150 365,190"/>
+  <polygon class="dgm-shape" points="308,150 365,116 422,150 365,184"/>
+  <text class="dgm-text dgm-text--sm" x="365" y="154" text-anchor="middle">liegt_in</text>
+  <ellipse class="dgm-shape" cx="110" cy="50" rx="42" ry="17"/>
+  <text class="dgm-key" x="110" y="55" text-anchor="middle">GebNr</text>
+  <ellipse class="dgm-shape" cx="212" cy="50" rx="38" ry="17"/>
+  <text class="dgm-text dgm-text--sm" x="212" y="55" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="518" cy="50" rx="44" ry="17"/>
+  <text class="dgm-text dgm-text--sm" x="518" y="54" text-anchor="middle">RaumNr</text>
+  <line class="dgm-line" x1="497" y1="59" x2="539" y2="59" stroke-dasharray="3 2"/>
+  <ellipse class="dgm-shape" cx="628" cy="50" rx="40" ry="17"/>
+  <text class="dgm-text dgm-text--sm" x="628" y="55" text-anchor="middle">Fläche</text>
+  <text class="dgm-card" x="256" y="141">1</text>
+  <text class="dgm-card" x="456" y="141">N</text>
+</svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Raum ist eine schwache Entität (Doppelrahmen): RaumNr allein ist nicht eindeutig – „Raum 101" gibt es in fast jedem Gebäude. Erst zusammen mit dem Gebäude über die identifizierende Beziehung liegt_in (Doppelraute) wird ein Raum eindeutig. Deshalb ist RaumNr nur gestrichelt unterstrichen (partieller Schlüssel), und die schwache Seite nimmt immer voll an der Beziehung teil (jeder Raum gehört zu genau einem Gebäude).',
+          },
+          {
             art: 'frage',
             q: 'Was ist eine IS-A-Beziehung (Generalisierung)?',
             a: 'Ein Obertyp wird in Untertypen spezialisiert (z. B. Kunde → Person / Firma). Die Untertypen erben die Attribute des Obertyps.',
