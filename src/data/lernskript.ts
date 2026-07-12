@@ -351,6 +351,62 @@ export const lernskript: SkriptKapitel[] = [
             text: '(min,max) sagt, wie oft ein konkreter Wert in der Beziehungstabelle minimal/maximal vorkommen darf. Vorsicht: Funktionalität und (min,max) stehen „über Kreuz" – die max-Angabe bei E1 gehört zur Gegenseite.',
           },
           {
+            art: 'svg',
+            titel: 'Dieselben vier Beispiele in (min,max)-Notation – das Paar (min, max) steht an der Entität selbst',
+            svg: `<svg viewBox="0 0 720 285" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Dieselben vier ER-Beispiele, aber mit (min,max)-Notation an den Entitäten">
+  <line class="dgm-line" x1="360" y1="20" x2="360" y2="270" style="opacity:.35"/>
+  <line class="dgm-line" x1="15" y1="150" x2="705" y2="150" style="opacity:.35"/>
+  <text class="dgm-card" x="72" y="36" text-anchor="middle">(0,1)</text>
+  <text class="dgm-card" x="288" y="36" text-anchor="middle">(0,1)</text>
+  <rect class="dgm-shape" x="22" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="72" y="80" text-anchor="middle">Abteilung</text>
+  <line class="dgm-line" x1="122" y1="76" x2="138" y2="76"/>
+  <polygon class="dgm-shape" points="138,76 180,50 222,76 180,102"/>
+  <text class="dgm-text dgm-text--sm" x="180" y="80" text-anchor="middle">leitet</text>
+  <line class="dgm-line" x1="222" y1="76" x2="238" y2="76"/>
+  <rect class="dgm-shape" x="238" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="288" y="80" text-anchor="middle">Manager</text>
+  <text class="dgm-card" x="432" y="36" text-anchor="middle">(0,*)</text>
+  <text class="dgm-card" x="648" y="36" text-anchor="middle">(0,1)</text>
+  <rect class="dgm-shape" x="382" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="432" y="80" text-anchor="middle">Abteilung</text>
+  <line class="dgm-line" x1="482" y1="76" x2="498" y2="76"/>
+  <polygon class="dgm-shape" points="498,76 540,50 582,76 540,102"/>
+  <text class="dgm-text dgm-text--sm" x="540" y="80" text-anchor="middle">beschäftigt</text>
+  <line class="dgm-line" x1="582" y1="76" x2="598" y2="76"/>
+  <rect class="dgm-shape" x="598" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="648" y="80" text-anchor="middle">Mitarbeiter</text>
+  <text class="dgm-card" x="72" y="186" text-anchor="middle">(0,1)</text>
+  <text class="dgm-card" x="288" y="186" text-anchor="middle">(0,*)</text>
+  <rect class="dgm-shape" x="22" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="72" y="230" text-anchor="middle">Mitarbeiter</text>
+  <line class="dgm-line" x1="122" y1="226" x2="138" y2="226"/>
+  <polygon class="dgm-shape" points="138,226 180,200 222,226 180,252"/>
+  <text class="dgm-text dgm-text--sm" x="180" y="230" text-anchor="middle">arbeitet_in</text>
+  <line class="dgm-line" x1="222" y1="226" x2="238" y2="226"/>
+  <rect class="dgm-shape" x="238" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="288" y="230" text-anchor="middle">Abteilung</text>
+  <text class="dgm-card" x="432" y="186" text-anchor="middle">(0,*)</text>
+  <text class="dgm-card" x="648" y="186" text-anchor="middle">(0,*)</text>
+  <rect class="dgm-shape" x="382" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="432" y="230" text-anchor="middle">Student</text>
+  <line class="dgm-line" x1="482" y1="226" x2="498" y2="226"/>
+  <polygon class="dgm-shape" points="498,226 540,200 582,226 540,252"/>
+  <text class="dgm-text dgm-text--sm" x="540" y="230" text-anchor="middle">hört</text>
+  <line class="dgm-line" x1="582" y1="226" x2="598" y2="226"/>
+  <rect class="dgm-shape" x="598" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="648" y="230" text-anchor="middle">Vorlesung</text>
+</svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Statt einer einzelnen Zahl steht hier an jeder Entität ein Paar (min, max): an wie vielen Beziehungen ein einzelnes Exemplar dieser Entität mindestens und höchstens teilnimmt (* = beliebig viele, min 0 = Teilnahme optional). Beim 1:N-Beispiel steht an »Abteilung« (0,*) – eine Abteilung beschäftigt 0 bis beliebig viele Mitarbeiter; an »Mitarbeiter« (0,1) – jeder Mitarbeiter gehört zu höchstens einer Abteilung.',
+          },
+          {
+            art: 'text',
+            text: 'Genau hier sieht man das „über Kreuz": Bei der Funktionalität stand das N (viele) auf der Mitarbeiter-Seite; als (min,max) sitzt das * dagegen bei der Abteilung, weil (min,max) die Teilnahme der Entität selbst beschreibt – nicht die der Gegenseite.',
+          },
+          {
             art: 'frage',
             q: 'Bei n-stelligen Beziehungen (n > 2): Funktionalität vs. (min,max)?',
             a: 'Beide Notationen sind unvergleichbar. Funktionalitäten drücken partielle Funktionen über PAARE von Entitäten aus (z. B. Prof × Student → Thema), (min,max) beschränkt das Vorkommen EINZELNER Entitäten. Manche Bedingungen sind nur mit der einen, andere nur mit der anderen Notation ausdrückbar.',
