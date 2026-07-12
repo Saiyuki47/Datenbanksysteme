@@ -409,7 +409,7 @@ export const lernskript: SkriptKapitel[] = [
           {
             art: 'frage',
             q: 'Bei n-stelligen Beziehungen (n > 2): Funktionalität vs. (min,max)?',
-            a: 'Beide Notationen sind unvergleichbar. Funktionalitäten drücken partielle Funktionen über PAARE von Entitäten aus (z. B. Prof × Student → Thema), (min,max) beschränkt das Vorkommen EINZELNER Entitäten. Manche Bedingungen sind nur mit der einen, andere nur mit der anderen Notation ausdrückbar.',
+            a: 'Beide Notationen sind unvergleichbar – jede kann etwas ausdrücken, das die andere nicht kann. Funktionalität ist eine Bedingung über KOMBINATIONEN von Entitäten (»dieses Paar bestimmt die dritte eindeutig«); (min,max) begrenzt, wie oft eine EINZELNE Entität in der Beziehung vorkommt. Am Beispiel »betreuen« unten wird der Unterschied konkret.',
           },
           {
             art: 'svg',
@@ -427,6 +427,32 @@ export const lernskript: SkriptKapitel[] = [
   <polygon class="dgm-shape" points="238,97 300,60 362,97 300,134"/>
   <text class="dgm-text dgm-text--sm" x="300" y="101" text-anchor="middle">betreuen</text>
 </svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Konkret: Ein Eintrag (Student, Professor, Thema) in »betreuen« heißt „dieser Professor betreut diesen Studenten bei diesem Seminarthema". Als Beispiel-Beziehungstabelle:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'betreuen (Beispieldaten)',
+            columns: ['Student', 'Professor', 'Thema'],
+            rows: [
+              ['Anna', 'Curie', 'Graphen'],
+              ['Anna', 'Bohr', 'Optik'],
+              ['Ben', 'Curie', 'Graphen'],
+            ],
+          },
+          {
+            art: 'liste',
+            titel: 'Zwei Bedingungen – jede nur mit einer Notation ausdrückbar',
+            punkte: [
+              '**Nur mit Funktionalität:** „Ein Student bearbeitet ein bestimmtes Thema bei höchstens einem Professor." Das ist die Funktion Student × Thema → Professor – eine Bedingung über das PAAR (Student, Thema). In der Tabelle: (Anna, Graphen) hat nur Curie; ein zusätzlicher Eintrag (Anna, Graphen, Bohr) wäre damit verboten. (min,max) kann das nicht sagen, weil es sich nie auf ein Paar bezieht, sondern immer nur auf eine einzelne Entität.',
+              '**Nur mit (min,max):** „Jeder Student wird in höchstens 3 Betreuungen geführt." = (0,3) an Studenten – gezählt wird, wie oft eine EINZELNE Entität vorkommt (Anna steht in 2 Zeilen, Ben in 1). Die Funktionalität kann keine Obergrenze wie „3" ausdrücken; sie kennt nur „bestimmt eindeutig" (höchstens 1) oder gar keine Schranke.',
+            ],
+          },
+          {
+            art: 'merk',
+            text: 'Kern: Funktionalität = Bedingung über KOMBINATIONEN (ein Paar/Tupel bestimmt eine weitere Entität), (min,max) = Vorkommen EINZELNER Entitäten. Keine Notation ist stärker – sie beschränken verschiedene Dinge, deshalb „unvergleichbar".',
           },
         ],
       },
