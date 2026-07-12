@@ -79,6 +79,61 @@ export const lernskript: SkriptKapitel[] = [
             a: 'Relational: Daten in Tabellen (Relationen) mit festem Schema, Beziehungen implizit über Fremdschlüssel, ausgewertet per JOIN. Graph: Knoten (Entitäten) + Kanten (Beziehungen), Beziehungen explizit gespeichert → schnelles Traversieren stark vernetzter Daten.',
           },
           {
+            art: 'text',
+            text: 'Beispiel: drei Personen (Anna, Ben, Carla) und wer wen kennt – einmal relational in Tabellen, einmal als Graph modelliert.',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Relational · Tabelle Person',
+            columns: ['PersNr', 'Name'],
+            rows: [
+              ['1', 'Anna'],
+              ['2', 'Ben'],
+              ['3', 'Carla'],
+            ],
+          },
+          {
+            art: 'tabelle',
+            titel: 'Relational · Tabelle kennt (von/nach = Fremdschlüssel auf PersNr)',
+            columns: ['von', 'nach'],
+            rows: [
+              ['1', '2'],
+              ['1', '3'],
+              ['2', '3'],
+            ],
+          },
+          {
+            art: 'svg',
+            titel: 'Graph · dieselben Daten: Personen = Knoten, „kennt" = Kanten',
+            svg: `<svg viewBox="0 0 640 280" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph mit den Knoten Anna, Ben und Carla, verbunden durch kennt-Kanten">
+  <defs>
+    <marker id="ls12-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:var(--text2)"/>
+    </marker>
+  </defs>
+  <circle class="dgm-shape" cx="130" cy="80" r="40"/>
+  <circle class="dgm-shape" cx="510" cy="80" r="40"/>
+  <circle class="dgm-shape" cx="320" cy="215" r="40"/>
+  <line class="dgm-line" x1="170" y1="80" x2="470" y2="80" marker-end="url(#ls12-arrow)"/>
+  <line class="dgm-line" x1="163" y1="103" x2="287" y2="192" marker-end="url(#ls12-arrow)"/>
+  <line class="dgm-line" x1="477" y1="103" x2="353" y2="192" marker-end="url(#ls12-arrow)"/>
+  <text class="dgm-text dgm-text--sm" x="130" y="85" text-anchor="middle">Anna</text>
+  <text class="dgm-text dgm-text--sm" x="510" y="85" text-anchor="middle">Ben</text>
+  <text class="dgm-text dgm-text--sm" x="320" y="220" text-anchor="middle">Carla</text>
+  <text class="dgm-text dgm-text--sm" x="320" y="70" text-anchor="middle">kennt</text>
+  <text class="dgm-text dgm-text--sm" x="200" y="150" text-anchor="middle">kennt</text>
+  <text class="dgm-text dgm-text--sm" x="440" y="150" text-anchor="middle">kennt</text>
+</svg>`,
+          },
+          {
+            art: 'liste',
+            titel: 'Was man am Beispiel sieht',
+            punkte: [
+              '**Relational:** Die Beziehung „kennt" existiert nur als Zahlenpaare in einer eigenen Tabelle. Für „Wen kennt Anna?" muss man Person und kennt per JOIN über die Fremdschlüssel verbinden; „Freunde von Freunden" braucht noch einen weiteren JOIN.',
+              '**Graph:** Jede Person ist ein Knoten, jedes „kennt" eine echte Kante. „Wen kennt Anna?" heißt einfach: den Kanten am Anna-Knoten folgen – „Freunde von Freunden" sind zwei Kanten weiter, ganz ohne JOIN. Darum sind Graphdatenbanken bei stark vernetzten Daten (soziale Netze, Wege, Empfehlungen) schneller.',
+            ],
+          },
+          {
             art: 'def',
             begriff: 'Datenbankschema',
             text: 'Formale Beschreibung der Struktur: welche Tabellen es gibt, ihre Attribute, Datentypen, Constraints und Beziehungen (der „Bauplan"). Die konkreten Daten heißen Ausprägung und müssen zum Schema passen.',
