@@ -280,6 +280,62 @@ export const lernskript: SkriptKapitel[] = [
             a: '1:1, 1:N, N:1 und N:M. Die Angabe steht an der jeweiligen Entität und beschränkt, wie viele Partner auf der Gegenseite möglich sind.',
           },
           {
+            art: 'svg',
+            titel: 'Die vier Funktionalitäten – je als kleines ER-Beispiel (die Zahl steht am Beziehungstyp)',
+            svg: `<svg viewBox="0 0 720 285" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vier ER-Beispiele für die Funktionalitäten 1:1, 1:N, N:1 und N:M">
+  <line class="dgm-line" x1="360" y1="20" x2="360" y2="270" style="opacity:.35"/>
+  <line class="dgm-line" x1="15" y1="150" x2="705" y2="150" style="opacity:.35"/>
+  <text class="dgm-card" x="180" y="32" text-anchor="middle">1:1</text>
+  <rect class="dgm-shape" x="22" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="72" y="80" text-anchor="middle">Abteilung</text>
+  <line class="dgm-line" x1="122" y1="76" x2="138" y2="76"/>
+  <polygon class="dgm-shape" points="138,76 180,50 222,76 180,102"/>
+  <text class="dgm-text dgm-text--sm" x="180" y="80" text-anchor="middle">leitet</text>
+  <line class="dgm-line" x1="222" y1="76" x2="238" y2="76"/>
+  <rect class="dgm-shape" x="238" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="288" y="80" text-anchor="middle">Manager</text>
+  <text class="dgm-card" x="128" y="70" text-anchor="middle">1</text>
+  <text class="dgm-card" x="232" y="70" text-anchor="middle">1</text>
+  <text class="dgm-card" x="540" y="32" text-anchor="middle">1:N</text>
+  <rect class="dgm-shape" x="382" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="432" y="80" text-anchor="middle">Abteilung</text>
+  <line class="dgm-line" x1="482" y1="76" x2="498" y2="76"/>
+  <polygon class="dgm-shape" points="498,76 540,50 582,76 540,102"/>
+  <text class="dgm-text dgm-text--sm" x="540" y="80" text-anchor="middle">beschäftigt</text>
+  <line class="dgm-line" x1="582" y1="76" x2="598" y2="76"/>
+  <rect class="dgm-shape" x="598" y="56" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="648" y="80" text-anchor="middle">Mitarbeiter</text>
+  <text class="dgm-card" x="488" y="70" text-anchor="middle">1</text>
+  <text class="dgm-card" x="592" y="70" text-anchor="middle">N</text>
+  <text class="dgm-card" x="180" y="182" text-anchor="middle">N:1</text>
+  <rect class="dgm-shape" x="22" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="72" y="230" text-anchor="middle">Mitarbeiter</text>
+  <line class="dgm-line" x1="122" y1="226" x2="138" y2="226"/>
+  <polygon class="dgm-shape" points="138,226 180,200 222,226 180,252"/>
+  <text class="dgm-text dgm-text--sm" x="180" y="230" text-anchor="middle">arbeitet_in</text>
+  <line class="dgm-line" x1="222" y1="226" x2="238" y2="226"/>
+  <rect class="dgm-shape" x="238" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="288" y="230" text-anchor="middle">Abteilung</text>
+  <text class="dgm-card" x="128" y="220" text-anchor="middle">N</text>
+  <text class="dgm-card" x="232" y="220" text-anchor="middle">1</text>
+  <text class="dgm-card" x="540" y="182" text-anchor="middle">N:M</text>
+  <rect class="dgm-shape" x="382" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="432" y="230" text-anchor="middle">Student</text>
+  <line class="dgm-line" x1="482" y1="226" x2="498" y2="226"/>
+  <polygon class="dgm-shape" points="498,226 540,200 582,226 540,252"/>
+  <text class="dgm-text dgm-text--sm" x="540" y="230" text-anchor="middle">hört</text>
+  <line class="dgm-line" x1="582" y1="226" x2="598" y2="226"/>
+  <rect class="dgm-shape" x="598" y="206" width="100" height="40" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="648" y="230" text-anchor="middle">Vorlesung</text>
+  <text class="dgm-card" x="488" y="220" text-anchor="middle">N</text>
+  <text class="dgm-card" x="592" y="220" text-anchor="middle">M</text>
+</svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Die Funktionalität annotiert den Beziehungstyp (die Raute): Die Zahl an einer Seite sagt, wie viele Partner auf der Gegenseite erlaubt sind. 1:N und N:1 sind dieselbe Beziehung – nur aus Sicht der jeweils anderen Entität gelesen (eine Abteilung beschäftigt viele Mitarbeiter = jeder Mitarbeiter arbeitet in genau einer Abteilung). Nur bei N:M braucht man beim Umsetzen ins relationale Schema eine eigene Beziehungstabelle.',
+          },
+          {
             art: 'tabelle',
             titel: 'Funktionalität ↔ (min,max)-Notation',
             columns: ['F1 : F2', '(min1, max1)', '(min2, max2)'],
