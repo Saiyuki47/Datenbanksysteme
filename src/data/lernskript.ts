@@ -396,6 +396,50 @@ export const lernskript: SkriptKapitel[] = [
               'Fremdschlüssel (FK): Attribut(e), die auf den PK einer (anderen) Relation verweisen.',
             ],
           },
+          {
+            art: 'svg',
+            titel: 'Beispiel-Relation »Studenten«: die ganze Tabelle ist die Relation, die Fachbegriffe stehen an den Rändern',
+            svg: `<svg viewBox="0 0 720 260" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel-Relation Studenten mit beschrifteten Fachbegriffen Attribut, Tupel, Grad und Kardinalität">
+  <rect x="300" y="70" width="150" height="136" style="fill:var(--blue);opacity:.10"/>
+  <rect x="190" y="138" width="370" height="34" style="fill:var(--green);opacity:.13"/>
+  <rect class="dgm-line" x="190" y="70" width="370" height="136"/>
+  <line class="dgm-line" x1="300" y1="70" x2="300" y2="206"/>
+  <line class="dgm-line" x1="450" y1="70" x2="450" y2="206"/>
+  <line class="dgm-line" x1="190" y1="104" x2="560" y2="104"/>
+  <line class="dgm-line" x1="190" y1="138" x2="560" y2="138"/>
+  <line class="dgm-line" x1="190" y1="172" x2="560" y2="172"/>
+  <text class="dgm-text dgm-text--sm" x="245" y="92" text-anchor="middle">MatrNr</text>
+  <text class="dgm-text dgm-text--sm" x="375" y="92" text-anchor="middle">Name</text>
+  <text class="dgm-text dgm-text--sm" x="505" y="92" text-anchor="middle">Semester</text>
+  <text class="dgm-text dgm-text--sm" x="245" y="126" text-anchor="middle">24002</text>
+  <text class="dgm-text dgm-text--sm" x="375" y="126" text-anchor="middle">Xenokrates</text>
+  <text class="dgm-text dgm-text--sm" x="505" y="126" text-anchor="middle">18</text>
+  <text class="dgm-text dgm-text--sm" x="245" y="160" text-anchor="middle">25403</text>
+  <text class="dgm-text dgm-text--sm" x="375" y="160" text-anchor="middle">Jonas</text>
+  <text class="dgm-text dgm-text--sm" x="505" y="160" text-anchor="middle">12</text>
+  <text class="dgm-text dgm-text--sm" x="245" y="194" text-anchor="middle">26120</text>
+  <text class="dgm-text dgm-text--sm" x="375" y="194" text-anchor="middle">Fichte</text>
+  <text class="dgm-text dgm-text--sm" x="505" y="194" text-anchor="middle">10</text>
+  <text class="dgm-text dgm-text--sm" x="375" y="40" text-anchor="middle" style="fill:var(--blue)">Attribut = Spalte</text>
+  <text class="dgm-text" x="375" y="63" text-anchor="middle" style="fill:var(--blue)">↓</text>
+  <text class="dgm-text dgm-text--sm" x="575" y="164" text-anchor="start" style="fill:var(--green)">← Tupel = Zeile</text>
+  <line class="dgm-line" x1="190" y1="220" x2="560" y2="220"/>
+  <line class="dgm-line" x1="190" y1="214" x2="190" y2="220"/>
+  <line class="dgm-line" x1="560" y1="214" x2="560" y2="220"/>
+  <line class="dgm-line" x1="375" y1="220" x2="375" y2="228"/>
+  <text class="dgm-text dgm-text--sm" x="375" y="244" text-anchor="middle">Grad = 3 (Spalten)</text>
+  <line class="dgm-line" x1="176" y1="104" x2="176" y2="206"/>
+  <line class="dgm-line" x1="176" y1="104" x2="182" y2="104"/>
+  <line class="dgm-line" x1="176" y1="206" x2="182" y2="206"/>
+  <line class="dgm-line" x1="176" y1="155" x2="170" y2="155"/>
+  <text class="dgm-text dgm-text--sm" x="96" y="151" text-anchor="middle">Kardinalität</text>
+  <text class="dgm-text dgm-text--sm" x="96" y="167" text-anchor="middle">= 3 (Zeilen)</text>
+</svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Grad (Spaltenzahl) und Kardinalität (Zeilenzahl) sind hier beide 3. Achtung: „Kardinalität" meint in der relationalen Theorie die Zeilenzahl – nicht zu verwechseln mit der Kardinalität/Funktionalität einer ER-Beziehung (1:N, N:M).',
+          },
         ],
       },
       {
