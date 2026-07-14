@@ -684,6 +684,10 @@ export const lernskript: SkriptKapitel[] = [
             ],
           },
           {
+            art: 'text',
+            text: 'Anmerkung: „Relation" ist dabei nur ein anderes Wort für „Tabelle" (Spalten = Attribute, Zeilen = Tupel). Was genau eine Relation, ein Tupel, ein Attribut und ein Schlüssel ist, steht oben in Abschnitt 3.1 Begriffe & Schlüssel.',
+          },
+          {
             art: 'merk',
             text: 'Verfeinern: Relationen mit GLEICHEM Schlüssel darf man zusammenfassen – aber nur diese! Binäre 1:N/N:1/1:1-Beziehungsrelationen werden mit der passenden Entity-Relation verschmolzen; N:M-Beziehungen behalten immer eine eigene Relation.',
           },
