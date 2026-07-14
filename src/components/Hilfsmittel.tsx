@@ -315,8 +315,8 @@ export default function Hilfsmittel() {
         </button>
       </div>
       <p className="hm-hint no-print">
-        Passt mit jeder Rand-Einstellung auf eine Seite. Für die größten Karten im Druckdialog
-        Ränder „Keine" wählen; Skalierung 100 % und „Hintergrundgrafiken" aktiviert lassen.
+        Auf A4 ausgelegt – passt mit jeder Rand-Einstellung auf eine Seite. Im Druckdialog Papier
+        „A4", Skalierung 100 % und „Hintergrundgrafiken" aktiviert lassen (für randlose Karten Ränder „Keine").
       </p>
       <div className="hm-sheets">
         {BLAETTER.map((karten, i) => (
@@ -333,29 +333,29 @@ export default function Hilfsmittel() {
 const HM_CSS = `
 .hm-hint{font-size:.8rem;color:var(--text2);margin:0 0 1rem}
 .hm-sheets{display:flex;flex-direction:column;align-items:center;gap:1.2rem;overflow-x:auto}
-/* Blatt bewusst 188×257mm: passt auf A4 UND US-Letter selbst mit den
-   Standard-Druckrändern (~10mm) noch auf EINE Seite – so verrutschen die
-   Karten unabhängig von der Rand-Einstellung im Druckdialog nicht. */
-.hm-sheet{width:188mm;height:257mm;flex-shrink:0;background:#fff;color:#000;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+/* Fest auf A4 ausgelegt: 188×274mm passt auf A4 selbst mit den Standard-
+   Druckrändern (~10mm) noch auf EINE Seite – so verrutschen die Karten
+   unabhängig von der Rand-Einstellung im Druckdialog nicht. */
+.hm-sheet{width:188mm;height:274mm;flex-shrink:0;background:#fff;color:#000;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;box-shadow:0 2px 16px rgba(0,0,0,.35)}
 .hm-cut-cell{border:1px dashed #b4b4b4;display:flex;padding:4mm;overflow:hidden}
 .hm-cut-frame{position:relative;flex:1;border:1.2px solid #555;border-radius:3mm;overflow:hidden}
 /* Inhalt um 90° gedreht: Querformat nutzt das Hochformat-Viertel besser aus.
-   Maße passend zum Viertel des kleineren Blatts. */
-.hm-cut-rot{position:absolute;top:50%;left:50%;width:116mm;height:80mm;box-sizing:border-box;transform:translate(-50%,-50%) rotate(-90deg);display:flex;flex-direction:column;justify-content:center;padding:3mm 6mm;overflow:hidden}
-.hm-cut-gruppe{margin:0 0 1.5mm;font-family:var(--font-mono,monospace);font-size:8pt;letter-spacing:.08em;text-transform:uppercase;color:#8a8a8a}
-.hm-cut-titel{margin:0 0 2.5mm;font-family:var(--font-sans);font-weight:700;font-size:13pt;line-height:1.12;color:#000}
-.hm-cut-rot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.4mm}
-.hm-cut-rot li{font-size:8.5pt;line-height:1.32;color:#111}
-.hm-label{display:inline-block;margin-right:1.3mm;padding:0 1.2mm;border-radius:2px;background:#ececec;color:#444;font-size:7.6pt;font-weight:700;white-space:nowrap}
-.hm-code{font-family:var(--font-mono,monospace);font-size:8.4pt;color:#111}
-.hm-tab{width:100%;border-collapse:collapse;margin:0 0 1.5mm;font-size:8pt}
-.hm-tab th,.hm-tab td{border:.75pt solid #999;padding:.4mm 1.5mm;text-align:center;color:#111}
+   Maße passend zum A4-Viertel. */
+.hm-cut-rot{position:absolute;top:50%;left:50%;width:124mm;height:82mm;box-sizing:border-box;transform:translate(-50%,-50%) rotate(-90deg);display:flex;flex-direction:column;justify-content:center;padding:3mm 6mm;overflow:hidden}
+.hm-cut-gruppe{margin:0 0 2mm;font-family:var(--font-mono,monospace);font-size:8pt;letter-spacing:.1em;text-transform:uppercase;color:#8a8a8a}
+.hm-cut-titel{margin:0 0 3mm;font-family:var(--font-sans);font-weight:700;font-size:14pt;line-height:1.13;color:#000}
+.hm-cut-rot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:1.7mm}
+.hm-cut-rot li{font-size:9pt;line-height:1.36;color:#111}
+.hm-label{display:inline-block;margin-right:1.4mm;padding:0 1.3mm;border-radius:2px;background:#ececec;color:#444;font-size:8pt;font-weight:700;white-space:nowrap}
+.hm-code{font-family:var(--font-mono,monospace);font-size:9pt;color:#111}
+.hm-tab{width:100%;border-collapse:collapse;margin:0 0 2mm;font-size:8.5pt}
+.hm-tab th,.hm-tab td{border:.75pt solid #999;padding:.5mm 1.8mm;text-align:center;color:#111}
 .hm-tab th{background:#ececec;font-weight:700}
 .hm-tab td{font-family:var(--font-mono,monospace)}
 @media print{
-  /* Kein festes A4: nimmt das eingelegte Papier (A4 oder Letter); das Blatt
-     ist mit 210×277mm so bemessen, dass es auf beiden je eine Seite bleibt. */
-  @page{margin:0}
+  /* Fest A4: der Ausdruck ist auf A4 ausgelegt (188×274mm-Blatt passt darauf
+     auch mit Standard-Rändern auf eine Seite). */
+  @page{size:A4 portrait;margin:0}
   header,.tabs,.no-print,.site-nav{display:none!important}
   body{background:#fff!important}
   .container{max-width:none!important;margin:0!important;padding:0!important}
