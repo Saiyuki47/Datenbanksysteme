@@ -134,6 +134,68 @@ export const lernskript: SkriptKapitel[] = [
             ],
           },
           {
+            art: 'text',
+            text: 'Noch ein typisches Datenbank-Beispiel – ein Online-Shop mit Kunden und Bestellungen. Relational sind es zwei Tabellen; der Fremdschlüssel kunden_id verknüpft sie:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Tabelle Kunde',
+            columns: ['kunden_id', 'name', 'ort'],
+            rows: [
+              ['1', 'Anna Schmidt', 'Fulda'],
+              ['2', 'Ben Weber', 'Kassel'],
+            ],
+          },
+          {
+            art: 'tabelle',
+            titel: 'Tabelle Bestellung (kunden_id = Fremdschlüssel auf Kunde)',
+            columns: ['bestell_id', 'datum', 'betrag', 'kunden_id'],
+            rows: [
+              ['101', '01.07.26', '49,90', '1'],
+              ['102', '03.07.26', '19,50', '1'],
+              ['103', '05.07.26', '89,00', '2'],
+            ],
+          },
+          {
+            art: 'svg',
+            titel: 'Als Graph: jede Zeile ein Knoten, der Fremdschlüssel wird zur Kante HAT_AUFGEGEBEN',
+            svg: `<svg viewBox="0 0 720 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Graph: Kunden-Knoten mit HAT_AUFGEGEBEN-Kanten zu Bestellungs-Knoten">
+  <defs>
+    <marker id="ls12b-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:var(--text2)"/>
+    </marker>
+  </defs>
+  <line class="dgm-line" x1="192" y1="143" x2="506" y2="102" marker-end="url(#ls12b-arrow)"/>
+  <line class="dgm-line" x1="191" y1="159" x2="507" y2="215" marker-end="url(#ls12b-arrow)"/>
+  <line class="dgm-line" x1="192" y1="333" x2="506" y2="352" marker-end="url(#ls12b-arrow)"/>
+  <text class="dgm-text" x="349" y="112" text-anchor="middle" style="font-size:10px;fill:var(--text2)">HAT_AUFGEGEBEN</text>
+  <text class="dgm-text" x="349" y="181" text-anchor="middle" style="font-size:10px;fill:var(--text2)">HAT_AUFGEGEBEN</text>
+  <text class="dgm-text" x="349" y="333" text-anchor="middle" style="font-size:10px;fill:var(--text2)">HAT_AUFGEGEBEN</text>
+  <circle cx="140" cy="150" r="52" style="fill:var(--green);fill-opacity:.14;stroke:var(--green);stroke-width:1.5"/>
+  <circle cx="140" cy="330" r="52" style="fill:var(--green);fill-opacity:.14;stroke:var(--green);stroke-width:1.5"/>
+  <circle cx="560" cy="95" r="54" style="fill:var(--blue);fill-opacity:.14;stroke:var(--blue);stroke-width:1.5"/>
+  <circle cx="560" cy="225" r="54" style="fill:var(--blue);fill-opacity:.14;stroke:var(--blue);stroke-width:1.5"/>
+  <circle cx="560" cy="355" r="54" style="fill:var(--blue);fill-opacity:.14;stroke:var(--blue);stroke-width:1.5"/>
+  <text x="140" y="146" text-anchor="middle" style="fill:var(--green);font-weight:700;font-size:12px">:Kunde</text>
+  <text x="140" y="162" text-anchor="middle" class="dgm-text" style="font-size:10.5px">name: Anna</text>
+  <text x="140" y="326" text-anchor="middle" style="fill:var(--green);font-weight:700;font-size:12px">:Kunde</text>
+  <text x="140" y="342" text-anchor="middle" class="dgm-text" style="font-size:10.5px">name: Ben</text>
+  <text x="560" y="83" text-anchor="middle" style="fill:var(--blue);font-weight:700;font-size:12px">:Bestellung</text>
+  <text x="560" y="99" text-anchor="middle" class="dgm-text" style="font-size:10.5px">id: 101</text>
+  <text x="560" y="113" text-anchor="middle" class="dgm-text" style="font-size:10.5px">betrag: 49,90</text>
+  <text x="560" y="213" text-anchor="middle" style="fill:var(--blue);font-weight:700;font-size:12px">:Bestellung</text>
+  <text x="560" y="229" text-anchor="middle" class="dgm-text" style="font-size:10.5px">id: 102</text>
+  <text x="560" y="243" text-anchor="middle" class="dgm-text" style="font-size:10.5px">betrag: 19,50</text>
+  <text x="560" y="343" text-anchor="middle" style="fill:var(--blue);font-weight:700;font-size:12px">:Bestellung</text>
+  <text x="560" y="359" text-anchor="middle" class="dgm-text" style="font-size:10.5px">id: 103</text>
+  <text x="560" y="373" text-anchor="middle" class="dgm-text" style="font-size:10.5px">betrag: 89,00</text>
+</svg>`,
+          },
+          {
+            art: 'text',
+            text: 'Aus jeder Tabellenzeile wird ein Knoten mit einem Label (:Kunde, :Bestellung) und den Spalten als Eigenschaften. Der Fremdschlüssel kunden_id wird zur gerichteten Kante (:Kunde)-[:HAT_AUFGEGEBEN]→(:Bestellung). „Alle Bestellungen von Anna" heißt dann nur: den HAT_AUFGEGEBEN-Kanten von Annas Knoten folgen – kein JOIN über die kunden_id nötig.',
+          },
+          {
             art: 'def',
             begriff: 'Datenbankschema',
             text: 'Formale Beschreibung der Struktur: welche Tabellen es gibt, ihre Attribute, Datentypen, Constraints und Beziehungen (der „Bauplan"). Die konkreten Daten heißen Ausprägung und müssen zum Schema passen.',
