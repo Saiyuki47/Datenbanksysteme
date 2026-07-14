@@ -648,6 +648,28 @@ export const lernskript: SkriptKapitel[] = [
             art: 'text',
             text: 'Grad (Spaltenzahl) und Kardinalität (Zeilenzahl) sind hier beide 3. Achtung: „Kardinalität" meint in der relationalen Theorie die Zeilenzahl – nicht zu verwechseln mit der Kardinalität/Funktionalität einer ER-Beziehung (1:N, N:M).',
           },
+          {
+            art: 'text',
+            text: 'Beispiel für Schlüssel – eine Studenten-Relation, in der sowohl die Matrikelnummer als auch die E-Mail eindeutig sind, der Name aber nicht:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Beispiel-Relation Student (MatrNr und Email eindeutig, Name nicht)',
+            columns: ['MatrNr', 'Email', 'Name'],
+            rows: [
+              ['24002', 'xenokrates@uni.de', 'Xenokrates'],
+              ['25403', 'jonas@uni.de', 'Jonas'],
+              ['26120', 'fichte@uni.de', 'Fichte'],
+            ],
+          },
+          {
+            art: 'liste',
+            titel: 'Schlüssel an diesem Beispiel',
+            punkte: [
+              '**Superschlüssel:** jede Attributmenge, die eine Zeile eindeutig bestimmt. Hier z. B. {MatrNr}, {Email}, aber auch {MatrNr, Name}, {Email, Name} oder {MatrNr, Email, Name} – sie alle enthalten ein eindeutiges Attribut und legen die Zeile damit eindeutig fest.',
+              '**Kandidatenschlüssel:** die minimalen Superschlüssel – kein Attribut ist mehr weglassbar, ohne die Eindeutigkeit zu verlieren. Hier {MatrNr} und {Email}. {MatrNr, Name} ist keiner, weil Name überflüssig ist ({MatrNr} allein bestimmt die Zeile schon); {Name} allein ist gar kein Superschlüssel (Namen können doppelt vorkommen).',
+            ],
+          },
         ],
       },
       {
