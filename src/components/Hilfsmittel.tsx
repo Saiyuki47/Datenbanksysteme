@@ -332,11 +332,14 @@ export default function Hilfsmittel() {
 const HM_CSS = `
 .hm-hint{font-size:.8rem;color:var(--text2);margin:0 0 1rem}
 .hm-sheets{display:flex;flex-direction:column;align-items:center;gap:1.2rem;overflow-x:auto}
-.hm-sheet{width:210mm;height:297mm;flex-shrink:0;background:#fff;color:#000;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;box-shadow:0 2px 16px rgba(0,0,0,.35)}
-.hm-cut-cell{border:1px dashed #b4b4b4;display:flex;padding:6mm;overflow:hidden}
+/* Höhe 277mm (statt volle A4-297mm), damit ein Blatt auch auf US-Letter
+   (279mm hoch) noch auf EINE Seite passt und die Karten nicht verrutschen. */
+.hm-sheet{width:210mm;height:277mm;flex-shrink:0;background:#fff;color:#000;display:grid;grid-template-columns:1fr 1fr;grid-template-rows:1fr 1fr;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+.hm-cut-cell{border:1px dashed #b4b4b4;display:flex;padding:5mm;overflow:hidden}
 .hm-cut-frame{position:relative;flex:1;border:1.2px solid #555;border-radius:3mm;overflow:hidden}
-/* Inhalt um 90° gedreht: Querformat nutzt das Hochformat-Viertel besser aus. */
-.hm-cut-rot{position:absolute;top:50%;left:50%;width:135mm;height:92mm;box-sizing:border-box;transform:translate(-50%,-50%) rotate(-90deg);display:flex;flex-direction:column;justify-content:center;padding:5mm 9mm}
+/* Inhalt um 90° gedreht: Querformat nutzt das Hochformat-Viertel besser aus.
+   Maße passend zum (nach Letter-Anpassung) etwas niedrigeren Viertel. */
+.hm-cut-rot{position:absolute;top:50%;left:50%;width:124mm;height:88mm;box-sizing:border-box;transform:translate(-50%,-50%) rotate(-90deg);display:flex;flex-direction:column;justify-content:center;padding:4mm 7mm}
 .hm-cut-gruppe{margin:0 0 2mm;font-family:var(--font-mono,monospace);font-size:8.5pt;letter-spacing:.1em;text-transform:uppercase;color:#8a8a8a}
 .hm-cut-titel{margin:0 0 4mm;font-family:var(--font-sans);font-weight:700;font-size:15pt;line-height:1.15;color:#000}
 .hm-cut-rot ul{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2mm}
@@ -348,7 +351,9 @@ const HM_CSS = `
 .hm-tab th{background:#ececec;font-weight:700}
 .hm-tab td{font-family:var(--font-mono,monospace)}
 @media print{
-  @page{size:A4 portrait;margin:0}
+  /* Kein festes A4: nimmt das eingelegte Papier (A4 oder Letter); das Blatt
+     ist mit 210×277mm so bemessen, dass es auf beiden je eine Seite bleibt. */
+  @page{margin:0}
   header,.tabs,.no-print,.site-nav{display:none!important}
   body{background:#fff!important}
   .container{max-width:none!important;margin:0!important;padding:0!important}

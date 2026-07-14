@@ -36,7 +36,7 @@ function App() {
       <Header logo={<>Datenbanksysteme</>} subtitle="Pine Valley & Northwind Datenbank" current="datenbanken" theme={theme} onToggleTheme={toggle} />
       <div className="container">
         <Tabs tabs={tabs} activeTab={activeTab} onTabChange={setActiveTab} />
-        <div style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.75rem' }}>
+        <div className="no-print" style={{ display: 'flex', justifyContent: 'flex-end', marginBottom: '0.75rem' }}>
           <GlobalSearch loadIndex={() => import('./data/searchIndex').then(m => m.searchIndex)} onNavigate={t => setActiveTab(t as TabId)} />
         </div>
         <Suspense fallback={<div className="card"><p className="quiz-hint">Lädt …</p></div>}>
