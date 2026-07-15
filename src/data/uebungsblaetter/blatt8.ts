@@ -23,8 +23,9 @@ export const blatt8: Uebungsblatt = {
       referenz: ['grundabfrage'],
       titel: 'Gruppenaufgabe 1 – Northwind-Datenbank & Notation',
       text:
-        'a) Um was für eine Datenbank handelt es sich bei Northwind? b) Wofür stehen die Symbole an den Spalten und die ' +
-        'Beziehungsnotation im Diagramm? c) Bauen Sie die Northwind-Datenbank in Ihrer Verbindung auf.',
+        'a) Um was für eine Datenbank handelt es sich bei Northwind?\n' +
+        'b) Wofür stehen die Symbole an den Spalten und die Beziehungsnotation im Diagramm?\n' +
+        'c) Bauen Sie die Northwind-Datenbank in Ihrer Verbindung auf.',
     },
     {
       nr: 2,
