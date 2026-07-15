@@ -24,11 +24,23 @@ export const blatt2: Uebungsblatt = {
       referenz: ['er-modell'],
       titel: 'Gruppenaufgabe 2 – Apothekenkette „Prescriptions-4-U"',
       text:
-        'Entwerfen Sie für die Apothekenkette eine Datenbank.\n\n' +
-        '1) Erstellen Sie ein ER-Diagramm: a) Entitäten und Attribute, b) Beziehungen (samt Attributen), ' +
-        'c) Funktionalitäten (1:1, 1:N, N:1, N:M), d) ggf. Einschränkungen.\n' +
-        '2) Wie ändert sich das Diagramm, wenn jedes Medikament in allen Apotheken zu einem festen Preis verkauft wird?\n' +
-        '3) Wie ändert sich das Diagramm, wenn mehrfach verschriebene Rezepte (gleicher Arzt, gleicher Patient, gleiches Medikament) alle separat gespeichert werden sollen?',
+        'Die Apothekenkette Prescriptions-4-U hat Sie beauftragt, eine Datenbank zur Speicherung aller für die Apothekenkette relevanten Daten zu entwerfen. Hier sind die Informationen, die Sie sammeln:\n\n' +
+        '• Die Patienten werden durch die SVN (Sozialversicherungsnummer) identifiziert. Auch ihre Namen, Adressen und das Alter werden erfasst.\n' +
+        '• Ärzte werden durch eine SVN identifiziert. Für jeden Arzt muss der Name, das Fachgebiet und die Jahre der Erfahrung erfasst werden.\n' +
+        '• Jedes pharmazeutische Unternehmen wird durch den Namen identifiziert und hat eine Telefonnummer.\n' +
+        '• Jede Apotheke hat einen Namen, der sie eindeutig identifiziert, eine Adresse und eine Telefonnummer.\n' +
+        '• Für jedes Medikament müssen Handelsname und Formel gespeichert werden. Jedes Medikament wird von einem bestimmten pharmazeutischen Unternehmen hergestellt und der Handelsname identifiziert ein Medikament eindeutig unter den Produkten dieses Unternehmens. Wenn ein pharmazeutisches Unternehmen gelöscht wird, müssen dessen Produkte nicht mehr erfasst werden.\n' +
+        '• Jeder Patient hat einen Primärarzt. Jeder Arzt hat mindestens einen Patienten.\n' +
+        '• Jede Apotheke verkauft mehrere Medikamente und hat für jedes einen Preis. Ein Medikament kann in mehreren Apotheken verkauft werden, und der Preis kann von Apotheke zu Apotheke variieren.\n' +
+        '• Ein Arzt kann einem Patienten mehrere Medikamente verschreiben. Ein Medikament kann vom Arzt mehreren Patienten verschrieben werden und ein Patient kann Medikamente von mehreren Ärzten erhalten. Jede Verschreibung ist mit einem Datum und einer Menge versehen. Wenn ein Arzt dasselbe Medikament für denselben Patienten mehr als einmal verschreibt, muss nur die jeweils letzte Verschreibung gespeichert werden.\n' +
+        '• Pharmazeutische Unternehmen haben langfristige Verträge mit Apotheken. Ein pharmazeutisches Unternehmen kann mit mehreren Apotheken Verträge abschließen. Für jeden Vertrag müssen ein Start- und ein Enddatum sowie der Vertragstext gespeichert werden.\n\n' +
+        '1) Erstellen Sie ein ER-Diagramm, indem Sie die folgenden Schritte abarbeiten:\n' +
+        'a) Ermitteln Sie die Entitäten und deren Attribute.\n' +
+        'b) Ermitteln Sie die Beziehungen zwischen den Entitäten und (falls vorhanden) die Attribute der Beziehungen.\n' +
+        'c) Ermitteln Sie die Funktionalitäten der Beziehungen (1:1, 1:N, N:1, N:M).\n' +
+        'd) Ermitteln Sie ggf. Einschränkungen zwischen Entitäten und Beziehungen.\n' +
+        '2) Wie müsste das Diagramm verändert werden, wenn jedes Medikament von allen Apotheken zu einem festen Preis verkauft werden soll?\n' +
+        '3) Wie müsste das Diagramm verändert werden, wenn die Anforderung wie folgt lautet: Falls ein Arzt ein Medikament mehrfach für den gleichen Patient verschreibt, dann sollen solche Rezepte alle separat gespeichert werden.',
       loesung: [
         {
           art: 'unterpunkt',
@@ -193,10 +205,10 @@ export const blatt2: Uebungsblatt = {
       referenz: ['er-modell'],
       titel: 'Hausaufgabe 1 – ER-Diagramme zu drei Sachverhalten',
       text:
-        'Erstellen Sie für jeden Sachverhalt ein ER-Diagramm (Entitäten, Beziehungen mit Funktionalitäten 1:1/1:N/N:1/N:M, ggf. Attribute).\n\n' +
-        'a) (Altklausur) Bibliothek: Buchtitel und Buchexemplare; zu einem Titel mehrere Exemplare. Ausleiher leihen Buchexemplare und können Buchtitel vormerken. Jedes Buch kann einen oder mehrere Autoren haben.\n' +
-        'b) Autos werden von einem Hersteller hergestellt. Autos haben höchstens einen Fahrzeughalter; auf einen Halter können mehrere Autos eingetragen sein.\n' +
-        'c) LinkedIn: Personenprofile (Vorname, Nachname, eindeutige E-Mail) vernetzen sich untereinander. Unternehmensprofile (eindeutiger Name, Slogan) werden von mind. einem Personenprofil administriert; Personen können mehrere administrieren, Unternehmen folgen und eines als aktuellen Arbeitgeber angeben.',
+        'Nachfolgend werden verschiedene Sachverhalte vorgestellt. Erstellen Sie für jeden Sachverhalt ein Entity-Relationship-Diagramm, indem Sie die Entitäten, Beziehungen mit Funktionalitäten (1:1, 1:N, N:1, N:M) und ggf. Attribute identifizieren.\n\n' +
+        'a) (Altklausuraufgabe) In einer Bibliothek werden folgende Daten verwaltet: Es gibt Buchtitel und Buchexemplare. Für einen Buchtitel können mehrere Exemplare vorhanden sein. Ausleiher leihen Buchexemplare. Ausleiher können Buchtitel vormerken lassen. Jedes Buch kann einen oder mehrere Autoren haben.\n' +
+        'b) Autos werden von einem Hersteller hergestellt. Autos haben höchstens einen Fahrzeughalter. Auf einen Fahrzeughalter können mehrere Autos eingetragen sein.\n' +
+        'c) Profile von Personen auf dem sozialen Netzwerk LinkedIn enthalten den Vornamen, Nachnamen und eine eindeutige E-Mail-Adresse. Personenprofile können sich mit anderen Personenprofilen vernetzen. Weiterhin existieren auf LinkedIn Unternehmensprofile. Diese haben einen eindeutigen Unternehmensnamen und einen Slogan. Unternehmensprofile werden von mindestens einem Personenprofil administriert. Personen können theoretisch eine oder mehrere Unternehmensprofile administrieren. Personen können Unternehmensprofilen folgen und ein Unternehmensprofil als aktuellen Arbeitgeber angeben.',
       loesung: [
         {
           art: 'unterpunkt',
@@ -331,10 +343,28 @@ export const blatt2: Uebungsblatt = {
       referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 2 – partielle Funktionen einer ternären Beziehung',
       text:
-        'Gegeben die ternäre Beziehung teilnehmen(Übungsleiter, Übungsgruppe, Student) mit Funktionalitäten 1:1:N.\n\n' +
-        '• Wie viele partielle Funktionen der Form A × B → C kann es maximal geben (Reihenfolge links egal)?\n' +
-        '• Nennen Sie alle und beschreiben Sie jeweils die Einschränkung.\n' +
-        '• Welche gelten unter den Funktionalitäten 1:1:N (Übungsleiter 1, Übungsgruppe 1, Student N)?',
+        'Ignorieren Sie die Funktionalitätsangaben 1:1:N und beantworten Sie:\n' +
+        '• Wie viele partielle Funktionen der Form A × B → C können in einer ternären Beziehung maximal auftreten? (Ignorieren Sie beim Zählen die Reihenfolge auf der linken Seite der Abbildung / links vom Pfeil.)\n' +
+        '• Nennen Sie alle potenziell möglichen partiellen Funktionen in der hier gezeigten Beziehung „Übung".\n' +
+        '• Nennen Sie für jede der potenziell möglichen partiellen Funktion in Textform, welche Einschränkung/Bedingung diese darstellt, falls sie gilt.\n\n' +
+        'Unter Berücksichtigung der Funktionalitätsangaben 1:1:N:\n' +
+        '• Welche partiellen Funktionen gelten hier tatsächlich?',
+      svg: `<svg viewBox="0 0 640 270" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ternäre Beziehung teilnehmen zwischen Übungsleiter, Übungsgruppe und Student mit Funktionalitäten 1:1:N">
+  <line class="dgm-line" x1="185" y1="92" x2="248" y2="92"/>
+  <line class="dgm-line" x1="372" y1="92" x2="435" y2="92"/>
+  <line class="dgm-line" x1="310" y1="132" x2="310" y2="205"/>
+  <rect class="dgm-shape" x="35" y="70" width="150" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="110" y="97" text-anchor="middle">Übungsleiter</text>
+  <polygon class="dgm-shape" points="248,92 310,52 372,92 310,132"/>
+  <text class="dgm-text dgm-text--sm" x="310" y="96" text-anchor="middle">teilnehmen</text>
+  <rect class="dgm-shape" x="435" y="70" width="150" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="510" y="97" text-anchor="middle">Übungsgruppe</text>
+  <rect class="dgm-shape" x="235" y="205" width="150" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="310" y="232" text-anchor="middle">Student</text>
+  <text class="dgm-card" x="205" y="86">1</text>
+  <text class="dgm-card" x="400" y="86">1</text>
+  <text class="dgm-card" x="322" y="178">N</text>
+</svg>`,
       loesung: [
         {
           art: 'text',
@@ -369,8 +399,9 @@ export const blatt2: Uebungsblatt = {
       referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 3 – Funktionalitäten aus partieller Funktion',
       text:
-        'Ternäre Beziehung R(A, B, C). Es gelte nur die partielle Funktion A × C → B. Beschriften Sie das Diagramm mit ' +
-        'Funktionalitäten und erklären Sie, wie man Funktionalitäten und partielle Funktionen ineinander umrechnet.',
+        'Angenommen, lediglich die partielle Funktion A × C → B gilt.\n' +
+        '• Beschriften Sie die Abbildung mit den passenden Funktionalitätsangaben.\n' +
+        '• Beantworten Sie nun die Frage, wie Funktionalitätsangaben aus partiellen Funktionen ermittelt werden können und umgekehrt.',
       loesung: [
         {
           art: 'text',
@@ -408,13 +439,13 @@ export const blatt2: Uebungsblatt = {
     {
       nr: 6,
       referenz: ['er-modell'],
-      titel: 'Zusatzaufgabe zum Knobeln',
-      hinweis: 'kein Pflichtteil',
+      titel: 'Zusatzaufgabe zum tieferen Verständnis',
+      hinweis: 'KEINE Hausaufgabe',
       text:
-        'Beim konzeptuellen Entwurf bestehen Freiheitsgrade. Illustrieren Sie am Universitätsschema drei alternative Modellierungen und ihre Vor-/Nachteile:\n\n' +
-        '1) Die ternäre Beziehung „prüfen" als binäre Beziehungen.\n' +
-        '2) Die Beziehung „prüfen" als eigenständigen Entitytyp „Prüfungen".\n' +
-        '3) Das Attribut „Raum" von Professoren als eigenständigen Entitytyp.',
+        'Beim konzeptuellen Entwurf hat man gewisse Freiheitsgrade hinsichtlich der Modellierung der realen Welt. Die Anwendbarkeit alternativer Entwürfe lässt sich beispielsweise hinsichtlich der abgebildeten Informationseinheiten, des Einhaltens von Konsistenzbedingungen oder der Nützlichkeit für bestimmte Anwendungssichten unterscheiden. Unter anderem hat man folgende Alternativen, die Sie am Universitätsschema beispielhaft illustrieren sollen:\n\n' +
+        '• Ternäre Beziehungen können in binäre Beziehungen transformiert werden. Betrachten Sie dazu die ternäre Beziehung prüfen. Modellieren Sie prüfen in einem alternativen Entwurf als binäre Beziehungen. Erläutern Sie Vor- und Nachteile einer solchen Transformation hinsichtlich Konsistenzbedingungen und Informationsgehalt.\n' +
+        '• Ein Konzept der realen Welt kann als Beziehung oder als Entitytyp modelliert werden. Modellieren Sie die Beziehung prüfen in einem alternativen Entwurf als eigenständigen Entitytyp Prüfungen. Erläutern Sie Vor- und Nachteile dieser Transformation hinsichtlich Konsistenzbedingungen und Informationsgehalt.\n' +
+        '• Ein Konzept der realen Welt kann als Entitytyp mit zugehörigem Beziehungstyp und als Attribut dargestellt werden. Ein Beispiel hierfür ist das Attribut Raum des Entitytyps Professoren in unserem Schema der Abbildung. Modellieren Sie einen alternativen Entwurf mit Raum als Entitytyp. Erläutern Sie Vor- und Nachteile der Transformation vor dem Hintergrund unterschiedlicher Anwendungssichten.',
       loesung: [
         {
           art: 'unterpunkt',

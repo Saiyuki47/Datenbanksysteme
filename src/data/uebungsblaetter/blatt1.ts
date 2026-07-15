@@ -100,9 +100,9 @@ export const blatt1: Uebungsblatt = {
       referenz: ['db-grundlagen'],
       titel: 'Gruppenaufgabe 2',
       text:
-        'Fallstudie – Pine Valley Furniture Company (PVFC).\n\n' +
-        'a) Betrachten Sie Figure 1-2 (PVFC Fallstudie Teil 1): das alte File Processing System (unten nachgebaut). Was sieht auf den ersten Blick problematisch aus?\n\n' +
-        'b) Lesen Sie die Fallstudie (Teil 2) zur Entwicklung einer Datenbankanwendung und fassen Sie Ihren zugeteilten Abschnitt auf dem Etherpad zusammen.',
+        'Fallstudie - Pine Valley Furniture Company\n\n' +
+        'a) Schauen Sie sich die Grafik Figure 1-2 von PVFC Fallstudie Teil 1 an. Diese zeigt das alte File Processing System der PVFC. Denken Sie an die gesammelten Nachteile von Dateiverwaltungssystemen (GA1). Was sieht an dem alten System bereits auf den ersten Blick problematisch aus?\n\n' +
+        'b) Lesen Sie zunächst die gesamte Fallstudie PVFC Fallstudie Teil 2 zur Entwicklung einer Datenbankanwendung für die Pine Valley Furniture Company. Lesen Sie dann den Ihnen zugeteilten Abschnitt genau und fassen Sie diesen Abschnitt in wenigen Stichpunkten auf dem Etherpad zusammen.',
       svg: `<svg viewBox="0 0 980 316" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Figure 1-2: Altes File-Processing-System bei Pine Valley Furniture mit den Abteilungen Orders, Accounting und Payroll">
   <defs>
     <marker id="pvfc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
@@ -238,11 +238,11 @@ export const blatt1: Uebungsblatt = {
       referenz: ['db-grundlagen'],
       titel: 'Hausaufgabe 1',
       text:
-        'Grundlage für die Strukturierung der Daten ist das Datenbankmodell.\n\n' +
-        'a) Erläutern Sie den Unterschied zwischen dem relationalen Modell und Graphdatenbanken und nennen Sie für beide je zwei typische Einsatzgebiete.\n\n' +
-        'b) Man unterscheidet Modelle mit festem Schema und schemalose Modelle.\n' +
-        '(a) Was versteht man unter einem Datenbankschema?\n' +
-        '(b) Welche Vor-/Nachteile hat eine solche Vorgabe für Entwickler und Anwender?',
+        'Grundlage für die Strukturierung der Daten und ihrer Beziehungen zueinander ist das Datenbankmodell.\n\n' +
+        'a) Erläutern Sie nach einer kurzen Internetrecherche den Unterschied zwischen dem Relationalen Modell und Graphdatenbanken. Nennen Sie für beide Modelle auch je zwei typische Einsatzgebiete.\n' +
+        'b) Im Datenbankbereich unterscheidet man zwischen Modellen, welche ein festes Schema voraussetzen und anderen, die kein Schema benötigen.\n' +
+        'a. Was versteht unter einem Datenbankschema?\n' +
+        'b. Was sind Vorteile/Nachteile einer solchen Vorgabe für Entwickler und Anwender des Datenbanksystems?',
       loesung: [
         {
           art: 'unterpunkt',
@@ -273,9 +273,9 @@ export const blatt1: Uebungsblatt = {
       referenz: ['db-grundlagen'],
       titel: 'Hausaufgabe 2',
       text:
-        'Bei unkontrolliertem parallelem Zugriff können Probleme auftreten (Beispiel: zwei Kunden A und B bestellen gleichzeitig dasselbe Produkt). ' +
-        'A bestellt y Stück, B bestellt z Stück; nach beiden Bestellungen sollte die verfügbare Menge x′ = x − y − z betragen.\n\n' +
-        'Konstruieren Sie mit den Operationen lesen, berechnen und schreiben einen Ablauf, bei dem diese Eigenschaft verletzt wird, und erläutern Sie die Problematik.',
+        'Bei unkontrolliertem parallelem Zugriff auf Daten können Probleme auftreten. Ein Beispiel hierfür ist das gleichzeitige Bestellen eines Produktes durch zwei Kunden A und B. Das Produkt ist vor den Bestellungen x-mal verfügbar. Wenn A ein Produkt y-mal bestellt und B das gleiche Produkt z-mal bestellt, sollte nach Abschluss beider Bestellungen die nun verfügbare Menge des Produktes x′ = x - y - z betragen.\n\n' +
+        'Aufgabe\n' +
+        'Konstruieren Sie einen Ablauf zweier gleichzeitiger Produktbestellungen, bei dem die Eigenschaft, dass die verfügbare Menge des Produkts nach dem Abschluss der zwei Bestellungen der tatsächlich noch verfügbaren Menge (x′ = x - y - z) entspricht, verletzt ist. Nutzen Sie dafür die einzelnen Operationen lesen (z.B. A liest Produktverfügbarkeit …), berechnen (z.B. A berechnet neue Produktverfügbarkeit …) und schreiben (z.B. A schreibt neue Produktverfügbarkeit …). Erläutern Sie daran, worin die Problematik des parallelen Datenzugriffs besteht.',
       loesung: [
         {
           art: 'text',
