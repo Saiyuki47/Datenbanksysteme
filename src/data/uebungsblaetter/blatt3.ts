@@ -14,8 +14,8 @@ export const blatt3: Uebungsblatt = {
       referenz: ['min-max', 'er-modell'],
       titel: 'Gruppenaufgabe 1 – Funktionalität ↔ (min,max)',
       text:
-        'Die Beziehungstypen 1:1, 1:N, N:1 und N:M lassen sich bei binären Beziehungen auch in (min,max)-Notation ausdrücken. ' +
-        'Geben Sie für eine binäre Beziehung R zwischen E1 und E2 die Wertepaare (min1,max1) und (min2,max2) an, die sich aus den Funktionalitäten F1 und F2 ergeben.',
+        'Die Beziehungstypen 1:1, 1:N, N:1 und N:M können bei binären Beziehungen auch mittels (min,max)-Notation ausgedrückt werden.\n' +
+        'Geben Sie für eine abstrakte binäre Beziehung R zwischen den beiden Entitytypen E1 und E2 jeweils die (min1,max1)- und (min2,max2)-Wertepaare an, die sich aus den (gröberen) Funktionalitätsangaben F1 und F2 herleiten lassen.',
       loesung: [
         {
           art: 'text',
@@ -49,24 +49,22 @@ export const blatt3: Uebungsblatt = {
       referenz: ['er-modell', 'min-max'],
       titel: 'Gruppenaufgabe 2 – Übungssystem',
       text:
-        'Angenommen, das hier modellierte Übungssystem (ternäre Beziehung „teilnehmen" zwischen Übungsleiter, ' +
-        'Übungsgruppe und Student) entspricht dem Übungssystem des Moduls Datenbanken.\n\n' +
-        'a) Bestimmen Sie die (min,max)-Beziehungen so, dass folgende Einschränkungen modelliert werden:\n' +
-        '• Ein Übungsleiter hält mindestens eine Übungsgruppe.\n' +
-        '• Eine Übungsgruppe wird von mindestens einem Studenten besucht.\n' +
-        '• Ein Student kann höchstens eine Übungsgruppe besuchen.\n\n' +
-        'b) Betrachten Sie eine Ausprägung, die die Beziehung modelliert. Welchen Zusammenhang gibt es zwischen ' +
-        'der (min,max)-Notation und einer solchen Ausprägung?',
+        'a) Angenommen das hier modellierte Übungssystem entspricht dem Übungssystem des Moduls Datenbanken.\n' +
+        'Bestimmen Sie die (min,max)-Beziehungen so, dass folgende Einschränkungen modelliert werden:\n' +
+        '• Ein Übungsleiter betreut mindestens einmal (einen Studenten in einer Übungsgruppe).\n' +
+        '• In einer Übungsgruppe wird mindestens einmal und maximal 25-mal (ein Student von einem Übungsleiter) betreut.\n' +
+        '• Ein Student wird höchstens einmal (von einem Übungsleiter in einer Übungsgruppe) betreut.\n\n' +
+        'b) Betrachten Sie nun die folgende Ausprägung der Beziehung betreuen. Welchen Zusammenhang gibt es zwischen der (min,max)-Notation und der Ausprägung?',
       loesung: [
         {
           art: 'unterpunkt',
           label: 'a) (min,max)-Angaben',
-          text: 'Übungsleiter: (1,*), Übungsgruppe: (1,*), Student: (0,1). min = 1 bei Übungsleiter und Übungsgruppe erzwingt „mindestens einmal"; max = 1 bei Student erzwingt, dass ein Student höchstens eine Übungsgruppe besuchen kann.',
+          text: 'Übungsleiter: (1,*), Übungsgruppe: (1,25), Student: (0,1). min = 1 bei Übungsleiter und Übungsgruppe erzwingt „mindestens einmal"; max = 25 bei der Übungsgruppe begrenzt sie auf höchstens 25 Betreuungen; max = 1 bei Student erzwingt, dass ein Student höchstens einmal betreut wird.',
         },
         {
           art: 'svg',
-          titel: 'a) teilnehmen mit (min,max)-Angaben',
-          svg: `<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ternäre Beziehung teilnehmen">
+          titel: 'a) betreuen mit (min,max)-Angaben',
+          svg: `<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ternäre Beziehung betreuen">
   <line class="dgm-line" x1="240" y1="103" x2="305" y2="103"/>
   <line class="dgm-line" x1="415" y1="103" x2="520" y2="103"/>
   <line class="dgm-line" x1="360" y1="141" x2="360" y2="230"/>
@@ -76,7 +74,7 @@ export const blatt3: Uebungsblatt = {
   <rect class="dgm-shape" x="80" y="80" width="160" height="46" rx="4"/>
   <text class="dgm-text dgm-text--sm" x="160" y="107" text-anchor="middle">Übungsleiter</text>
   <polygon class="dgm-shape" points="305,103 360,65 415,103 360,141"/>
-  <text class="dgm-text dgm-text--sm" x="360" y="107" text-anchor="middle">teilnehmen</text>
+  <text class="dgm-text dgm-text--sm" x="360" y="107" text-anchor="middle">betreuen</text>
   <rect class="dgm-shape" x="520" y="80" width="160" height="46" rx="4"/>
   <text class="dgm-text dgm-text--sm" x="600" y="107" text-anchor="middle">Übungsgruppe</text>
   <rect class="dgm-shape" x="280" y="230" width="160" height="46" rx="4"/>
@@ -88,7 +86,7 @@ export const blatt3: Uebungsblatt = {
   <ellipse class="dgm-shape" cx="415" cy="310" rx="36" ry="16"/>
   <text class="dgm-key" x="415" y="315" text-anchor="middle">MatrNr</text>
   <text class="dgm-card" x="252" y="95">(1,*)</text>
-  <text class="dgm-card" x="450" y="95">(1,*)</text>
+  <text class="dgm-card" x="450" y="95">(1,25)</text>
   <text class="dgm-card" x="372" y="185">(0,1)</text>
 </svg>`,
         },
@@ -104,12 +102,21 @@ export const blatt3: Uebungsblatt = {
       referenz: ['min-max'],
       titel: 'Gruppenaufgabe 3 – Funktionalität vs. (min,max) bei n > 2',
       text:
-        'Zeigen Sie, dass die Ausdruckskraft von Funktionalitätsangaben (1:1, 1:N, …) und (min,max)-Angaben bei n-stelligen ' +
-        'Beziehungen (n > 2) unvergleichbar ist.\n\n' +
-        '[1] betreuen(Studenten, Professoren, Seminarthemen) mit Funktionalitäten N, 1, 1.\n' +
-        '[2] betreuen(Doktoranden, Professoren, Promotionsthemen) mit (min,max)-Angaben (0,1), (0,*), (0,1).\n\n' +
-        'a) Formulieren Sie die jeweils ausgedrückten Konsistenzbedingungen als partielle Funktionen.\n' +
-        'b) Begründen Sie, warum manche Bedingungen nur als Funktionalität [1] und andere nur als (min,max) [2] ausdrückbar sind.',
+        'Zeigen Sie anhand der nachfolgenden Beispiele [1] und [2], dass die Ausdruckskraft der Funktionalitätsangaben (1:1, 1:N, N:1, N:M) und der (min,max)-Angaben bei n-stelligen Beziehungen mit n > 2 unvergleichbar ist.\n\n' +
+        'a) Umwandlung Funktionalitätenangaben [1] in (min,max)-Notation\n' +
+        '• Geben Sie die in [1] geltenden partiellen Funktionen an.\n' +
+        '• Formulieren Sie die Konsistenzbedingungen, die mit den Funktionalitätsangaben ausgedrückt werden.\n' +
+        '• Notieren Sie Ausprägungen, die entsprechend den Konsistenzbedingungen zulässig sind und solche, die nicht zulässig sind.\n' +
+        '• Leiten Sie aus den gültigen Ausprägungen die entsprechenden (min,max)-Notationen ab.\n' +
+        '• Zeigen Sie nun am Beispiel, dass die abgeleiteten (min,max)-Notationen nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen vereinbar sind.\n\n' +
+        'b) Umwandlung (min,max)-Notation [2] in Funktionalitätenangaben\n' +
+        '• Geben Sie die in [2] geltenden partiellen Funktionen an.\n' +
+        '• Formulieren Sie die Konsistenzbedingungen, die mit den (min,max)-Notationen ausgedrückt werden.\n' +
+        '• Notieren Sie Ausprägungen, die entsprechend den Konsistenzbedingungen zulässig sind und solche, die nicht zulässig sind.\n' +
+        '• Leiten Sie aus den gültigen Ausprägungen die entsprechenden Funktionalitätsangaben für die Beziehung ab.\n' +
+        '• Zeigen Sie nun am Beispiel, dass die abgeleiteten Funktionalitätsangaben nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen übereinstimmen.\n\n' +
+        '[1] betreuen(Studenten, Professoren, Seminarthemen), Funktionalitäten N : 1 : 1, Beziehungsattribut Note.\n' +
+        '[2] betreuen(Doktoranden, Professoren, Promotionsthemen), (min,max)-Angaben (0,1) / (0,*) / (0,1), Beziehungsattribut Note.',
       loesung: [
         {
           art: 'unterpunkt',
@@ -231,11 +238,13 @@ export const blatt3: Uebungsblatt = {
       referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 1 – Fahrzeugverwaltung',
       text:
-        'Gegeben das ER-Modell mit Fahrer — hat_Fahrerlaubnis — Fahrzeug — gehört — Abteilung sowie Fahrzeug — steht_in — Einzelgarage. Bedingungen:\n' +
-        '• Jedes Fahrzeug gehört zu höchstens einer Abteilung; jede Abteilung hat mindestens ein Fahrzeug.\n' +
-        '• Für fast alle Fahrzeuge gibt es eine fest zugeordnete Einzelgarage; jede dieser Garagen ist belegt.\n' +
-        '• Für jedes Fahrzeug muss es mindestens drei Personen mit passender Fahrerlaubnis geben.\n\n' +
-        'a) Wie lauten die entsprechenden Funktionalitäten (1:1, 1:N, N:1, N:M)? b) Geben Sie geeignete (min,max)-Funktionalitäten an.',
+        'Gegeben ist das folgende ER-Modell der Fahrzeugverwaltung einer Firma (Fahrer —hat_Fahrerlaubnis— Fahrzeug, Fahrzeug —gehört— Abteilung, Fahrzeug —steht_in— Einzelgarage; die Attribute wurden aus Einfachheitsgründen weggelassen).\n\n' +
+        'Es gelten folgende Bedingungen, ansonsten gibt es keine Einschränkungen:\n' +
+        '• Jedes Fahrzeug gehört zu höchstens einer Abteilung, wobei aber jede Abteilung mindestens ein Fahrzeug hat.\n' +
+        '• Für fast alle Fahrzeuge gibt es eine (fest zugeordnete) Einzelgarage. Jede dieser Garagen ist belegt.\n' +
+        '• Für jedes Fahrzeug muss es mindestens drei Personen mit einer entsprechenden Fahrerlaubnis geben.\n\n' +
+        'a) Wie lauten die entsprechenden Funktionalitäten (1:1, 1:N, N:1, N:M)?\n' +
+        'b) Geben Sie gemäß der obigen Bedingungen geeignete Funktionalitäten in der (min, max)-Notation an.',
       loesung: [
         {
           art: 'unterpunkt',
@@ -330,11 +339,15 @@ export const blatt3: Uebungsblatt = {
       referenz: ['er-modell', 'min-max'],
       titel: 'Hausaufgabe 2 – Vielfliegerprogramm (Altklausur)',
       text:
-        'Das ER-Diagramm modelliert Vielfliegerprogramme mehrerer Fluglinien. Bei der Umsetzung des Textes wurden im ' +
-        'Diagramm einige Angaben vergessen – ergänzen Sie die fehlenden Elemente (Schlüssel, Kardinalitäten, ' +
-        'Beziehungen, schwache Entität, Generalisierung). Kernregeln: Fluglinie (FLC) bietet Flüge an; Flug ist nur mit ' +
-        'FLC + FNR eindeutig; Flüge sind Nonstop (Start-/Zielflughafen); Kunden nehmen an 1–3 Vielflieger-Programmen ' +
-        'teil (mit Status) und haben genau eine Lieblingsgesellschaft; Kunden sind disjunkt in Personen und Firmen unterteilt.',
+        '(Altklausuraufgabe)\n\n' +
+        'Nachfolgend finden Sie ein ER-Diagramm, welches einen Teil der Informationen zu den Vielfliegerprogrammen mehrerer Fluglinien (Fluggesellschaften), z.B. der Lufthansa, British Airways, Air France, etc. darstellt. Im folgenden Text sind die relevanten Sachverhalte und Regeln beschrieben, die zu dem ER-Diagramm geführt haben.\n' +
+        'Analysieren Sie den folgenden Text sehr sorgfältig und vergleichen Sie ihn mit dem ER-Diagramm. Bei der Umsetzung des Textes wurden im Diagramm einige Angaben vergessen.\n\n' +
+        'Ergänzen Sie fehlende Angaben/Elemente im ER-Diagramm!\n\n' +
+        'Fluglinien werden eindeutig über einen Flugliniencode (FLC) identifiziert. Relevant sind darüber hinaus das Land und der Name der Fluglinie. Fluglinien bieten viele Flüge an. Jeder Flug wird von genau einer Fluglinie angeboten. Für jeden Flug soll auch der Typ (z.B. A380, B737, B747, etc.) des eingesetzten Flugzeugs und die Anzahl der Sitzplätze abgespeichert werden. Jede Fluglinie vergibt für jeden der von ihr angebotenen Flüge jeweils eine eindeutige Zahl, die Flugnummer (FNR). Unterschiedliche Fluggesellschaften können dieselben Zahlen verwenden. Daher ist zur weltweit eindeutigen Identifikation eines Fluges zusätzlich noch der Code der Fluglinie nötig. D.h. Flüge können nur von in der Datenbank erfassten Fluggesellschaften durchgeführt werden.\n' +
+        'Wichtige Informationen für jeden Flug sind Startflughafen und Zielflughafen. In unserer Miniwelt gibt es nur Nonstop-Flüge, d.h. solche, die einen Startflughafen ohne Zwischenlandungen mit einem Zielflughafen verbinden. Nur Flughäfen, von denen wenigstens ein Flug startet und auf denen wenigstens ein Flug landet, sollen in die Datenbank aufgenommen werden. Jeder Flughafen hat einen weltweit eindeutigen Flughafencode (FHC). Wichtige Informationen sind auch dessen Name und der Ort des Flughafens.\n' +
+        'In der Datenbank werden nur Passagiere abgespeichert, die am Vielfliegerprogramm von wenigstens einer Fluglinie teilnehmen. Kein Passagier nimmt am Vielfliegerprogramm von mehr als 3 Fluggesellschaften teil. Jeder Teilnahme am Vielfliegerprogramm ist ein Status zugeordnet, z.B. Gold, Silber, Bronze. Es gibt Fluglinien, an deren Vielfliegerprogrammen zeitweise keine Passagiere teilnehmen.\n' +
+        'Jeder Passagier hat genau eine Lieblingsfluggesellschaft.\n' +
+        'Passagiere werden in unserer Miniwelt als Kunden bezeichnet. Zu jedem Kunden sind dessen Kundennummer (KDNR), sein Name und seine Adresse zu speichern. Die Kundennummer ist weltweit eindeutig. Die Passagiere (Kunden) werden in zwei disjunkte Gruppen aufgeteilt, und zwar Personen und Firmen. Zusätzliche Eigenschaften von Firmen sind der Firmensitz und die Firmengröße. Zusätzliche Eigenschaften von Personen sind Alter und Sternzeichen.',
       loesung: [
         {
           art: 'unterpunkt',
