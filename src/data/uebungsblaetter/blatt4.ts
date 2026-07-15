@@ -22,8 +22,7 @@ export const blatt4: Uebungsblatt = {
       referenz: ['er-zu-schema'],
       titel: 'Gruppenaufgabe 1 – ER → Schema + Verfeinerung',
       text:
-        'Überführen Sie die ER-Diagramme a)–d) jeweils in ein Relationenschema und verfeinern Sie es. Geben Sie ' +
-        'Wertebereiche an und unterstreichen Sie Primärschlüssel. Welche Regel gilt beim Verfeinern?',
+        'Überführen Sie die untenstehenden ER-Diagramme jeweils zuerst in ein Relationen Schema und verfeinern Sie dieses anschließend. Achten Sie darauf, Wertebereiche für die Attribute anzugeben und Primärschlüssel durch Unterstreichen zu kennzeichnen.',
       loesung: [
         {
           art: 'text',
@@ -193,10 +192,7 @@ export const blatt4: Uebungsblatt = {
       nr: 2,
       referenz: ['er-zu-schema'],
       titel: 'Gruppenaufgabe 2 – Vermieter / Wohnung / Haus',
-      text:
-        'Überführen Sie das ER-Modell in ein relationales Schema und verfeinern Sie es. mieten ist eine ternäre Beziehung ' +
-        '(Vermieter 1, Wohnung N, Mieter 1); Wohnung ist eine schwache Entität, die über die identifizierende Beziehung ' +
-        'liegt_in zum Haus gehört (Nummer ist nur innerhalb eines Hauses eindeutig).',
+      text: 'Überführen Sie das ER-Modell in ein relationales Schema und verfeinern Sie dieses im Anschluss.',
       svg: `<svg viewBox="0 0 860 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Vermieter Wohnung Haus">
   <line class="dgm-line" x1="150" y1="93" x2="216" y2="93"/>
   <line class="dgm-line" x1="324" y1="93" x2="410" y2="93"/>
@@ -250,7 +246,10 @@ export const blatt4: Uebungsblatt = {
       referenz: ['er-zu-schema'],
       titel: 'Hausaufgabe 1 – abstrakte 1:N-Beziehung (Altklausur)',
       text:
-        'Überführen Sie das abstrakte Diagramm A —1— R —N— B (mit Attributen a, b, r) in ein Schema und verfeinern Sie es.',
+        'Altklausur Aufgabe\n' +
+        'Überführen Sie das Diagramm (abstrakte 1:N-Beziehung A —1— R —N— B mit Attributen a, b, r) zuerst in ein Schema und verfeinern Sie dieses im Nachfolgenden. (Aufgrund der Abstraktion müssen keine Wertebereiche angeben werden.)\n' +
+        'a) Relationales Schema\n' +
+        'b) Verfeinerung',
       loesung: [
         {
           art: 'svg',
@@ -307,10 +306,11 @@ export const blatt4: Uebungsblatt = {
       referenz: ['er-zu-schema'],
       titel: 'Hausaufgabe 2 – Zugverbindungen',
       text:
-        'Gegeben das ER-Modell mit Bahnhöfe, Städte, Züge und den Beziehungen liegt_in, Start, Ziel und der ternären ' +
-        'Beziehung verbindet (Teilstrecken; von/nach sind zwei Rollen von Bahnhöfe).\n\n' +
-        'a) Ergänzen Sie Funktionalitäten und geben Sie für verbindet die geltenden partiellen Funktionen an. ' +
-        'b) Überführen Sie das Modell in ein relationales Schema. c) Verfeinern Sie es durch Eliminierung von Relationen.',
+        'Gegeben sei die ER-Modellierung von Zugverbindungen (siehe Abbildung; Entitäten Bahnhöfe, Städte, Züge mit den Beziehungen liegt_in, Start, Ziel und der ternären Beziehung verbindet – von/nach sind zwei Rollen von Bahnhöfe). Beachten Sie: verbindet modelliert ein Teilstück einer Verbindung, d.h. auf der Strecke München → Hamburg gibt es einen Eintrag für die Teilstrecke von München nach Nürnberg, einen Eintrag für Nürnberg nach Würzburg, einen Eintrag für die Teilstrecke Würzburg nach Göttingen und einen Eintrag von Göttingen nach Hamburg.\n' +
+        'Hinweis: Start und Ziel beschreiben nur die erste und letzte Haltestelle des Zuges, wohingegen sich verbindet auf die Teilstrecken bezieht.\n\n' +
+        'a) Fügen Sie bei den Beziehungen Funktionalitätsangaben (1:1, 1:N, N:1, N:M) hinzu. Geben Sie dabei für die Beziehung verbindet ebenfalls die geltenden partiellen Funktionen an.\n' +
+        'b) Übertragen Sie das ER-Modell in ein relationales Schema.\n' +
+        'c) Verfeinern Sie das relationale Schema soweit möglich durch Eliminierung von Relationen.',
       loesung: [
         {
           art: 'unterpunkt',
