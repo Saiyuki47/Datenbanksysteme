@@ -97,15 +97,22 @@ const SEITEN: Seite[] = [
     titel: 'Relationale Algebra & SQL',
     boxen: [
       {
-        t: 'Relationale Algebra',
+        t: 'Relationale Algebra – Grundoperatoren',
         r: [
           { l: 'σ[Bed](R)', f: 'Selektion: wählt ZEILEN (waagerecht)' },
           { l: 'π[Attr](R)', f: 'Projektion: wählt SPALTEN, entfernt Duplikate' },
           { l: 'ρ', f: 'Umbenennung von Relation/Attributen' },
           { l: '×', f: 'Kreuzprodukt: alle Kombinationen (m·n)' },
-          { l: 'R ⋈ S', f: 'Join = π(σ[R.b=S.b](R × S)); natürlich = über gleichnamige Spalten' },
-          { l: '∪ ∩ −', f: 'Vereinigung · Schnitt · Differenz (gleiches Schema)' },
           { f: 'Basis: σ, π, ρ, ×, ∪, − — der Rest ist ableitbar' },
+        ],
+      },
+      {
+        t: 'Relationale Algebra – Join & Mengen',
+        r: [
+          { l: 'R ⋈ S', f: 'natürlicher Join: über alle gleichnamigen Spalten' },
+          { l: 'R ⋈[θ] S', f: 'Theta-Join = σ[θ](R × S) – Kreuzprodukt + Bedingung' },
+          { l: '∪ ∩ −', f: 'Vereinigung · Schnitt · Differenz (gleiches Schema)' },
+          { f: 'Bei gleichem Schema gilt: u ⋈ v = u ∩ v' },
         ],
       },
       {
@@ -189,14 +196,16 @@ const SEITEN: Seite[] = [
           { f: '{X}⁺ = alles, was X funktional bestimmt („Was folgt aus X?")' },
           { l: 'Rezept', f: 'Start Hülle = X. Solange FD L → R mit L ⊆ Hülle: R aufnehmen. Bis stabil.' },
           { f: 'Reihenfolge der FD-Anwendung egal – Ergebnis immer gleich' },
+          { l: 'Bsp', f: 'R(A,B,C,D), A→B, B→C: {A}⁺ = {A,B,C}; {A} ist Schlüssel, wenn {A}⁺ = alle Attr.' },
         ],
       },
       {
         t: 'Kanonische Überdeckung Fc',
         r: [
-          { f: '1) rechte Seiten vereinzeln: X → AB ⇒ X → A, X → B' },
-          { f: '2) Linksreduktion: linkes Attribut streichen, wenn rechte Seite in {Rest}⁺ liegt' },
-          { f: '3) überflüssige FD streichen (A auch ohne sie in {X}⁺); gleiche linke Seiten vereinen' },
+          { f: '1) Linksreduktion: linkes Attribut streichen, wenn rechte Seite in {Rest}⁺ liegt' },
+          { f: '2) Rechtsreduktion: rechtes A streichen, wenn A ohne diese FD in {X}⁺ liegt' },
+          { f: '3) FDs mit leerer rechter Seite (X → ∅) entfernen' },
+          { f: '4) FDs mit gleicher linker Seite vereinen: X→A, X→B ⇒ X→AB' },
         ],
       },
       {
@@ -214,6 +223,7 @@ const SEITEN: Seite[] = [
           { f: '1) finde bad FD: X mit X⁺ ≠ X und X⁺ ≠ [alle Attribute]' },
           { f: '2) keine → R ist BCNF, fertig' },
           { f: '3) zerlege R1 = X⁺, R2 = X ∪ Rest; rekursiv weiter' },
+          { l: 'Bsp', f: 'R(A,B,C), B→C (B kein Superschlüssel) ⇒ R1(B,C), R2(A,B)' },
           { f: 'immer verlustlos, kann aber Abhängigkeitstreue verlieren' },
         ],
       },
@@ -224,6 +234,7 @@ const SEITEN: Seite[] = [
           { f: '2) je FD X → Y eine Relation mit X ∪ Y' },
           { f: '3) enthält keine Relation einen Kandidatenschlüssel → eine mit Schlüssel ergänzen' },
           { f: '4) Relationen, die in einer anderen enthalten sind, streichen' },
+          { l: 'Bsp', f: 'Fc: A→B, A→C ⇒ R1(A,B,C); Schlüssel {A} bereits enthalten' },
           { f: 'Ergebnis: 3NF, verlustlos UND abhängigkeitstreu' },
         ],
       },
