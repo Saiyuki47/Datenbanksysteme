@@ -3,6 +3,7 @@ import type { Uebungsblatt } from '../../types'
 export const blatt7: Uebungsblatt = {
   id: 'blatt7',
   nr: '7',
+  pdf: 'dateien_aus_moodle/übung 7/Übungsblatt 7.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'SQL: Aufbau und Reihenfolge der SELECT-Klauseln, Übersetzung der Algebra-Anfragen nach SQL, Operatorbaum-' +

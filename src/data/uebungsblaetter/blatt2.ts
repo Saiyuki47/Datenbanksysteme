@@ -3,6 +3,7 @@ import type { Uebungsblatt } from '../../types'
 export const blatt2: Uebungsblatt = {
   id: 'blatt2',
   nr: '2',
+  pdf: 'dateien_aus_moodle/übung 2/Übungsblatt 2.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Entity-Relationship-Modellierung: binäre Beziehungstypen mit Funktionalität, Konsistenzbedingungen und partiellen ' +

@@ -3,6 +3,7 @@ import type { Uebungsblatt } from '../../types'
 export const blatt4: Uebungsblatt = {
   id: 'blatt4',
   nr: '4',
+  pdf: 'dateien_aus_moodle/übung 4/Übungsblatt 4.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Vom ER-Diagramm zum Relationenschema: initiale Überführung (je Entity- und Beziehungstyp eine Relation) und ' +

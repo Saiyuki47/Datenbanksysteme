@@ -3,6 +3,7 @@ import type { Uebungsblatt } from '../../types'
 export const blatt1: Uebungsblatt = {
   id: 'blatt1',
   nr: '1',
+  pdf: 'dateien_aus_moodle/übung 1/Übungsblatt 1.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Grundlagen: Nachteile reiner Dateiverwaltung, Datenmodelle (relational vs. Graph), ' +

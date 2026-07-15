@@ -83,5 +83,8 @@ export interface Uebungsblatt {
   // Highlighted note box shown above the first task (e.g. lecturer remarks).
   anmerkung?: { titel?: string; punkte: string[] }
   db?: DbType
+  // Pfad zum offiziellen Übungsblatt-PDF (relativ zu BASE_URL). Wird im Kopf als
+  // Link „Original-PDF öffnen" gerendert (neuer Tab) – das vollständige Original.
+  pdf?: string
   tasks: UebungsblattTask[]
 }

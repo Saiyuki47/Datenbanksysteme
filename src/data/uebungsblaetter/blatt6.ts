@@ -3,6 +3,7 @@ import type { Uebungsblatt } from '../../types'
 export const blatt6: Uebungsblatt = {
   id: 'blatt6',
   nr: '6',
+  pdf: 'dateien_aus_moodle/übung 6/Übungsblatt 6.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Relationale Algebra in der Praxis: ER-Diagramm aus einem verfeinerten Relationenschema rekonstruieren, ' +

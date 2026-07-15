@@ -5,6 +5,7 @@ export const blatt0: Uebungsblatt = {
   nr: '0',
   typ: 'Hausaufgabe',
   db: 'pv',
+  pdf: 'dateien_aus_moodle/übung 0/Übungsblatt 0.pdf',
   beschreibung:
     'Aufgaben der letzten Folie „Additional Sample Queries" des Videos zu Kapitel 1. ' +
     'Geben Sie für die nachfolgenden Fragen das entsprechende SQL-Statement an. ' +

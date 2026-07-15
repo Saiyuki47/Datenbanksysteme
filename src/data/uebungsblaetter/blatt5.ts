@@ -3,6 +3,7 @@ import type { Uebungsblatt } from '../../types'
 export const blatt5: Uebungsblatt = {
   id: 'blatt5',
   nr: '5',
+  pdf: 'dateien_aus_moodle/übung 5/Übungsblatt 5.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Relationale Algebra: Auswerten von Ausdrücken (Selektion σ, Projektion π, Vereinigung ∪, Schnitt ∩, Differenz −, ' +
