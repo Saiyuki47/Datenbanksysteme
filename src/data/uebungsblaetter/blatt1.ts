@@ -101,8 +101,137 @@ export const blatt1: Uebungsblatt = {
       titel: 'Gruppenaufgabe 2',
       text:
         'Fallstudie – Pine Valley Furniture Company (PVFC).\n\n' +
-        'a) Betrachten Sie Figure 1-2 (PVFC Fallstudie Teil 1): das alte File Processing System. Was sieht auf den ersten Blick problematisch aus?\n\n' +
+        'a) Betrachten Sie Figure 1-2 (PVFC Fallstudie Teil 1): das alte File Processing System (unten nachgebaut). Was sieht auf den ersten Blick problematisch aus?\n\n' +
         'b) Lesen Sie die Fallstudie (Teil 2) zur Entwicklung einer Datenbankanwendung und fassen Sie Ihren zugeteilten Abschnitt auf dem Etherpad zusammen.',
+      svg: `<svg viewBox="0 0 980 316" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Figure 1-2: Altes File-Processing-System bei Pine Valley Furniture mit den Abteilungen Orders, Accounting und Payroll">
+  <defs>
+    <marker id="pvfc-arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" style="fill:var(--text2)"/>
+    </marker>
+  </defs>
+  <text class="dgm-text" x="490" y="16" text-anchor="middle" style="font-weight:700">Figure 1-2 — Altes File-Processing-System (Pine Valley Furniture)</text>
+  <text class="dgm-text dgm-text--sm" x="160" y="38" text-anchor="middle" style="font-weight:700">Orders Department</text>
+  <text class="dgm-text dgm-text--sm" x="495" y="38" text-anchor="middle" style="font-weight:700">Accounting Department</text>
+  <text class="dgm-text dgm-text--sm" x="825" y="38" text-anchor="middle" style="font-weight:700">Payroll Department</text>
+  <ellipse class="dgm-shape" cx="70" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="70" y="94" text-anchor="middle" style="font-size:10px">Program A</text>
+  <ellipse class="dgm-shape" cx="160" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="160" y="94" text-anchor="middle" style="font-size:10px">Program B</text>
+  <ellipse class="dgm-shape" cx="250" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="250" y="94" text-anchor="middle" style="font-size:10px">Program C</text>
+  <line class="dgm-line" x1="70" y1="120" x2="120" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="160" y1="120" x2="160" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="250" y1="120" x2="200" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <rect class="dgm-shape" x="100" y="165" width="120" height="46" rx="3"/>
+  <text class="dgm-text" x="160" y="184" text-anchor="middle" style="font-size:10px">Order Filling</text>
+  <text class="dgm-text" x="160" y="198" text-anchor="middle" style="font-size:10px">System</text>
+  <line class="dgm-line" x1="120" y1="211" x2="70" y2="250" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="160" y1="211" x2="160" y2="250" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="200" y1="211" x2="250" y2="250" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <path class="dgm-shape" style="fill:var(--blue);fill-opacity:.16" d="M36,250 V300 A34,9 0 0 0 104,300 V250 Z"/>
+  <ellipse class="dgm-shape" style="fill:var(--blue);fill-opacity:.16" cx="70" cy="250" rx="34" ry="9"/>
+  <text class="dgm-text" x="70" y="271" text-anchor="middle" style="font-size:9px">Customer</text>
+  <text class="dgm-text" x="70" y="283" text-anchor="middle" style="font-size:9px">Master</text>
+  <text class="dgm-text" x="70" y="295" text-anchor="middle" style="font-size:9px">File</text>
+  <path class="dgm-shape" style="fill:var(--text2);fill-opacity:.13" d="M126,250 V300 A34,9 0 0 0 194,300 V250 Z"/>
+  <ellipse class="dgm-shape" style="fill:var(--text2);fill-opacity:.13" cx="160" cy="250" rx="34" ry="9"/>
+  <text class="dgm-text" x="160" y="271" text-anchor="middle" style="font-size:9px">Inventory</text>
+  <text class="dgm-text" x="160" y="283" text-anchor="middle" style="font-size:9px">Master</text>
+  <text class="dgm-text" x="160" y="295" text-anchor="middle" style="font-size:9px">File</text>
+  <path class="dgm-shape" d="M216,250 V300 A34,9 0 0 0 284,300 V250 Z"/>
+  <ellipse class="dgm-shape" cx="250" cy="250" rx="34" ry="9"/>
+  <text class="dgm-text" x="250" y="271" text-anchor="middle" style="font-size:9px">Back</text>
+  <text class="dgm-text" x="250" y="283" text-anchor="middle" style="font-size:9px">Order</text>
+  <text class="dgm-text" x="250" y="295" text-anchor="middle" style="font-size:9px">File</text>
+  <ellipse class="dgm-shape" cx="430" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="430" y="94" text-anchor="middle" style="font-size:10px">Program A</text>
+  <ellipse class="dgm-shape" cx="560" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="560" y="94" text-anchor="middle" style="font-size:10px">Program B</text>
+  <line class="dgm-line" x1="430" y1="120" x2="470" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="560" y1="120" x2="520" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <rect class="dgm-shape" x="450" y="165" width="90" height="46" rx="3"/>
+  <text class="dgm-text" x="495" y="184" text-anchor="middle" style="font-size:10px">Invoicing</text>
+  <text class="dgm-text" x="495" y="198" text-anchor="middle" style="font-size:10px">System</text>
+  <line class="dgm-line" x1="470" y1="211" x2="430" y2="250" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="520" y1="211" x2="560" y2="250" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <path class="dgm-shape" style="fill:var(--text2);fill-opacity:.13" d="M396,250 V300 A34,9 0 0 0 464,300 V250 Z"/>
+  <ellipse class="dgm-shape" style="fill:var(--text2);fill-opacity:.13" cx="430" cy="250" rx="34" ry="9"/>
+  <text class="dgm-text" x="430" y="271" text-anchor="middle" style="font-size:9px">Inventory</text>
+  <text class="dgm-text" x="430" y="283" text-anchor="middle" style="font-size:9px">Pricing</text>
+  <text class="dgm-text" x="430" y="295" text-anchor="middle" style="font-size:9px">File</text>
+  <path class="dgm-shape" style="fill:var(--blue);fill-opacity:.16" d="M526,250 V300 A34,9 0 0 0 594,300 V250 Z"/>
+  <ellipse class="dgm-shape" style="fill:var(--blue);fill-opacity:.16" cx="560" cy="250" rx="34" ry="9"/>
+  <text class="dgm-text" x="560" y="271" text-anchor="middle" style="font-size:9px">Customer</text>
+  <text class="dgm-text" x="560" y="283" text-anchor="middle" style="font-size:9px">Master</text>
+  <text class="dgm-text" x="560" y="295" text-anchor="middle" style="font-size:9px">File</text>
+  <ellipse class="dgm-shape" cx="760" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="760" y="94" text-anchor="middle" style="font-size:10px">Program A</text>
+  <ellipse class="dgm-shape" cx="890" cy="90" rx="36" ry="30"/>
+  <text class="dgm-text" x="890" y="94" text-anchor="middle" style="font-size:10px">Program B</text>
+  <line class="dgm-line" x1="760" y1="120" x2="800" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <line class="dgm-line" x1="890" y1="120" x2="850" y2="165" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <rect class="dgm-shape" x="780" y="165" width="90" height="46" rx="3"/>
+  <text class="dgm-text" x="825" y="184" text-anchor="middle" style="font-size:10px">Payroll</text>
+  <text class="dgm-text" x="825" y="198" text-anchor="middle" style="font-size:10px">System</text>
+  <line class="dgm-line" x1="825" y1="211" x2="825" y2="250" marker-start="url(#pvfc-arr)" marker-end="url(#pvfc-arr)"/>
+  <path class="dgm-shape" d="M791,250 V300 A34,9 0 0 0 859,300 V250 Z"/>
+  <ellipse class="dgm-shape" cx="825" cy="250" rx="34" ry="9"/>
+  <text class="dgm-text" x="825" y="271" text-anchor="middle" style="font-size:9px">Employee</text>
+  <text class="dgm-text" x="825" y="283" text-anchor="middle" style="font-size:9px">Master</text>
+  <text class="dgm-text" x="825" y="295" text-anchor="middle" style="font-size:9px">File</text>
+</svg>`,
+      fallstudie: {
+        titel: '📄 Fallstudie Teil 2 – Zusammenfassung (aufklappen)',
+        pdfs: [
+          { label: 'Teil 1 (Figure 1-2) als PDF', pfad: 'dateien_aus_moodle/übung 1/PVFC_Teil1.pdf' },
+          { label: 'Teil 2 (Fallstudie) als PDF', pfad: 'dateien_aus_moodle/übung 1/PVFC_Teil2.pdf' },
+        ],
+        bloecke: [
+          {
+            art: 'text',
+            text: 'Quelle: Modern Database Management (Hoffer, 2016), Kapitel 1 – „Database Environment and Development Process" (Ausschnitt). Kurzfassung in eigenen Worten; das vollständige Original steht in der oben verlinkten PDF.',
+          },
+          {
+            art: 'text',
+            text: 'Worum geht es? Am Beispiel von Pine Valley Furniture (PVFC) wird gezeigt, wie aus dem alten Dateisystem eine Datenbank-Anwendung entsteht. Ende der 1990er stieg PVFC auf einen Datenbank-Ansatz um: zuvor getrennte Dateien wurden in eine gemeinsame Datenbankstruktur integriert, ein DBMS bildet die Schnittstelle für alle Anwendungen. Ein LAN verbindet die Arbeitsplätze mit einem Datenbank-Server (Figure 1-13); später kamen Intranet und Web-Zugriff (z. B. Auftragserfassung) hinzu.',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Datenbank-Evolution',
+            text: 'Produktmanagerin Helen Jarvis (Home-Office-Möbel) braucht direkten, einfachen Zugriff auf Verkaufsdaten für spontane (Ad-hoc-)Analysen. Systemanalyst Chris Martin soll ihr ein Marketing-Support-System bauen – als eigenständige Datenbank, damit die unvorhersehbaren Abfragen die operativen Systeme nicht ausbremsen. Chris kombiniert Prototyping mit dem klassischen Lebenszyklus und nutzt MS Access.',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Projektplanung',
+            text: 'Chris interviewt Helen zu ihren Zielen und Datenobjekten. Daraus zeichnet er ein konzeptuelles Datenmodell (ER, Figure 1-14) mit den Entitäten CUSTOMER, ORDER, ORDER LINE, PRODUCT und PRODUCT LINE sowie INVOICE und PAYMENT und listet die zugehörigen Attribute (Tabelle 1-6).',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Anforderungsanalyse',
+            text: 'Chris geht die Entitäten, Beziehungen und Geschäftsregeln durch – z. B. „jeder Kunde platziert beliebig viele Bestellungen, jede Bestellung gehört zu genau einem Kunden" (1:N). Gemeinsam mit Helen verfeinert er die Attribute (Tabelle 1-7, u. a. Vorjahres- und aktuelle Verkaufsziele).',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Datenbank-Entwurf',
+            text: 'Aus dem Datenmodell mit Schlüsseln (Figure 1-15) werden Relationen/Tabellen (Figure 1-16: Customer, Product, Order, Order Line mit Beispieldaten), per SQL CREATE TABLE angelegt (Figures 1-17/1-18). Primär- und Fremdschlüssel verbinden die Tabellen; Chris legt zusätzlich Indizes an (Primärschlüssel automatisch, plus Sekundärschlüssel wie das Bestelldatum).',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Nutzung der Datenbank',
+            text: 'Helen stellt vor allem Ad-hoc-Abfragen; für wiederkehrende Fragen baut Chris vorgefertigte Abfragen, Formulare und Berichte (z. B. „Umsatz je Produkt gegen Jahresziel" per SQL-Abfrage, Figures 1-19/1-20). Nach rund einem Dutzend Iterationen ist der Prototyp gut genug, um als fertige Anwendung zu dienen.',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Administration',
+            text: 'Die Daten werden wöchentlich aus den operativen Datenbanken in Helens Access-Datenbank übernommen (ein C#-Programm extrahiert per SQL, ein Visual-Basic-Programm baut die Access-Tabellen neu auf – sonntags automatisiert). Das System wird ins Architektur-Modell des Unternehmens aufgenommen, damit Formatänderungen auffallen.',
+          },
+          {
+            art: 'unterpunkt',
+            label: 'Zukunft',
+            text: 'Die operativen Datenbanken decken das Tagesgeschäft ab, sind aber für Entscheidungsunterstützung schlecht geeignet (z. B. „Wer sind unsere 10 größten Kunden?"). Dafür braucht es eine eigene Datenbank mit historischen, verdichteten Daten – ein Data Warehouse bzw. Data Mart – samt OLAP-Auswertungswerkzeugen.',
+          },
+        ],
+      },
     },
     {
       nr: 3,

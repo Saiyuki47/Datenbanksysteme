@@ -219,6 +219,33 @@ function TaskCard({
         <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: task.svg }} />
       )}
 
+      {/* Fallstudie: PDF-Links (neuer Tab) + aufklappbare Zusammenfassung */}
+      {task.fallstudie && (
+        <div className="ub-fallstudie">
+          {task.fallstudie.pdfs && task.fallstudie.pdfs.length > 0 && (
+            <div style={refLinksRow}>
+              {task.fallstudie.pdfs.map(p => (
+                <a
+                  key={p.pfad}
+                  href={import.meta.env.BASE_URL + encodeURI(p.pfad)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={refLinkStyle}
+                >
+                  📄 {p.label}
+                </a>
+              ))}
+            </div>
+          )}
+          <details style={{ margin: '0.2rem 0 0.5rem' }}>
+            <summary style={{ cursor: 'pointer', fontWeight: 700, color: 'var(--blue, #2563eb)', userSelect: 'none' }}>
+              {task.fallstudie.titel}
+            </summary>
+            <LoesungView blocks={task.fallstudie.bloecke} />
+          </details>
+        </div>
+      )}
+
       {/* Given SQL query (the exam question), always visible */}
       {task.sqlQuery && (
         <div className="sql-block visible">

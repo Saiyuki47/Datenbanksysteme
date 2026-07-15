@@ -63,6 +63,13 @@ export interface UebungsblattTask {
   loesung?: LoesungBlock[]
   // IDs der passenden Referenz-Themen → Deep-Link-Buttons „📘 Thema" (#referenz/<id>).
   referenz?: string[]
+  // Fallstudien-Zusatz: aufklappbare Zusammenfassung + PDF-Links (öffnen neuen Tab).
+  fallstudie?: {
+    titel: string
+    bloecke: LoesungBlock[]
+    // Pfad relativ zu import.meta.env.BASE_URL (wird encodeURI-kodiert).
+    pdfs?: { label: string; pfad: string }[]
+  }
 }
 
 export interface Uebungsblatt {
