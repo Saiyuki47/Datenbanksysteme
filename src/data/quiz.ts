@@ -15,7 +15,7 @@ export const quizFragen: QuizFrage[] = [
       'Pine Valley: Welches Schlüsselwort braucht man, damit jede Stadt der Kunden (CUSTOMERCITY) nur EINMAL im Ergebnis erscheint?',
     optionen: [
       { text: 'SELECT DISTINCT CUSTOMERCITY' },
-      { text: 'SELECT UNIQUE CUSTOMERCITY', warumFalsch: 'UNIQUE ist in Oracle ein Constraint-Schlüsselwort; zum Entfernen von Duplikaten in einer Abfrage dient DISTINCT.' },
+      { text: 'SELECT UNIQUE CUSTOMERCITY', warumFalsch: 'Der standardkonforme und portable Weg, Duplikate zu entfernen, ist DISTINCT. (Oracle akzeptiert SELECT UNIQUE zwar als veraltetes Synonym, üblich ist aber DISTINCT.)' },
       { text: 'SELECT NODUP CUSTOMERCITY', warumFalsch: 'NODUP existiert in SQL nicht.' },
       { text: 'SELECT GROUP CUSTOMERCITY', warumFalsch: 'GROUP ist keine eigenständige Klausel; GROUP BY gruppiert, entfernt aber nicht einfach Duplikate einer einzelnen Spalte.' },
     ],
@@ -188,6 +188,20 @@ export const quizFragen: QuizFrage[] = [
     erklaerung: 'Bei N:M entsteht ein zusammengesetzter Schlüssel (kein Verfeinern möglich). Bei 1:N bekommt die Beziehungsrelation den Schlüssel der N-Seite und kann in die N-Seiten-Relation aufgenommen werden.',
     quelle: 'Blatt 4, Gruppenaufgabe 1 / Hausaufgabe 1',
   },
+  {
+    art: 'single',
+    frage:
+      'Ein ER-Diagramm hat zwei Entitytypen und eine N:M-Beziehung dazwischen. Wie viele Relationen bleiben im VERFEINERTEN Schema übrig?',
+    optionen: [
+      { text: '3 – zwei Entity-Relationen plus die N:M-Beziehungsrelation (sie lässt sich nicht einrechnen).' },
+      { text: '2 – die Beziehungsrelation wird in eine Entity-Relation aufgenommen.', warumFalsch: 'Nur 1:1/1:N/N:1-Beziehungsrelationen werden eingerechnet; eine N:M-Relation hat einen zusammengesetzten Schlüssel und bleibt eigenständig.' },
+      { text: '1 – alles wird zu einer Tabelle zusammengefasst.', warumFalsch: 'Zusammenfassen ist nur bei GLEICHEM Schlüssel erlaubt; hier haben die Relationen verschiedene Schlüssel.' },
+      { text: '4 – für die Beziehung entstehen zwei Relationen.', warumFalsch: 'Ein Beziehungstyp wird zu genau einer Relation.' },
+    ],
+    richtige: 0,
+    erklaerung: 'Initial entstehen drei Relationen (zwei Entitytypen + Beziehungstyp). Beim Verfeinern lässt sich die N:M-Beziehungsrelation nicht einrechnen (zusammengesetzter Schlüssel) → es bleiben 3 Relationen. Nur bei 1:1/1:N/N:1 würde die Beziehungsrelation verschmolzen.',
+    quelle: 'Blatt 4, Gruppenaufgabe 1',
+  },
 
   // ─────────────────────────────────────────────────────────────────────────
   // Blatt 5 – Relationale Algebra
@@ -231,6 +245,20 @@ export const quizFragen: QuizFrage[] = [
     richtige: 0,
     erklaerung: '„Nur" verlangt eine Differenz: alle, die Faust/Wallenstein spielten, MINUS alle, die etwas anderes spielten. Übrig bleibt PNR 1.',
     quelle: 'Blatt 5, Hausaufgabe 2 d)',
+  },
+  {
+    art: 'single',
+    frage:
+      'π[Stadt](Kunde) auf einer Kunde-Relation mit 91 Zeilen, deren Werte aus 20 verschiedenen Städten stammen. Wie viele Tupel liefert die Projektion?',
+    optionen: [
+      { text: '20 – die Projektion entfernt Duplikate.' },
+      { text: '91 – jede Zeile ergibt ein Tupel.', warumFalsch: 'Die Projektion π liefert eine MENGE und entfernt doppelte Städte.' },
+      { text: '1 – es bleibt nur eine Zeile.', warumFalsch: 'Es bleiben so viele Tupel, wie es verschiedene Städte gibt.' },
+      { text: '111 – 91 + 20.', warumFalsch: 'Es wird nichts addiert; die Projektion reduziert auf die verschiedenen Werte.' },
+    ],
+    richtige: 0,
+    erklaerung: 'π wählt die Spalte Stadt aus und entfernt Duplikate (Relationen sind Mengen). Bei 20 verschiedenen Städten bleiben 20 Tupel – unabhängig davon, dass es 91 Kunden gibt. (In SQL entspricht das SELECT DISTINCT Stadt.)',
+    quelle: 'Blatt 5, Gruppenaufgabe 1',
   },
 
   // ─────────────────────────────────────────────────────────────────────────
@@ -389,6 +417,30 @@ export const quizFragen: QuizFrage[] = [
     erklaerung: 'Im SELECT erlaubt sind nur Aggregate oder Spalten aus dem GROUP BY. HAVING filtert Gruppen (nach der Aggregation). Da ProductID Primärschlüssel ist, enthält jede Gruppe nur eine Zeile – die Aggregation bringt nichts.',
     quelle: 'Blatt 8, Hausaufgabe 1',
   },
+  {
+    art: 'eingabe',
+    frage:
+      'Eine Tabelle hat 91 Zeilen; in der Spalte Region stehen 60-mal NULL. Was liefert COUNT(Region)?',
+    loesungen: ['31'],
+    toleranz: 0,
+    platzhalter: 'Anzahl',
+    erklaerung: 'COUNT(Spalte) zählt nur Zeilen mit einem NICHT-NULL-Wert: 91 − 60 = 31. Dagegen zählt COUNT(*) alle Zeilen (also 91), unabhängig von NULL-Werten.',
+    quelle: 'Blatt 8, Gruppenaufgabe 2',
+  },
+  {
+    art: 'single',
+    frage:
+      'Man möchte nur die Produktgruppen behalten, deren Gesamtmenge SUM(Quantity) über 200 liegt. Welche Klausel filtert das?',
+    optionen: [
+      { text: 'HAVING SUM(Quantity) > 200' },
+      { text: 'WHERE SUM(Quantity) > 200', warumFalsch: 'WHERE filtert einzelne Zeilen VOR der Gruppierung und darf keine Aggregatfunktionen enthalten.' },
+      { text: 'GROUP BY SUM(Quantity)', warumFalsch: 'GROUP BY bildet nur die Gruppen, filtert sie aber nicht.' },
+      { text: 'ORDER BY SUM(Quantity) > 200', warumFalsch: 'ORDER BY sortiert nur, es filtert nichts.' },
+    ],
+    richtige: 0,
+    erklaerung: 'Bedingungen über ein Aggregat je Gruppe stehen in HAVING (wird nach GROUP BY ausgewertet). WHERE filtert nur Einzelzeilen vor der Gruppierung und kennt keine Aggregate.',
+    quelle: 'Blatt 8, Hausaufgabe 1',
+  },
 
   // ─────────────────────────────────────────────────────────────────────────
   // Blatt 9 – SQL-Ergebnisse von Hand, Subqueries, Outer Joins
@@ -510,6 +562,45 @@ export const quizFragen: QuizFrage[] = [
     richtige: 0,
     erklaerung: 'Eine FD α → β ist trivial, wenn β ⊆ α. So sind z. B. AB → B und D → D trivial, weil die rechte Seite schon links enthalten ist.',
     quelle: 'Blatt 11, Gruppenaufgabe 1',
+  },
+  {
+    art: 'zuordnung',
+    frage: 'Ordne jede Normalform ihrer Kernbedingung zu.',
+    paare: [
+      { begriff: '1NF', ziel: 'Alle Attributwerte sind atomar' },
+      { begriff: '2NF', ziel: 'Kein Nichtschlüsselattribut hängt von einem TEIL eines Schlüssels ab' },
+      { begriff: '3NF', ziel: 'Keine transitive Abhängigkeit vom Schlüssel' },
+      { begriff: 'BCNF', ziel: 'Linke Seite jeder nichttrivialen FD ist Superschlüssel' },
+    ],
+    erklaerung: '1NF verlangt atomare Werte, 2NF verbietet partielle Abhängigkeiten von Teilschlüsseln, 3NF verbietet transitive Abhängigkeiten, BCNF verlangt, dass jede nichttriviale FD von einem Superschlüssel ausgeht (strenger als 3NF).',
+    quelle: 'Blatt 11, Gruppenaufgabe 1',
+  },
+  {
+    art: 'single',
+    frage:
+      'R(MatrNr, VorlNr, Note, Vorlesungstitel) hat den Schlüssel {MatrNr, VorlNr}; Vorlesungstitel hängt allein von VorlNr ab. Welche Normalform ist als erste verletzt?',
+    optionen: [
+      { text: '2NF – Vorlesungstitel hängt nur von einem TEIL des Schlüssels (VorlNr) ab (partielle Abhängigkeit).' },
+      { text: '1NF – die Werte sind nicht atomar.', warumFalsch: 'Alle Werte sind atomar, 1NF ist erfüllt.' },
+      { text: '3NF – es liegt eine transitive Abhängigkeit vor.', warumFalsch: 'Schon 2NF ist verletzt; die partielle Abhängigkeit greift „früher" als eine transitive.' },
+      { text: 'BCNF – die linke Seite ist kein Superschlüssel.', warumFalsch: 'BCNF ist zwar auch verletzt, aber die ERSTE verletzte Normalform ist 2NF.' },
+    ],
+    richtige: 0,
+    erklaerung: 'Vorlesungstitel ist ein Nichtschlüsselattribut, das nur von VorlNr – einem echten Teil des Schlüssels {MatrNr, VorlNr} – abhängt. Diese partielle Abhängigkeit verletzt die 2NF.',
+    quelle: 'Blatt 11, Gruppenaufgabe 2',
+  },
+  {
+    art: 'single',
+    frage: 'Wodurch ist BCNF strenger als 3NF?',
+    optionen: [
+      { text: 'BCNF verlangt, dass die linke Seite JEDER nichttrivialen FD ein Superschlüssel ist; 3NF erlaubt zusätzlich, dass die rechte Seite ein Schlüsselattribut ist.' },
+      { text: 'BCNF erlaubt transitive Abhängigkeiten, 3NF nicht.', warumFalsch: 'Es ist umgekehrt: Beide verbieten transitive Abhängigkeiten, BCNF ist dabei strenger.' },
+      { text: '3NF verlangt atomare Werte, BCNF nicht.', warumFalsch: 'Atomare Werte fordert bereits die 1NF; das unterscheidet 3NF und BCNF nicht.' },
+      { text: 'Es gibt keinen praktischen Unterschied.', warumFalsch: 'Es gibt Schemata, die 3NF erfüllen, aber nicht BCNF.' },
+    ],
+    richtige: 0,
+    erklaerung: '3NF lässt eine FD α → B zu, wenn α Superschlüssel ODER B ein Schlüsselattribut ist. BCNF streicht die zweite Möglichkeit: Hier muss α immer Superschlüssel sein. Deshalb ist BCNF strenger als 3NF.',
+    quelle: 'Blatt 11, Gruppenaufgabe 3',
   },
   {
     art: 'reihenfolge',
