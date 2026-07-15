@@ -47,9 +47,13 @@ export const blatt7: Uebungsblatt = {
       text:
         'Formulieren Sie die Algebra-Anfragen aus Blatt 5 nun als SQL und beschreiben Sie den Zusammenhang zwischen ' +
         'beiden.\n\n' +
-        'a) Namen der Studierenden  b) Vorlesungen mit 4 SWS  c) AssistentInnen der Fachgebiete „Ideenlehre"/„Sprachtheorie"  ' +
-        'd) Namen unter Studierenden oder ProfessorInnen  e) Vorlesung (Titel) mit lesender ProfessorIn (Name)  ' +
-        'f) Vorlesungen von Augustinus  g) AssistentInnen, deren Chef eine 4-SWS-Vorlesung hält.',
+        'a) Namen der Studierenden\n' +
+        'b) Vorlesungen mit 4 SWS\n' +
+        'c) AssistentInnen der Fachgebiete „Ideenlehre"/„Sprachtheorie"\n' +
+        'd) Namen unter Studierenden oder ProfessorInnen\n' +
+        'e) Vorlesung (Titel) mit lesender ProfessorIn (Name)\n' +
+        'f) Vorlesungen von Augustinus\n' +
+        'g) AssistentInnen, deren Chef eine 4-SWS-Vorlesung hält.',
       loesung: [
         { art: 'code', titel: 'a)', text: 'SELECT Name\nFROM Studenten;' },
         { art: 'code', titel: 'b)', text: 'SELECT *\nFROM Vorlesungen\nWHERE SWS = 4;' },
@@ -73,7 +77,9 @@ export const blatt7: Uebungsblatt = {
       text:
         'Der Ausdruck π[Name] σ[VorlNr=Nachfolger] ( σ[SWS=2] (Professoren ⋈[PersNr=gelesenVon] Vorlesungen) × voraussetzen ) ' +
         'beantwortet: „Welche ProfessorInnen halten 2-SWS-Vorlesungen, für die es vorausgesetzte Vorlesungen gibt?"\n\n' +
-        'a) Zeichnen Sie den Operatorbaum. b) Optimieren Sie ihn. c) Geben Sie das passende SQL an.',
+        'a) Zeichnen Sie den Operatorbaum.\n' +
+        'b) Optimieren Sie ihn.\n' +
+        'c) Geben Sie das passende SQL an.',
     },
     {
       nr: 4,

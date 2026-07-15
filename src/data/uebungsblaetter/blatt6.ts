@@ -421,9 +421,9 @@ export const blatt6: Uebungsblatt = {
       titel: 'Hausaufgabe 3 – SQL-Client & Datenbankverbindung',
       hinweis: 'praktische Einrichtung',
       text:
-        'a) Installieren Sie einen SQL-Client (SQL Developer, DBeaver oder DataGrip). ' +
-        'b) Legen Sie eine individuelle Datenbankverbindung an und setzen Sie mit schema_rn.sql und daten.sql das ' +
-        'Universitätsschema auf. c) Abgabe: Screenshots des erfolgreichen Verbindungsaufbaus und der aufgesetzten DB.',
+        'a) Installieren Sie einen SQL-Client (SQL Developer, DBeaver oder DataGrip).\n' +
+        'b) Legen Sie eine individuelle Datenbankverbindung an und setzen Sie mit schema_rn.sql und daten.sql das Universitätsschema auf.\n' +
+        'c) Abgabe: Screenshots des erfolgreichen Verbindungsaufbaus und der aufgesetzten DB.',
     },
   ],
 }

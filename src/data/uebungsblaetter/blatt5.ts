@@ -16,7 +16,11 @@ export const blatt5: Uebungsblatt = {
       titel: 'Gruppenaufgabe 1 – Ausdrücke auswerten',
       text:
         'Gegeben die Relationen u, v und z. Geben Sie die Ergebnisrelationen der Ausdrücke a)–e) in Tabellenform an:\n\n' +
-        'a) σ[A=a](u)  b) π[A,B](v)  c) u ∪ v  d) u × z  e) u ⋈[u.B=z.G] z',
+        'a) σ[A=a](u)\n' +
+        'b) π[A,B](v)\n' +
+        'c) u ∪ v\n' +
+        'd) u × z\n' +
+        'e) u ⋈[u.B=z.G] z',
       tabellen: [
         { titel: 'Relation u', columns: ['A', 'B', 'C'], rows: [['a', '2', 'a'], ['b', '3', 'b'], ['c', '1', 'c'], ['a', '2', 'd']] },
         { titel: 'Relation v', columns: ['A', 'B', 'C'], rows: [['a', '2', 'a'], ['a', '1', 'c'], ['b', '3', 'b']] },
@@ -74,9 +78,13 @@ export const blatt5: Uebungsblatt = {
       text:
         'Formulieren Sie die folgenden Anfragen in relationaler Algebra (Schema: Studenten, Vorlesungen[gelesenVon], ' +
         'Professoren, Assistenten[Boss]):\n\n' +
-        'a) Namen der Studierenden  b) Vorlesungen mit 4 SWS  c) AssistentInnen der Fachgebiete „Ideenlehre"/„Sprachtheorie"  ' +
-        'd) Namen unter Studierenden oder ProfessorInnen  e) Vorlesung (Titel) + lesende ProfessorIn (Name)  ' +
-        'f) Vorlesungen von Augustinus  g) AssistentInnen, deren Chef eine 4-SWS-Vorlesung hält.',
+        'a) Namen der Studierenden\n' +
+        'b) Vorlesungen mit 4 SWS\n' +
+        'c) AssistentInnen der Fachgebiete „Ideenlehre"/„Sprachtheorie"\n' +
+        'd) Namen unter Studierenden oder ProfessorInnen\n' +
+        'e) Vorlesung (Titel) + lesende ProfessorIn (Name)\n' +
+        'f) Vorlesungen von Augustinus\n' +
+        'g) AssistentInnen, deren Chef eine 4-SWS-Vorlesung hält.',
       loesung: [
         { art: 'code', titel: 'a) Namen aller Studierenden', text: 'π[Name] ( Studenten )' },
         { art: 'code', titel: 'b) Vorlesungen mit 4 SWS', text: "σ[SWS = 4] ( Vorlesungen )" },
@@ -92,8 +100,10 @@ export const blatt5: Uebungsblatt = {
       referenz: ['relationale-algebra'],
       titel: 'Hausaufgabe 1 – „Welche Vorlesungen wurden geprüft?" (drei Join-Varianten)',
       text:
-        'Formulieren Sie „Welche Vorlesungen (Titel) wurden bereits geprüft?" auf dem Uni-Schema mit a) einem natürlichen ' +
-        'Join, b) dem Kartesischen Produkt, c) einem Theta-Join.',
+        'Formulieren Sie „Welche Vorlesungen (Titel) wurden bereits geprüft?" auf dem Uni-Schema mit:\n' +
+        'a) einem natürlichen Join\n' +
+        'b) dem Kartesischen Produkt\n' +
+        'c) einem Theta-Join.',
       loesung: [
         {
           art: 'code',
@@ -131,9 +141,11 @@ export const blatt5: Uebungsblatt = {
       titel: 'Hausaufgabe 2 – Dichter-Datenbank',
       text:
         'Formulieren Sie in relationaler Algebra und geben Sie die Ergebnisrelation an.\n\n' +
-        'a) Dramen (TITEL) von „Schiller"  b) SchauspielerInnen (PNR), die „Faust" oder „Wallenstein" gespielt haben  ' +
-        'c) SchauspielerInnen (PNR) mit einer Heldenrolle  d) SchauspielerInnen (PNR), die NUR „Faust" oder „Wallenstein" ' +
-        'spielten  e) SchauspielerInnen (NAME), deren Wohnort (W_ORT) ein Geburtsort (G_ORT) eines Dichters ist. ' +
+        'a) Dramen (TITEL) von „Schiller"\n' +
+        'b) SchauspielerInnen (PNR), die „Faust" oder „Wallenstein" gespielt haben\n' +
+        'c) SchauspielerInnen (PNR) mit einer Heldenrolle\n' +
+        'd) SchauspielerInnen (PNR), die NUR „Faust" oder „Wallenstein" spielten\n' +
+        'e) SchauspielerInnen (NAME), deren Wohnort (W_ORT) ein Geburtsort (G_ORT) eines Dichters ist.\n' +
         '(„oder" = und/oder.)',
       tabellen: [
         { titel: 'DICHTER', columns: ['AUTOR', 'G_ORT', 'G_JAHR'], rows: [['Schiller', 'Marbach', '1759'], ['Goethe', 'Frankfurt', '1749'], ['Kleist', 'Kamenz', '1777'], ['Lessing', 'Frankfurt', '1729']] },

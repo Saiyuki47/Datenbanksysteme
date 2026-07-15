@@ -25,7 +25,13 @@ export const blatt11: Uebungsblatt = {
       titel: 'Gruppenaufgabe 1 – Funktionale Abhängigkeiten prüfen',
       text:
         'Erläutern Sie den Begriff der funktionalen Abhängigkeit und prüfen Sie für die gegebene Relation r(A,B,C,D), ' +
-        'ob die FDs a)–f) gelten (und ob sie trivial sind): a) A→B  b) AB→B  c) AB→C  d) C→D  e) D→D  f) A→ABCD.',
+        'ob die FDs a)–f) gelten (und ob sie trivial sind):\n' +
+        'a) A→B\n' +
+        'b) AB→B\n' +
+        'c) AB→C\n' +
+        'd) C→D\n' +
+        'e) D→D\n' +
+        'f) A→ABCD.',
       tabellen: [
         {
           titel: 'r(A, B, C, D)',
