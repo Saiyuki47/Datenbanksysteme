@@ -26,6 +26,20 @@ const defBox: CSSProperties = {
   padding: '0.55rem 0.8rem',
   margin: '0.6rem 0',
 }
+const detailsBox: CSSProperties = {
+  border: '1px solid var(--border)',
+  borderRadius: 'var(--radius, 8px)',
+  background: 'var(--bg2)',
+  margin: '0.6rem 0',
+}
+const summaryStyle: CSSProperties = {
+  cursor: 'pointer',
+  fontWeight: 700,
+  color: 'var(--text)',
+  padding: '0.55rem 0.8rem',
+  userSelect: 'none',
+}
+const detailsBody: CSSProperties = { padding: '0 0.8rem 0.5rem' }
 
 function Block({ block }: { block: SkriptBlock }) {
   switch (block.art) {
@@ -92,6 +106,15 @@ function Block({ block }: { block: SkriptBlock }) {
             </table>
           </div>
         </div>
+      )
+    case 'details':
+      return (
+        <details style={detailsBox}>
+          <summary style={summaryStyle}>{block.titel}</summary>
+          <div style={detailsBody}>
+            {block.blocks.map(b => <Block key={blockKey(b)} block={b} />)}
+          </div>
+        </details>
       )
     default:
       return null

@@ -18,6 +18,8 @@ export type SkriptBlock =
   | { art: 'code'; titel?: string; text: string }
   // Inline-SVG-Diagramm (z. B. Beispiel-ER-Diagramm); nutzt die dgm-*-Styles.
   | { art: 'svg'; titel?: string; svg: string }
+  // Aufklappbarer Block (<details>, standardmäßig zu) mit verschachtelten Blöcken.
+  | { art: 'details'; titel: string; blocks: SkriptBlock[] }
 
 export interface SkriptAbschnitt {
   titel: string
@@ -802,6 +804,33 @@ export const lernskript: SkriptKapitel[] = [
   <rect class="dgm-shape" x="355" y="255" width="130" height="34" rx="4"/>
   <text class="dgm-text dgm-text--sm" x="420" y="277" text-anchor="middle">Professoren</text>
 </svg>`,
+          },
+          {
+            art: 'details',
+            titel: '▸ Beispiel für jeden Operator (mit Ergebnis) – aufklappen',
+            blocks: [
+              {
+                art: 'text',
+                text: 'Ausgangs-Relationen R und S (gleiches Schema, damit auch ∪/∩/− funktionieren):',
+              },
+              { art: 'tabelle', titel: 'R', columns: ['A', 'B'], rows: [['1', 'rot'], ['2', 'blau'], ['3', 'rot']] },
+              { art: 'tabelle', titel: 'S', columns: ['A', 'B'], rows: [['2', 'blau'], ['4', 'grün']] },
+              { art: 'tabelle', titel: 'σ Selektion — σ[B = rot](R): nur Zeilen mit B = rot', columns: ['A', 'B'], rows: [['1', 'rot'], ['3', 'rot']] },
+              { art: 'tabelle', titel: 'π Projektion — π[B](R): nur Spalte B, Duplikate entfernt', columns: ['B'], rows: [['rot'], ['blau']] },
+              { art: 'tabelle', titel: 'ρ Umbenennung — ρ[A→Nr](R): Spalte A heißt jetzt Nr', columns: ['Nr', 'B'], rows: [['1', 'rot'], ['2', 'blau'], ['3', 'rot']] },
+              { art: 'tabelle', titel: '∪ Vereinigung — R ∪ S: alle Tupel aus R oder S', columns: ['A', 'B'], rows: [['1', 'rot'], ['2', 'blau'], ['3', 'rot'], ['4', 'grün']] },
+              { art: 'tabelle', titel: '∩ Schnitt — R ∩ S: Tupel in R UND S', columns: ['A', 'B'], rows: [['2', 'blau']] },
+              { art: 'tabelle', titel: '− Differenz — R − S: Tupel in R, nicht in S', columns: ['A', 'B'], rows: [['1', 'rot'], ['3', 'rot']] },
+              { art: 'tabelle', titel: '× Kreuzprodukt — R × S: jede Zeile von R mit jeder von S (3·2 = 6)', columns: ['R.A', 'R.B', 'S.A', 'S.B'], rows: [['1', 'rot', '2', 'blau'], ['1', 'rot', '4', 'grün'], ['2', 'blau', '2', 'blau'], ['2', 'blau', '4', 'grün'], ['3', 'rot', '2', 'blau'], ['3', 'rot', '4', 'grün']] },
+              {
+                art: 'text',
+                text: 'Für die beiden Joins zwei Relationen mit gemeinsamer Spalte KID:',
+              },
+              { art: 'tabelle', titel: 'Kunde', columns: ['KID', 'Ort'], rows: [['1', 'Fulda'], ['2', 'Kassel']] },
+              { art: 'tabelle', titel: 'Bestellung', columns: ['BID', 'KID', 'Betrag'], rows: [['101', '1', '50'], ['102', '2', '20'], ['103', '2', '90']] },
+              { art: 'tabelle', titel: '⋈ Theta-Join — Kunde ⋈[Kunde.KID = Bestellung.KID] Bestellung: Kreuzprodukt + Bedingung, behält beide KID-Spalten', columns: ['Kunde.KID', 'Ort', 'BID', 'Best.KID', 'Betrag'], rows: [['1', 'Fulda', '101', '1', '50'], ['2', 'Kassel', '102', '2', '20'], ['2', 'Kassel', '103', '2', '90']] },
+              { art: 'tabelle', titel: '⋈ Natürlicher Join — Kunde ⋈ Bestellung: verbindet über die gleichnamige Spalte KID (nur einmal im Ergebnis)', columns: ['KID', 'Ort', 'BID', 'Betrag'], rows: [['1', 'Fulda', '101', '50'], ['2', 'Kassel', '102', '20'], ['2', 'Kassel', '103', '90']] },
+            ],
           },
         ],
       },
