@@ -561,11 +561,6 @@ export const lernskript: SkriptKapitel[] = [
             text: 'Genau hier sieht man das „über Kreuz": Bei der Funktionalität stand das N (viele) auf der Mitarbeiter-Seite; als (min,max) sitzt das * dagegen bei der Abteilung, weil (min,max) die Teilnahme der Entität selbst beschreibt – nicht die der Gegenseite.',
           },
           {
-            art: 'def',
-            begriff: 'Ternäre / n-stellige Beziehung',
-            text: 'Eine ternäre (dreistellige) Beziehung verbindet drei Entitytypen statt zwei; ein Tupel der Beziehung besteht aus je einem Exemplar jeder Seite – z. B. (Student, Professor, Thema). Allgemein verbindet eine n-stellige Beziehung n Entitytypen. Sie lässt sich im Allgemeinen nicht ohne Bedeutungsverlust in mehrere binäre Beziehungen zerlegen – das „betreuen"-Beispiel unten zeigt genau das.',
-          },
-          {
             art: 'frage',
             q: 'Bei n-stelligen Beziehungen (n > 2): Funktionalität vs. (min,max)?',
             a: 'Beide Notationen sind unvergleichbar – jede kann etwas ausdrücken, das die andere nicht kann. Funktionalität ist eine Bedingung über KOMBINATIONEN von Entitäten (»dieses Paar bestimmt die dritte eindeutig«); (min,max) begrenzt, wie oft eine EINZELNE Entität in der Beziehung vorkommt. Am Beispiel »betreuen« unten wird der Unterschied konkret.',
@@ -586,6 +581,11 @@ export const lernskript: SkriptKapitel[] = [
   <polygon class="dgm-shape" points="238,97 300,60 362,97 300,134"/>
   <text class="dgm-text dgm-text--sm" x="300" y="101" text-anchor="middle">betreuen</text>
 </svg>`,
+          },
+          {
+            art: 'def',
+            begriff: 'Ternäre / n-stellige Beziehung',
+            text: 'Eine ternäre (dreistellige) Beziehung verbindet drei Entitytypen statt zwei; ein Tupel der Beziehung besteht aus je einem Exemplar jeder Seite – hier (Student, Professor, Thema). Allgemein verbindet eine n-stellige Beziehung n Entitytypen. Sie lässt sich im Allgemeinen nicht ohne Bedeutungsverlust in mehrere binäre Beziehungen zerlegen.',
           },
           {
             art: 'text',
