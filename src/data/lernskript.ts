@@ -594,6 +594,46 @@ export const lernskript: SkriptKapitel[] = [
           },
           {
             art: 'frage',
+            q: 'Wie bestimmt man Funktionalität und (min,max) aus einer Anforderung?',
+            a: 'Man übersetzt die Bedingungen Satz für Satz. Für die Funktionalität fragt man „Wie viele Y gehören zu EINEM X?" (und umgekehrt); für (min,max) fragt man an jeder Entität „In wie WENIGEN (min) und wie VIELEN (max) Beziehungen steckt ein EINZELNES Exemplar?".',
+          },
+          {
+            art: 'liste',
+            titel: 'Funktionalität bestimmen (grob: 1 oder N je Seite)',
+            punkte: [
+              '**Zwei Fragen:** „Wie viele Y gehören zu EINEM X?" und „Wie viele X zu EINEM Y?" – Antwort je: höchstens eins → 1, mehrere möglich → N.',
+              '**Beispiel:** „Ein Fahrzeug gehört zu einer Abteilung, eine Abteilung hat viele Fahrzeuge" → Fahrzeug **N : 1** Abteilung.',
+              'Hier zählt nur „eins vs. viele" – ob die Teilnahme Pflicht ist (das min), spielt für die grobe Funktionalität keine Rolle.',
+            ],
+          },
+          {
+            art: 'liste',
+            titel: '(min,max) bestimmen (genauer: je Entität Pflicht + Obergrenze)',
+            punkte: [
+              'Das Paar steht **an der Entität selbst** und zählt, an wie vielen Beziehungen EIN Exemplar teilnimmt.',
+              '**max (Obergrenze)** aus „höchstens/genau …": höchstens eine → 1, beliebig viele → * (unbeschränkt).',
+              '**min (Pflicht)** aus „muss/mindestens …": verpflichtend → 1 (oder mehr); optional/„kann" → 0.',
+            ],
+          },
+          {
+            art: 'text',
+            text: 'Beispiel (Fahrzeugverwaltung, Blatt 3): „Jedes Fahrzeug gehört zu höchstens einer Abteilung; jede Abteilung hat mindestens ein Fahrzeug." Bedingung für Bedingung übersetzt:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Bedingung → (min,max) bei der Beziehung gehört (Fahrzeug – Abteilung)',
+            columns: ['Bedingung im Text', 'gilt an der Entität', '(min,max)'],
+            rows: [
+              ['„höchstens einer Abteilung"', 'Fahrzeug', '(0,1)'],
+              ['„jede Abteilung mind. ein Fahrzeug"', 'Abteilung', '(1,*)'],
+            ],
+          },
+          {
+            art: 'merk',
+            text: 'Kurz: Funktionalität grob über „eins vs. viele", (min,max) genau über „Pflicht (min) und Obergrenze (max)" je Entität. Tipp für knifflige Fälle: erst die (min,max) aus den Bedingungen ableiten, daraus folgt die grobe Funktionalität (siehe Umrechnungstabelle oben).',
+          },
+          {
+            art: 'frage',
             q: 'Bei n-stelligen Beziehungen (n > 2): Funktionalität vs. (min,max)?',
             a: 'Beide Notationen sind unvergleichbar – jede kann etwas ausdrücken, das die andere nicht kann. Funktionalität ist eine Bedingung über KOMBINATIONEN von Entitäten (»dieses Paar bestimmt die dritte eindeutig«); (min,max) begrenzt, wie oft eine EINZELNE Entität in der Beziehung vorkommt. Am Beispiel »betreuen« unten wird der Unterschied konkret.',
           },
