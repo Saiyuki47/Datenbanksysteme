@@ -440,6 +440,45 @@ export const blatt3: Uebungsblatt = {
         'In der Datenbank werden nur Passagiere abgespeichert, die am Vielfliegerprogramm von wenigstens einer Fluglinie teilnehmen. Kein Passagier nimmt am Vielfliegerprogramm von mehr als 3 Fluggesellschaften teil. Jeder Teilnahme am Vielfliegerprogramm ist ein Status zugeordnet, z.B. Gold, Silber, Bronze. Es gibt Fluglinien, an deren Vielfliegerprogrammen zeitweise keine Passagiere teilnehmen.\n' +
         'Jeder Passagier hat genau eine Lieblingsfluggesellschaft.\n' +
         'Passagiere werden in unserer Miniwelt als Kunden bezeichnet. Zu jedem Kunden sind dessen Kundennummer (KDNR), sein Name und seine Adresse zu speichern. Die Kundennummer ist weltweit eindeutig. Die Passagiere (Kunden) werden in zwei disjunkte Gruppen aufgeteilt, und zwar Personen und Firmen. Zusätzliche Eigenschaften von Firmen sind der Firmensitz und die Firmengröße. Zusätzliche Eigenschaften von Personen sind Alter und Sternzeichen.',
+      svg: `<svg viewBox="0 0 820 350" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Unvollständiges ER-Diagramm des Vielfliegerprogramms: Fluglinie (0,*) Vielflieger (1,3) Kunde; die Entität Flug und der Flughafen sind noch nicht eingebunden – fehlende Angaben und Elemente sind selbst zu ergänzen">
+  <line class="dgm-line" x1="72" y1="50" x2="180" y2="78"/>
+  <line class="dgm-line" x1="66" y1="90" x2="180" y2="90"/>
+  <line class="dgm-line" x1="72" y1="130" x2="180" y2="102"/>
+  <ellipse class="dgm-shape" cx="46" cy="46" rx="34" ry="15"/>
+  <text class="dgm-key" x="46" y="51" text-anchor="middle">FLC</text>
+  <ellipse class="dgm-shape" cx="36" cy="90" rx="30" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="36" y="95" text-anchor="middle">Land</text>
+  <ellipse class="dgm-shape" cx="46" cy="134" rx="32" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="46" y="139" text-anchor="middle">Name</text>
+  <rect class="dgm-shape" x="180" y="65" width="110" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="235" y="94" text-anchor="middle">Fluglinie</text>
+  <line class="dgm-line" x1="290" y1="90" x2="382" y2="90"/>
+  <text class="dgm-card" x="322" y="82" text-anchor="middle">(0,*)</text>
+  <polygon class="dgm-shape" points="382,90 445,58 508,90 445,122"/>
+  <text class="dgm-text dgm-text--sm" x="445" y="94" text-anchor="middle">Vielflieger</text>
+  <line class="dgm-line" x1="508" y1="90" x2="600" y2="90"/>
+  <text class="dgm-card" x="556" y="82" text-anchor="middle">(1,3)</text>
+  <rect class="dgm-shape" x="600" y="65" width="110" height="50" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="655" y="94" text-anchor="middle">Kunde</text>
+  <line class="dgm-line" x1="710" y1="78" x2="758" y2="55"/>
+  <line class="dgm-line" x1="710" y1="100" x2="758" y2="122"/>
+  <ellipse class="dgm-shape" cx="775" cy="50" rx="36" ry="15"/>
+  <text class="dgm-key" x="775" y="55" text-anchor="middle">KDNR</text>
+  <ellipse class="dgm-shape" cx="778" cy="124" rx="34" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="778" y="129" text-anchor="middle">Name</text>
+  <text class="dgm-text dgm-text--sm" x="250" y="205" text-anchor="middle">Flug</text>
+  <line class="dgm-line" x1="258" y1="292" x2="222" y2="316"/>
+  <line class="dgm-line" x1="300" y1="292" x2="300" y2="316"/>
+  <line class="dgm-line" x1="342" y1="292" x2="378" y2="316"/>
+  <rect class="dgm-shape" x="245" y="248" width="110" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="300" y="275" text-anchor="middle">Flughafen</text>
+  <ellipse class="dgm-shape" cx="200" cy="326" rx="30" ry="15"/>
+  <text class="dgm-key" x="200" y="331" text-anchor="middle">FHC</text>
+  <ellipse class="dgm-shape" cx="300" cy="331" rx="32" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="300" y="336" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="395" cy="326" rx="28" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="395" y="331" text-anchor="middle">Ort</text>
+</svg>`,
       loesung: [
         {
           art: 'unterpunkt',
