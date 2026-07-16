@@ -10,8 +10,9 @@ import { nwTables } from '../data/nwTables'
 import { uniTables } from '../data/uniTables'
 import { aufgabeTipps } from '../data/aufgabeTipps'
 import { themaTitelById } from '../data/themen'
+import { claudeAufgaben, type ClaudeAufgabe } from '../data/claudeAufgaben'
 import type { TableData } from '../data/pvTables'
-import type { DbType, LoesungBlock, Uebungsblatt, UebungsblattTask } from '../types'
+import type { DbType, LoesungBlock, NamedTable, Uebungsblatt, UebungsblattTask } from '../types'
 
 // „📘 Thema"-Deep-Links unter der Frage: führen zum passenden Referenz-Thema
 // (#referenz/<id>) – wie bei Mathe/BWL.
@@ -426,12 +427,126 @@ function TaskCard({
   )
 }
 
+// Kleine, immer sichtbare Datentabelle, die mit einer Claude-Aufgabe gezeigt wird.
+function ClaudeTable({ t }: { t: NamedTable }) {
+  return (
+    <div className="ub-table-scroll" style={{ margin: '0.4rem 0' }}>
+      <p className="ub-result-label">{t.titel}</p>
+      <table className="ub-table">
+        <thead>
+          <tr>{t.columns.map(c => <th key={c}>{c}</th>)}</tr>
+        </thead>
+        <tbody>
+          {t.rows.map((row, i) => {
+            const rk = row.map(cell => String(cell)).join('|') || `row-${i}`
+            return (
+              <tr key={rk}>
+                {row.map((cell, j) => (
+                  <td key={j}>{cell ?? <span className="ub-null">NULL</span>}</td>
+                ))}
+              </tr>
+            )
+          })}
+        </tbody>
+      </table>
+    </div>
+  )
+}
+
+// Eine einzelne KI-Aufgabe: aufgebaut wie eine normale Arbeitsblatt-Aufgabe
+// (Aufgabenstellung, ggf. Daten/Diagramm, Tipp-Akkordeon, Lösung, „verstanden").
+function ClaudeCard({ a, done, toggleDone }: { a: ClaudeAufgabe; done: Set<string>; toggleDone: (key: string) => void }) {
+  const [open, setOpen] = useState<Set<string>>(new Set())
+  const toggle = (key: string) => toggleInSet(setOpen, key)
+  const key = `claude-${a.nr}`
+  const solKey = `${key}-sol`
+  const hintKey = `${key}-hint`
+  return (
+    <div className="card" data-aufgabe={String(a.nr)}>
+      <div className="ub-meta-row">
+        <span className="ub-badge">{a.art}</span>
+      </div>
+      <p className="ub-task-nr">Aufgabe {a.nr} – {a.titel}</p>
+      <p className="q-title ub-question">{a.text}</p>
+
+      {a.referenz && a.referenz.length > 0 && (
+        <div style={refLinksRow}>
+          {a.referenz.map(rid => (
+            <a key={rid} href={`#referenz/${rid}`} style={refLinkStyle}>
+              📘 {themaTitelById[rid] ?? rid}
+            </a>
+          ))}
+        </div>
+      )}
+
+      {a.code && <div className="sql-block visible">{highlightSQL(a.code)}</div>}
+      {a.gegeben?.map(t => <ClaudeTable key={t.titel} t={t} />)}
+      {a.svg && (
+        // eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (a.svg), kein User-Input
+        <div className="ub-diagram" dangerouslySetInnerHTML={{ __html: a.svg }} />
+      )}
+
+      {a.tipps.length > 0 && (
+        <div className="ub-hints-section">
+          <button type="button" className="toggle-btn toggle-btn--hints" onClick={() => toggle(hintKey)}>
+            {open.has(hintKey) ? '▼ Tipp verbergen' : '▶ Tipp anzeigen'}
+          </button>
+          {open.has(hintKey) && (
+            <div className="tipp-accordion">
+              {a.tipps.map(hint => (
+                <details key={hint.titel} className="tipp-section">
+                  <summary className="tipp-section-summary">
+                    <span className="tipp-section-icon">{hint.icon}</span>
+                    {hint.titel}
+                  </summary>
+                  <div className="tipp-section-body">{hint.inhalt}</div>
+                </details>
+              ))}
+            </div>
+          )}
+        </div>
+      )}
+
+      <button type="button" className="toggle-btn" onClick={() => toggle(solKey)}>
+        {open.has(solKey) ? '▼ Lösung verbergen' : '▶ Lösung anzeigen'}
+      </button>
+      {open.has(solKey) && <LoesungView blocks={a.loesung} />}
+
+      <button
+        type="button"
+        className={`toggle-btn${done.has(key) ? ' done' : ''}`}
+        onClick={() => toggleDone(key)}
+      >
+        {done.has(key) ? '✓ Verstanden' : '○ Als verstanden markieren'}
+      </button>
+    </div>
+  )
+}
+
+// Der „Claude-Aufgaben"-Tab: KI-generierte Übungen, je eine pro Aufgabenart.
+function ClaudeView({ done, toggleDone }: { done: Set<string>; toggleDone: (key: string) => void }) {
+  return (
+    <div>
+      <div className="ub-anmerkung" style={{ borderLeftColor: 'var(--blue, #2563eb)' }}>
+        <p className="ub-anmerkung-title">🤖 KI-generierte Übungsaufgaben</p>
+        <ul className="ub-anmerkung-liste">
+          <li>Diese Aufgaben wurden von einer KI (Claude) erstellt – zum zusätzlichen Lernen und Üben. Sie stammen NICHT vom Dozenten.</li>
+          <li>Zu jeder Aufgabenart der Original-Übungsblätter gibt es hier eine eigene Beispielaufgabe – mit Lösung und Tipps, aufgebaut wie ein normales Arbeitsblatt.</li>
+        </ul>
+      </div>
+      {claudeAufgaben.map(a => (
+        <ClaudeCard key={a.nr} a={a} done={done} toggleDone={toggleDone} />
+      ))}
+    </div>
+  )
+}
+
 export default function Uebungsblaetter() {
   const [selectedId, setSelectedId] = useState(() => {
     const b = getHashDetail().blatt
     return b && uebungsblaetter.some(x => x.id === b) ? b : (uebungsblaetter[0]?.id ?? '')
   })
-  const [view, setView] = useState<'blatt' | 'offen'>('blatt')
+  const [view, setView] = useState<'blatt' | 'offen' | 'claude'>('blatt')
   const { done, toggle: toggleDone, ratio } = useDoneTracker()
   const listRef = useTaskDeepLink<HTMLDivElement>(selectedId)
 
@@ -488,10 +603,19 @@ export default function Uebungsblaetter() {
         >
           📌 Noch offen{offen.length ? ` (${offen.length})` : ''}
         </button>
+        <button
+          type="button"
+          className={`filter-btn${view === 'claude' ? ' on' : ''}`}
+          onClick={() => setView('claude')}
+        >
+          🤖 Claude-Aufgaben
+        </button>
       </div>
 
       {view === 'offen' ? (
         <OffeneAufgaben items={offen} onGo={goToTask} />
+      ) : view === 'claude' ? (
+        <ClaudeView done={done} toggleDone={toggleDone} />
       ) : (
         <>
       {/* Sheet selector */}
