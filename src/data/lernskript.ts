@@ -136,6 +136,14 @@ export const lernskript: SkriptKapitel[] = [
             ],
           },
           {
+            art: 'liste',
+            titel: 'Typische Einsatzgebiete der beiden Modelle',
+            punkte: [
+              '**Relational:** wo Daten klar strukturiert und konsistent sein müssen – z. B. CMS (Content-Management-Systeme), Bibliotheks- und andere betriebliche Verwaltungssysteme.',
+              '**Graph:** wo die Verbindungen im Vordergrund stehen – soziale Netze, Empfehlungssysteme, Wegfindung in Verkehrsnetzen (z. B. U-Bahn) und Bioinformatik/Medizin.',
+            ],
+          },
+          {
             art: 'text',
             text: 'Noch ein typisches Datenbank-Beispiel – ein Online-Shop mit Kunden und Bestellungen. Relational sind es zwei Tabellen; der Fremdschlüssel kunden_id verknüpft sie:',
           },
@@ -201,6 +209,24 @@ export const lernskript: SkriptKapitel[] = [
             art: 'def',
             begriff: 'Datenbankschema',
             text: 'Formale Beschreibung der Struktur: welche Tabellen es gibt, ihre Attribute, Datentypen, Constraints und Beziehungen (der „Bauplan"). Die konkreten Daten heißen Ausprägung und müssen zum Schema passen.',
+          },
+          {
+            art: 'liste',
+            titel: 'Festes Schema – Vorteile (für Entwickler & Anwender)',
+            punkte: [
+              '**Optimierbarkeit:** Weil Typen, Constraints und Beziehungen bekannt sind, kann das DBMS Anfragen effizienter planen und schneller bearbeiten.',
+              '**Konsistenz zentral gesichert:** Integritätsbedingungen (Fremdschlüssel, Wertebereiche …) stehen einmal im Schema und müssen nicht in jedem Programm neu geprüft werden.',
+              '**Saubere, einheitliche Daten:** Der Aufbau ist garantiert – Anwender können sich auf Format und Vollständigkeit der gespeicherten Daten verlassen.',
+            ],
+          },
+          {
+            art: 'liste',
+            titel: 'Festes Schema – Nachteile',
+            punkte: [
+              '**Weniger Flexibilität:** Alle Daten müssen vorab in die feste Struktur passen.',
+              '**Teure Änderungen:** Sollen neue Daten gespeichert werden, die nicht ins Schema passen, ist oft eine aufwendige Schemaänderung (Migration) nötig.',
+              '**Nicht immer vorab klar:** Manche Anwendungsfälle lassen sich schwer in ein vordefiniertes Schema bringen, oder die zu speichernden Daten stehen noch nicht fest – dort sind schemalose Modelle im Vorteil.',
+            ],
           },
           {
             art: 'merk',
