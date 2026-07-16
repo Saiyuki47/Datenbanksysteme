@@ -211,6 +211,38 @@ export const lernskript: SkriptKapitel[] = [
             text: 'Formale Beschreibung der Struktur: welche Tabellen es gibt, ihre Attribute, Datentypen, Constraints und Beziehungen (der „Bauplan"). Die konkreten Daten heißen Ausprägung und müssen zum Schema passen.',
           },
           {
+            art: 'def',
+            begriff: 'Ausprägung (Instanz)',
+            text: 'Die konkreten Daten zu einem Schema zu einem bestimmten Zeitpunkt – also die tatsächlich gespeicherten Zeilen. Das Schema ist der feste Bauplan, die Ausprägung ist der „Inhalt" und ändert sich bei jedem Einfügen, Ändern oder Löschen.',
+          },
+          {
+            art: 'text',
+            text: 'Beispiel: Das Schema legt Spalten und Datentypen der Tabelle Studenten fest (der Bauplan) …',
+          },
+          {
+            art: 'code',
+            titel: 'Schema (Bauplan) – einmal festgelegt',
+            text: 'Studenten(MatrNr: integer, Name: varchar(30), Semester: integer)',
+          },
+          {
+            art: 'text',
+            text: '… und eine Ausprägung sind konkrete Zeilen, die zu diesem Schema passen:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Eine Ausprägung der Tabelle Studenten (ändert sich mit den Daten)',
+            columns: ['MatrNr', 'Name', 'Semester'],
+            rows: [
+              ['24002', 'Xenokrates', '18'],
+              ['25403', 'Jonas', '12'],
+              ['26120', 'Fichte', '10'],
+            ],
+          },
+          {
+            art: 'merk',
+            text: 'Schema = Bauplan (fest, selten geändert). Ausprägung = die konkreten Daten dazu (veränderlich). Jede Ausprägung muss zum Schema passen – richtige Spalten, passende Datentypen, erfüllte Constraints.',
+          },
+          {
             art: 'liste',
             titel: 'Festes Schema – Vorteile (für Entwickler & Anwender)',
             punkte: [
