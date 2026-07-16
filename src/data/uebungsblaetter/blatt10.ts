@@ -4,6 +4,7 @@ export const blatt10: Uebungsblatt = {
   id: 'blatt10',
   nr: '10',
   pdf: 'dateien_aus_moodle/übung 10/Übungsblatt 10.pdf',
+  loesungPdf: 'dateien_aus_moodle/übung 10/Übungsblatt 10 Lösung.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Integritätsbedingungen (Constraints): Primärschlüssel, NOT NULL, CHECK, UNIQUE und Fremdschlüssel mit ' +

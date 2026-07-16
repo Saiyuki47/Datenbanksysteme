@@ -4,6 +4,7 @@ export const blatt11: Uebungsblatt = {
   id: 'blatt11',
   nr: '11',
   pdf: 'dateien_aus_moodle/übung 11/Übungsblatt 11.pdf',
+  loesungPdf: 'dateien_aus_moodle/übung 11/Übungsblatt 11 Lösung.pdf',
   typ: 'Gruppenaufgaben',
   beschreibung:
     'Funktionale Abhängigkeiten (FDs) und Normalisierung: FDs prüfen (inkl. trivialer FDs), Attributhülle und ' +

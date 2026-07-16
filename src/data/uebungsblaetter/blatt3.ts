@@ -4,6 +4,7 @@ export const blatt3: Uebungsblatt = {
   id: 'blatt3',
   nr: '3',
   pdf: 'dateien_aus_moodle/übung 3/Übungsblatt 3.pdf',
+  loesungPdf: 'dateien_aus_moodle/übung 3/Übungsblatt 3 Lösung.pdf',
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Funktionalitäten und (min,max)-Notation: Umrechnung zwischen beiden Notationen, ihr Zusammenhang mit der ' +

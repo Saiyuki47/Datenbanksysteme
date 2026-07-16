@@ -86,5 +86,7 @@ export interface Uebungsblatt {
   // Pfad zum offiziellen Übungsblatt-PDF (relativ zu BASE_URL). Wird im Kopf als
   // Link „Original-PDF öffnen" gerendert (neuer Tab) – das vollständige Original.
   pdf?: string
+  // Pfad zum Lösungs-PDF (relativ zu BASE_URL), analog als „Lösung öffnen"-Link.
+  loesungPdf?: string
   tasks: UebungsblattTask[]
 }
