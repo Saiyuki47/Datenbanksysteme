@@ -4,6 +4,12 @@ export const blatt8: Uebungsblatt = {
   id: 'blatt8',
   nr: '8',
   pdf: 'dateien_aus_moodle/übung 8/Übungsblatt 8.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 8/Übungsblatt 8 Lösung.pdf' },
+    { label: 'Northwind-Lösung Teil 1 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 8/Northwind SQL Aufgaben - Lösungen-20260621/Northwind_SQL_Uebungen_Aufgaben_1.pdf' },
+    { label: 'Northwind-Lösung Teil 2 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 8/Northwind SQL Aufgaben - Lösungen-20260621/Northwind_SQL_Uebungen_Aufgaben_2.pdf' },
+    { label: 'Northwind-Lösung Teil 3 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 8/Northwind SQL Aufgaben - Lösungen-20260621/Northwind_SQL_Uebungen_Aufgaben_3.pdf' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'SQL-Praxis mit der Northwind-Datenbank (Webucator-Tutorial): einfache SELECTs (Spalten, Sortierung, WHERE mit ' +

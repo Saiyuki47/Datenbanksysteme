@@ -4,7 +4,11 @@ export const blatt3: Uebungsblatt = {
   id: 'blatt3',
   nr: '3',
   pdf: 'dateien_aus_moodle/übung 3/Übungsblatt 3.pdf',
-  loesungPdf: 'dateien_aus_moodle/übung 3/Übungsblatt 3 Lösung.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 3/Übungsblatt 3 Lösung.pdf' },
+    { label: 'Lösung 2 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 3/Übungsblatt 3 Lösung 2.pdf' },
+    { label: 'Lösung ER-Diagramm (PNG) öffnen', pfad: 'dateien_aus_moodle/übung 3/Übungsblatt 3 Lösung ER-Diagramm.png' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Funktionalitäten und (min,max)-Notation: Umrechnung zwischen beiden Notationen, ihr Zusammenhang mit der ' +

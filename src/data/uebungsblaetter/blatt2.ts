@@ -4,7 +4,10 @@ export const blatt2: Uebungsblatt = {
   id: 'blatt2',
   nr: '2',
   pdf: 'dateien_aus_moodle/übung 2/Übungsblatt 2.pdf',
-  loesungPdf: 'dateien_aus_moodle/übung 2/Übungsblatt 2 Lösung.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 2/Übungsblatt 2 Lösung.pdf' },
+    { label: 'Lösung 2 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 2/Übungsblatt 2 Lösung 2.pdf' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Entity-Relationship-Modellierung: binäre Beziehungstypen mit Funktionalität, Konsistenzbedingungen und partiellen ' +

@@ -86,7 +86,8 @@ export interface Uebungsblatt {
   // Pfad zum offiziellen Übungsblatt-PDF (relativ zu BASE_URL). Wird im Kopf als
   // Link „Original-PDF öffnen" gerendert (neuer Tab) – das vollständige Original.
   pdf?: string
-  // Pfad zum Lösungs-PDF (relativ zu BASE_URL), analog als „Lösung öffnen"-Link.
-  loesungPdf?: string
+  // Lösungen (relativ zu BASE_URL), je als „Lösung öffnen"-Link mit eigenem Label.
+  // Manche Blätter haben mehrere Lösungen (offiziell + Hausaufgaben, Northwind …).
+  loesungen?: { label: string; pfad: string }[]
   tasks: UebungsblattTask[]
 }

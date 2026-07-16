@@ -4,6 +4,10 @@ export const blatt9: Uebungsblatt = {
   id: 'blatt9',
   nr: '9',
   pdf: 'dateien_aus_moodle/übung 9/Übungsblatt 9.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 9/Übungsblatt 9 Lösung.pdf' },
+    { label: 'Ergebnistabellen Subqueries (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 9/Ergebnistabellen GA 2 - Subqueries.pdf' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'SQL-Ergebnisse „von Hand" bestimmen (Uni-Schema und abstrakte Tabellen T1/T2 mit Selektion, GROUP BY/HAVING, ' +

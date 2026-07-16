@@ -4,7 +4,9 @@ export const blatt1: Uebungsblatt = {
   id: 'blatt1',
   nr: '1',
   pdf: 'dateien_aus_moodle/übung 1/Übungsblatt 1.pdf',
-  loesungPdf: 'dateien_aus_moodle/übung 1/Übungsblatt 1 Lösung.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 1/Übungsblatt 1 Lösung.pdf' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Grundlagen: Nachteile reiner Dateiverwaltung, Datenmodelle (relational vs. Graph), ' +

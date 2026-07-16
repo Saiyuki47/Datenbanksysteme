@@ -4,7 +4,10 @@ export const blatt5: Uebungsblatt = {
   id: 'blatt5',
   nr: '5',
   pdf: 'dateien_aus_moodle/übung 5/Übungsblatt 5.pdf',
-  loesungPdf: 'dateien_aus_moodle/übung 5/Übungsblatt 5 Lösung.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 5/Übungsblatt 5 Lösung.pdf' },
+    { label: 'Lösung 2 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 5/Übungsblatt 5 Lösung 2.pdf' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'Relationale Algebra: Auswerten von Ausdrücken (Selektion σ, Projektion π, Vereinigung ∪, Schnitt ∩, Differenz −, ' +

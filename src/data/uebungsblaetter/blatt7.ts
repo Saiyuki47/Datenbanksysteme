@@ -4,7 +4,10 @@ export const blatt7: Uebungsblatt = {
   id: 'blatt7',
   nr: '7',
   pdf: 'dateien_aus_moodle/übung 7/Übungsblatt 7.pdf',
-  loesungPdf: 'dateien_aus_moodle/übung 7/Übungsblatt 7 Lösung.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 7/Übungsblatt 7 Lösung.pdf' },
+    { label: 'Lösung 2 (PDF) öffnen', pfad: 'dateien_aus_moodle/übung 7/Übungsblatt 7 Lösung 2.pdf' },
+  ],
   typ: 'Gruppen- & Hausaufgaben',
   beschreibung:
     'SQL: Aufbau und Reihenfolge der SELECT-Klauseln, Übersetzung der Algebra-Anfragen nach SQL, Operatorbaum-' +

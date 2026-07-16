@@ -521,7 +521,7 @@ export default function Uebungsblaetter() {
             {blatt.beschreibung && (
               <p className="ub-desc">{blatt.beschreibung}</p>
             )}
-            {(blatt.pdf || blatt.loesungPdf) && (
+            {(blatt.pdf || (blatt.loesungen && blatt.loesungen.length > 0)) && (
               <div style={{ ...refLinksRow, marginTop: '0.4rem' }}>
                 {blatt.pdf && (
                   <a
@@ -533,16 +533,17 @@ export default function Uebungsblaetter() {
                     📄 Original-Übungsblatt (PDF) öffnen
                   </a>
                 )}
-                {blatt.loesungPdf && (
+                {blatt.loesungen?.map(l => (
                   <a
-                    href={import.meta.env.BASE_URL + encodeURI(blatt.loesungPdf)}
+                    key={l.pfad}
+                    href={import.meta.env.BASE_URL + encodeURI(l.pfad)}
                     target="_blank"
                     rel="noopener noreferrer"
                     style={refLinkStyle}
                   >
-                    ✅ Lösung (PDF) öffnen
+                    ✅ {l.label}
                   </a>
-                )}
+                ))}
               </div>
             )}
             {taskKeys.length > 0 && (
