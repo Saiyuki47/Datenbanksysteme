@@ -130,22 +130,22 @@ export const blatt3: Uebungsblatt = {
       referenz: ['min-max'],
       titel: 'Gruppenaufgabe 3 – Funktionalität vs. (min,max) bei n > 2',
       text:
-        'Zeigen Sie anhand der nachfolgenden Beispiele [1] und [2], dass die Ausdruckskraft der Funktionalitätsangaben (1:1, 1:N, N:1, N:M) und der (min,max)-Angaben bei n-stelligen Beziehungen mit n > 2 unvergleichbar ist.\n\n' +
-        'a) Umwandlung Funktionalitätenangaben [1] in (min,max)-Notation\n' +
-        '• Geben Sie die in [1] geltenden partiellen Funktionen an.\n' +
-        '• Formulieren Sie die Konsistenzbedingungen, die mit den Funktionalitätsangaben ausgedrückt werden.\n' +
-        '• Notieren Sie Ausprägungen, die entsprechend den Konsistenzbedingungen zulässig sind und solche, die nicht zulässig sind.\n' +
-        '• Leiten Sie aus den gültigen Ausprägungen die entsprechenden (min,max)-Notationen ab.\n' +
-        '• Zeigen Sie nun am Beispiel, dass die abgeleiteten (min,max)-Notationen nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen vereinbar sind.\n\n' +
-        'b) Umwandlung (min,max)-Notation [2] in Funktionalitätenangaben\n' +
-        '• Geben Sie die in [2] geltenden partiellen Funktionen an.\n' +
-        '• Formulieren Sie die Konsistenzbedingungen, die mit den (min,max)-Notationen ausgedrückt werden.\n' +
-        '• Notieren Sie Ausprägungen, die entsprechend den Konsistenzbedingungen zulässig sind und solche, die nicht zulässig sind.\n' +
-        '• Leiten Sie aus den gültigen Ausprägungen die entsprechenden Funktionalitätsangaben für die Beziehung ab.\n' +
-        '• Zeigen Sie nun am Beispiel, dass die abgeleiteten Funktionalitätsangaben nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen übereinstimmen.\n\n' +
-        '[1] betreuen(Studenten, Professoren, Seminarthemen), Funktionalitäten N : 1 : 1, Beziehungsattribut Note.\n' +
-        '[2] betreuen(Doktoranden, Professoren, Promotionsthemen), (min,max)-Angaben (0,1) / (0,*) / (0,1), Beziehungsattribut Note.',
-      svg: `<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel [1]: ternäre Beziehung betreuen zwischen Studenten, Professoren und Seminarthemen mit den Funktionalitäten N, 1, 1">
+        'Zeigen Sie anhand der nachfolgenden Beispiele [1] und [2], dass die Ausdruckskraft der Funktionalitätsangaben (1:1, 1:N, N:1, N:M) und der (min,max)-Angaben bei n-stelligen Beziehungen mit n > 2 unvergleichbar ist.',
+      statementBlocks: [
+        {
+          art: 'text',
+          text:
+            'a) Umwandlung Funktionalitätenangaben [1] in (min,max)-Notation\n' +
+            '• Geben Sie die in [1] geltenden partiellen Funktionen an.\n' +
+            '• Formulieren Sie die Konsistenzbedingungen, die mit den Funktionalitätsangaben ausgedrückt werden.\n' +
+            '• Notieren Sie Ausprägungen, die entsprechend den Konsistenzbedingungen zulässig sind und solche, die nicht zulässig sind.\n' +
+            '• Leiten Sie aus den gültigen Ausprägungen die entsprechenden (min,max)-Notationen ab.\n' +
+            '• Zeigen Sie nun am Beispiel, dass die abgeleiteten (min,max)-Notationen nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen vereinbar sind.\n\n' +
+            '[1] betreuen(Studenten, Professoren, Seminarthemen), Funktionalitäten N : 1 : 1, Beziehungsattribut Note.',
+        },
+        {
+          art: 'svg',
+          svg: `<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel [1]: ternäre Beziehung betreuen zwischen Studenten, Professoren und Seminarthemen mit den Funktionalitäten N, 1, 1">
   <text class="dgm-text" x="30" y="30" style="font-weight:700">[1] Funktionalitäten N : 1 : 1</text>
   <line class="dgm-line" x1="230" y1="95" x2="325" y2="95"/>
   <line class="dgm-line" x1="435" y1="95" x2="560" y2="95"/>
@@ -164,8 +164,22 @@ export const blatt3: Uebungsblatt = {
   <text class="dgm-card" x="262" y="86">N</text>
   <text class="dgm-card" x="498" y="86">1</text>
   <text class="dgm-card" x="470" y="218">1</text>
-</svg>
-<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel [2]: ternäre Beziehung betreuen zwischen Doktoranden, Professoren und Promotionsthemen mit den (min,max)-Angaben (0,1), (0,*), (0,1)">
+</svg>`,
+        },
+        {
+          art: 'text',
+          text:
+            'b) Umwandlung (min,max)-Notation [2] in Funktionalitätenangaben\n' +
+            '• Geben Sie die in [2] geltenden partiellen Funktionen an.\n' +
+            '• Formulieren Sie die Konsistenzbedingungen, die mit den (min,max)-Notationen ausgedrückt werden.\n' +
+            '• Notieren Sie Ausprägungen, die entsprechend den Konsistenzbedingungen zulässig sind und solche, die nicht zulässig sind.\n' +
+            '• Leiten Sie aus den gültigen Ausprägungen die entsprechenden Funktionalitätsangaben für die Beziehung ab.\n' +
+            '• Zeigen Sie nun am Beispiel, dass die abgeleiteten Funktionalitätsangaben nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen übereinstimmen.\n\n' +
+            '[2] betreuen(Doktoranden, Professoren, Promotionsthemen), (min,max)-Angaben (0,1) / (0,*) / (0,1), Beziehungsattribut Note.',
+        },
+        {
+          art: 'svg',
+          svg: `<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel [2]: ternäre Beziehung betreuen zwischen Doktoranden, Professoren und Promotionsthemen mit den (min,max)-Angaben (0,1), (0,*), (0,1)">
   <text class="dgm-text" x="30" y="30" style="font-weight:700">[2] (min,max)-Angaben (0,1) / (0,*) / (0,1)</text>
   <line class="dgm-line" x1="230" y1="95" x2="325" y2="95"/>
   <line class="dgm-line" x1="435" y1="95" x2="560" y2="95"/>
@@ -186,6 +200,8 @@ export const blatt3: Uebungsblatt = {
   <text class="dgm-card" x="478" y="112">(0,*)</text>
   <text class="dgm-card" x="468" y="244">(0,1)</text>
 </svg>`,
+        },
+      ],
       loesung: [
         {
           art: 'unterpunkt',

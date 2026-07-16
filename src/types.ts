@@ -55,6 +55,10 @@ export interface UebungsblattTask {
   hinweis?: string
   // Inline SVG diagram shown with the question (e.g. an ER diagram).
   svg?: string
+  // Aufgabenstellung als verschachtelte Blöcke (Text/SVG/…) statt nur text+svg –
+  // damit Teilaufgaben und ihre Abbildung gruppiert stehen können (a → Bild, b → Bild).
+  // Werden NACH task.text gerendert; task.svg entfällt dann.
+  statementBlocks?: LoesungBlock[]
   aufgabeId?: string
   relevantTables?: string[]
   tabellen?: NamedTable[]

@@ -214,6 +214,21 @@ function TaskCard({
         </div>
       )}
 
+      {/* Verschachtelte Aufgaben-Blöcke: Teilaufgabe und ihre Abbildung gruppiert */}
+      {task.statementBlocks?.map(block => {
+        const bk = blockKey(block)
+        if (block.art === 'text') {
+          return <p key={bk} className="q-title ub-question" style={{ marginTop: '0.7rem' }}>{block.text}</p>
+        }
+        if (block.art === 'svg') {
+          return (
+            // eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (block.svg), kein User-Input
+            <div key={bk} className="ub-diagram" dangerouslySetInnerHTML={{ __html: block.svg }} />
+          )
+        }
+        return null
+      })}
+
       {/* ER / structural diagram shown with the question */}
       {task.svg && (
         // eslint-disable-next-line react-doctor/no-danger -- statisches, im Repo definiertes SVG-Diagramm (task.svg), kein User-Input
