@@ -407,6 +407,19 @@ export const blatt2: Uebungsblatt = {
         'Angenommen, lediglich die partielle Funktion A × C → B gilt.\n' +
         '• Beschriften Sie die Abbildung mit den passenden Funktionalitätsangaben.\n' +
         '• Beantworten Sie nun die Frage, wie Funktionalitätsangaben aus partiellen Funktionen ermittelt werden können und umgekehrt.',
+      svg: `<svg viewBox="0 0 620 320" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Ternäre Beziehung R zwischen A, B und C – die Funktionalitäten sind selbst zu beschriften">
+  <line class="dgm-line" x1="170" y1="103" x2="255" y2="103"/>
+  <line class="dgm-line" x1="365" y1="103" x2="450" y2="103"/>
+  <line class="dgm-line" x1="310" y1="139" x2="310" y2="240"/>
+  <rect class="dgm-shape" x="60" y="80" width="110" height="46" rx="4"/>
+  <text class="dgm-text" x="115" y="109" text-anchor="middle">A</text>
+  <polygon class="dgm-shape" points="255,103 310,67 365,103 310,139"/>
+  <text class="dgm-text dgm-text--sm" x="310" y="107" text-anchor="middle">R</text>
+  <rect class="dgm-shape" x="450" y="80" width="110" height="46" rx="4"/>
+  <text class="dgm-text" x="505" y="109" text-anchor="middle">B</text>
+  <rect class="dgm-shape" x="255" y="240" width="110" height="46" rx="4"/>
+  <text class="dgm-text" x="310" y="269" text-anchor="middle">C</text>
+</svg>`,
       loesung: [
         {
           art: 'text',
