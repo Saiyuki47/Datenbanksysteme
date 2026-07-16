@@ -952,6 +952,14 @@ export const lernskript: SkriptKapitel[] = [
   <text class="dgm-text dgm-text--sm" x="561" y="150" text-anchor="middle">FULL JOIN</text>
 </svg>`,
           },
+          {
+            art: 'text',
+            text: 'Konkret an Daten: Carla hat noch keine Bestellung aufgegeben. Der INNER JOIN lässt sie deshalb weg; der LEFT JOIN behält alle Kunden und füllt die fehlenden Bestell-Spalten mit NULL:',
+          },
+          { art: 'tabelle', titel: 'Kunde', columns: ['KID', 'Name'], rows: [['1', 'Anna'], ['2', 'Ben'], ['3', 'Carla']] },
+          { art: 'tabelle', titel: 'Bestellung (KID = Fremdschlüssel; zu Carla gibt es keine Zeile)', columns: ['BID', 'KID', 'Betrag'], rows: [['101', '1', '50'], ['102', '2', '20']] },
+          { art: 'tabelle', titel: 'Kunde ⋈ Bestellung (INNER JOIN über KID) – nur Kunden MIT Bestellung', columns: ['KID', 'Name', 'BID', 'Betrag'], rows: [['1', 'Anna', '101', '50'], ['2', 'Ben', '102', '20']] },
+          { art: 'tabelle', titel: 'Kunde LEFT JOIN Bestellung – ALLE Kunden; Carla ohne Bestellung → NULL', columns: ['KID', 'Name', 'BID', 'Betrag'], rows: [['1', 'Anna', '101', '50'], ['2', 'Ben', '102', '20'], ['3', 'Carla', 'NULL', 'NULL']] },
         ],
       },
       {
@@ -961,6 +969,15 @@ export const lernskript: SkriptKapitel[] = [
             art: 'frage',
             q: 'Wie funktioniert eine Unterabfrage mit IN?',
             a: 'Die innere Abfrage liefert zuerst eine Werteliste, die äußere filtert damit: WHERE spalte IN (SELECT …). Von innen nach außen lesen.',
+          },
+          {
+            art: 'code',
+            titel: 'Beispiel: Namen der Studierenden, die mindestens eine Vorlesung hören',
+            text: 'SELECT Name\nFROM Studenten\nWHERE MatrNr IN (SELECT MatrNr FROM hören)',
+          },
+          {
+            art: 'text',
+            text: 'Von innen nach außen: Die innere Abfrage liefert zuerst die MatrNr aller Hörer; die äußere gibt genau die Namen der Studierenden aus, deren MatrNr in dieser Liste steht. (Alternativ ginge das auch als Join – die Unterabfrage ist hier nur die direktere Schreibweise für „kommt vor in".)',
           },
           {
             art: 'merk',
@@ -1043,6 +1060,15 @@ export const lernskript: SkriptKapitel[] = [
             text: 'Eine automatisch ausgelöste Aktion bei bestimmten Ereignissen (BEFORE/AFTER INSERT/UPDATE/DELETE). Nützlich, um Integritätsregeln durchzusetzen, die sich nicht als einfacher CHECK formulieren lassen.',
           },
           {
+            art: 'code',
+            titel: 'Beispiel (Pseudo-SQL): beim Einfügen prüfen und ggf. abweisen',
+            text: "CREATE TRIGGER semester_pruefen\nBEFORE INSERT ON Studenten\nFOR EACH ROW\nBEGIN\n  IF :NEW.Semester > 13 THEN\n    raise_application_error(-20001, 'Semester zu hoch');\n  END IF;\nEND;",
+          },
+          {
+            art: 'text',
+            text: 'Der Unterschied zum CHECK: Ein Trigger kann Dinge tun, die eine reine Spaltenbedingung nicht kann – z. B. andere Tabellen einbeziehen (beim Einfügen einer Bestellung automatisch den Lagerbestand verringern) oder eine Aktion auslösen statt nur abzulehnen.',
+          },
+          {
             art: 'text',
             text: 'Temporale Daten: Gültigkeitszeiträume (z. B. gültig_von / gültig_bis) modellieren die zeitliche Entwicklung von Daten.',
           },
@@ -1065,6 +1091,24 @@ export const lernskript: SkriptKapitel[] = [
             text: '„A bestimmt B funktional": Haben zwei Tupel gleiche Werte bei A, so haben sie auch gleiche Werte bei B. Ein Verstoß lässt sich an der Ausprägung zeigen; die FD selbst folgt aus der Semantik (nicht aus der Ausprägung beweisbar).',
           },
           {
+            art: 'text',
+            text: 'Beispiel zum Ablesen: Hier gilt MatrNr → Name (jede MatrNr hat genau einen Namen), aber Name → MatrNr gilt NICHT – derselbe Name „Fichte" steht bei zwei verschiedenen MatrNr:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'MatrNr → Name gilt · Name → MatrNr gilt nicht (Gegenbeispiel: die beiden Fichte-Zeilen)',
+            columns: ['MatrNr', 'Name', 'Semester'],
+            rows: [
+              ['24002', 'Xenokrates', '18'],
+              ['25403', 'Fichte', '12'],
+              ['26120', 'Fichte', '10'],
+            ],
+          },
+          {
+            art: 'text',
+            text: 'Eine verletzte FD zeigt man immer mit einem Gegenbeispiel: zwei Zeilen, die links gleich, rechts aber verschieden sind. Dass eine FD GILT, kann eine einzelne Tabelle dagegen nur nahelegen – es folgt erst aus der Bedeutung der Daten.',
+          },
+          {
             art: 'liste',
             titel: 'Armstrong-Axiome / Regeln',
             punkte: [
@@ -1084,6 +1128,26 @@ export const lernskript: SkriptKapitel[] = [
             a: 'Starte mit A⁺ = {A}. Wende wiederholt jede FD X → Y an: liegt X vollständig in A⁺, nimm Y hinzu. Wiederhole, bis sich nichts mehr ändert.',
           },
           {
+            art: 'text',
+            text: 'Beispiel: R = {A, B, C, D} mit den FDs A → BC, B → C und AB → D. Gesucht ist {A}⁺:',
+          },
+          {
+            art: 'tabelle',
+            titel: '{A}⁺ schrittweise – jede FD, deren linke Seite schon in der Hülle liegt, ergänzt ihre rechte Seite',
+            columns: ['Schritt', 'anwendbare FD', 'Hülle danach'],
+            rows: [
+              ['Start', '– (nur A selbst)', '{A}'],
+              ['1', 'A → BC   (A liegt in der Hülle)', '{A, B, C}'],
+              ['2', 'B → C   (B liegt drin, C schon da)', '{A, B, C}'],
+              ['3', 'AB → D   (A und B liegen drin)', '{A, B, C, D}'],
+              ['Ende', 'keine FD ergänzt mehr etwas', '{A, B, C, D}'],
+            ],
+          },
+          {
+            art: 'text',
+            text: '{A}⁺ = {A, B, C, D} = alle Attribute → {A} ist ein Superschlüssel. Da {A} nur aus einem Attribut besteht, ist es auch minimal, also ein Kandidatenschlüssel. (Aufgabe: Blatt 11, GA2.)',
+          },
+          {
             art: 'merk',
             text: 'A ist Superschlüssel ⇔ A⁺ = alle Attribute. A ist Kandidatenschlüssel ⇔ A ist Superschlüssel UND minimal. Ein Attribut, das in keiner rechten FD-Seite vorkommt, muss in JEDEM Schlüssel enthalten sein.',
           },
@@ -1101,6 +1165,25 @@ export const lernskript: SkriptKapitel[] = [
               '3. FDs mit leerer rechter Seite streichen.',
               '4. FDs mit gleicher linker Seite zusammenfassen: A → B und A → D ⇒ A → BD.',
             ],
+          },
+          {
+            art: 'text',
+            text: 'Beispiel (gleiche FD-Menge wie oben): A → BC, B → C, AB → D. Schritt für Schritt:',
+          },
+          {
+            art: 'liste',
+            titel: 'Reduktion in der vorgegebenen Reihenfolge',
+            punkte: [
+              '**Linksreduktion** von AB → D: Das B links ist überflüssig, denn aus A folgt schon B (A → B steckt in A → BC). Also wird AB → D zu A → D.',
+              '**Rechtsreduktion** von A → BC: Das C rechts ist überflüssig, denn C folgt schon aus B (B → C). Also wird A → BC zu A → B.',
+              'Zwischenstand: A → B, B → C, A → D. Keine FD hat eine leere rechte Seite.',
+              '**Gleiche linke Seiten zusammenfassen:** A → B und A → D werden zu A → BD.',
+            ],
+          },
+          {
+            art: 'code',
+            titel: 'Ergebnis: kanonische Überdeckung Fc',
+            text: 'A → BD\nB → C',
           },
           {
             art: 'merk',
@@ -1125,6 +1208,33 @@ export const lernskript: SkriptKapitel[] = [
           {
             art: 'merk',
             text: 'Ziel der Normalisierung: Redundanz und die daraus folgenden Update-, Einfüge- und Löschanomalien beseitigen.',
+          },
+          {
+            art: 'text',
+            text: 'Warum überhaupt zerlegen? In dieser Tabelle steht zu jedem Studenten auch der Raum seines Kurses. Weil jeder Kurs immer im selben Raum stattfindet, wird der Raum in jeder Zeile des Kurses wiederholt – reine Redundanz. Ursache ist die FD Kurs → Raum, wobei Kurs kein Schlüssel ist:',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Belegung (Student, Kurs, Raum) – Raum B01 steht dreimal redundant',
+            columns: ['Student', 'Kurs', 'Raum'],
+            rows: [
+              ['Mary', 'CS145', 'B01'],
+              ['Joe', 'CS145', 'B01'],
+              ['Sam', 'CS145', 'B01'],
+            ],
+          },
+          {
+            art: 'liste',
+            titel: 'Die drei Anomalien, die aus dieser Redundanz folgen',
+            punkte: [
+              '**Update-Anomalie:** Ändert man den Raum nur in einer Zeile (Joe → C12), widersprechen sich die Zeilen – derselbe Kurs hat plötzlich zwei Räume.',
+              '**Lösch-Anomalie:** Verlassen alle Studenten den Kurs, verschwindet mit den Zeilen auch die Information, in welchem Raum CS145 stattfand.',
+              '**Einfüge-Anomalie:** Einen Raum für einen neuen Kurs kann man gar nicht eintragen, solange noch kein Student eingeschrieben ist.',
+            ],
+          },
+          {
+            art: 'text',
+            text: 'Lösung: verlustlos zerlegen in Belegung(Student, Kurs) und Raumplan(Kurs, Raum). Jetzt steht jeder Raum genau einmal, alle drei Anomalien sind weg. Genau das leisten 2NF/3NF/BCNF – sie entfernen schrittweise die „schlechten" FDs (ein Nichtschlüssel bestimmt etwas) durch Zerlegung.',
           },
         ],
       },
