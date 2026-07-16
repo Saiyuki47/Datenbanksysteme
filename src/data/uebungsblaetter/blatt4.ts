@@ -27,6 +27,83 @@ export const blatt4: Uebungsblatt = {
       titel: 'Gruppenaufgabe 1 – ER → Schema + Verfeinerung',
       text:
         'Überführen Sie die untenstehenden ER-Diagramme jeweils zuerst in ein Relationen Schema und verfeinern Sie dieses anschließend. Achten Sie darauf, Wertebereiche für die Attribute anzugeben und Primärschlüssel durch Unterstreichen zu kennzeichnen.',
+      svg: `<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="a) Auto N zu 1 herstellen Hersteller mit Schlüsseln FGNr und Name">
+  <text class="dgm-text" x="10" y="18" style="font-weight:700">a) Auto N : 1 Hersteller</text>
+  <line class="dgm-line" x1="150" y1="82" x2="218" y2="82"/>
+  <line class="dgm-line" x1="342" y1="82" x2="410" y2="82"/>
+  <line class="dgm-line" x1="95" y1="104" x2="95" y2="136"/>
+  <line class="dgm-line" x1="465" y1="104" x2="465" y2="136"/>
+  <rect class="dgm-shape" x="40" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="95" y="87" text-anchor="middle">Auto</text>
+  <polygon class="dgm-shape" points="218,82 280,48 342,82 280,116"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="86" text-anchor="middle">herstellen</text>
+  <rect class="dgm-shape" x="410" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="465" y="87" text-anchor="middle">Hersteller</text>
+  <ellipse class="dgm-shape" cx="95" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="95" y="159" text-anchor="middle">FGNr</text>
+  <ellipse class="dgm-shape" cx="465" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="465" y="159" text-anchor="middle">Name</text>
+  <text class="dgm-card" x="172" y="74">N</text>
+  <text class="dgm-card" x="382" y="74">1</text>
+</svg>
+<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="b) Buchtitel N zu M vormerken Ausleiher mit Schlüsseln ISBN und LeserNr">
+  <text class="dgm-text" x="10" y="18" style="font-weight:700">b) Buchtitel N : M Ausleiher</text>
+  <line class="dgm-line" x1="150" y1="82" x2="218" y2="82"/>
+  <line class="dgm-line" x1="342" y1="82" x2="410" y2="82"/>
+  <line class="dgm-line" x1="95" y1="104" x2="95" y2="136"/>
+  <line class="dgm-line" x1="465" y1="104" x2="465" y2="136"/>
+  <rect class="dgm-shape" x="40" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="95" y="87" text-anchor="middle">Buchtitel</text>
+  <polygon class="dgm-shape" points="218,82 280,48 342,82 280,116"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="86" text-anchor="middle">vormerken</text>
+  <rect class="dgm-shape" x="410" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="465" y="87" text-anchor="middle">Ausleiher</text>
+  <ellipse class="dgm-shape" cx="95" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="95" y="159" text-anchor="middle">ISBN</text>
+  <ellipse class="dgm-shape" cx="465" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="465" y="159" text-anchor="middle">LeserNr</text>
+  <text class="dgm-card" x="172" y="74">N</text>
+  <text class="dgm-card" x="382" y="74">M</text>
+</svg>
+<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="c) Stadt 1 zu 1 Bürgermeister Bürger mit Schlüsseln Name und SVNr">
+  <text class="dgm-text" x="10" y="18" style="font-weight:700">c) Stadt 1 : 1 Bürger</text>
+  <line class="dgm-line" x1="150" y1="82" x2="210" y2="82"/>
+  <line class="dgm-line" x1="350" y1="82" x2="410" y2="82"/>
+  <line class="dgm-line" x1="95" y1="104" x2="95" y2="136"/>
+  <line class="dgm-line" x1="465" y1="104" x2="465" y2="136"/>
+  <rect class="dgm-shape" x="40" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="95" y="87" text-anchor="middle">Stadt</text>
+  <polygon class="dgm-shape" points="210,82 280,44 350,82 280,120"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="86" text-anchor="middle">Bürgermeister</text>
+  <rect class="dgm-shape" x="410" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="465" y="87" text-anchor="middle">Bürger</text>
+  <ellipse class="dgm-shape" cx="95" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="95" y="159" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="465" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="465" y="159" text-anchor="middle">SVNr</text>
+  <text class="dgm-card" x="172" y="74">1</text>
+  <text class="dgm-card" x="382" y="74">1</text>
+</svg>
+<svg viewBox="0 0 560 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="d) Gebäude 1 zu N liegt_in Raum (schwache Entität, identifizierende Beziehung) mit Schlüsseln GebNr und RaumNr">
+  <text class="dgm-text" x="10" y="18" style="font-weight:700">d) Gebäude 1 : N Raum (identifizierend)</text>
+  <line class="dgm-line" x1="150" y1="82" x2="210" y2="82"/>
+  <line class="dgm-line" x1="350" y1="82" x2="410" y2="82"/>
+  <line class="dgm-line" x1="95" y1="104" x2="95" y2="136"/>
+  <line class="dgm-line" x1="465" y1="104" x2="465" y2="136"/>
+  <rect class="dgm-shape" x="40" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="95" y="87" text-anchor="middle">Gebäude</text>
+  <polygon class="dgm-shape" points="210,82 280,44 350,82 280,120"/>
+  <polygon class="dgm-shape" points="222,82 280,53 338,82 280,111"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="86" text-anchor="middle">liegt_in</text>
+  <rect class="dgm-shape" x="410" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="465" y="87" text-anchor="middle">Raum</text>
+  <ellipse class="dgm-shape" cx="95" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="95" y="159" text-anchor="middle">GebNr</text>
+  <ellipse class="dgm-shape" cx="465" cy="154" rx="36" ry="16"/>
+  <text class="dgm-key" x="465" y="159" text-anchor="middle">RaumNr</text>
+  <text class="dgm-card" x="172" y="74">1</text>
+  <text class="dgm-card" x="382" y="74">N</text>
+</svg>`,
       loesung: [
         {
           art: 'text',
@@ -254,6 +331,27 @@ export const blatt4: Uebungsblatt = {
         'Überführen Sie das Diagramm (abstrakte 1:N-Beziehung A —1— R —N— B mit Attributen a, b, r) zuerst in ein Schema und verfeinern Sie dieses im Nachfolgenden. (Aufgrund der Abstraktion müssen keine Wertebereiche angeben werden.)\n' +
         'a) Relationales Schema\n' +
         'b) Verfeinerung',
+      svg: `<svg viewBox="0 0 560 190" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="abstrakte 1:N-Beziehung A 1 zu N R B mit Attributen a, b, r">
+  <line class="dgm-line" x1="150" y1="55" x2="218" y2="55"/>
+  <line class="dgm-line" x1="342" y1="55" x2="410" y2="55"/>
+  <line class="dgm-line" x1="95" y1="77" x2="95" y2="109"/>
+  <line class="dgm-line" x1="465" y1="77" x2="465" y2="109"/>
+  <line class="dgm-line" x1="280" y1="89" x2="280" y2="119"/>
+  <rect class="dgm-shape" x="40" y="33" width="110" height="44" rx="4"/>
+  <text class="dgm-text" x="95" y="60" text-anchor="middle">A</text>
+  <polygon class="dgm-shape" points="218,55 280,21 342,55 280,89"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="59" text-anchor="middle">R</text>
+  <rect class="dgm-shape" x="410" y="33" width="110" height="44" rx="4"/>
+  <text class="dgm-text" x="465" y="60" text-anchor="middle">B</text>
+  <ellipse class="dgm-shape" cx="95" cy="127" rx="30" ry="16"/>
+  <text class="dgm-key" x="95" y="132" text-anchor="middle">a</text>
+  <ellipse class="dgm-shape" cx="465" cy="127" rx="30" ry="16"/>
+  <text class="dgm-key" x="465" y="132" text-anchor="middle">b</text>
+  <ellipse class="dgm-shape" cx="280" cy="137" rx="30" ry="16"/>
+  <text class="dgm-text dgm-text--sm" x="280" y="142" text-anchor="middle">r</text>
+  <text class="dgm-card" x="172" y="47">1</text>
+  <text class="dgm-card" x="382" y="47">N</text>
+</svg>`,
       loesung: [
         {
           art: 'svg',
@@ -315,6 +413,57 @@ export const blatt4: Uebungsblatt = {
         'a) Fügen Sie bei den Beziehungen Funktionalitätsangaben (1:1, 1:N, N:1, N:M) hinzu. Geben Sie dabei für die Beziehung verbindet ebenfalls die geltenden partiellen Funktionen an.\n' +
         'b) Übertragen Sie das ER-Modell in ein relationales Schema.\n' +
         'c) Verfeinern Sie das relationale Schema soweit möglich durch Eliminierung von Relationen.',
+      svg: `<svg viewBox="0 0 800 580" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Modell Zugverbindungen: Bahnhöfe, Städte, Züge mit den Beziehungen liegt_in, Start, Ziel und der ternären Beziehung verbindet – die Funktionalitäten sind selbst zu ergänzen">
+  <line class="dgm-line" x1="300" y1="143" x2="395" y2="143"/>
+  <line class="dgm-line" x1="505" y1="143" x2="580" y2="143"/>
+  <line class="dgm-line" x1="180" y1="166" x2="110" y2="278"/>
+  <line class="dgm-line" x1="110" y1="342" x2="262" y2="440"/>
+  <line class="dgm-line" x1="222" y1="166" x2="238" y2="272"/>
+  <line class="dgm-line" x1="262" y1="166" x2="278" y2="272"/>
+  <line class="dgm-line" x1="260" y1="348" x2="300" y2="440"/>
+  <line class="dgm-line" x1="290" y1="166" x2="420" y2="276"/>
+  <line class="dgm-line" x1="420" y1="344" x2="358" y2="440"/>
+  <line class="dgm-line" x1="170" y1="120" x2="150" y2="98"/>
+  <line class="dgm-line" x1="170" y1="135" x2="130" y2="135"/>
+  <line class="dgm-line" x1="700" y1="125" x2="700" y2="120"/>
+  <line class="dgm-line" x1="700" y1="161" x2="700" y2="166"/>
+  <line class="dgm-line" x1="250" y1="476" x2="182" y2="470"/>
+  <line class="dgm-line" x1="250" y1="486" x2="182" y2="515"/>
+  <line class="dgm-line" x1="368" y1="450" x2="438" y2="425"/>
+  <line class="dgm-line" x1="368" y1="466" x2="452" y2="466"/>
+  <rect class="dgm-shape" x="170" y="120" width="130" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="235" y="147" text-anchor="middle">Bahnhöfe</text>
+  <polygon class="dgm-shape" points="395,143 450,111 505,143 450,175"/>
+  <text class="dgm-text dgm-text--sm" x="450" y="147" text-anchor="middle">liegt_in</text>
+  <rect class="dgm-shape" x="580" y="120" width="120" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="640" y="147" text-anchor="middle">Städte</text>
+  <polygon class="dgm-shape" points="60,310 110,276 160,310 110,344"/>
+  <text class="dgm-text dgm-text--sm" x="110" y="314" text-anchor="middle">Start</text>
+  <polygon class="dgm-shape" points="202,310 260,272 318,310 260,348"/>
+  <text class="dgm-text dgm-text--sm" x="260" y="314" text-anchor="middle">verbindet</text>
+  <polygon class="dgm-shape" points="362,310 420,276 478,310 420,344"/>
+  <text class="dgm-text dgm-text--sm" x="420" y="314" text-anchor="middle">Ziel</text>
+  <rect class="dgm-shape" x="250" y="440" width="120" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="310" y="467" text-anchor="middle">Züge</text>
+  <ellipse class="dgm-shape" cx="120" cy="92" rx="34" ry="15"/>
+  <text class="dgm-key" x="120" y="97" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="88" cy="135" rx="42" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="88" y="140" text-anchor="middle">AnzahlGleise</text>
+  <ellipse class="dgm-shape" cx="730" cy="110" rx="34" ry="15"/>
+  <text class="dgm-key" x="730" y="115" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="738" cy="176" rx="42" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="738" y="181" text-anchor="middle">Bundesland</text>
+  <ellipse class="dgm-shape" cx="148" cy="468" rx="34" ry="15"/>
+  <text class="dgm-key" x="148" y="473" text-anchor="middle">ZugNr</text>
+  <ellipse class="dgm-shape" cx="148" cy="518" rx="32" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="148" y="523" text-anchor="middle">Länge</text>
+  <ellipse class="dgm-shape" cx="472" cy="418" rx="34" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="472" y="423" text-anchor="middle">Abfahrt</text>
+  <ellipse class="dgm-shape" cx="486" cy="466" rx="34" ry="15"/>
+  <text class="dgm-text dgm-text--sm" x="486" y="471" text-anchor="middle">Ankunft</text>
+  <text class="dgm-text dgm-text--sm" x="230" y="200">von</text>
+  <text class="dgm-text dgm-text--sm" x="285" y="200">nach</text>
+</svg>`,
       loesung: [
         {
           art: 'unterpunkt',

@@ -61,6 +61,28 @@ export const blatt3: Uebungsblatt = {
         '• In einer Übungsgruppe wird mindestens einmal und maximal 25-mal (ein Student von einem Übungsleiter) betreut.\n' +
         '• Ein Student wird höchstens einmal (von einem Übungsleiter in einer Übungsgruppe) betreut.\n\n' +
         'b) Betrachten Sie nun die folgende Ausprägung der Beziehung betreuen. Welchen Zusammenhang gibt es zwischen der (min,max)-Notation und der Ausprägung?',
+      svg: `<svg viewBox="0 0 720 360" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Übungssystem: ternäre Beziehung betreuen zwischen Übungsleiter, Übungsgruppe und Student – die (min,max)-Angaben sind selbst zu bestimmen">
+  <line class="dgm-line" x1="240" y1="103" x2="305" y2="103"/>
+  <line class="dgm-line" x1="415" y1="103" x2="520" y2="103"/>
+  <line class="dgm-line" x1="360" y1="141" x2="360" y2="230"/>
+  <line class="dgm-line" x1="160" y1="126" x2="185" y2="158"/>
+  <line class="dgm-line" x1="600" y1="126" x2="625" y2="158"/>
+  <line class="dgm-line" x1="360" y1="276" x2="385" y2="296"/>
+  <rect class="dgm-shape" x="80" y="80" width="160" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="160" y="107" text-anchor="middle">Übungsleiter</text>
+  <polygon class="dgm-shape" points="305,103 360,65 415,103 360,141"/>
+  <text class="dgm-text dgm-text--sm" x="360" y="107" text-anchor="middle">betreuen</text>
+  <rect class="dgm-shape" x="520" y="80" width="160" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="600" y="107" text-anchor="middle">Übungsgruppe</text>
+  <rect class="dgm-shape" x="280" y="230" width="160" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="360" y="257" text-anchor="middle">Student</text>
+  <ellipse class="dgm-shape" cx="215" cy="172" rx="36" ry="16"/>
+  <text class="dgm-key" x="215" y="177" text-anchor="middle">Name</text>
+  <ellipse class="dgm-shape" cx="655" cy="172" rx="40" ry="16"/>
+  <text class="dgm-key" x="655" y="177" text-anchor="middle">GruppenNr</text>
+  <ellipse class="dgm-shape" cx="415" cy="310" rx="36" ry="16"/>
+  <text class="dgm-key" x="415" y="315" text-anchor="middle">MatrNr</text>
+</svg>`,
       loesung: [
         {
           art: 'unterpunkt',
@@ -123,6 +145,47 @@ export const blatt3: Uebungsblatt = {
         '• Zeigen Sie nun am Beispiel, dass die abgeleiteten Funktionalitätsangaben nicht mit den zuvor festgelegten Konsistenzbedingungen bzw. partiellen Funktionen übereinstimmen.\n\n' +
         '[1] betreuen(Studenten, Professoren, Seminarthemen), Funktionalitäten N : 1 : 1, Beziehungsattribut Note.\n' +
         '[2] betreuen(Doktoranden, Professoren, Promotionsthemen), (min,max)-Angaben (0,1) / (0,*) / (0,1), Beziehungsattribut Note.',
+      svg: `<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel [1]: ternäre Beziehung betreuen zwischen Studenten, Professoren und Seminarthemen mit den Funktionalitäten N, 1, 1">
+  <text class="dgm-text" x="30" y="30" style="font-weight:700">[1] Funktionalitäten N : 1 : 1</text>
+  <line class="dgm-line" x1="230" y1="95" x2="325" y2="95"/>
+  <line class="dgm-line" x1="435" y1="95" x2="560" y2="95"/>
+  <line class="dgm-line" x1="380" y1="131" x2="560" y2="263"/>
+  <line class="dgm-line" x1="355" y1="123" x2="340" y2="162"/>
+  <rect class="dgm-shape" x="70" y="72" width="160" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="150" y="99" text-anchor="middle">Studenten</text>
+  <polygon class="dgm-shape" points="325,95 380,59 435,95 380,131"/>
+  <text class="dgm-text dgm-text--sm" x="380" y="99" text-anchor="middle">betreuen</text>
+  <rect class="dgm-shape" x="560" y="72" width="170" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="645" y="99" text-anchor="middle">Professoren</text>
+  <rect class="dgm-shape" x="560" y="240" width="180" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="650" y="267" text-anchor="middle">Seminarthemen</text>
+  <ellipse class="dgm-shape" cx="320" cy="178" rx="34" ry="16"/>
+  <text class="dgm-text dgm-text--sm" x="320" y="183" text-anchor="middle">Note</text>
+  <text class="dgm-card" x="262" y="86">N</text>
+  <text class="dgm-card" x="498" y="86">1</text>
+  <text class="dgm-card" x="470" y="218">1</text>
+</svg>
+<svg viewBox="0 0 760 340" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Beispiel [2]: ternäre Beziehung betreuen zwischen Doktoranden, Professoren und Promotionsthemen mit den (min,max)-Angaben (0,1), (0,*), (0,1)">
+  <text class="dgm-text" x="30" y="30" style="font-weight:700">[2] (min,max)-Angaben (0,1) / (0,*) / (0,1)</text>
+  <line class="dgm-line" x1="230" y1="95" x2="325" y2="95"/>
+  <line class="dgm-line" x1="435" y1="95" x2="560" y2="95"/>
+  <line class="dgm-line" x1="380" y1="131" x2="560" y2="263"/>
+  <line class="dgm-line" x1="355" y1="123" x2="340" y2="162"/>
+  <rect class="dgm-shape" x="70" y="72" width="160" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="150" y="99" text-anchor="middle">Doktoranden</text>
+  <polygon class="dgm-shape" points="325,95 380,59 435,95 380,131"/>
+  <text class="dgm-text dgm-text--sm" x="380" y="99" text-anchor="middle">betreuen</text>
+  <rect class="dgm-shape" x="560" y="72" width="170" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="645" y="99" text-anchor="middle">Professoren</text>
+  <rect class="dgm-shape" x="560" y="240" width="180" height="46" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="650" y="260" text-anchor="middle">Promotions-</text>
+  <text class="dgm-text dgm-text--sm" x="650" y="276" text-anchor="middle">themen</text>
+  <ellipse class="dgm-shape" cx="320" cy="178" rx="34" ry="16"/>
+  <text class="dgm-text dgm-text--sm" x="320" y="183" text-anchor="middle">Note</text>
+  <text class="dgm-card" x="248" y="112">(0,1)</text>
+  <text class="dgm-card" x="478" y="112">(0,*)</text>
+  <text class="dgm-card" x="468" y="244">(0,1)</text>
+</svg>`,
       loesung: [
         {
           art: 'unterpunkt',
@@ -251,6 +314,29 @@ export const blatt3: Uebungsblatt = {
         '• Für jedes Fahrzeug muss es mindestens drei Personen mit einer entsprechenden Fahrerlaubnis geben.\n\n' +
         'a) Wie lauten die entsprechenden Funktionalitäten (1:1, 1:N, N:1, N:M)?\n' +
         'b) Geben Sie gemäß der obigen Bedingungen geeignete Funktionalitäten in der (min, max)-Notation an.',
+      svg: `<svg viewBox="0 0 820 380" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Modell der Fahrzeugverwaltung: Fahrer hat_Fahrerlaubnis Fahrzeug, Fahrzeug gehört Abteilung, Fahrzeug steht_in Einzelgarage – die Funktionalitäten sind selbst zu bestimmen">
+  <line class="dgm-line" x1="140" y1="82" x2="168" y2="82"/>
+  <line class="dgm-line" x1="292" y1="82" x2="360" y2="82"/>
+  <line class="dgm-line" x1="470" y1="82" x2="520" y2="82"/>
+  <line class="dgm-line" x1="620" y1="82" x2="690" y2="82"/>
+  <line class="dgm-line" x1="415" y1="104" x2="415" y2="196"/>
+  <line class="dgm-line" x1="415" y1="264" x2="415" y2="320"/>
+  <rect class="dgm-shape" x="30" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="85" y="87" text-anchor="middle">Fahrer</text>
+  <polygon class="dgm-shape" points="168,82 230,44 292,82 230,120"/>
+  <text class="dgm-text dgm-text--sm" x="230" y="79" text-anchor="middle">hat_Fahr-</text>
+  <text class="dgm-text dgm-text--sm" x="230" y="93" text-anchor="middle">erlaubnis</text>
+  <rect class="dgm-shape" x="360" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="415" y="87" text-anchor="middle">Fahrzeug</text>
+  <polygon class="dgm-shape" points="520,82 570,48 620,82 570,116"/>
+  <text class="dgm-text dgm-text--sm" x="570" y="86" text-anchor="middle">gehört</text>
+  <rect class="dgm-shape" x="690" y="60" width="110" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="745" y="87" text-anchor="middle">Abteilung</text>
+  <polygon class="dgm-shape" points="365,230 415,196 465,230 415,264"/>
+  <text class="dgm-text dgm-text--sm" x="415" y="234" text-anchor="middle">steht_in</text>
+  <rect class="dgm-shape" x="355" y="320" width="120" height="44" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="415" y="347" text-anchor="middle">Einzelgarage</text>
+</svg>`,
       loesung: [
         {
           art: 'unterpunkt',
