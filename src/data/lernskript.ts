@@ -937,6 +937,68 @@ export const lernskript: SkriptKapitel[] = [
           },
         ],
       },
+      {
+        titel: '4.2 Operatorbaum optimieren (algebraische Optimierung)',
+        blocks: [
+          {
+            art: 'text',
+            text: 'Jeder Algebra-Ausdruck lässt sich als Operatorbaum zeichnen (Blätter = Relationen, Wurzel = Endergebnis, Auswertung von unten nach oben). Weil jeder Operator wieder eine Relation liefert, darf man den Baum in einen äquivalenten, aber schnelleren umformen – das Ergebnis bleibt gleich, es wird nur weniger gerechnet.',
+          },
+          {
+            art: 'liste',
+            titel: 'Die wichtigsten Optimierungsregeln',
+            punkte: [
+              '**Selektion nach unten schieben (früh selektieren):** σ so nah wie möglich an die Blätter ziehen, damit früh Zeilen wegfallen – z. B. σ[Bedingung nur über R](R ⋈ S) = (σ[Bedingung](R)) ⋈ S.',
+              '**Selektionen aufteilen:** σ[A ∧ B](R) = σ[A](σ[B](R)) – so lassen sich die Teile einzeln nach unten schieben.',
+              '**Projektion nach unten schieben (früh projizieren):** unnötige Spalten früh mit π wegwerfen – aber die Join- und Selektionsattribute behalten, bis sie gebraucht wurden.',
+              '**Kreuzprodukt + Selektion zu Join zusammenfassen:** σ[R.a = S.b](R × S) = R ⋈[R.a = S.b] S. Ein Join ist viel billiger als das volle Kreuzprodukt.',
+              '**Faustregel:** erst filtern (σ), dann verbinden (⋈), zuletzt Spalten wählen (π) – „erst klein machen, dann zusammenbauen".',
+            ],
+          },
+          {
+            art: 'text',
+            text: 'Beispiel: „Titel der Vorlesungen von Professor Sokrates." Naiv erst alles kombinieren, dann selektieren:',
+          },
+          {
+            art: 'code',
+            titel: 'Unoptimiert – großes Kreuzprodukt, danach Selektion',
+            text: "π[Titel] ( σ[Name = 'Sokrates' ∧ PersNr = gelesenVon] (Professoren × Vorlesungen) )",
+          },
+          {
+            art: 'code',
+            titel: 'Optimiert – erst σ auf Professoren, dann Join, dann π',
+            text: "π[Titel] ( σ[Name = 'Sokrates'](Professoren) ⋈[PersNr = gelesenVon] Vorlesungen )",
+          },
+          {
+            art: 'text',
+            text: 'Die Selektion σ[Name = Sokrates] wandert an das Professoren-Blatt (dort bleibt sofort nur eine Zeile übrig), die Verbundbedingung PersNr = gelesenVon macht aus dem Kreuzprodukt einen Join. Statt der riesigen Kreuzprodukt-Tabelle wird nur eine winzige Zwischenrelation weiterverarbeitet – gleiches Ergebnis, viel weniger Aufwand.',
+          },
+          {
+            art: 'svg',
+            titel: 'Optimierter Operatorbaum (Wurzel oben, Auswertung von unten nach oben)',
+            svg: `<svg viewBox="0 0 520 300" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Optimierter Operatorbaum: Projektion Titel ueber Join ueber Selektion Name Sokrates auf Professoren und Vorlesungen">
+  <line class="dgm-line" x1="250" y1="49" x2="250" y2="90"/>
+  <line class="dgm-line" x1="220" y1="124" x2="130" y2="185"/>
+  <line class="dgm-line" x1="300" y1="124" x2="400" y2="185"/>
+  <line class="dgm-line" x1="130" y1="219" x2="130" y2="255"/>
+  <rect class="dgm-shape" x="205" y="15" width="90" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="250" y="37" text-anchor="middle">π[Titel]</text>
+  <rect class="dgm-shape" x="150" y="90" width="200" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="250" y="112" text-anchor="middle">⋈[PersNr = gelesenVon]</text>
+  <rect class="dgm-shape" x="45" y="185" width="170" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="130" y="207" text-anchor="middle">σ[Name = 'Sokrates']</text>
+  <rect class="dgm-shape" x="55" y="255" width="150" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="130" y="277" text-anchor="middle">Professoren</text>
+  <rect class="dgm-shape" x="320" y="185" width="150" height="34" rx="4"/>
+  <text class="dgm-text dgm-text--sm" x="395" y="207" text-anchor="middle">Vorlesungen</text>
+</svg>`,
+          },
+          {
+            art: 'merk',
+            text: 'Klausur-Vorgehen: (1) Baum aus dem Ausdruck zeichnen, (2) Selektionen aufteilen und nach unten schieben, (3) Kreuzprodukt + Verbundbedingung zu Join zusammenfassen, (4) unnötige Spalten früh weg-projizieren. Das Ergebnis muss identisch bleiben – umgeformt wird nur der Rechenweg.',
+          },
+        ],
+      },
     ],
   },
   // ===========================================================================
@@ -983,6 +1045,29 @@ export const lernskript: SkriptKapitel[] = [
               'Bedingungen: AND bindet stärker als OR – bei gemischten Bedingungen klammern!',
               'Stringvergleiche sind (in Oracle) case-sensitiv: \'m\' ≠ \'M\'.',
             ],
+          },
+          {
+            art: 'liste',
+            titel: 'Wortoperatoren im WHERE (Kurzformen für längere Bedingungen)',
+            punkte: [
+              '**IN (w1, w2, …):** spalte hat einen der Werte – kurz für „= w1 OR = w2 OR …". Beispiel: WHERE SupplierID IN (1, 3, 4).',
+              '**BETWEEN a AND b:** der geschlossene Bereich a ≤ spalte ≤ b. Beispiel: WHERE Semester BETWEEN 1 AND 4.',
+              '**LIKE \'muster\':** Textmustervergleich – % = beliebig viele Zeichen, _ = genau eines. Beispiel: WHERE PLZ LIKE \'02389%\' (beginnt mit 02389).',
+              '**NOT** davor negiert jeweils (NOT IN, NOT BETWEEN, NOT LIKE).',
+            ],
+          },
+          {
+            art: 'text',
+            text: 'In WHERE und SELECT darf man auch rechnen und Spalten berechnen. Der berechneten Spalte gibt man mit AS einen Namen; Texte verkettet Oracle mit ||.',
+          },
+          {
+            art: 'code',
+            titel: 'Rechnen & berechnete Felder',
+            text:
+              'SELECT Menge * Einzelpreis AS Gesamt,\n' +
+              "       Vorname || ' ' || Nachname AS VollerName\n" +
+              'FROM Posten\n' +
+              'WHERE Menge * Einzelpreis > 100;',
           },
           {
             art: 'frage',
@@ -1063,6 +1148,27 @@ export const lernskript: SkriptKapitel[] = [
           { art: 'tabelle', titel: 'Bestellung (KID = Fremdschlüssel; zu Carla gibt es keine Zeile)', columns: ['BID', 'KID', 'Betrag'], rows: [['101', '1', '50'], ['102', '2', '20']] },
           { art: 'tabelle', titel: 'Kunde ⋈ Bestellung (INNER JOIN über KID) – nur Kunden MIT Bestellung', columns: ['KID', 'Name', 'BID', 'Betrag'], rows: [['1', 'Anna', '101', '50'], ['2', 'Ben', '102', '20']] },
           { art: 'tabelle', titel: 'Kunde LEFT JOIN Bestellung – ALLE Kunden; Carla ohne Bestellung → NULL', columns: ['KID', 'Name', 'BID', 'Betrag'], rows: [['1', 'Anna', '101', '50'], ['2', 'Ben', '102', '20'], ['3', 'Carla', 'NULL', 'NULL']] },
+          {
+            art: 'frage',
+            q: 'Outer Join in Oracle – die (+)-Syntax?',
+            a: 'In (älterem) Oracle schreibt man den äußeren Join im impliziten Stil mit dem Pluszeichen (+) hinter der Spalte der Tabelle, die mit NULL aufgefüllt werden soll. Das (+) steht also auf der „Mangel"-Seite – die andere Tabelle bleibt vollständig.',
+          },
+          {
+            art: 'code',
+            titel: 'Dieselbe Anfrage in ANSI- und in Oracle-(+)-Syntax',
+            text:
+              '-- ANSI: alle Kunden, auch ohne Bestellung\n' +
+              'SELECT k.Name, b.BID\n' +
+              'FROM Kunde k LEFT JOIN Bestellung b ON k.KID = b.KID;\n\n' +
+              '-- Oracle (+): (+) steht bei der Bestellung-Seite (die fehlen darf)\n' +
+              'SELECT k.Name, b.BID\n' +
+              'FROM Kunde k, Bestellung b\n' +
+              'WHERE k.KID = b.KID(+);',
+          },
+          {
+            art: 'merk',
+            text: 'Merkhilfe zur (+)-Seite: Das (+) markiert die Tabelle, die „fehlen darf" und mit NULL aufgefüllt wird – das ist die Gegenseite zu der Tabelle, die vollständig erhalten bleibt. Steht das (+) bei b, bleiben alle k-Zeilen (entspricht Kunde LEFT JOIN Bestellung).',
+          },
         ],
       },
       {
@@ -1104,6 +1210,52 @@ export const lernskript: SkriptKapitel[] = [
               'UPDATE t SET spalte = wert WHERE … – Werte ändern (ohne WHERE ALLE Zeilen!).',
               'DELETE FROM t WHERE … – Zeilen löschen (ohne WHERE wird die Tabelle geleert).',
             ],
+          },
+        ],
+      },
+      {
+        titel: '5.7 SQL ↔ relationale Algebra',
+        blocks: [
+          {
+            art: 'text',
+            text: 'Jeder Algebra-Operator hat ein direktes SQL-Pendant. Damit lässt sich eine Anfrage in beide Richtungen übersetzen: SQL → Algebra (jede Klausel dem passenden Operator zuordnen) und Algebra → SQL.',
+          },
+          {
+            art: 'tabelle',
+            titel: 'Übersetzungstabelle',
+            columns: ['Relationale Algebra', 'SQL'],
+            rows: [
+              ['σ[Bedingung](R)', 'WHERE Bedingung'],
+              ['π[Spalten](R)', 'SELECT Spalten (bei Duplikatfreiheit: SELECT DISTINCT)'],
+              ['R × S (Kreuzprodukt)', 'FROM R, S (ohne Verbundbedingung)'],
+              ['R ⋈[θ] S (Theta-Join)', 'FROM R, S WHERE θ  bzw.  R JOIN S ON θ'],
+              ['R ⋈ S (natürlicher Join)', 'Join mit Gleichheit auf allen gleichnamigen Spalten'],
+              ['ρ (Umbenennung)', 'Alias mit AS (Spalte AS x, Tabelle t)'],
+              ['R ∪ S', 'UNION (UNION ALL behält Duplikate)'],
+              ['R ∩ S', 'INTERSECT (oder WHERE … IN (SELECT …))'],
+              ['R − S', 'MINUS / EXCEPT (oder WHERE … NOT IN (SELECT …))'],
+            ],
+          },
+          {
+            art: 'text',
+            text: 'Beispiel SQL → Algebra: „Titel der Vorlesungen, die Sokrates hält."',
+          },
+          {
+            art: 'code',
+            titel: 'SQL',
+            text:
+              'SELECT Titel\n' +
+              'FROM Vorlesungen, Professoren\n' +
+              "WHERE gelesenVon = PersNr AND Name = 'Sokrates';",
+          },
+          {
+            art: 'code',
+            titel: 'Zugehörige relationale Algebra',
+            text: "π[Titel] ( σ[Name = 'Sokrates'](Professoren) ⋈[PersNr = gelesenVon] Vorlesungen )",
+          },
+          {
+            art: 'merk',
+            text: 'Zuordnung: SELECT → π (Projektion), WHERE-Verbundbedingung → ⋈ (Join), WHERE-Filterbedingung → σ (Selektion), mehrere Tabellen im FROM → × / ⋈, UNION → ∪. So kann man jede SELECT-Anfrage Stück für Stück in einen Algebra-Ausdruck (und zurück) übersetzen.',
           },
         ],
       },
