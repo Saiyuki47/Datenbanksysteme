@@ -7,7 +7,9 @@ export const probeklausur2: Uebungsblatt = {
   typ: 'Probeklausur',
   pdf: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2-20260621/Klausur_A WS18_verb.pdf',
   loesungen: [
-    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2-20260621/Klausur_B WS18_verb.pdf' },
+    { label: 'Lösungsblätter (keine Lösung) öffnen', pfad: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2-20260621/Klausur_B WS18_verb.pdf' },
+    { label: 'Lösung Aufgabe 1–6 (Word) öffnen', pfad: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2 - Lösung-20260621/Lösung Aufgabe 1-6.docx' },
+    { label: 'Lösung Aufgabe 7: Normalisierung (Word) öffnen', pfad: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2 - Lösung-20260621/Lösung Aufgabe 7 (Normalisierung).docx' },
   ],
   beschreibung:
     'Klausur „Grundlagen von Datenbanksystemen" (Bachelor AI, HS Fulda, WS 2018/2019, ' +
