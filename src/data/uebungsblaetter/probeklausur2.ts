@@ -5,6 +5,10 @@ export const probeklausur2: Uebungsblatt = {
   nr: 'P2',
   titel: 'Probeklausur 2',
   typ: 'Probeklausur',
+  pdf: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2-20260621/Klausur_A WS18_verb.pdf',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 2/Probeklausur 2-20260621/Klausur_B WS18_verb.pdf' },
+  ],
   beschreibung:
     'Klausur „Grundlagen von Datenbanksystemen" (Bachelor AI, HS Fulda, WS 2018/2019, ' +
     '20. Februar 2019). Umgesetzt sind die Aufgaben 1–6: ER-Modell (Aufgabe 1 – Begriffe, ' +

@@ -5,6 +5,10 @@ export const probeklausur1: Uebungsblatt = {
   nr: 'P1',
   titel: 'Probeklausur 1',
   typ: 'Probeklausur',
+  pdf: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 1/klausur-ws0708-convertedword.docx',
+  loesungen: [
+    { label: 'Lösung (PDF) öffnen', pfad: 'dateien_aus_moodle/Übung - Altklausuren/Klausur 1/klausur-ws0708-loesung.pdf' },
+  ],
   beschreibung:
     'Probeklausur Datenbanksysteme 2 (WS 07/08). Aufgaben: SQL-Anfragen auf Relation T, ' +
     'Relationenalgebra auf den Relationen V und W, SQL-Anfragen auf Relation V (mit Nullwerten) ' +

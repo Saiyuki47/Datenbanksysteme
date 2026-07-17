@@ -669,7 +669,7 @@ export default function Uebungsblaetter() {
                     rel="noopener noreferrer"
                     style={refLinkStyle}
                   >
-                    📄 Original-Übungsblatt (PDF) öffnen
+                    {blatt.id.startsWith('probeklausur') ? '📄 Original-Klausur öffnen' : '📄 Original-Übungsblatt (PDF) öffnen'}
                   </a>
                 )}
                 {blatt.loesungen?.map(l => (
