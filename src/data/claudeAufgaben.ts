@@ -5,12 +5,29 @@ import type { LoesungBlock, NamedTable, TippSection } from '../types'
 // (Claude) zum zusätzlichen Lernen und Üben erstellt. Alle Inhalte sind eigens
 // erdacht; die Uni-Beispieldaten folgen dem im Kurs genutzten Universitätsschema.
 
+/** Eine Relation/Tabelle im „Gegeben"-Block einer Aufgabe. */
+export interface SchemaRelation {
+  /** Relations- bzw. Tabellenname, z. B. „Professoren". */
+  name: string
+  /** Attribute in der Reihenfolge des Schemas. */
+  attribute: string[]
+  /** Attribute des Primärschlüssels – werden unterstrichen (Kursnotation). */
+  pk?: string[]
+  /** Zusatz unter der Relation, z. B. Fremdschlüssel oder Constraints. */
+  hinweis?: string
+}
+
 export interface ClaudeAufgabe {
   nr: number
   /** Aufgabenart (Kategorie), wie sie in den Übungsblättern vorkommt. */
   art: string
   titel: string
   text: string
+  /**
+   * Gegebenes Schema, das VOR der Frage steht – je Relation eine eigene Zeile,
+   * statt alles in einer Fließtext-Kette aufzuzählen.
+   */
+  schema?: { titel?: string; relationen: SchemaRelation[] }
   /** Optionale Angaben, die mit der Aufgabe gezeigt werden. */
   code?: string
   gegeben?: NamedTable[]
@@ -55,9 +72,15 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 2,
     art: 'ER-Diagramm entwerfen',
     titel: 'Bibliotheks-Ausleihe modellieren',
+    schema: {
+      titel: 'Gegebene Entitytypen',
+      relationen: [
+        { name: 'Buch', attribute: ['ISBN', 'Titel'], pk: ['ISBN'] },
+        { name: 'Leser', attribute: ['LeserNr', 'Name'], pk: ['LeserNr'] },
+      ],
+    },
     text:
-      'Modellieren Sie den folgenden Sachverhalt als ER-Diagramm (Entitytypen als Rechtecke, Beziehung als Raute mit Funktionalität, Schlüsselattribute unterstreichen):\n\n' +
-      '• Eine Bibliothek verwaltet Bücher (Schlüssel ISBN, dazu Titel) und Leser (Schlüssel LeserNr, dazu Name).\n' +
+      'Eine Bibliothek verwaltet Bücher und Leser (siehe oben). Modellieren Sie den folgenden Sachverhalt als ER-Diagramm (Entitytypen als Rechtecke, Beziehung als Raute mit Funktionalität, Schlüsselattribute unterstreichen):\n\n' +
       '• Ein Leser kann mehrere Bücher ausleihen; ein Buch ist zu einem Zeitpunkt von höchstens einem Leser ausgeliehen.\n' +
       '• Zu jeder Ausleihe wird ein Rückgabedatum gespeichert.',
     referenz: ['er-modell'],
@@ -145,8 +168,15 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 4,
     art: 'ER → Relationenschema (Überführung & Verfeinerung)',
     titel: 'Autoren & Bücher ins Schema überführen',
+    schema: {
+      titel: 'Gegebene Entitytypen (aus dem ER-Diagramm)',
+      relationen: [
+        { name: 'Autor', attribute: ['AutorID', 'Name'], pk: ['AutorID'] },
+        { name: 'Buch', attribute: ['ISBN', 'Titel'], pk: ['ISBN'] },
+      ],
+    },
     text:
-      'Gegeben ist die Beziehung schreiben zwischen Autor (Schlüssel AutorID, Attribut Name) und Buch (Schlüssel ISBN, Attribut Titel). Ein Autor schreibt mehrere Bücher, ein Buch kann von mehreren Autoren geschrieben werden (N:M).\n\n' +
+      'Zwischen Autor und Buch besteht die Beziehung schreiben: Ein Autor schreibt mehrere Bücher, ein Buch kann von mehreren Autoren geschrieben werden (N:M).\n\n' +
       'a) Überführen Sie das ER-Diagramm initial in ein Relationenschema (je eine Relation, Primärschlüssel unterstrichen bzw. mit «…» markiert).\n' +
       'b) Ist eine Verfeinerung (Zusammenfassen von Relationen) möglich? Begründen Sie.',
     referenz: ['er-zu-schema'],
@@ -199,8 +229,19 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 6,
     art: 'Relationale Algebra – Anfrage formulieren (+ Operatorbaum)',
     titel: 'Anfrage auf dem Universitätsschema',
+    schema: {
+      titel: 'Universitätsschema',
+      relationen: [
+        { name: 'Professoren', attribute: ['PersNr', 'Name', 'Rang', 'Raum'], pk: ['PersNr'] },
+        {
+          name: 'Vorlesungen',
+          attribute: ['VorlNr', 'Titel', 'SWS', 'gelesenVon'],
+          pk: ['VorlNr'],
+          hinweis: 'gelesenVon → Professoren.PersNr',
+        },
+      ],
+    },
     text:
-      'Universitätsschema: Professoren(PersNr, Name, Rang, Raum), Vorlesungen(VorlNr, Titel, SWS, gelesenVon).\n\n' +
       'Formulieren Sie in relationaler Algebra: „Titel aller Vorlesungen, die von einem Professor mit Rang C4 gelesen werden." Geben Sie zusätzlich den (optimierten) Operatorbaum an.',
     referenz: ['relationale-algebra'],
     tipps: [
@@ -240,8 +281,26 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 7,
     art: 'SQL – Anfrage formulieren',
     titel: 'SQL auf dem Universitätsschema',
+    schema: {
+      titel: 'Universitätsschema (Auszug)',
+      relationen: [
+        { name: 'Studenten', attribute: ['MatrNr', 'Name', 'Semester'], pk: ['MatrNr'] },
+        {
+          name: 'hören',
+          attribute: ['MatrNr', 'VorlNr'],
+          pk: ['MatrNr', 'VorlNr'],
+          hinweis: 'MatrNr → Studenten.MatrNr,  VorlNr → Vorlesungen.VorlNr',
+        },
+        {
+          name: 'Vorlesungen',
+          attribute: ['VorlNr', 'Titel', 'SWS', 'gelesenVon'],
+          pk: ['VorlNr'],
+          hinweis: 'gelesenVon → Professoren.PersNr',
+        },
+        { name: 'Professoren', attribute: ['PersNr', 'Name', 'Rang', 'Raum'], pk: ['PersNr'] },
+      ],
+    },
     text:
-      'Universitätsschema (Auszug): Studenten(MatrNr, Name, Semester), hören(MatrNr, VorlNr), Vorlesungen(VorlNr, Titel, SWS, gelesenVon), Professoren(PersNr, Name, Rang, Raum).\n\n' +
       'Formulieren Sie in SQL: „Namen der Studierenden, die mindestens eine Vorlesung von Professor „Kant" hören." (ohne Duplikate)',
     referenz: ['grundabfrage', 'joins'],
     tipps: [
@@ -299,10 +358,25 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 9,
     art: 'DDL & Integritätsbedingungen (Constraints)',
     titel: 'CREATE TABLE mit Constraints',
+    schema: {
+      titel: 'Zu erstellende Tabellen',
+      relationen: [
+        {
+          name: 'Konto',
+          attribute: ['KontoNr', 'Inhaber', 'Saldo'],
+          pk: ['KontoNr'],
+          hinweis: 'Inhaber darf nicht NULL sein · Saldo muss ≥ 0 sein',
+        },
+        {
+          name: 'Buchung',
+          attribute: ['BuchungsNr', 'KontoNr', 'Betrag'],
+          pk: ['BuchungsNr'],
+          hinweis: 'KontoNr → Konto.KontoNr · wird ein Konto gelöscht, sollen seine Buchungen mitgelöscht werden',
+        },
+      ],
+    },
     text:
-      'Schreiben Sie die CREATE-TABLE-Anweisungen für folgende zwei Tabellen mit den passenden Integritätsbedingungen:\n\n' +
-      '• Konto(KontoNr, Inhaber, Saldo): KontoNr ist Primärschlüssel, Inhaber darf nicht NULL sein, Saldo muss ≥ 0 sein.\n' +
-      '• Buchung(BuchungsNr, KontoNr, Betrag): BuchungsNr ist Primärschlüssel, KontoNr ist Fremdschlüssel auf Konto. Wird ein Konto gelöscht, sollen seine Buchungen mitgelöscht werden.',
+      'Schreiben Sie für die beiden oben angegebenen Tabellen die CREATE-TABLE-Anweisungen mit den passenden Integritätsbedingungen.',
     referenz: ['create-table', 'integritaetsbedingungen'],
     tipps: [
       { icon: '💡', titel: 'Constraints', inhalt: 'PRIMARY KEY, NOT NULL, CHECK(Bedingung) und FOREIGN KEY … REFERENCES … ON DELETE … sind die passenden Bausteine.' },
@@ -331,8 +405,20 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 10,
     art: 'Constraints – Operation erlaubt oder nicht?',
     titel: 'Sind diese Operationen ausführbar?',
+    schema: {
+      titel: 'Gegebene Tabellen',
+      relationen: [
+        { name: 'Kunde', attribute: ['KNr'], pk: ['KNr'] },
+        {
+          name: 'Bestellung',
+          attribute: ['BNr', 'KNr'],
+          pk: ['BNr'],
+          hinweis: 'KNr → Kunde.KNr · Standard-Verhalten NO ACTION (kein CASCADE)',
+        },
+      ],
+    },
     text:
-      'Gegeben die Tabellen Kunde(«KNr») und Bestellung(«BNr», KNr → Kunde) mit Fremdschlüssel KNr auf Kunde (Standard-Verhalten NO ACTION, kein CASCADE). Aktuell gilt: Kunde enthält KNr 1 und 2; Bestellung enthält (BNr 100, KNr 1).\n\n' +
+      'Aktuelle Ausprägung: Kunde enthält KNr 1 und 2; Bestellung enthält (BNr 100, KNr 1).\n\n' +
       'Entscheiden Sie für jede Operation, ob sie ausführbar ist, und begründen Sie:\n' +
       "a) INSERT INTO Bestellung VALUES (101, 2);\n" +
       "b) INSERT INTO Bestellung VALUES (102, 5);\n" +
@@ -397,8 +483,16 @@ export const claudeAufgaben: ClaudeAufgabe[] = [
     nr: 12,
     art: 'Normalisierung – Attributhülle, Schlüssel, Fc & 3NF',
     titel: 'Von den FDs zur 3NF-Zerlegung',
+    schema: {
+      titel: 'Gegebene Relation',
+      // Kein pk: Das Bestimmen der Schlüssel ist genau Teilaufgabe b).
+      relationen: [{ name: 'R', attribute: ['A', 'B', 'C', 'D'] }],
+    },
     text:
-      'Gegeben ist R = {A, B, C, D} mit den funktionalen Abhängigkeiten A → B, B → C und A → D.\n\n' +
+      'Funktionale Abhängigkeiten:\n' +
+      'A → B\n' +
+      'B → C\n' +
+      'A → D\n\n' +
       'a) Berechnen Sie die Attributhülle {A}⁺.\n' +
       'b) Bestimmen Sie alle Kandidatenschlüssel von R.\n' +
       'c) Geben Sie die kanonische Überdeckung Fc an.\n' +

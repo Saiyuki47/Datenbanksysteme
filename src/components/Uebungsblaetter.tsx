@@ -1,4 +1,4 @@
-import { useState, useMemo, type CSSProperties } from 'react'
+import { useState, useMemo, Fragment, type CSSProperties } from 'react'
 // eslint-disable-next-line react-doctor/no-flush-sync -- offizielles React-Muster: flushSync + scrollIntoView, um nach dem Ansichtswechsel sofort zur Ziel-Aufgabe zu scrollen
 import { flushSync } from 'react-dom'
 import { useDoneTracker, useTaskDeepLink, getHashDetail, setHashDetail, OffeneAufgaben, type OffenItem } from 'lernseiten-ui'
@@ -468,6 +468,38 @@ function ClaudeTable({ t }: { t: NamedTable }) {
   )
 }
 
+// Gegebenes Schema einer Aufgabe: eine Relation pro Zeile (statt Fließtext-Kette),
+// Primärschlüssel unterstrichen wie in der Kursnotation.
+function ClaudeSchema({ schema }: { schema: NonNullable<ClaudeAufgabe['schema']> }) {
+  const hatPk = schema.relationen.some(r => r.pk && r.pk.length > 0)
+  return (
+    <div className="ub-schema">
+      <p className="ub-result-label">{schema.titel ?? 'Gegebenes Schema'}</p>
+      <ul className="ub-schema-list">
+        {schema.relationen.map(r => (
+          <li key={r.name} className="ub-schema-row">
+            <span className="ub-schema-def">
+              <span className="ub-schema-name">{r.name}</span>
+              <span className="ub-schema-attrs">
+                {'('}
+                {r.attribute.map((attr, i) => (
+                  <Fragment key={attr}>
+                    {i > 0 && ', '}
+                    <span className={r.pk?.includes(attr) ? 'ub-schema-pk' : undefined}>{attr}</span>
+                  </Fragment>
+                ))}
+                {')'}
+              </span>
+            </span>
+            {r.hinweis && <span className="ub-schema-hinweis">{r.hinweis}</span>}
+          </li>
+        ))}
+      </ul>
+      {hatPk && <p className="ub-schema-legende">Primärschlüssel unterstrichen</p>}
+    </div>
+  )
+}
+
 // Eine einzelne KI-Aufgabe: aufgebaut wie eine normale Arbeitsblatt-Aufgabe
 // (Aufgabenstellung, ggf. Daten/Diagramm, Tipp-Akkordeon, Lösung, „verstanden").
 function ClaudeCard({ a, done, toggleDone }: { a: ClaudeAufgabe; done: Set<string>; toggleDone: (key: string) => void }) {
@@ -482,6 +514,7 @@ function ClaudeCard({ a, done, toggleDone }: { a: ClaudeAufgabe; done: Set<strin
         <span className="ub-badge">{a.art}</span>
       </div>
       <p className="ub-task-nr">Aufgabe {a.nr} – {a.titel}</p>
+      {a.schema && <ClaudeSchema schema={a.schema} />}
       <p className="q-title ub-question">{a.text}</p>
 
       {a.referenz && a.referenz.length > 0 && (

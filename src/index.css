@@ -520,6 +520,56 @@
 /* ---- Übungsblätter: multi-line questions + text-based (theory) solutions ---- */
 .ub-question { white-space: pre-line; }
 
+/* Gegebenes Schema über der Frage: je Relation eine eigene Zeile, damit man
+   „Relation → ihre Attribute" auf einen Blick sieht (statt Fließtext-Kette). */
+.ub-schema {
+  margin: 0 0 12px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--amber);
+  border-radius: var(--radius);
+  padding: 0.85rem 1.15rem;
+}
+.ub-schema-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+}
+.ub-schema-def {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--text);
+  overflow-wrap: anywhere;
+}
+.ub-schema-name {
+  color: var(--amber);
+  font-weight: 600;
+  margin-right: 3px;
+}
+.ub-schema-pk {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.ub-schema-hinweis {
+  display: block;
+  margin-top: 3px;
+  padding-left: 0.9rem;
+  font-size: 12px;
+  color: var(--text3);
+  line-height: 1.5;
+  overflow-wrap: anywhere;
+}
+.ub-schema-legende {
+  margin: 10px 0 0;
+  font-size: 11px;
+  color: var(--text3);
+  font-style: italic;
+}
+
 .ub-loesung {
   margin-top: 12px;
   display: flex;
