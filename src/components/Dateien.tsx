@@ -218,6 +218,9 @@ function FolderContent({ folder }: { folder: DateiFolder }) {
 
 const cap = (s: string) => s.charAt(0).toUpperCase() + s.slice(1)
 
+// Rohen Ordnernamen lesbar machen (Bindestriche/Unterstriche → Leerzeichen).
+const prettify = (s: string) => cap(s.replace(/[-_]+/g, ' ').replace(/\s+/g, ' ').trim())
+
 interface Week {
   num: number
   vorlesung?: DateiFolder
@@ -247,7 +250,40 @@ function groupIntoWeeks(folders: DateiFolder[]): { weeks: Week[]; leftovers: Dat
   return { weeks, leftovers }
 }
 
-type WeekKey = number | 'extra'
+// Kachel-Design (Option D): eine Karte pro Woche, dazu je eine für die
+// „Weiteren Materialien". `open` merkt sich, welche Karte gerade geöffnet ist.
+type OpenKey = { kind: 'week'; num: number } | { kind: 'leftover'; path: string }
+
+type LeafCat = 'material' | 'uebung' | 'loesung' | 'klausur' | 'sonstiges'
+
+const CARD_STYLE: Record<LeafCat, { color: string; dim: string; emoji: string; tag: string }> = {
+  material:  { color: 'var(--blue)',  dim: 'var(--blue-dim)',  emoji: '📘', tag: 'Material' },
+  uebung:    { color: 'var(--green)', dim: 'var(--green-dim)', emoji: '✏️', tag: 'Übung' },
+  loesung:   { color: 'var(--amber)', dim: 'var(--amber-dim)', emoji: '✅', tag: 'Lösung' },
+  klausur:   { color: 'var(--red)',   dim: 'var(--red-dim)',   emoji: '🎓', tag: 'Klausur' },
+  sonstiges: { color: 'var(--text2)', dim: 'var(--bg3)',       emoji: '📁', tag: 'Sonstiges' },
+}
+
+// Rät den Kategorie-Typ eines „Weiteren Materialien"-Ordners aus seinem Namen.
+function leafCat(name: string): LeafCat {
+  const n = name.toLowerCase()
+  if (/klausur|pr[üu]fung|exam|probeklausur/.test(n)) return 'klausur'
+  if (/l[öo]sung|lsg/.test(n)) return 'loesung'
+  if (/[üu]bung|aufgabe|escape|training|blatt/.test(n)) return 'uebung'
+  if (/orga|readme|verschieden|share|sonstig/.test(n)) return 'sonstiges'
+  return 'material'
+}
+
+function CategoryCard({ emoji, color, dim, name, tag, meta, onOpen }: { emoji: string; color: string; dim: string; name: string; tag: string; meta: string; onOpen: () => void }) {
+  return (
+    <button type="button" className="dz-card" onClick={onOpen}>
+      <span className="dz-card-icon" style={{ color, background: dim }} aria-hidden="true">{emoji}</span>
+      <span className="dz-card-name">{name}</span>
+      <span className="dz-card-tag" style={{ color, background: dim }}>{tag}</span>
+      <span className="dz-card-meta">{meta}</span>
+    </button>
+  )
+}
 
 interface FileHit {
   file: DateiFile
@@ -271,8 +307,24 @@ function collectAllFiles(folder: DateiFolder, trail: string[]): FileHit[] {
 const { weeks: WEEKS, leftovers: LEFTOVERS } = groupIntoWeeks(dateienTree.folders)
 const PINNED = dateienTree.files.filter(f => !f.isReadme)
 const ALL_FILES = collectAllFiles(dateienTree, [])
-const TAB_KEYS: WeekKey[] = [...WEEKS.map(w => w.num), ...(LEFTOVERS.length ? ['extra' as const] : [])]
-const DEFAULT_KEY: WeekKey = WEEKS.find(w => w.num === 1)?.num ?? TAB_KEYS[0] ?? 'extra'
+
+// Datei-/Ordner-Zusammenfassung für die Kachel-Unterzeile.
+function weekMeta(w: Week): string {
+  const parts: string[] = []
+  if (w.vorlesung) parts.push('Vorlesung')
+  if (w.uebung) parts.push('Übung')
+  const total = (w.vorlesung ? countFiles(w.vorlesung) : 0) + (w.uebung ? countFiles(w.uebung) : 0)
+  parts.push(`${total} ${total === 1 ? 'Datei' : 'Dateien'}`)
+  return parts.join(' · ')
+}
+
+function folderMeta(folder: DateiFolder): string {
+  const total = countFiles(folder)
+  const subs = folder.folders.length
+  const parts = [`${total} ${total === 1 ? 'Datei' : 'Dateien'}`]
+  if (subs > 0) parts.push(`${subs} Ordner`)
+  return parts.join(' · ')
+}
 
 function FolderSection({ folder, displayName, variant }: { folder: DateiFolder; displayName: string; variant: 'vorlesung' | 'uebung' | 'extra' }) {
   return (
@@ -288,17 +340,18 @@ function FolderSection({ folder, displayName, variant }: { folder: DateiFolder; 
 
 export default function Dateien() {
   const [query, setQuery] = useState('')
-  const [active, setActive] = useState<WeekKey>(DEFAULT_KEY)
+  const [open, setOpen] = useState<OpenKey | null>(null)
   const q = query.trim().toLowerCase()
 
   const results = q ? ALL_FILES.filter(r => r.file.name.toLowerCase().includes(q)) : []
-  const activeWeek = typeof active === 'number' ? WEEKS.find(w => w.num === active) : undefined
+  const openWeek = open?.kind === 'week' ? WEEKS.find(w => w.num === open.num) : undefined
+  const openLeftover = open?.kind === 'leftover' ? LEFTOVERS.find(f => f.path === open.path) : undefined
 
   return (
     <div>
       <div className="section-header">
         <h2>Moodle</h2>
-        <p>Alle Moodle-Materialien nach Wochen. Wähle oben eine Woche – darunter siehst du direkt die Vorlesung und die Übung.</p>
+        <p>Alle Moodle-Materialien nach Wochen. Wähle eine Kachel – darunter siehst du direkt die Vorlesung und die Übung.</p>
       </div>
 
       {/* Kursübersicht stays pinned at the very top, viewable like any file */}
@@ -330,45 +383,51 @@ export default function Dateien() {
             ))}
           </div>
         )
+      ) : openWeek ? (
+        <div className="dz-week-content">
+          <button type="button" className="dz-back" onClick={() => setOpen(null)}>← Alle Kategorien</button>
+          {openWeek.vorlesung && (
+            <FolderSection folder={openWeek.vorlesung} displayName={cap(openWeek.vorlesung.name)} variant="vorlesung" />
+          )}
+          {openWeek.uebung && (
+            <FolderSection folder={openWeek.uebung} displayName={cap(openWeek.uebung.name)} variant="uebung" />
+          )}
+        </div>
+      ) : openLeftover ? (
+        <div className="dz-week-content">
+          <button type="button" className="dz-back" onClick={() => setOpen(null)}>← Alle Kategorien</button>
+          <FolderSection folder={openLeftover} displayName={prettify(openLeftover.name)} variant="extra" />
+        </div>
       ) : (
-        <>
-          {/* One sub-tab per week, plus the leftover category */}
-          <div className="filter-row dz-subtabs">
-            {WEEKS.map(w => (
-              <button
-                type="button"
-                key={w.num}
-                className={`filter-btn${active === w.num ? ' on' : ''}`}
-                onClick={() => setActive(w.num)}
-              >
-                Woche {w.num}
-              </button>
-            ))}
-            {LEFTOVERS.length > 0 && (
-              <button
-                type="button"
-                className={`filter-btn${active === 'extra' ? ' on' : ''}`}
-                onClick={() => setActive('extra')}
-              >
-                Weitere Materialien
-              </button>
-            )}
-          </div>
-
-          {/* Selected week: lecture first, then exercise – shown directly, no folders to open */}
-          <div className="dz-week-content">
-            {activeWeek?.vorlesung && (
-              <FolderSection folder={activeWeek.vorlesung} displayName={cap(activeWeek.vorlesung.name)} variant="vorlesung" />
-            )}
-            {activeWeek?.uebung && (
-              <FolderSection folder={activeWeek.uebung} displayName={cap(activeWeek.uebung.name)} variant="uebung" />
-            )}
-            {active === 'extra' &&
-              LEFTOVERS.map(folder => (
-                <FolderSection key={folder.path} folder={folder} displayName={folder.name} variant="extra" />
-              ))}
-          </div>
-        </>
+        <div className="dz-cards">
+          {WEEKS.map(w => (
+            <CategoryCard
+              key={`w${w.num}`}
+              emoji={CARD_STYLE.material.emoji}
+              color={CARD_STYLE.material.color}
+              dim={CARD_STYLE.material.dim}
+              name={`Woche ${w.num}`}
+              tag="Woche"
+              meta={weekMeta(w)}
+              onOpen={() => setOpen({ kind: 'week', num: w.num })}
+            />
+          ))}
+          {LEFTOVERS.map(folder => {
+            const s = CARD_STYLE[leafCat(folder.name)]
+            return (
+              <CategoryCard
+                key={folder.path}
+                emoji={s.emoji}
+                color={s.color}
+                dim={s.dim}
+                name={prettify(folder.name)}
+                tag={s.tag}
+                meta={folderMeta(folder)}
+                onOpen={() => setOpen({ kind: 'leftover', path: folder.path })}
+              />
+            )
+          })}
+        </div>
       )}
     </div>
   )
