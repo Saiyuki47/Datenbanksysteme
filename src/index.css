@@ -487,6 +487,27 @@
   color: var(--text);
   transition: border-color 0.12s ease, transform 0.12s ease;
 }
+.dz-group { display: block; margin-top: 1.75rem; }
+.dz-group:first-child { margin-top: 1.25rem; }
+.dz-group .dz-cards { margin-top: 0; }
+.dz-group-head { display: flex; align-items: center; gap: 10px; margin: 0 0 11px; }
+.dz-group-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--text2);
+  white-space: nowrap;
+}
+.dz-group-count {
+  flex: none;
+  font-size: 11px;
+  color: var(--text3);
+  background: var(--bg3);
+  border-radius: 999px;
+  padding: 1px 8px;
+}
+.dz-group-rule { flex: 1; height: 1px; background: var(--border); }
 .dz-card:hover { border-color: var(--text3); transform: translateY(-2px); }
 .dz-card:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .dz-card-icon {

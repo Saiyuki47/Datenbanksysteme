@@ -308,6 +308,17 @@ const { weeks: WEEKS, leftovers: LEFTOVERS } = groupIntoWeeks(dateienTree.folder
 const PINNED = dateienTree.files.filter(f => !f.isReadme)
 const ALL_FILES = collectAllFiles(dateienTree, [])
 
+// Reihenfolge der Extra-Kacheln: die beiden Altklausuren-Ordner zusammen,
+// das Escape-Game (Spaß-Extra) zuletzt. Unbekannte hängen sich alphabetisch an.
+const LEFTOVER_ORDER = ['Übung - Altklausuren', 'Altklausuren_Datenbanksysteme_share', 'Übung Escape Game']
+const rankLeftover = (name: string) => {
+  const i = LEFTOVER_ORDER.indexOf(name)
+  return i === -1 ? Number.MAX_SAFE_INTEGER : i
+}
+const SORTED_LEFTOVERS = [...LEFTOVERS].sort(
+  (a, b) => rankLeftover(a.name) - rankLeftover(b.name) || a.name.localeCompare(b.name, 'de'),
+)
+
 // Datei-/Ordner-Zusammenfassung für die Kachel-Unterzeile.
 function weekMeta(w: Week): string {
   const parts: string[] = []
@@ -399,34 +410,55 @@ export default function Dateien() {
           <FolderSection folder={openLeftover} displayName={prettify(openLeftover.name)} variant="extra" />
         </div>
       ) : (
-        <div className="dz-cards">
-          {WEEKS.map(w => (
-            <CategoryCard
-              key={`w${w.num}`}
-              emoji={CARD_STYLE.material.emoji}
-              color={CARD_STYLE.material.color}
-              dim={CARD_STYLE.material.dim}
-              name={`Woche ${w.num}`}
-              tag="Woche"
-              meta={weekMeta(w)}
-              onOpen={() => setOpen({ kind: 'week', num: w.num })}
-            />
-          ))}
-          {LEFTOVERS.map(folder => {
-            const s = CARD_STYLE[leafCat(folder.name)]
-            return (
-              <CategoryCard
-                key={folder.path}
-                emoji={s.emoji}
-                color={s.color}
-                dim={s.dim}
-                name={prettify(folder.name)}
-                tag={s.tag}
-                meta={folderMeta(folder)}
-                onOpen={() => setOpen({ kind: 'leftover', path: folder.path })}
-              />
-            )
-          })}
+        <div>
+          <section className="dz-group">
+            <div className="dz-group-head">
+              <span className="dz-group-title">Nach Wochen</span>
+              <span className="dz-group-count">{WEEKS.length}</span>
+              <span className="dz-group-rule" />
+            </div>
+            <div className="dz-cards">
+              {WEEKS.map(w => (
+                <CategoryCard
+                  key={`w${w.num}`}
+                  emoji={CARD_STYLE.material.emoji}
+                  color={CARD_STYLE.material.color}
+                  dim={CARD_STYLE.material.dim}
+                  name={`Woche ${w.num}`}
+                  tag="Woche"
+                  meta={weekMeta(w)}
+                  onOpen={() => setOpen({ kind: 'week', num: w.num })}
+                />
+              ))}
+            </div>
+          </section>
+
+          {SORTED_LEFTOVERS.length > 0 && (
+            <section className="dz-group">
+              <div className="dz-group-head">
+                <span className="dz-group-title">Weitere Materialien</span>
+                <span className="dz-group-count">{SORTED_LEFTOVERS.length}</span>
+                <span className="dz-group-rule" />
+              </div>
+              <div className="dz-cards">
+                {SORTED_LEFTOVERS.map(folder => {
+                  const s = CARD_STYLE[leafCat(folder.name)]
+                  return (
+                    <CategoryCard
+                      key={folder.path}
+                      emoji={s.emoji}
+                      color={s.color}
+                      dim={s.dim}
+                      name={prettify(folder.name)}
+                      tag={s.tag}
+                      meta={folderMeta(folder)}
+                      onOpen={() => setOpen({ kind: 'leftover', path: folder.path })}
+                    />
+                  )
+                })}
+              </div>
+            </section>
+          )}
         </div>
       )}
     </div>
