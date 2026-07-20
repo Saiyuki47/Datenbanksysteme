@@ -58,6 +58,12 @@ export const klausurFallen: FalleGruppe[] = [
         merke: "Genau auf Groß-/Kleinschreibung achten; ggf. UPPER(x)/LOWER(x) verwenden.",
       },
       {
+        titel: 'BETWEEN schließt beide Grenzen ein',
+        falle: 'BETWEEN a AND b meint den GESCHLOSSENEN Bereich a ≤ x ≤ b – beide Randwerte gehören dazu. Wichtig, wenn man prüfen soll, ob ein INSERT eine CHECK-Bedingung verletzt: genau die Randwerte sind dort die Stolperstelle.',
+        beispiel: 'CONSTRAINT X2_CO_4 CHECK (D BETWEEN 12 AND 16)\n-- erlaubt:  12, 13, 14, 15, 16   → Intervall [12, 16]\n-- verletzt: 11 und 17',
+        merke: 'BETWEEN = [a, b], nicht (a, b). Einen offenen Bereich muss man ausschreiben: D > 12 AND D < 16.',
+      },
+      {
         titel: 'Fehlende Join-Bedingung → Kreuzprodukt',
         falle: 'Mehrere Tabellen in FROM ohne Verbundbedingung ergeben das volle Kreuzprodukt: jede Zeile mit jeder (m · n Zeilen) – meist viel zu viele.',
         beispiel: 'SELECT COUNT(*) FROM T2, T2      -- = 6 · 6 = 36',
