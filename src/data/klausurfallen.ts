@@ -163,6 +163,13 @@ export const klausurFallen: FalleGruppe[] = [
     titel: 'Relationale Algebra',
     fallen: [
       {
+        titel: 'Algebra rechnet auf Mengen, SQL auf Multimengen',
+        falle: 'π[B](V) und SELECT B FROM V liefern NICHT dasselbe. Eine Relation enthält per Definition keine doppelten Tupel – die Projektion entfernt Duplikate also automatisch. SQL arbeitet dagegen auf Multimengen (Bags) und behält jede Zeile.',
+        falsch: 'SELECT B FROM V           -- Multimenge: alle 11 Zeilen, mit Duplikaten',
+        richtig: 'SELECT DISTINCT B FROM V  -- Menge: nur die 5 verschiedenen Werte',
+        merke: 'π entfernt Duplikate, SELECT nicht → DISTINCT ist die SQL-Entsprechung. Und: Hier zählt die BEGRÜNDUNG. In der korrigierten Probeklausur gab „richtige Antwort, falsche Begründung" −2 von 3 Punkten – das Stichwort „Mengen vs. Multimengen" muss fallen.',
+      },
+      {
         titel: 'Natürlicher Join über ALLE gleichnamigen Spalten',
         falle: 'Der natürliche Join verbindet über JEDE gleichnamige Spalte. Haben zwei Relationen ungewollt zwei gleiche Spaltennamen (z. B. ServerID UND Name), verbindet er über beide – meist falsch.',
         richtig: 'In dem Fall einen Theta-Join mit expliziter Bedingung nehmen (⋈[R.ServerID = S.ServerID]).',
