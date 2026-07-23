@@ -13,19 +13,22 @@ export const probeklausur2: Uebungsblatt = {
   ],
   beschreibung:
     'Klausur „Grundlagen von Datenbanksystemen" (Bachelor AI, HS Fulda, WS 2018/2019, ' +
-    '20. Februar 2019). Umgesetzt sind die Aufgaben 1–6: ER-Modell (Aufgabe 1 – Begriffe, ' +
+    '20. Februar 2019). Umgesetzt sind alle Aufgaben 1–7: ER-Modell (Aufgabe 1 – Begriffe, ' +
     'Aufgabe 2 – Überführung ins relationale Schema und Verfeinerung, Aufgabe 3 – (min,max)-Notation), ' +
     'SQL-Anfragen (Aufgabe 4), Integritätsbedingungen (Aufgabe 5), relationale Algebra (Aufgabe 6) und ' +
-    'Normalisierung/BCNF (Aufgabe 7). Die ER-Diagramme und Operatorbäume sind als gezeichnete Diagramme ' +
-    'dargestellt; die Lösungen lassen sich pro Teilaufgabe einblenden.',
+    'Normalisierung/BCNF (Aufgabe 7). Jede Teilaufgabe enthält die zur Lösung nötigen Angaben (Diagramme, ' +
+    'Tabellen, SQL-Texte); die ER-Diagramme und Operatorbäume sind als gezeichnete Diagramme dargestellt, ' +
+    'die Lösungen lassen sich pro Teilaufgabe einblenden.',
   anmerkung: {
     titel: 'Rahmen der Klausur',
     punkte: [
       'Bearbeitungszeit 60 Minuten, 60 Punkte = 100 %. Punkteverteilung: Aufgabe 1 = 5, ' +
         'Aufgabe 2 = 5, Aufgabe 3 = 6, Aufgabe 4 = 22, Aufgabe 5 = 12, Aufgabe 6 = 7, ' +
         'Aufgabe 7 = 10 (Σ = 60); zusätzlich maximal 8 Bonuspunkte.',
-      'Alle 7 Aufgaben sind umgesetzt. Einzige Ausnahme: Bei Aufgabe 4 sind die Quelltabellen und die ' +
-        'offiziellen Ergebnisse abgedruckt, die literalen SELECT-Texte lagen jedoch nicht vor.',
+      'Alle 7 Aufgaben sind vollständig umgesetzt: Zu jeder Teilaufgabe stehen die benötigten Daten – bei ' +
+        'Aufgabe 4 die Quelltabellen T1/T2 samt SELECT-Text und offiziellem Ergebnis, bei Aufgabe 5 die ' +
+        'Tabellen S/R mit allen Constraints CS1–CS11, bei Aufgabe 3 zusätzlich die Beziehungstabellen ' +
+        'VERKAUFT und BRAUT.',
       'Keine Hilfsmittel erlaubt; Mobiltelefone wegpacken. Unleserliches zählt als nicht vorhanden.',
     ],
   },
@@ -290,9 +293,13 @@ export const probeklausur2: Uebungsblatt = {
         'So liest man (min,max): Die Angabe [min,max] an der Seite eines Entitätstyps bedeutet, dass jede ' +
         'einzelne Entität dieses Typs an mindestens min und höchstens max Beziehungen teilnimmt. Beispiel: ' +
         'VERKAUFT [0,2] an der KNEIPE-Seite heißt „jede Kneipe verkauft zwischen 0 und 2 Biere".\n\n' +
-        'Hinweis: Die vollständigen Tabellen VERKAUFT und BRAUT standen auf den Aufgabenblättern. Die für die ' +
-        'Lösung entscheidenden Fakten sind jeweils in der Erklärung genannt; siehe auch die „Anmerkungen zur ' +
-        'Lösung" am Ende dieser Aufgabe.',
+        'Alle fünf Relationen (KNEIPE, BIER, BRAUEREI, VERKAUFT, BRAUT) sind unten abgedruckt – VERKAUFT ' +
+        'und BRAUT als Beziehungstabellen. Prüfen Sie jede (min,max)-Angabe direkt an diesen gespeicherten ' +
+        'Werten. Siehe zusätzlich die „Anmerkungen zur Lösung" am Ende dieser Aufgabe.\n\n' +
+        'Hinweis zur Herkunft: Die Beziehungstabellen VERKAUFT und BRAUT lagen im digitalisierten Material ' +
+        'nur noch als ER-Diagramm plus Musterlösungs-Fakten vor. Die unten gezeigten Ausprägungen sind daraus ' +
+        'so rekonstruiert, dass sie mit sämtlichen Angaben der offiziellen Lösung übereinstimmen (Anzahl je ' +
+        'Kneipe/Brauerei, Bestseller, nicht verkaufte/gebraute Biere).',
       svg: `<svg viewBox="0 0 760 430" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="ER-Diagramm: Kneipe, Bier, Brauerei mit Beziehungen Verkauft, Bestseller, Braut">
   <line class="dgm-line" x1="78" y1="68" x2="112" y2="120"/>
   <line class="dgm-line" x1="186" y1="68" x2="158" y2="120"/>
@@ -359,6 +366,30 @@ export const probeklausur2: Uebungsblatt = {
           titel: 'Ausprägungen BRAUEREI (Schlüssel NAME)',
           columns: ['NAME'],
           rows: [['Klecks'], ['Rotstift']],
+        },
+        {
+          titel: 'VERKAUFT (welche Kneipe verkauft welches Bier)',
+          columns: ['KNEIPE', 'SORTE'],
+          rows: [
+            ['OskarsOase', 'Klecksex'],
+            ['OskarsOase', 'Klecksport'],
+            ['OskarsOase', 'Warstone'],
+            ['SamsSpelunke', 'Montcroix'],
+            ['SamsSpelunke', 'Klecksport'],
+            ['SamsSpelunke', 'Warstone'],
+          ],
+        },
+        {
+          titel: 'BRAUT (welche Brauerei braut welches Bier)',
+          columns: ['BRAUEREI', 'SORTE'],
+          rows: [
+            ['Klecks', 'Klecksport'],
+            ['Klecks', 'Klecksex'],
+            ['Rotstift', 'Klecksport'],
+            ['Rotstift', 'Klecksex'],
+            ['Rotstift', 'Montcroix'],
+            ['Rotstift', 'Warstone'],
+          ],
         },
       ],
     },
