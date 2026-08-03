@@ -269,7 +269,7 @@ function BoxInhalt({ box }: { box: Box }) {
           </thead>
           <tbody>
             {box.tab.rows.map(row => (
-              <tr key={row.join('|')}>{row.map((c, i) => <td key={i}>{c}</td>)}</tr>
+              <tr key={row.join('|')}>{row.map((c, ci) => <td key={ci}>{c}</td>)}</tr>
             ))}
           </tbody>
         </table>
@@ -292,8 +292,8 @@ function BoxInhalt({ box }: { box: Box }) {
 function CutSheet({ karten }: { karten: (Karte | null)[] }) {
   return (
     <div className="hm-sheet">
-      {karten.map((k, i) => (
-        <div key={k ? k.box.t : `leer-${i}`} className="hm-cut-cell">
+      {karten.map((k, pos) => (
+        <div key={k ? k.box.t : `leer-${pos}`} className="hm-cut-cell">
           {k && (
             <div className="hm-cut-frame">
               <div className="hm-cut-rot">
@@ -330,8 +330,8 @@ export default function Hilfsmittel() {
         „A4", Skalierung 100 % und „Hintergrundgrafiken" aktiviert lassen (für randlose Karten Ränder „Keine").
       </p>
       <div className="hm-sheets">
-        {BLAETTER.map((karten, i) => (
-          <CutSheet key={i} karten={karten} />
+        {BLAETTER.map((karten, blattNr) => (
+          <CutSheet key={blattNr} karten={karten} />
         ))}
       </div>
     </div>

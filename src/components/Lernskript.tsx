@@ -8,10 +8,15 @@ function blockKey(b: SkriptBlock): string {
 
 // Minimaler Inline-Fettdruck: **Text** → <strong>Text</strong>.
 function renderInline(text: string): ReactNode[] {
-  return text.split(/\*\*(.+?)\*\*/g).map((part, i) => (i % 2 === 1 ? <strong key={i}>{part}</strong> : part))
+  return text.split(/\*\*(.+?)\*\*/g).map((part, pos) => (pos % 2 === 1 ? <strong key={pos}>{part}</strong> : part))
 }
 
 const kapId = (id: string) => `skript-kap-${id}`
+
+// Zum Kapitel-Anker scrollen – kapselt keinen State, daher auf Modul-Ebene.
+function scrollTo(id: string) {
+  document.getElementById(kapId(id))?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
 
 const frageBox: CSSProperties = {
   borderLeft: '3px solid var(--blue, #2563eb)',
@@ -122,10 +127,6 @@ function Block({ block }: { block: SkriptBlock }) {
 }
 
 export default function Lernskript() {
-  const scrollTo = (id: string) => {
-    document.getElementById(kapId(id))?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
-
   return (
     <div>
       <div className="section-header">

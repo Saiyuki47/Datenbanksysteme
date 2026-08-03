@@ -332,8 +332,8 @@ function TaskCard({
                         </tr>
                       </thead>
                       <tbody>
-                        {tableData.rows.map((row, i) => {
-                          const rowKey = row.map(cell => String(cell)).join('|') || `row-${i}`
+                        {tableData.rows.map((row, rowNr) => {
+                          const rowKey = row.map(cell => String(cell)).join('|') || `row-${rowNr}`
                           return (
                             <tr key={rowKey}>
                               {row.map((cell, j) => (
@@ -398,8 +398,8 @@ function TaskCard({
                         </tr>
                       </thead>
                       <tbody>
-                        {task.queryResult.rows.map((row, i) => {
-                          const rowKey = row.map(cell => String(cell)).join('|') || `result-row-${i}`
+                        {task.queryResult.rows.map((row, rowNr) => {
+                          const rowKey = row.map(cell => String(cell)).join('|') || `result-row-${rowNr}`
                           return (
                             <tr key={rowKey}>
                               {row.map((cell, j) => (
@@ -452,8 +452,8 @@ function ClaudeTable({ t }: { t: NamedTable }) {
           <tr>{t.columns.map(c => <th key={c}>{c}</th>)}</tr>
         </thead>
         <tbody>
-          {t.rows.map((row, i) => {
-            const rk = row.map(cell => String(cell)).join('|') || `row-${i}`
+          {t.rows.map((row, rowNr) => {
+            const rk = row.map(cell => String(cell)).join('|') || `row-${rowNr}`
             return (
               <tr key={rk}>
                 {row.map((cell, j) => (

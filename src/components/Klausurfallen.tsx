@@ -3,6 +3,11 @@ import { klausurFallen, type Falle } from '../data/klausurfallen'
 
 const grpId = (id: string) => `fallen-grp-${id}`
 
+// Zum Gruppen-Anker scrollen – kapselt keinen State, daher auf Modul-Ebene.
+function scrollTo(id: string) {
+  document.getElementById(grpId(id))?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+}
+
 const card: CSSProperties = {
   border: '1px solid var(--border)',
   borderLeft: '3px solid var(--red, #dc2626)',
@@ -57,9 +62,6 @@ function FalleCard({ f }: { f: Falle }) {
 }
 
 export default function Klausurfallen() {
-  const scrollTo = (id: string) => {
-    document.getElementById(grpId(id))?.scrollIntoView({ behavior: 'smooth', block: 'start' })
-  }
   const anzahl = klausurFallen.reduce((n, g) => n + g.fallen.length, 0)
 
   return (

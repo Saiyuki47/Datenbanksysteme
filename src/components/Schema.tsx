@@ -126,8 +126,8 @@ export default function Schema() {
                       <tr>{data.columns.map(col => <th key={col}>{col}</th>)}</tr>
                     </thead>
                     <tbody>
-                      {data.rows.map((row, i) => {
-                        const rowKey = row.map(cell => String(cell)).join('|') || `row-${i}`
+                      {data.rows.map((row, rowNr) => {
+                        const rowKey = row.map(cell => String(cell)).join('|') || `row-${rowNr}`
                         return (
                           <tr key={rowKey}>
                             {row.map((cell, j) => (
