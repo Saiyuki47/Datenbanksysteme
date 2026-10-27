@@ -8,6 +8,7 @@ Entwurfstheorie/Normalisierung) mit den Beispieldatenbanken *Pine Valley* und
 
 | Tab | Beschreibung |
 |-----|-------------|
+| **Übersicht** | Standard-Tab: zeigt die selbst geschriebene [`Übersicht.md`](Übersicht.md) – wie die Seite funktioniert und woher die Inhalte kommen |
 | **Übungsblätter** | Aufgaben & Musterlösungen nach Blatt geordnet, mit Tipps, SQL-Highlighting und Ergebnistabellen |
 | **Referenz** | Erklärte Themen-Karten (relationale Algebra, Integrität, funktionale Abhängigkeiten, Normalformen …) |
 | **Schema** | Tabellen-/Beziehungsübersicht der verwendeten Datenbanken |
